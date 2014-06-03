@@ -84,7 +84,7 @@ expression
     ;
 
 compound_expression
-    : LCURLY! declarations_and_expressions RCURLY!
+    :   LCURLY! declarations_and_expressions RCURLY!
     ;
 
 // priority 6
@@ -125,11 +125,11 @@ assignment_statement
     ;
 
 print_statement
-    :   PRINT^ LPAREN! IDENTIFIER RPAREN!
+    :   PRINT^ LPAREN! IDENTIFIER (COMMA! IDENTIFIER)* RPAREN!
     ;
 
 read_statement
-    :   READ^ LPAREN! IDENTIFIER RPAREN!
+    :   READ^ LPAREN! IDENTIFIER (COMMA! IDENTIFIER)* RPAREN!
     ;
 
 type
