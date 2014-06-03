@@ -77,7 +77,8 @@ var_declaration
     ;
 
 expression
-    :   (arithmetic_expression | assignment_statement | print_statement | read_statement)
+    :   (IDENTIFIER BECOMES) => assignment_statement
+    |   (arithmetic_expression | print_statement | read_statement)
     ;
 
 // priority 6
@@ -106,9 +107,10 @@ arithmetic_expression_pr1
     ;
 
 operand
-    :   IDENTIFIER
+    :   bool_literal
     |   char_literal
     |   INT_LITERAL
+    |   IDENTIFIER
     |   LPAREN! expression RPAREN!
     ;
 
@@ -126,6 +128,10 @@ read_statement
 
 type
     :   BOOL | CHAR | INT
+    ;
+
+bool_literal
+    :   TRUE | FALSE
     ;
 
 char_literal 
