@@ -12,3 +12,8 @@ n := 33 % 3;
 n := n + (3*5+2/-1%+2);
 read(m);
 c := c && (m + 2/+2 -1) > 0;
+
+c := { var bool a; read(a);
+var bool b; read(b);
+(a && !b) || (!a && b);
+};

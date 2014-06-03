@@ -11,6 +11,8 @@ tokens {
     COLON       =   ':'     ;
     LPAREN      =   '('     ;
     RPAREN      =   ')'     ;
+    LCURLY      =   '{'     ;
+    RCURLY      =   '}'     ;
     SEMICOLON   =   ';'     ; 
     APOS        =   '\''    ;
 
@@ -78,7 +80,11 @@ var_declaration
 
 expression
     :   (IDENTIFIER BECOMES) => assignment_statement
-    |   (arithmetic_expression | print_statement | read_statement)
+    |   (compound_expression | arithmetic_expression | print_statement | read_statement)
+    ;
+
+compound_expression
+    : LCURLY! declarations_and_expressions RCURLY!
     ;
 
 // priority 6
