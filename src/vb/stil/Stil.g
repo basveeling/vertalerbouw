@@ -12,9 +12,24 @@ tokens {
     LPAREN      =   '('     ;
     RPAREN      =   ')'     ;
     SEMICOLON   =   ';'     ; 
+    APOS        =   '\''    ;
 
     // operators
     BECOMES     =   ':='    ;
+    OR          =   '||'    ;
+    AND         =   '&&'    ;
+    LT          =   '<'     ;
+    LTE         =   '<='    ;
+    GT          =   '>'     ;
+    GTE         =   '>='    ;
+    EQ          =   '=='    ;
+    NEQ         =   '<>'    ;
+    PLUS        =   '+'     ;
+    MINUS       =   '-'     ;
+    DIVIDE      =   '/'     ;
+    MULTIPLY    =   '*'     ;
+    MODULO      =   '%'     ;
+    NOT         =   '!'     ;
 
     // keywords
     BOOL        =   'bool'      ;
@@ -24,6 +39,8 @@ tokens {
     PRINT       =   'print'     ;
     PROGRAM     =   'program'   ;
     READ        =   'read'      ;
+    TRUE        =   'true'      ;
+    FALSE       =   'false'     ;
 }
 
 @lexer::header {
@@ -59,7 +76,39 @@ var_declaration
     ;
 
 expression
-    :   (assignment_statement | print_statement | read_statement)
+    :   (arithmetic_expression | assignment_statement | print_statement | read_statement)
+    ;
+
+// priority 6
+arithmetic_expression
+    :   arithmetic_expression_pr5 (OR^ arithmetic_expression_pr5)*
+    ;
+
+arithmetic_expression_pr5
+    :   arithmetic_expression_pr4 (AND^ arithmetic_expression_pr4)*
+    ;
+
+arithmetic_expression_pr4
+    :   arithmetic_expression_pr3 ((LTE^ | LT^ | GTE^ | GT^ | NEQ^ | EQ^) arithmetic_expression_pr3)*
+    ;
+
+arithmetic_expression_pr3
+    :   arithmetic_expression_pr2 ((PLUS^ | MINUS^) arithmetic_expression_pr2)*
+    ;
+
+arithmetic_expression_pr2
+    :   arithmetic_expression_pr1 ((MULTIPLY^ | DIVIDE^ | MODULO^) arithmetic_expression_pr1)*
+    ;
+
+arithmetic_expression_pr1
+    :   (MINUS^ | PLUS^ | NOT^) operand
+    ;
+
+operand
+    :   IDENTIFIER
+    |   char_literal
+    |   INT_LITERAL
+    |   LPAREN! expression RPAREN!
     ;
 
 assignment_statement
@@ -78,11 +127,19 @@ type
     :   BOOL | CHAR | INT
     ;
 
+char_literal 
+    :   APOS! LETTER APOS!
+    ;
 
 // Lexer rules
 
 IDENTIFIER
     :   LETTER (LETTER | DIGIT)*
+    ;
+
+
+INT_LITERAL
+    :   DIGIT+
     ;
 
 fragment DIGIT  :   ('0'..'9') ;
