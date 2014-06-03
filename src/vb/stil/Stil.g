@@ -35,12 +35,13 @@ tokens {
     BOOL        =   'bool'      ;
     CONST       =   'const'     ;
     CHAR        =   'char'      ;
+    FALSE       =   'false'     ;
     INT         =   'int'       ;
     PRINT       =   'print'     ;
     PROGRAM     =   'program'   ;
     READ        =   'read'      ;
     TRUE        =   'true'      ;
-    FALSE       =   'false'     ;
+    VAR         =   'var'       ;
 }
 
 @lexer::header {
@@ -68,11 +69,11 @@ declaration
     ;
 
 constant_declaration
-    :   CONST! type IDENTIFIER
+    :   CONST^ type IDENTIFIER
     ;
 
 var_declaration
-    :   type IDENTIFIER
+    :   VAR^ type IDENTIFIER
     ;
 
 expression
@@ -101,7 +102,7 @@ arithmetic_expression_pr2
     ;
 
 arithmetic_expression_pr1
-    :   (MINUS^ | PLUS^ | NOT^) operand
+    :   (MINUS^ | PLUS^ | NOT^)? operand
     ;
 
 operand
@@ -112,15 +113,15 @@ operand
     ;
 
 assignment_statement
-    :   IDENTIFIER BECOMES! expression
+    :   IDENTIFIER BECOMES^ expression
     ;
 
 print_statement
-    :   PRINT! LPAREN! IDENTIFIER RPAREN!
+    :   PRINT^ LPAREN! IDENTIFIER RPAREN!
     ;
 
 read_statement
-    :   READ! LPAREN! IDENTIFIER RPAREN!
+    :   READ^ LPAREN! IDENTIFIER RPAREN!
     ;
 
 type
@@ -137,9 +138,18 @@ IDENTIFIER
     :   LETTER (LETTER | DIGIT)*
     ;
 
-
 INT_LITERAL
     :   DIGIT+
+    ;
+
+COMMENT
+    :   '//' .* '\n' 
+            { $channel=HIDDEN; }
+    ;
+
+WS
+    :   (' ' | '\t' | '\f' | '\r' | '\n')+
+            { $channel=HIDDEN; }
     ;
 
 fragment DIGIT  :   ('0'..'9') ;

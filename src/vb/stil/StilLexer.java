@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 Stil.g 2014-06-03 14:19:20
+// $ANTLR 3.5.2 Stil.g 2014-06-03 14:39:18
 
     package vb.stil;
 
@@ -18,35 +18,38 @@ public class StilLexer extends Lexer {
 	public static final int CHAR=8;
 	public static final int COLON=9;
 	public static final int COMMA=10;
-	public static final int CONST=11;
-	public static final int DIGIT=12;
-	public static final int DIVIDE=13;
-	public static final int EQ=14;
-	public static final int FALSE=15;
-	public static final int GT=16;
-	public static final int GTE=17;
-	public static final int IDENTIFIER=18;
-	public static final int INT=19;
-	public static final int INT_LITERAL=20;
-	public static final int LETTER=21;
-	public static final int LOWER=22;
-	public static final int LPAREN=23;
-	public static final int LT=24;
-	public static final int LTE=25;
-	public static final int MINUS=26;
-	public static final int MODULO=27;
-	public static final int MULTIPLY=28;
-	public static final int NEQ=29;
-	public static final int NOT=30;
-	public static final int OR=31;
-	public static final int PLUS=32;
-	public static final int PRINT=33;
-	public static final int PROGRAM=34;
-	public static final int READ=35;
-	public static final int RPAREN=36;
-	public static final int SEMICOLON=37;
-	public static final int TRUE=38;
-	public static final int UPPER=39;
+	public static final int COMMENT=11;
+	public static final int CONST=12;
+	public static final int DIGIT=13;
+	public static final int DIVIDE=14;
+	public static final int EQ=15;
+	public static final int FALSE=16;
+	public static final int GT=17;
+	public static final int GTE=18;
+	public static final int IDENTIFIER=19;
+	public static final int INT=20;
+	public static final int INT_LITERAL=21;
+	public static final int LETTER=22;
+	public static final int LOWER=23;
+	public static final int LPAREN=24;
+	public static final int LT=25;
+	public static final int LTE=26;
+	public static final int MINUS=27;
+	public static final int MODULO=28;
+	public static final int MULTIPLY=29;
+	public static final int NEQ=30;
+	public static final int NOT=31;
+	public static final int OR=32;
+	public static final int PLUS=33;
+	public static final int PRINT=34;
+	public static final int PROGRAM=35;
+	public static final int READ=36;
+	public static final int RPAREN=37;
+	public static final int SEMICOLON=38;
+	public static final int TRUE=39;
+	public static final int UPPER=40;
+	public static final int VAR=41;
+	public static final int WS=42;
 
 	// delegates
 	// delegators
@@ -679,17 +682,38 @@ public class StilLexer extends Lexer {
 	}
 	// $ANTLR end "TRUE"
 
+	// $ANTLR start "VAR"
+	public final void mVAR() throws RecognitionException {
+		try {
+			int _type = VAR;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// Stil.g:41:5: ( 'var' )
+			// Stil.g:41:7: 'var'
+			{
+			match("var"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "VAR"
+
 	// $ANTLR start "IDENTIFIER"
 	public final void mIDENTIFIER() throws RecognitionException {
 		try {
 			int _type = IDENTIFIER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// Stil.g:137:5: ( LETTER ( LETTER | DIGIT )* )
-			// Stil.g:137:9: LETTER ( LETTER | DIGIT )*
+			// Stil.g:138:5: ( LETTER ( LETTER | DIGIT )* )
+			// Stil.g:138:9: LETTER ( LETTER | DIGIT )*
 			{
 			mLETTER(); 
 
-			// Stil.g:137:16: ( LETTER | DIGIT )*
+			// Stil.g:138:16: ( LETTER | DIGIT )*
 			loop1:
 			while (true) {
 				int alt1=2;
@@ -734,10 +758,10 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = INT_LITERAL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// Stil.g:144:5: ( ( DIGIT )+ )
-			// Stil.g:144:9: ( DIGIT )+
+			// Stil.g:142:5: ( ( DIGIT )+ )
+			// Stil.g:142:9: ( DIGIT )+
 			{
-			// Stil.g:144:9: ( DIGIT )+
+			// Stil.g:142:9: ( DIGIT )+
 			int cnt2=0;
 			loop2:
 			while (true) {
@@ -781,10 +805,111 @@ public class StilLexer extends Lexer {
 	}
 	// $ANTLR end "INT_LITERAL"
 
+	// $ANTLR start "COMMENT"
+	public final void mCOMMENT() throws RecognitionException {
+		try {
+			int _type = COMMENT;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// Stil.g:146:5: ( '//' ( . )* '\\n' )
+			// Stil.g:146:9: '//' ( . )* '\\n'
+			{
+			match("//"); 
+
+			// Stil.g:146:14: ( . )*
+			loop3:
+			while (true) {
+				int alt3=2;
+				int LA3_0 = input.LA(1);
+				if ( (LA3_0=='\n') ) {
+					alt3=2;
+				}
+				else if ( ((LA3_0 >= '\u0000' && LA3_0 <= '\t')||(LA3_0 >= '\u000B' && LA3_0 <= '\uFFFF')) ) {
+					alt3=1;
+				}
+
+				switch (alt3) {
+				case 1 :
+					// Stil.g:146:14: .
+					{
+					matchAny(); 
+					}
+					break;
+
+				default :
+					break loop3;
+				}
+			}
+
+			match('\n'); 
+			 _channel=HIDDEN; 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "COMMENT"
+
+	// $ANTLR start "WS"
+	public final void mWS() throws RecognitionException {
+		try {
+			int _type = WS;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// Stil.g:151:5: ( ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+ )
+			// Stil.g:151:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+			{
+			// Stil.g:151:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+			int cnt4=0;
+			loop4:
+			while (true) {
+				int alt4=2;
+				int LA4_0 = input.LA(1);
+				if ( ((LA4_0 >= '\t' && LA4_0 <= '\n')||(LA4_0 >= '\f' && LA4_0 <= '\r')||LA4_0==' ') ) {
+					alt4=1;
+				}
+
+				switch (alt4) {
+				case 1 :
+					// Stil.g:
+					{
+					if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||(input.LA(1) >= '\f' && input.LA(1) <= '\r')||input.LA(1)==' ' ) {
+						input.consume();
+					}
+					else {
+						MismatchedSetException mse = new MismatchedSetException(null,input);
+						recover(mse);
+						throw mse;
+					}
+					}
+					break;
+
+				default :
+					if ( cnt4 >= 1 ) break loop4;
+					EarlyExitException eee = new EarlyExitException(4, input);
+					throw eee;
+				}
+				cnt4++;
+			}
+
+			 _channel=HIDDEN; 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "WS"
+
 	// $ANTLR start "DIGIT"
 	public final void mDIGIT() throws RecognitionException {
 		try {
-			// Stil.g:147:17: ( ( '0' .. '9' ) )
+			// Stil.g:155:17: ( ( '0' .. '9' ) )
 			// Stil.g:
 			{
 			if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
@@ -807,7 +932,7 @@ public class StilLexer extends Lexer {
 	// $ANTLR start "LOWER"
 	public final void mLOWER() throws RecognitionException {
 		try {
-			// Stil.g:148:17: ( ( 'a' .. 'z' ) )
+			// Stil.g:156:17: ( ( 'a' .. 'z' ) )
 			// Stil.g:
 			{
 			if ( (input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
@@ -830,7 +955,7 @@ public class StilLexer extends Lexer {
 	// $ANTLR start "UPPER"
 	public final void mUPPER() throws RecognitionException {
 		try {
-			// Stil.g:149:17: ( ( 'A' .. 'Z' ) )
+			// Stil.g:157:17: ( ( 'A' .. 'Z' ) )
 			// Stil.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') ) {
@@ -853,7 +978,7 @@ public class StilLexer extends Lexer {
 	// $ANTLR start "LETTER"
 	public final void mLETTER() throws RecognitionException {
 		try {
-			// Stil.g:150:17: ( LOWER | UPPER )
+			// Stil.g:158:17: ( LOWER | UPPER )
 			// Stil.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
@@ -875,10 +1000,10 @@ public class StilLexer extends Lexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// Stil.g:1:8: ( AND | APOS | BECOMES | BOOL | CHAR | COLON | COMMA | CONST | DIVIDE | EQ | FALSE | GT | GTE | INT | LPAREN | LT | LTE | MINUS | MODULO | MULTIPLY | NEQ | NOT | OR | PLUS | PRINT | PROGRAM | READ | RPAREN | SEMICOLON | TRUE | IDENTIFIER | INT_LITERAL )
-		int alt3=32;
-		alt3 = dfa3.predict(input);
-		switch (alt3) {
+		// Stil.g:1:8: ( AND | APOS | BECOMES | BOOL | CHAR | COLON | COMMA | CONST | DIVIDE | EQ | FALSE | GT | GTE | INT | LPAREN | LT | LTE | MINUS | MODULO | MULTIPLY | NEQ | NOT | OR | PLUS | PRINT | PROGRAM | READ | RPAREN | SEMICOLON | TRUE | VAR | IDENTIFIER | INT_LITERAL | COMMENT | WS )
+		int alt5=35;
+		alt5 = dfa5.predict(input);
+		switch (alt5) {
 			case 1 :
 				// Stil.g:1:10: AND
 				{
@@ -1090,16 +1215,37 @@ public class StilLexer extends Lexer {
 				}
 				break;
 			case 31 :
-				// Stil.g:1:175: IDENTIFIER
+				// Stil.g:1:175: VAR
+				{
+				mVAR(); 
+
+				}
+				break;
+			case 32 :
+				// Stil.g:1:179: IDENTIFIER
 				{
 				mIDENTIFIER(); 
 
 				}
 				break;
-			case 32 :
-				// Stil.g:1:186: INT_LITERAL
+			case 33 :
+				// Stil.g:1:190: INT_LITERAL
 				{
 				mINT_LITERAL(); 
+
+				}
+				break;
+			case 34 :
+				// Stil.g:1:202: COMMENT
+				{
+				mCOMMENT(); 
+
+				}
+				break;
+			case 35 :
+				// Stil.g:1:210: WS
+				{
+				mWS(); 
 
 				}
 				break;
@@ -1108,144 +1254,153 @@ public class StilLexer extends Lexer {
 	}
 
 
-	protected DFA3 dfa3 = new DFA3(this);
-	static final String DFA3_eotS =
-		"\3\uffff\1\34\2\31\3\uffff\1\31\1\42\1\31\1\uffff\1\46\6\uffff\2\31\2"+
-		"\uffff\1\31\4\uffff\4\31\2\uffff\1\31\3\uffff\7\31\1\67\4\31\1\74\1\75"+
-		"\2\31\1\uffff\2\31\1\102\1\103\2\uffff\1\104\1\105\1\106\1\31\5\uffff"+
-		"\1\31\1\111\1\uffff";
-	static final String DFA3_eofS =
-		"\112\uffff";
-	static final String DFA3_minS =
-		"\1\41\2\uffff\1\75\1\157\1\150\3\uffff\1\141\1\75\1\156\1\uffff\1\75\6"+
-		"\uffff\1\162\1\145\2\uffff\1\162\4\uffff\1\157\1\141\1\156\1\154\2\uffff"+
-		"\1\164\3\uffff\1\151\1\141\1\165\1\154\1\162\2\163\1\60\1\156\1\147\1"+
-		"\144\1\145\2\60\1\164\1\145\1\uffff\1\164\1\162\2\60\2\uffff\3\60\1\141"+
-		"\5\uffff\1\155\1\60\1\uffff";
-	static final String DFA3_maxS =
-		"\1\174\2\uffff\1\75\2\157\3\uffff\1\141\1\75\1\156\1\uffff\1\76\6\uffff"+
-		"\1\162\1\145\2\uffff\1\162\4\uffff\1\157\1\141\1\156\1\154\2\uffff\1\164"+
-		"\3\uffff\1\157\1\141\1\165\1\154\1\162\2\163\1\172\1\156\1\147\1\144\1"+
-		"\145\2\172\1\164\1\145\1\uffff\1\164\1\162\2\172\2\uffff\3\172\1\141\5"+
-		"\uffff\1\155\1\172\1\uffff";
-	static final String DFA3_acceptS =
-		"\1\uffff\1\1\1\2\3\uffff\1\7\1\11\1\12\3\uffff\1\17\1\uffff\1\22\1\23"+
-		"\1\24\1\26\1\27\1\30\2\uffff\1\34\1\35\1\uffff\1\37\1\40\1\3\1\6\4\uffff"+
-		"\1\15\1\14\1\uffff\1\21\1\25\1\20\20\uffff\1\16\4\uffff\1\4\1\5\4\uffff"+
-		"\1\33\1\36\1\10\1\13\1\31\2\uffff\1\32";
-	static final String DFA3_specialS =
-		"\112\uffff}>";
-	static final String[] DFA3_transitionS = {
-			"\1\21\3\uffff\1\17\1\1\1\2\1\14\1\26\1\20\1\23\1\6\1\16\1\uffff\1\7\12"+
-			"\32\1\3\1\27\1\15\1\10\1\12\2\uffff\32\31\6\uffff\1\31\1\4\1\5\2\31\1"+
-			"\11\2\31\1\13\6\31\1\24\1\31\1\25\1\31\1\30\6\31\1\uffff\1\22",
+	protected DFA5 dfa5 = new DFA5(this);
+	static final String DFA5_eotS =
+		"\3\uffff\1\36\2\32\1\uffff\1\43\1\uffff\1\32\1\46\1\32\1\uffff\1\52\6"+
+		"\uffff\2\32\2\uffff\2\32\5\uffff\3\32\2\uffff\1\32\2\uffff\1\32\3\uffff"+
+		"\10\32\1\75\4\32\1\102\1\103\1\104\2\32\1\uffff\2\32\1\111\1\112\3\uffff"+
+		"\1\113\1\114\1\115\1\32\5\uffff\1\32\1\120\1\uffff";
+	static final String DFA5_eofS =
+		"\121\uffff";
+	static final String DFA5_minS =
+		"\1\11\2\uffff\1\75\1\157\1\150\1\uffff\1\57\1\uffff\1\141\1\75\1\156\1"+
+		"\uffff\1\75\6\uffff\1\162\1\145\2\uffff\1\162\1\141\5\uffff\1\157\1\141"+
+		"\1\156\2\uffff\1\154\2\uffff\1\164\3\uffff\1\151\1\141\1\165\1\162\1\154"+
+		"\1\162\2\163\1\60\1\156\1\147\1\144\1\145\3\60\1\164\1\145\1\uffff\1\164"+
+		"\1\162\2\60\3\uffff\3\60\1\141\5\uffff\1\155\1\60\1\uffff";
+	static final String DFA5_maxS =
+		"\1\174\2\uffff\1\75\2\157\1\uffff\1\57\1\uffff\1\141\1\75\1\156\1\uffff"+
+		"\1\76\6\uffff\1\162\1\145\2\uffff\1\162\1\141\5\uffff\1\157\1\141\1\156"+
+		"\2\uffff\1\154\2\uffff\1\164\3\uffff\1\157\1\141\1\165\1\162\1\154\1\162"+
+		"\2\163\1\172\1\156\1\147\1\144\1\145\3\172\1\164\1\145\1\uffff\1\164\1"+
+		"\162\2\172\3\uffff\3\172\1\141\5\uffff\1\155\1\172\1\uffff";
+	static final String DFA5_acceptS =
+		"\1\uffff\1\1\1\2\3\uffff\1\7\1\uffff\1\12\3\uffff\1\17\1\uffff\1\22\1"+
+		"\23\1\24\1\26\1\27\1\30\2\uffff\1\34\1\35\2\uffff\1\40\1\41\1\43\1\3\1"+
+		"\6\3\uffff\1\42\1\11\1\uffff\1\15\1\14\1\uffff\1\21\1\25\1\20\22\uffff"+
+		"\1\16\4\uffff\1\37\1\4\1\5\4\uffff\1\33\1\36\1\10\1\13\1\31\2\uffff\1"+
+		"\32";
+	static final String DFA5_specialS =
+		"\121\uffff}>";
+	static final String[] DFA5_transitionS = {
+			"\2\34\1\uffff\2\34\22\uffff\1\34\1\21\3\uffff\1\17\1\1\1\2\1\14\1\26"+
+			"\1\20\1\23\1\6\1\16\1\uffff\1\7\12\33\1\3\1\27\1\15\1\10\1\12\2\uffff"+
+			"\32\32\6\uffff\1\32\1\4\1\5\2\32\1\11\2\32\1\13\6\32\1\24\1\32\1\25\1"+
+			"\32\1\30\1\32\1\31\4\32\1\uffff\1\22",
 			"",
 			"",
-			"\1\33",
 			"\1\35",
-			"\1\36\6\uffff\1\37",
+			"\1\37",
+			"\1\40\6\uffff\1\41",
 			"",
+			"\1\42",
 			"",
-			"",
-			"\1\40",
-			"\1\41",
-			"\1\43",
-			"",
-			"\1\44\1\45",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
+			"\1\44",
+			"\1\45",
 			"\1\47",
-			"\1\50",
 			"",
-			"",
-			"\1\51",
-			"",
+			"\1\50\1\51",
 			"",
 			"",
 			"",
-			"\1\52",
+			"",
+			"",
+			"",
 			"\1\53",
 			"\1\54",
+			"",
+			"",
 			"\1\55",
-			"",
-			"",
 			"\1\56",
 			"",
 			"",
 			"",
-			"\1\57\5\uffff\1\60",
+			"",
+			"",
+			"\1\57",
+			"\1\60",
 			"\1\61",
+			"",
+			"",
 			"\1\62",
+			"",
+			"",
 			"\1\63",
-			"\1\64",
-			"\1\65",
+			"",
+			"",
+			"",
+			"\1\64\5\uffff\1\65",
 			"\1\66",
-			"\12\31\7\uffff\32\31\6\uffff\32\31",
+			"\1\67",
 			"\1\70",
 			"\1\71",
 			"\1\72",
 			"\1\73",
-			"\12\31\7\uffff\32\31\6\uffff\32\31",
-			"\12\31\7\uffff\32\31\6\uffff\32\31",
+			"\1\74",
+			"\12\32\7\uffff\32\32\6\uffff\32\32",
 			"\1\76",
 			"\1\77",
-			"",
 			"\1\100",
 			"\1\101",
-			"\12\31\7\uffff\32\31\6\uffff\32\31",
-			"\12\31\7\uffff\32\31\6\uffff\32\31",
+			"\12\32\7\uffff\32\32\6\uffff\32\32",
+			"\12\32\7\uffff\32\32\6\uffff\32\32",
+			"\12\32\7\uffff\32\32\6\uffff\32\32",
+			"\1\105",
+			"\1\106",
 			"",
-			"",
-			"\12\31\7\uffff\32\31\6\uffff\32\31",
-			"\12\31\7\uffff\32\31\6\uffff\32\31",
-			"\12\31\7\uffff\32\31\6\uffff\32\31",
 			"\1\107",
-			"",
-			"",
-			"",
-			"",
-			"",
 			"\1\110",
-			"\12\31\7\uffff\32\31\6\uffff\32\31",
+			"\12\32\7\uffff\32\32\6\uffff\32\32",
+			"\12\32\7\uffff\32\32\6\uffff\32\32",
+			"",
+			"",
+			"",
+			"\12\32\7\uffff\32\32\6\uffff\32\32",
+			"\12\32\7\uffff\32\32\6\uffff\32\32",
+			"\12\32\7\uffff\32\32\6\uffff\32\32",
+			"\1\116",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"\1\117",
+			"\12\32\7\uffff\32\32\6\uffff\32\32",
 			""
 	};
 
-	static final short[] DFA3_eot = DFA.unpackEncodedString(DFA3_eotS);
-	static final short[] DFA3_eof = DFA.unpackEncodedString(DFA3_eofS);
-	static final char[] DFA3_min = DFA.unpackEncodedStringToUnsignedChars(DFA3_minS);
-	static final char[] DFA3_max = DFA.unpackEncodedStringToUnsignedChars(DFA3_maxS);
-	static final short[] DFA3_accept = DFA.unpackEncodedString(DFA3_acceptS);
-	static final short[] DFA3_special = DFA.unpackEncodedString(DFA3_specialS);
-	static final short[][] DFA3_transition;
+	static final short[] DFA5_eot = DFA.unpackEncodedString(DFA5_eotS);
+	static final short[] DFA5_eof = DFA.unpackEncodedString(DFA5_eofS);
+	static final char[] DFA5_min = DFA.unpackEncodedStringToUnsignedChars(DFA5_minS);
+	static final char[] DFA5_max = DFA.unpackEncodedStringToUnsignedChars(DFA5_maxS);
+	static final short[] DFA5_accept = DFA.unpackEncodedString(DFA5_acceptS);
+	static final short[] DFA5_special = DFA.unpackEncodedString(DFA5_specialS);
+	static final short[][] DFA5_transition;
 
 	static {
-		int numStates = DFA3_transitionS.length;
-		DFA3_transition = new short[numStates][];
+		int numStates = DFA5_transitionS.length;
+		DFA5_transition = new short[numStates][];
 		for (int i=0; i<numStates; i++) {
-			DFA3_transition[i] = DFA.unpackEncodedString(DFA3_transitionS[i]);
+			DFA5_transition[i] = DFA.unpackEncodedString(DFA5_transitionS[i]);
 		}
 	}
 
-	protected class DFA3 extends DFA {
+	protected class DFA5 extends DFA {
 
-		public DFA3(BaseRecognizer recognizer) {
+		public DFA5(BaseRecognizer recognizer) {
 			this.recognizer = recognizer;
-			this.decisionNumber = 3;
-			this.eot = DFA3_eot;
-			this.eof = DFA3_eof;
-			this.min = DFA3_min;
-			this.max = DFA3_max;
-			this.accept = DFA3_accept;
-			this.special = DFA3_special;
-			this.transition = DFA3_transition;
+			this.decisionNumber = 5;
+			this.eot = DFA5_eot;
+			this.eof = DFA5_eof;
+			this.min = DFA5_min;
+			this.max = DFA5_max;
+			this.accept = DFA5_accept;
+			this.special = DFA5_special;
+			this.transition = DFA5_transition;
 		}
 		@Override
 		public String getDescription() {
-			return "1:1: Tokens : ( AND | APOS | BECOMES | BOOL | CHAR | COLON | COMMA | CONST | DIVIDE | EQ | FALSE | GT | GTE | INT | LPAREN | LT | LTE | MINUS | MODULO | MULTIPLY | NEQ | NOT | OR | PLUS | PRINT | PROGRAM | READ | RPAREN | SEMICOLON | TRUE | IDENTIFIER | INT_LITERAL );";
+			return "1:1: Tokens : ( AND | APOS | BECOMES | BOOL | CHAR | COLON | COMMA | CONST | DIVIDE | EQ | FALSE | GT | GTE | INT | LPAREN | LT | LTE | MINUS | MODULO | MULTIPLY | NEQ | NOT | OR | PLUS | PRINT | PROGRAM | READ | RPAREN | SEMICOLON | TRUE | VAR | IDENTIFIER | INT_LITERAL | COMMENT | WS );";
 		}
 	}
 
