@@ -22,23 +22,33 @@ package vb.stil;
 }
 
 program
-    :
+    :   ^(PROGRAM declarations_and_expressions)
     ;
     
 declarations_and_expressions
-    :
+    :   ((declaration | expression) SEMICOLON!)*
     ;
     
 declaration
-    :
+    :   constant_declaration 
+    |   var_declaration
     ;
-    
+
 constant_declaration
-    :
+    :   CONST^ type IDENTIFIER
+        {
+            // Check scope/uniqueness
+            // Set Type
+        }
     ;
-    
+
 var_declaration
-    :
+    :   VAR^ type IDENTIFIER
+        {
+            // Check scope/uniqueness
+            // Set Type
+
+        }
     ;
     
 expression
