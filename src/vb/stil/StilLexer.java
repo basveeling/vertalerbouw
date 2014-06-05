@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 Stil.g 2014-06-03 15:30:56
+// $ANTLR 3.5.2 Stil.g 2014-06-05 14:25:56
 
     package vb.stil;
 
@@ -750,12 +750,12 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = IDENTIFIER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// Stil.g:150:5: ( LETTER ( LETTER | DIGIT )* )
-			// Stil.g:150:9: LETTER ( LETTER | DIGIT )*
+			// Stil.g:151:5: ( LETTER ( LETTER | DIGIT )* )
+			// Stil.g:151:9: LETTER ( LETTER | DIGIT )*
 			{
 			mLETTER(); 
 
-			// Stil.g:150:16: ( LETTER | DIGIT )*
+			// Stil.g:151:16: ( LETTER | DIGIT )*
 			loop1:
 			while (true) {
 				int alt1=2;
@@ -800,10 +800,10 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = INT_LITERAL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// Stil.g:154:5: ( ( DIGIT )+ )
-			// Stil.g:154:9: ( DIGIT )+
+			// Stil.g:155:5: ( ( DIGIT )+ )
+			// Stil.g:155:9: ( DIGIT )+
 			{
-			// Stil.g:154:9: ( DIGIT )+
+			// Stil.g:155:9: ( DIGIT )+
 			int cnt2=0;
 			loop2:
 			while (true) {
@@ -852,12 +852,12 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// Stil.g:158:5: ( '//' ( . )* '\\n' )
-			// Stil.g:158:9: '//' ( . )* '\\n'
+			// Stil.g:159:5: ( '//' ( . )* '\\n' )
+			// Stil.g:159:9: '//' ( . )* '\\n'
 			{
 			match("//"); 
 
-			// Stil.g:158:14: ( . )*
+			// Stil.g:159:14: ( . )*
 			loop3:
 			while (true) {
 				int alt3=2;
@@ -871,7 +871,7 @@ public class StilLexer extends Lexer {
 
 				switch (alt3) {
 				case 1 :
-					// Stil.g:158:14: .
+					// Stil.g:159:14: .
 					{
 					matchAny(); 
 					}
@@ -900,10 +900,10 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// Stil.g:163:5: ( ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+ )
-			// Stil.g:163:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+			// Stil.g:164:5: ( ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+ )
+			// Stil.g:164:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
 			{
-			// Stil.g:163:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+			// Stil.g:164:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
 			int cnt4=0;
 			loop4:
 			while (true) {
@@ -951,7 +951,7 @@ public class StilLexer extends Lexer {
 	// $ANTLR start "DIGIT"
 	public final void mDIGIT() throws RecognitionException {
 		try {
-			// Stil.g:167:17: ( ( '0' .. '9' ) )
+			// Stil.g:168:17: ( ( '0' .. '9' ) )
 			// Stil.g:
 			{
 			if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
@@ -974,7 +974,7 @@ public class StilLexer extends Lexer {
 	// $ANTLR start "LOWER"
 	public final void mLOWER() throws RecognitionException {
 		try {
-			// Stil.g:168:17: ( ( 'a' .. 'z' ) )
+			// Stil.g:169:17: ( ( 'a' .. 'z' ) )
 			// Stil.g:
 			{
 			if ( (input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
@@ -997,7 +997,7 @@ public class StilLexer extends Lexer {
 	// $ANTLR start "UPPER"
 	public final void mUPPER() throws RecognitionException {
 		try {
-			// Stil.g:169:17: ( ( 'A' .. 'Z' ) )
+			// Stil.g:170:17: ( ( 'A' .. 'Z' ) )
 			// Stil.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') ) {
@@ -1020,7 +1020,7 @@ public class StilLexer extends Lexer {
 	// $ANTLR start "LETTER"
 	public final void mLETTER() throws RecognitionException {
 		try {
-			// Stil.g:170:17: ( LOWER | UPPER )
+			// Stil.g:171:17: ( LOWER | UPPER )
 			// Stil.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {

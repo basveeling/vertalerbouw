@@ -4,6 +4,7 @@ options {
     k = 1;
     language = Java;
     output = AST;
+    ASTLabelType = StilTree; // Use custom tree nodes
 }
 
 tokens {

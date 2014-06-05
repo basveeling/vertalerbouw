@@ -56,7 +56,9 @@ public class Stil {
 			InputStream in = inputFile == null ? System.in : new FileInputStream(inputFile);
 			StilLexer lexer = new StilLexer(new ANTLRInputStream(in));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			
 			StilParser parser = new StilParser(tokens);
+			parser.setTreeAdaptor(new StilTreeAdaptor()); //Use StilTree nodes
 			
 			StilParser.program_return result = parser.program();
 			CommonTree tree = (CommonTree) result.getTree();
