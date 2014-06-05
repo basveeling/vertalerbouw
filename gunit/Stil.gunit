@@ -1,5 +1,8 @@
 gunit Stil;
 @header{package vb.stil;}
+//------------------- program
+program:
+basic.st OK
 
 //------------------- IDENTIFIER
 IDENTIFIER:
@@ -20,3 +23,5 @@ INT_LITERAL:
 "123456789" OK
 
 "-1" FAIL
+
+

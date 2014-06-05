@@ -15,6 +15,7 @@ while getopts 'gcrj' flag; do
   esac
 done
 
+# cp tests/* bin/
 
 if [[ $buildgram = true ]]; then
 echo "Building Antlr grammars"
