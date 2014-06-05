@@ -1,0 +1,7 @@
+gunit StilChecker walks Stil;
+@header{package vb.stil;}
+//------------------- program
+program walks program:
+simple.st          OK
+duplicatedecl.st  FAIL
+

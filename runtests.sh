@@ -19,7 +19,7 @@ done
 
 if [[ $buildgram = true ]]; then
 echo "Building Antlr grammars"
-java org.antlr.Tool src/vb/stil/Stil.g
+java org.antlr.Tool src/vb/stil/*.g
 fi
 # java org.antlr.Tool src/vb/stil/*.g
 
@@ -31,7 +31,7 @@ fi
 
 if [[ $rungunit = true ]]; then
 echo "Running gunit tests..."
-cd bin; java org.antlr.gunit.Interp ../gunit/Stil.gunit
+cd bin; java org.antlr.gunit.Interp ../gunit/*.gunit
 fi
 
 if [[ $makejunit = true ]]; then
