@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 StilChecker.g 2014-06-05 15:31:05
+// $ANTLR 3.5.2 StilChecker.g 2014-06-05 17:15:37
 
     package vb.stil;
     import  vb.stil.symtab.*;
@@ -19,7 +19,7 @@ public class StilChecker extends TreeParser {
 		"FALSE", "GT", "GTE", "IDENTIFIER", "INT", "INT_LITERAL", "LCURLY", "LETTER", 
 		"LOWER", "LPAREN", "LT", "LTE", "MINUS", "MODULO", "MULTIPLY", "NEQ", 
 		"NOT", "OR", "PLUS", "PRINT", "PROGRAM", "RCURLY", "READ", "RPAREN", "SEMICOLON", 
-		"TRUE", "UPPER", "VAR", "WS"
+		"TRUE", "UPPER", "VAR", "WS", "IF"
 	};
 	public static final int EOF=-1;
 	public static final int AND=4;
@@ -63,6 +63,7 @@ public class StilChecker extends TreeParser {
 	public static final int UPPER=42;
 	public static final int VAR=43;
 	public static final int WS=44;
+	public static final int IF=45;
 
 	// delegates
 	public TreeParser[] getDelegates() {
@@ -106,7 +107,7 @@ public class StilChecker extends TreeParser {
 					if ( (LA1_0==CONST||LA1_0==VAR) ) {
 						alt1=1;
 					}
-					else if ( (LA1_0==BECOMES) ) {
+					else if ( (LA1_0==BECOMES||(LA1_0 >= DIVIDE && LA1_0 <= IDENTIFIER)||LA1_0==INT_LITERAL||LA1_0==LETTER||(LA1_0 >= LT && LA1_0 <= MINUS)||(LA1_0 >= MULTIPLY && LA1_0 <= NEQ)||LA1_0==PLUS||LA1_0==TRUE||LA1_0==IF) ) {
 						alt1=2;
 					}
 
@@ -213,12 +214,13 @@ public class StilChecker extends TreeParser {
 	// StilChecker.g:35:1: constant_declaration : ^( CONST type id= IDENTIFIER ) ;
 	public final void constant_declaration() throws RecognitionException {
 		StilNode id=null;
+		StilNode CONST1=null;
 
 		try {
 			// StilChecker.g:36:5: ( ^( CONST type id= IDENTIFIER ) )
 			// StilChecker.g:36:9: ^( CONST type id= IDENTIFIER )
 			{
-			match(input,CONST,FOLLOW_CONST_in_constant_declaration162); 
+			CONST1=(StilNode)match(input,CONST,FOLLOW_CONST_in_constant_declaration162); 
 			match(input, Token.DOWN, null); 
 			pushFollow(FOLLOW_type_in_constant_declaration164);
 			type();
@@ -228,12 +230,12 @@ public class StilChecker extends TreeParser {
 			match(input, Token.UP, null); 
 
 
-			            // Check scope/uniqueness
+			            ((DeclNode)CONST1).setKind(DeclNode.CONST);
+
 			            try {
 			                IdEntry entry = new IdEntry();
-			                entry.setType(IdEntry.CONST);
 			                entry.setLevel(symtab.currentLevel());
-
+			                entry.setDeclNode((DeclNode)CONST1);
 			                symtab.enter((id!=null?id.getText():null), entry);
 			            } catch (SymbolTableException e) {
 			                System.err.println(e.getMessage());
@@ -259,12 +261,13 @@ public class StilChecker extends TreeParser {
 	// StilChecker.g:51:1: var_declaration : ^( VAR type id= IDENTIFIER ) ;
 	public final void var_declaration() throws RecognitionException {
 		StilNode id=null;
+		StilNode VAR2=null;
 
 		try {
 			// StilChecker.g:52:5: ( ^( VAR type id= IDENTIFIER ) )
 			// StilChecker.g:52:9: ^( VAR type id= IDENTIFIER )
 			{
-			match(input,VAR,FOLLOW_VAR_in_var_declaration199); 
+			VAR2=(StilNode)match(input,VAR,FOLLOW_VAR_in_var_declaration199); 
 			match(input, Token.DOWN, null); 
 			pushFollow(FOLLOW_type_in_var_declaration201);
 			type();
@@ -274,12 +277,12 @@ public class StilChecker extends TreeParser {
 			match(input, Token.UP, null); 
 
 
-			            // Check scope/uniqueness
+			            ((DeclNode)VAR2).setKind(DeclNode.VAR);
+
 			            try {
 			                IdEntry entry = new IdEntry();
-			                entry.setType(IdEntry.CONST);
 			                entry.setLevel(symtab.currentLevel());
-
+			                entry.setDeclNode((DeclNode)VAR2);
 			                symtab.enter((id!=null?id.getText():null), entry);
 			            } catch (SymbolTableException e) {
 			                System.err.println(e.getMessage());
@@ -302,22 +305,316 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "expression"
-	// StilChecker.g:67:1: expression : ^( BECOMES expression ) ;
+	// StilChecker.g:67:1: expression : ( operand | ^( BECOMES id= IDENTIFIER expression ) | ^( PLUS expression expression ) | ^( MINUS expression expression ) | ^( DIVIDE expression expression ) | ^( MULTIPLY expression expression ) | ^( IF expression expression expression ) | ^( LT expression expression ) | ^( LTE expression expression ) | ^( GT expression expression ) | ^( GTE expression expression ) | ^( EQ expression expression ) | ^( NEQ expression expression ) );
 	public final void expression() throws RecognitionException {
-		try {
-			// StilChecker.g:68:5: ( ^( BECOMES expression ) )
-			// StilChecker.g:68:9: ^( BECOMES expression )
-			{
-			match(input,BECOMES,FOLLOW_BECOMES_in_expression240); 
-			match(input, Token.DOWN, null); 
-			pushFollow(FOLLOW_expression_in_expression242);
-			expression();
-			state._fsp--;
+		StilNode id=null;
 
-			match(input, Token.UP, null); 
+		try {
+			// StilChecker.g:68:5: ( operand | ^( BECOMES id= IDENTIFIER expression ) | ^( PLUS expression expression ) | ^( MINUS expression expression ) | ^( DIVIDE expression expression ) | ^( MULTIPLY expression expression ) | ^( IF expression expression expression ) | ^( LT expression expression ) | ^( LTE expression expression ) | ^( GT expression expression ) | ^( GTE expression expression ) | ^( EQ expression expression ) | ^( NEQ expression expression ) )
+			int alt3=13;
+			switch ( input.LA(1) ) {
+			case FALSE:
+			case IDENTIFIER:
+			case INT_LITERAL:
+			case LETTER:
+			case TRUE:
+				{
+				alt3=1;
+				}
+				break;
+			case BECOMES:
+				{
+				alt3=2;
+				}
+				break;
+			case PLUS:
+				{
+				alt3=3;
+				}
+				break;
+			case MINUS:
+				{
+				alt3=4;
+				}
+				break;
+			case DIVIDE:
+				{
+				alt3=5;
+				}
+				break;
+			case MULTIPLY:
+				{
+				alt3=6;
+				}
+				break;
+			case IF:
+				{
+				alt3=7;
+				}
+				break;
+			case LT:
+				{
+				alt3=8;
+				}
+				break;
+			case LTE:
+				{
+				alt3=9;
+				}
+				break;
+			case GT:
+				{
+				alt3=10;
+				}
+				break;
+			case GTE:
+				{
+				alt3=11;
+				}
+				break;
+			case EQ:
+				{
+				alt3=12;
+				}
+				break;
+			case NEQ:
+				{
+				alt3=13;
+				}
+				break;
+			default:
+				NoViableAltException nvae =
+					new NoViableAltException("", 3, 0, input);
+				throw nvae;
+			}
+			switch (alt3) {
+				case 1 :
+					// StilChecker.g:68:9: operand
+					{
+					pushFollow(FOLLOW_operand_in_expression239);
+					operand();
+					state._fsp--;
+
+					}
+					break;
+				case 2 :
+					// StilChecker.g:69:9: ^( BECOMES id= IDENTIFIER expression )
+					{
+					match(input,BECOMES,FOLLOW_BECOMES_in_expression250); 
+					match(input, Token.DOWN, null); 
+					id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_expression254); 
+					pushFollow(FOLLOW_expression_in_expression256);
+					expression();
+					state._fsp--;
+
+					match(input, Token.UP, null); 
+
+					   
+					            IdEntry symbol = symtab.retrieve((id!=null?id.getText():null));
+
+					            if (symbol == null) {
+					                throw new StilException(id, "is not declared");
+					            }
+
+					            if (!symbol.getDeclNode().isVariable()) {
+					                throw new StilException(id, "must be declared as variable");
+					            }
+					        
+					}
+					break;
+				case 3 :
+					// StilChecker.g:81:9: ^( PLUS expression expression )
+					{
+					match(input,PLUS,FOLLOW_PLUS_in_expression278); 
+					match(input, Token.DOWN, null); 
+					pushFollow(FOLLOW_expression_in_expression280);
+					expression();
+					state._fsp--;
+
+					pushFollow(FOLLOW_expression_in_expression282);
+					expression();
+					state._fsp--;
+
+					match(input, Token.UP, null); 
+
+					}
+					break;
+				case 4 :
+					// StilChecker.g:82:9: ^( MINUS expression expression )
+					{
+					match(input,MINUS,FOLLOW_MINUS_in_expression294); 
+					match(input, Token.DOWN, null); 
+					pushFollow(FOLLOW_expression_in_expression296);
+					expression();
+					state._fsp--;
+
+					pushFollow(FOLLOW_expression_in_expression298);
+					expression();
+					state._fsp--;
+
+					match(input, Token.UP, null); 
+
+					}
+					break;
+				case 5 :
+					// StilChecker.g:83:9: ^( DIVIDE expression expression )
+					{
+					match(input,DIVIDE,FOLLOW_DIVIDE_in_expression310); 
+					match(input, Token.DOWN, null); 
+					pushFollow(FOLLOW_expression_in_expression312);
+					expression();
+					state._fsp--;
+
+					pushFollow(FOLLOW_expression_in_expression314);
+					expression();
+					state._fsp--;
+
+					match(input, Token.UP, null); 
+
+					}
+					break;
+				case 6 :
+					// StilChecker.g:84:9: ^( MULTIPLY expression expression )
+					{
+					match(input,MULTIPLY,FOLLOW_MULTIPLY_in_expression326); 
+					match(input, Token.DOWN, null); 
+					pushFollow(FOLLOW_expression_in_expression328);
+					expression();
+					state._fsp--;
+
+					pushFollow(FOLLOW_expression_in_expression330);
+					expression();
+					state._fsp--;
+
+					match(input, Token.UP, null); 
+
+					}
+					break;
+				case 7 :
+					// StilChecker.g:85:9: ^( IF expression expression expression )
+					{
+					match(input,IF,FOLLOW_IF_in_expression342); 
+					match(input, Token.DOWN, null); 
+					pushFollow(FOLLOW_expression_in_expression344);
+					expression();
+					state._fsp--;
+
+					pushFollow(FOLLOW_expression_in_expression346);
+					expression();
+					state._fsp--;
+
+					pushFollow(FOLLOW_expression_in_expression348);
+					expression();
+					state._fsp--;
+
+					match(input, Token.UP, null); 
+
+					}
+					break;
+				case 8 :
+					// StilChecker.g:86:9: ^( LT expression expression )
+					{
+					match(input,LT,FOLLOW_LT_in_expression360); 
+					match(input, Token.DOWN, null); 
+					pushFollow(FOLLOW_expression_in_expression362);
+					expression();
+					state._fsp--;
+
+					pushFollow(FOLLOW_expression_in_expression364);
+					expression();
+					state._fsp--;
+
+					match(input, Token.UP, null); 
+
+					}
+					break;
+				case 9 :
+					// StilChecker.g:87:9: ^( LTE expression expression )
+					{
+					match(input,LTE,FOLLOW_LTE_in_expression376); 
+					match(input, Token.DOWN, null); 
+					pushFollow(FOLLOW_expression_in_expression378);
+					expression();
+					state._fsp--;
+
+					pushFollow(FOLLOW_expression_in_expression380);
+					expression();
+					state._fsp--;
+
+					match(input, Token.UP, null); 
+
+					}
+					break;
+				case 10 :
+					// StilChecker.g:88:9: ^( GT expression expression )
+					{
+					match(input,GT,FOLLOW_GT_in_expression392); 
+					match(input, Token.DOWN, null); 
+					pushFollow(FOLLOW_expression_in_expression394);
+					expression();
+					state._fsp--;
+
+					pushFollow(FOLLOW_expression_in_expression396);
+					expression();
+					state._fsp--;
+
+					match(input, Token.UP, null); 
+
+					}
+					break;
+				case 11 :
+					// StilChecker.g:89:9: ^( GTE expression expression )
+					{
+					match(input,GTE,FOLLOW_GTE_in_expression408); 
+					match(input, Token.DOWN, null); 
+					pushFollow(FOLLOW_expression_in_expression410);
+					expression();
+					state._fsp--;
+
+					pushFollow(FOLLOW_expression_in_expression412);
+					expression();
+					state._fsp--;
+
+					match(input, Token.UP, null); 
+
+					}
+					break;
+				case 12 :
+					// StilChecker.g:90:9: ^( EQ expression expression )
+					{
+					match(input,EQ,FOLLOW_EQ_in_expression424); 
+					match(input, Token.DOWN, null); 
+					pushFollow(FOLLOW_expression_in_expression426);
+					expression();
+					state._fsp--;
+
+					pushFollow(FOLLOW_expression_in_expression428);
+					expression();
+					state._fsp--;
+
+					match(input, Token.UP, null); 
+
+					}
+					break;
+				case 13 :
+					// StilChecker.g:91:9: ^( NEQ expression expression )
+					{
+					match(input,NEQ,FOLLOW_NEQ_in_expression440); 
+					match(input, Token.DOWN, null); 
+					pushFollow(FOLLOW_expression_in_expression442);
+					expression();
+					state._fsp--;
+
+					pushFollow(FOLLOW_expression_in_expression444);
+					expression();
+					state._fsp--;
+
+					match(input, Token.UP, null); 
+
+					}
+					break;
 
 			}
-
 		}
 		 
 		    catch (RecognitionException e) { 
@@ -332,11 +629,99 @@ public class StilChecker extends TreeParser {
 
 
 
+	// $ANTLR start "operand"
+	// StilChecker.g:94:1: operand : (id= IDENTIFIER | ( TRUE | FALSE ) | LETTER | INT_LITERAL );
+	public final void operand() throws RecognitionException {
+		StilNode id=null;
+
+		try {
+			// StilChecker.g:95:5: (id= IDENTIFIER | ( TRUE | FALSE ) | LETTER | INT_LITERAL )
+			int alt4=4;
+			switch ( input.LA(1) ) {
+			case IDENTIFIER:
+				{
+				alt4=1;
+				}
+				break;
+			case FALSE:
+			case TRUE:
+				{
+				alt4=2;
+				}
+				break;
+			case LETTER:
+				{
+				alt4=3;
+				}
+				break;
+			case INT_LITERAL:
+				{
+				alt4=4;
+				}
+				break;
+			default:
+				NoViableAltException nvae =
+					new NoViableAltException("", 4, 0, input);
+				throw nvae;
+			}
+			switch (alt4) {
+				case 1 :
+					// StilChecker.g:95:9: id= IDENTIFIER
+					{
+					id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand466); 
+					   
+					            if (symtab.retrieve((id!=null?id.getText():null)) == null) {
+					                throw new StilException(id, "is not declared");
+					            }
+					        
+					}
+					break;
+				case 2 :
+					// StilChecker.g:101:9: ( TRUE | FALSE )
+					{
+					if ( input.LA(1)==FALSE||input.LA(1)==TRUE ) {
+						input.consume();
+						state.errorRecovery=false;
+					}
+					else {
+						MismatchedSetException mse = new MismatchedSetException(null,input);
+						throw mse;
+					}
+					}
+					break;
+				case 3 :
+					// StilChecker.g:102:9: LETTER
+					{
+					match(input,LETTER,FOLLOW_LETTER_in_operand503); 
+					}
+					break;
+				case 4 :
+					// StilChecker.g:103:9: INT_LITERAL
+					{
+					match(input,INT_LITERAL,FOLLOW_INT_LITERAL_in_operand513); 
+					}
+					break;
+
+			}
+		}
+		 
+		    catch (RecognitionException e) { 
+		        throw e; 
+		    } 
+
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "operand"
+
+
+
 	// $ANTLR start "type"
-	// StilChecker.g:71:1: type : ( BOOL | CHAR | INT );
+	// StilChecker.g:106:1: type : ( BOOL | CHAR | INT );
 	public final void type() throws RecognitionException {
 		try {
-			// StilChecker.g:72:5: ( BOOL | CHAR | INT )
+			// StilChecker.g:107:5: ( BOOL | CHAR | INT )
 			// StilChecker.g:
 			{
 			if ( (input.LA(1) >= BOOL && input.LA(1) <= CHAR)||input.LA(1)==INT ) {
@@ -366,8 +751,8 @@ public class StilChecker extends TreeParser {
 
 
 	public static final BitSet FOLLOW_PROGRAM_in_program96 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_declaration_in_program101 = new BitSet(new long[]{0x0000080000001048L});
-	public static final BitSet FOLLOW_expression_in_program105 = new BitSet(new long[]{0x0000080000001048L});
+	public static final BitSet FOLLOW_declaration_in_program101 = new BitSet(new long[]{0x00002A04DCAFD048L});
+	public static final BitSet FOLLOW_expression_in_program105 = new BitSet(new long[]{0x00002A04DCAFD048L});
 	public static final BitSet FOLLOW_constant_declaration_in_declaration131 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_var_declaration_in_declaration142 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_CONST_in_constant_declaration162 = new BitSet(new long[]{0x0000000000000004L});
@@ -376,6 +761,46 @@ public class StilChecker extends TreeParser {
 	public static final BitSet FOLLOW_VAR_in_var_declaration199 = new BitSet(new long[]{0x0000000000000004L});
 	public static final BitSet FOLLOW_type_in_var_declaration201 = new BitSet(new long[]{0x0000000000080000L});
 	public static final BitSet FOLLOW_IDENTIFIER_in_var_declaration205 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_BECOMES_in_expression240 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression242 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_operand_in_expression239 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_BECOMES_in_expression250 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_expression254 = new BitSet(new long[]{0x00002204DCAFC040L});
+	public static final BitSet FOLLOW_expression_in_expression256 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_PLUS_in_expression278 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression280 = new BitSet(new long[]{0x00002204DCAFC040L});
+	public static final BitSet FOLLOW_expression_in_expression282 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MINUS_in_expression294 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression296 = new BitSet(new long[]{0x00002204DCAFC040L});
+	public static final BitSet FOLLOW_expression_in_expression298 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_DIVIDE_in_expression310 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression312 = new BitSet(new long[]{0x00002204DCAFC040L});
+	public static final BitSet FOLLOW_expression_in_expression314 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MULTIPLY_in_expression326 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression328 = new BitSet(new long[]{0x00002204DCAFC040L});
+	public static final BitSet FOLLOW_expression_in_expression330 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_IF_in_expression342 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression344 = new BitSet(new long[]{0x00002204DCAFC040L});
+	public static final BitSet FOLLOW_expression_in_expression346 = new BitSet(new long[]{0x00002204DCAFC040L});
+	public static final BitSet FOLLOW_expression_in_expression348 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_LT_in_expression360 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression362 = new BitSet(new long[]{0x00002204DCAFC040L});
+	public static final BitSet FOLLOW_expression_in_expression364 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_LTE_in_expression376 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression378 = new BitSet(new long[]{0x00002204DCAFC040L});
+	public static final BitSet FOLLOW_expression_in_expression380 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_GT_in_expression392 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression394 = new BitSet(new long[]{0x00002204DCAFC040L});
+	public static final BitSet FOLLOW_expression_in_expression396 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_GTE_in_expression408 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression410 = new BitSet(new long[]{0x00002204DCAFC040L});
+	public static final BitSet FOLLOW_expression_in_expression412 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_EQ_in_expression424 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression426 = new BitSet(new long[]{0x00002204DCAFC040L});
+	public static final BitSet FOLLOW_expression_in_expression428 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_NEQ_in_expression440 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression442 = new BitSet(new long[]{0x00002204DCAFC040L});
+	public static final BitSet FOLLOW_expression_in_expression444 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_operand466 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_operand487 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LETTER_in_operand503 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INT_LITERAL_in_operand513 = new BitSet(new long[]{0x0000000000000002L});
 }

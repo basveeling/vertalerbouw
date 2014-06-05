@@ -72,11 +72,11 @@ declaration
     ;
 
 constant_declaration
-    :   CONST^ type IDENTIFIER<IdNode>
+    :   CONST<DeclNode>^ type IDENTIFIER<IdNode>
     ;
 
 var_declaration
-    :   VAR^ type IDENTIFIER<IdNode>
+    :   VAR<DeclNode>^ type IDENTIFIER<IdNode>
     ;
 
 expression
