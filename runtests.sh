@@ -25,7 +25,7 @@ fi
 
 if [[ $compile = true ]]; then
 echo "Compiling..."
-java -jar /Applications/eclipse/plugins/org.eclipse.jdt.core_3.9.2.v20140114-1555.jar -d bin/ -1.7 src/
+java -jar /Applications/eclipse/plugins/org.eclipse.jdt.core_*.jar -d bin/ -1.7 src/
 fi
 
 if [[ $rungunit = true ]]; then
