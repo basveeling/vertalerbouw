@@ -4,7 +4,6 @@ options {
     k = 1;
     language = Java;
     output = AST;
-    ASTLabelType = StilTree; // Use custom tree nodes
 }
 
 tokens {
@@ -53,6 +52,7 @@ tokens {
 
 @header {
     package vb.stil;
+    import  vb.stil.tree.*;
 }
 
 // Parser rules
@@ -72,15 +72,15 @@ declaration
     ;
 
 constant_declaration
-    :   CONST^ type IDENTIFIER
+    :   CONST^ type IDENTIFIER<IdNode>
     ;
 
 var_declaration
-    :   VAR^ type IDENTIFIER
+    :   VAR^ type IDENTIFIER<IdNode>
     ;
 
 expression
-    :   (IDENTIFIER BECOMES) => assignment_statement
+    :   (IDENTIFIER<IdNode> BECOMES) => assignment_statement
     |   (compound_expression | arithmetic_expression | print_statement | read_statement)
     ;
 
@@ -117,20 +117,20 @@ operand
     :   bool_literal
     |   char_literal
     |   INT_LITERAL
-    |   IDENTIFIER
+    |   IDENTIFIER<IdNode>
     |   LPAREN! expression RPAREN!
     ;
 
 assignment_statement
-    :   IDENTIFIER BECOMES^ expression
+    :   IDENTIFIER<IdNode> BECOMES^ expression
     ;
 
 print_statement
-    :   PRINT^ LPAREN! IDENTIFIER (COMMA! IDENTIFIER)* RPAREN!
+    :   PRINT^ LPAREN! IDENTIFIER<IdNode> (COMMA! IDENTIFIER<IdNode>)* RPAREN!
     ;
 
 read_statement
-    :   READ^ LPAREN! IDENTIFIER (COMMA! IDENTIFIER)* RPAREN!
+    :   READ^ LPAREN! IDENTIFIER<IdNode> (COMMA! IDENTIFIER<IdNode>)* RPAREN!
     ;
 
 type

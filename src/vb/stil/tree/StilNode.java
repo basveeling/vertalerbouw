@@ -10,26 +10,26 @@ import org.antlr.runtime.tree.CommonTree;
  * @author basveeling
  *
  */
-public class StilTree extends CommonTree {
+public class StilNode extends CommonTree {
 	
 	/**
 	 * 
 	 */
-	public StilTree() {
+	public StilNode() {
 		super();
 	}
 
 	/**
 	 * @param node
 	 */
-	public StilTree(CommonTree node) {
+	public StilNode(CommonTree node) {
 		super(node);
 	}
 
 	/**
 	 * @param t
 	 */
-	public StilTree(Token t) {
+	public StilNode(Token t) {
 		super(t);
 	}
 

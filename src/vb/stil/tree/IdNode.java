@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package vb.stil.tree;
 
@@ -10,9 +10,9 @@ import org.antlr.runtime.tree.CommonTree;
  * @author basveeling
  *
  */
-public class IdNode extends StilTree {
+public class IdNode extends StilNode {
 	/**
-	 * 
+	 *
 	 */
 	public IdNode() {
 		// TODO Auto-generated constructor stub
@@ -34,4 +34,8 @@ public class IdNode extends StilTree {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public IdNode dupNode() {
+		return new IdNode(this);
+	}
 }

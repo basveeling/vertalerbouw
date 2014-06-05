@@ -2,12 +2,13 @@ tree grammar StilChecker;
 
 options {
     tokenVocab=Stil;                    // import tokens from Stil.tokens
-    ASTLabelType = StilTree;            // AST nodes are of type CommonTree
+    ASTLabelType = StilNode;            // AST nodes are of type StilNode
 }
 
 @header {
     package vb.stil;
     import  vb.stil.symtab.*;
+    import  vb.stil.tree.*;
 }
 
 // Alter code generation so catch-clauses get replaced with this action. 
@@ -32,84 +33,42 @@ declaration
     ;
 
 constant_declaration
-    :   CONST^ type IDENTIFIER<IdNode>
+    :   ^(CONST type id=IDENTIFIER)
         {
             // Check scope/uniqueness
-            entry = new IdEntry();
-            entry.setType(IdEntry.CONST);
-            symtab.enter($type.text,entry);
-            // TODO: Set Type
+            try {
+                IdEntry entry = new IdEntry();
+                entry.setType(IdEntry.CONST);
+                entry.setLevel(symtab.currentLevel());
+
+                symtab.enter($id.text, entry);
+            } catch (SymbolTableException e) {
+                System.err.println(e.getMessage());
+            }
         }
     ;
 
 var_declaration
-    :   VAR^ type IDENTIFIER<IdNode>
+    :   ^(VAR type id=IDENTIFIER)
         {
             // Check scope/uniqueness
-            entry = new IdEntry();
-            entry.setType(IdEntry.VAR);
-            symtab.enter($type.text,entry);
-            // TODO: Set Type
+            try {
+                IdEntry entry = new IdEntry();
+                entry.setType(IdEntry.CONST);
+                entry.setLevel(symtab.currentLevel());
+
+                symtab.enter($id.text, entry);
+            } catch (SymbolTableException e) {
+                System.err.println(e.getMessage());
+            }
         }
     ;
     
 expression
-    :
-    ;
-    
-compound_expression
-    :
-    ;
-    
-arithmetic_expression
-    :
-    ;
-    
-arithmetic_expression_pr5
-    :
-    ;
-    
-arithmetic_expression_pr4
-    :
-    ;
-    
-arithmetic_expression_pr3
-    :
-    ;
-    
-arithmetic_expression_pr2
-    :
-    ;
-    
-arithmetic_expression_pr1
-    :
-    ;
-    
-operand
-    :
-    ;
-    
-assignment_statement
-    :
-    ;
-    
-print_statement
-    :
-    ;
-    
-read_statement
-    :
+    :   ^(BECOMES expression)
     ;
     
 type
-    :
-    ;
-    
-bool_literal
-    :
-    ;
-    
-char_literal 
-    :
+    :   BOOL | CHAR | INT
     ;
     
