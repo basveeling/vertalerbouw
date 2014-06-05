@@ -1,19 +1,24 @@
 var bool a;
-read(a);
 var bool b;
-read(b);
 var bool c;
+
+read(a);
+read(b);
+
 c := (a && !b) || (!a && b);
 
-var int n;
-var int m;
+a := b := 4+2;
 
-n := 33 % 3;
-n := n + (3*5+2/-1%+2);
-read(m);
-c := c && (m + 2/+2 -1) > 0;
+a := c + (3*5+2/-1%+2);
 
-c := { var bool a; read(a);
-var bool b; read(b);
-(a && !b) || (!a && b);
+read(a, b);
+
+c := c && (a + 2/+2 -1) > 0;
+
+// comment
+c := { 
+	read(b);
+	!b;
 };
+
+print(a,b,c);
