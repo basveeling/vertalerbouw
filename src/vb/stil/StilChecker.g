@@ -2,11 +2,12 @@ tree grammar StilChecker;
 
 options {
     tokenVocab=Stil;                    // import tokens from Stil.tokens
-    ASTLabelType=CommonTree;            // AST nodes are of type CommonTree
+    ASTLabelType = StilTree;            // AST nodes are of type CommonTree
 }
 
 @header {
-package vb.stil;
+    package vb.stil;
+    import  vb.stil.symtab.*;
 }
 
 // Alter code generation so catch-clauses get replaced with this action. 
@@ -18,15 +19,11 @@ package vb.stil;
 }
 
 @members {
-
+    protected SymbolTable<IdEntry> symtab = new SymbolTable<IdEntry>();
 }
 
 program
-    :   ^(PROGRAM declarations_and_expressions)
-    ;
-    
-declarations_and_expressions
-    :   ((declaration | expression) SEMICOLON!)*
+    :   ^(PROGRAM { symtab.openScope(); } (declaration | expression)*)
     ;
     
 declaration
@@ -35,19 +32,24 @@ declaration
     ;
 
 constant_declaration
-    :   CONST^ type IDENTIFIER
+    :   CONST^ type IDENTIFIER<IdNode>
         {
             // Check scope/uniqueness
-            // Set Type
+            entry = new IdEntry();
+            entry.setType(IdEntry.CONST);
+            symtab.enter($type.text,entry);
+            // TODO: Set Type
         }
     ;
 
 var_declaration
-    :   VAR^ type IDENTIFIER
+    :   VAR^ type IDENTIFIER<IdNode>
         {
             // Check scope/uniqueness
-            // Set Type
-
+            entry = new IdEntry();
+            entry.setType(IdEntry.VAR);
+            symtab.enter($type.text,entry);
+            // TODO: Set Type
         }
     ;
     

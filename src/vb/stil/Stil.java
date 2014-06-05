@@ -12,6 +12,8 @@ import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.DOTTreeGenerator;
 import org.antlr.stringtemplate.StringTemplate;
 
+import vb.stil.tree.StilTreeAdaptor;
+
 /**
  * Program that creates and starts the Stil lexer, parser, etc.
  *

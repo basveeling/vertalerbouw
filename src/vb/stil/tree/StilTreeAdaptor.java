@@ -1,7 +1,7 @@
 /**
  * 
  */
-package vb.stil;
+package vb.stil.tree;
 
 import org.antlr.runtime.tree.CommonTreeAdaptor;
 
