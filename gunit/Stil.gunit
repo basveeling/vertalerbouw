@@ -1,0 +1,22 @@
+gunit Stil;
+@header{package vb.stil;}
+
+//------------------- IDENTIFIER
+IDENTIFIER:
+
+"abc123" OK
+
+"a" OK
+
+"XYZ@999" FAIL
+
+"123abc" FAIL
+
+//------------------- INT_LITERAL
+INT_LITERAL:
+
+"00000" OK
+
+"123456789" OK
+
+"-1" FAIL
