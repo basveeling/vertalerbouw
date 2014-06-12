@@ -1,6 +1,7 @@
-var bool a;
-const bool b;
+var char a;
+var bool b;
+var int c;
 
-a := 4;
-b := 3;
+a := 'a';
+b := true;
 c := 5;

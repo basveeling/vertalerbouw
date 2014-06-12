@@ -3,10 +3,12 @@ package vb.stil.tree;
 import org.antlr.runtime.Token;
 
 public class DeclNode extends StilNode {
-	public static final int CONST = 0;
-	public static final int VAR = 1;
+	public enum Kind {
+		CONST, VAR
+	}
 	
-	protected int kind = -1;
+	protected Kind kind;
+	protected EntityType entityType;
 
 	public DeclNode() {
 		super();
@@ -20,16 +22,24 @@ public class DeclNode extends StilNode {
 		super(t);
 	}
 	
-	public int getKind() {
+	public EntityType getEntityType() {
+		return entityType;
+	}
+	
+	public void setEntityType(EntityType entityType) {
+		this.entityType = entityType;
+	}
+	
+	public Kind getKind() {
 		return kind;
 	}
 	
-	public void setKind(int kind) {
+	public void setKind(Kind kind) {
 		this.kind = kind;
 	}
 	
 	public boolean isVariable() {
-		return this.kind == DeclNode.VAR;
+		return kind == Kind.VAR;
 	}
 	
 	@Override

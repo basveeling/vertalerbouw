@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 src/vb/stil/Stil.g 2014-06-05 17:24:36
+// $ANTLR 3.5.2 Stil.g 2014-06-12 17:45:09
 
     package vb.stil;
 
@@ -16,42 +16,46 @@ public class StilLexer extends Lexer {
 	public static final int BECOMES=6;
 	public static final int BOOL=7;
 	public static final int CHAR=8;
-	public static final int COLON=9;
-	public static final int COMMA=10;
-	public static final int COMMENT=11;
-	public static final int CONST=12;
-	public static final int DIGIT=13;
-	public static final int DIVIDE=14;
-	public static final int EQ=15;
-	public static final int FALSE=16;
-	public static final int GT=17;
-	public static final int GTE=18;
-	public static final int IDENTIFIER=19;
-	public static final int INT=20;
-	public static final int INT_LITERAL=21;
-	public static final int LCURLY=22;
-	public static final int LETTER=23;
-	public static final int LOWER=24;
-	public static final int LPAREN=25;
-	public static final int LT=26;
-	public static final int LTE=27;
-	public static final int MINUS=28;
-	public static final int MODULO=29;
-	public static final int MULTIPLY=30;
-	public static final int NEQ=31;
-	public static final int NOT=32;
-	public static final int OR=33;
-	public static final int PLUS=34;
-	public static final int PRINT=35;
-	public static final int PROGRAM=36;
-	public static final int RCURLY=37;
-	public static final int READ=38;
-	public static final int RPAREN=39;
-	public static final int SEMICOLON=40;
-	public static final int TRUE=41;
-	public static final int UPPER=42;
-	public static final int VAR=43;
-	public static final int WS=44;
+	public static final int CHAR_LITERAL=9;
+	public static final int COLON=10;
+	public static final int COMMA=11;
+	public static final int COMMENT=12;
+	public static final int CONST=13;
+	public static final int DIGIT=14;
+	public static final int DIVIDE=15;
+	public static final int EQ=16;
+	public static final int FALSE=17;
+	public static final int GT=18;
+	public static final int GTE=19;
+	public static final int IDENTIFIER=20;
+	public static final int INT=21;
+	public static final int INT_LITERAL=22;
+	public static final int LCURLY=23;
+	public static final int LETTER=24;
+	public static final int LOWER=25;
+	public static final int LPAREN=26;
+	public static final int LT=27;
+	public static final int LTE=28;
+	public static final int MINUS=29;
+	public static final int MODULO=30;
+	public static final int MULTIPLY=31;
+	public static final int NEQ=32;
+	public static final int NOT=33;
+	public static final int OR=34;
+	public static final int PLUS=35;
+	public static final int PRINT=36;
+	public static final int PROGRAM=37;
+	public static final int RCURLY=38;
+	public static final int READ=39;
+	public static final int RPAREN=40;
+	public static final int SEMICOLON=41;
+	public static final int TRUE=42;
+	public static final int UNARY_MINUS=43;
+	public static final int UNARY_NOT=44;
+	public static final int UNARY_PLUS=45;
+	public static final int UPPER=46;
+	public static final int VAR=47;
+	public static final int WS=48;
 
 	// delegates
 	// delegators
@@ -66,15 +70,15 @@ public class StilLexer extends Lexer {
 	public StilLexer(CharStream input, RecognizerSharedState state) {
 		super(input,state);
 	}
-	@Override public String getGrammarFileName() { return "src/vb/stil/Stil.g"; }
+	@Override public String getGrammarFileName() { return "Stil.g"; }
 
 	// $ANTLR start "AND"
 	public final void mAND() throws RecognitionException {
 		try {
 			int _type = AND;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:11:5: ( '&&' )
-			// src/vb/stil/Stil.g:11:7: '&&'
+			// Stil.g:11:5: ( '&&' )
+			// Stil.g:11:7: '&&'
 			{
 			match("&&"); 
 
@@ -94,8 +98,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = APOS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:12:6: ( '\\'' )
-			// src/vb/stil/Stil.g:12:8: '\\''
+			// Stil.g:12:6: ( '\\'' )
+			// Stil.g:12:8: '\\''
 			{
 			match('\''); 
 			}
@@ -114,8 +118,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = BECOMES;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:13:9: ( ':=' )
-			// src/vb/stil/Stil.g:13:11: ':='
+			// Stil.g:13:9: ( ':=' )
+			// Stil.g:13:11: ':='
 			{
 			match(":="); 
 
@@ -135,8 +139,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = BOOL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:14:6: ( 'bool' )
-			// src/vb/stil/Stil.g:14:8: 'bool'
+			// Stil.g:14:6: ( 'bool' )
+			// Stil.g:14:8: 'bool'
 			{
 			match("bool"); 
 
@@ -156,8 +160,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = CHAR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:15:6: ( 'char' )
-			// src/vb/stil/Stil.g:15:8: 'char'
+			// Stil.g:15:6: ( 'char' )
+			// Stil.g:15:8: 'char'
 			{
 			match("char"); 
 
@@ -177,8 +181,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = COLON;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:16:7: ( ':' )
-			// src/vb/stil/Stil.g:16:9: ':'
+			// Stil.g:16:7: ( ':' )
+			// Stil.g:16:9: ':'
 			{
 			match(':'); 
 			}
@@ -197,8 +201,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = COMMA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:17:7: ( ',' )
-			// src/vb/stil/Stil.g:17:9: ','
+			// Stil.g:17:7: ( ',' )
+			// Stil.g:17:9: ','
 			{
 			match(','); 
 			}
@@ -217,8 +221,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = CONST;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:18:7: ( 'const' )
-			// src/vb/stil/Stil.g:18:9: 'const'
+			// Stil.g:18:7: ( 'const' )
+			// Stil.g:18:9: 'const'
 			{
 			match("const"); 
 
@@ -238,8 +242,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = DIVIDE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:19:8: ( '/' )
-			// src/vb/stil/Stil.g:19:10: '/'
+			// Stil.g:19:8: ( '/' )
+			// Stil.g:19:10: '/'
 			{
 			match('/'); 
 			}
@@ -258,8 +262,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = EQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:20:4: ( '==' )
-			// src/vb/stil/Stil.g:20:6: '=='
+			// Stil.g:20:4: ( '==' )
+			// Stil.g:20:6: '=='
 			{
 			match("=="); 
 
@@ -279,8 +283,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = FALSE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:21:7: ( 'false' )
-			// src/vb/stil/Stil.g:21:9: 'false'
+			// Stil.g:21:7: ( 'false' )
+			// Stil.g:21:9: 'false'
 			{
 			match("false"); 
 
@@ -300,8 +304,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = GT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:22:4: ( '>' )
-			// src/vb/stil/Stil.g:22:6: '>'
+			// Stil.g:22:4: ( '>' )
+			// Stil.g:22:6: '>'
 			{
 			match('>'); 
 			}
@@ -320,8 +324,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = GTE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:23:5: ( '>=' )
-			// src/vb/stil/Stil.g:23:7: '>='
+			// Stil.g:23:5: ( '>=' )
+			// Stil.g:23:7: '>='
 			{
 			match(">="); 
 
@@ -341,8 +345,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = INT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:24:5: ( 'int' )
-			// src/vb/stil/Stil.g:24:7: 'int'
+			// Stil.g:24:5: ( 'int' )
+			// Stil.g:24:7: 'int'
 			{
 			match("int"); 
 
@@ -362,8 +366,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = LCURLY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:25:8: ( '{' )
-			// src/vb/stil/Stil.g:25:10: '{'
+			// Stil.g:25:8: ( '{' )
+			// Stil.g:25:10: '{'
 			{
 			match('{'); 
 			}
@@ -382,8 +386,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = LPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:26:8: ( '(' )
-			// src/vb/stil/Stil.g:26:10: '('
+			// Stil.g:26:8: ( '(' )
+			// Stil.g:26:10: '('
 			{
 			match('('); 
 			}
@@ -402,8 +406,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = LT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:27:4: ( '<' )
-			// src/vb/stil/Stil.g:27:6: '<'
+			// Stil.g:27:4: ( '<' )
+			// Stil.g:27:6: '<'
 			{
 			match('<'); 
 			}
@@ -422,8 +426,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = LTE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:28:5: ( '<=' )
-			// src/vb/stil/Stil.g:28:7: '<='
+			// Stil.g:28:5: ( '<=' )
+			// Stil.g:28:7: '<='
 			{
 			match("<="); 
 
@@ -443,8 +447,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = MINUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:29:7: ( '-' )
-			// src/vb/stil/Stil.g:29:9: '-'
+			// Stil.g:29:7: ( '-' )
+			// Stil.g:29:9: '-'
 			{
 			match('-'); 
 			}
@@ -463,8 +467,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = MODULO;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:30:8: ( '%' )
-			// src/vb/stil/Stil.g:30:10: '%'
+			// Stil.g:30:8: ( '%' )
+			// Stil.g:30:10: '%'
 			{
 			match('%'); 
 			}
@@ -483,8 +487,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = MULTIPLY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:31:10: ( '*' )
-			// src/vb/stil/Stil.g:31:12: '*'
+			// Stil.g:31:10: ( '*' )
+			// Stil.g:31:12: '*'
 			{
 			match('*'); 
 			}
@@ -503,8 +507,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = NEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:32:5: ( '<>' )
-			// src/vb/stil/Stil.g:32:7: '<>'
+			// Stil.g:32:5: ( '<>' )
+			// Stil.g:32:7: '<>'
 			{
 			match("<>"); 
 
@@ -524,8 +528,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = NOT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:33:5: ( '!' )
-			// src/vb/stil/Stil.g:33:7: '!'
+			// Stil.g:33:5: ( '!' )
+			// Stil.g:33:7: '!'
 			{
 			match('!'); 
 			}
@@ -544,8 +548,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = OR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:34:4: ( '||' )
-			// src/vb/stil/Stil.g:34:6: '||'
+			// Stil.g:34:4: ( '||' )
+			// Stil.g:34:6: '||'
 			{
 			match("||"); 
 
@@ -565,8 +569,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = PLUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:35:6: ( '+' )
-			// src/vb/stil/Stil.g:35:8: '+'
+			// Stil.g:35:6: ( '+' )
+			// Stil.g:35:8: '+'
 			{
 			match('+'); 
 			}
@@ -585,8 +589,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = PRINT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:36:7: ( 'print' )
-			// src/vb/stil/Stil.g:36:9: 'print'
+			// Stil.g:36:7: ( 'print' )
+			// Stil.g:36:9: 'print'
 			{
 			match("print"); 
 
@@ -606,8 +610,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = PROGRAM;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:37:9: ( 'program' )
-			// src/vb/stil/Stil.g:37:11: 'program'
+			// Stil.g:37:9: ( 'program' )
+			// Stil.g:37:11: 'program'
 			{
 			match("program"); 
 
@@ -627,8 +631,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = RCURLY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:38:8: ( '}' )
-			// src/vb/stil/Stil.g:38:10: '}'
+			// Stil.g:38:8: ( '}' )
+			// Stil.g:38:10: '}'
 			{
 			match('}'); 
 			}
@@ -647,8 +651,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = READ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:39:6: ( 'read' )
-			// src/vb/stil/Stil.g:39:8: 'read'
+			// Stil.g:39:6: ( 'read' )
+			// Stil.g:39:8: 'read'
 			{
 			match("read"); 
 
@@ -668,8 +672,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = RPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:40:8: ( ')' )
-			// src/vb/stil/Stil.g:40:10: ')'
+			// Stil.g:40:8: ( ')' )
+			// Stil.g:40:10: ')'
 			{
 			match(')'); 
 			}
@@ -688,8 +692,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = SEMICOLON;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:41:11: ( ';' )
-			// src/vb/stil/Stil.g:41:13: ';'
+			// Stil.g:41:11: ( ';' )
+			// Stil.g:41:13: ';'
 			{
 			match(';'); 
 			}
@@ -708,8 +712,8 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = TRUE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:42:6: ( 'true' )
-			// src/vb/stil/Stil.g:42:8: 'true'
+			// Stil.g:42:6: ( 'true' )
+			// Stil.g:42:8: 'true'
 			{
 			match("true"); 
 
@@ -724,13 +728,76 @@ public class StilLexer extends Lexer {
 	}
 	// $ANTLR end "TRUE"
 
+	// $ANTLR start "UNARY_MINUS"
+	public final void mUNARY_MINUS() throws RecognitionException {
+		try {
+			int _type = UNARY_MINUS;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// Stil.g:43:13: ( 'minus' )
+			// Stil.g:43:15: 'minus'
+			{
+			match("minus"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "UNARY_MINUS"
+
+	// $ANTLR start "UNARY_NOT"
+	public final void mUNARY_NOT() throws RecognitionException {
+		try {
+			int _type = UNARY_NOT;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// Stil.g:44:11: ( 'not' )
+			// Stil.g:44:13: 'not'
+			{
+			match("not"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "UNARY_NOT"
+
+	// $ANTLR start "UNARY_PLUS"
+	public final void mUNARY_PLUS() throws RecognitionException {
+		try {
+			int _type = UNARY_PLUS;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// Stil.g:45:12: ( 'plus' )
+			// Stil.g:45:14: 'plus'
+			{
+			match("plus"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "UNARY_PLUS"
+
 	// $ANTLR start "VAR"
 	public final void mVAR() throws RecognitionException {
 		try {
 			int _type = VAR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:43:5: ( 'var' )
-			// src/vb/stil/Stil.g:43:7: 'var'
+			// Stil.g:46:5: ( 'var' )
+			// Stil.g:46:7: 'var'
 			{
 			match("var"); 
 
@@ -745,28 +812,105 @@ public class StilLexer extends Lexer {
 	}
 	// $ANTLR end "VAR"
 
-	// $ANTLR start "IDENTIFIER"
-	public final void mIDENTIFIER() throws RecognitionException {
+	// $ANTLR start "CHAR_LITERAL"
+	public final void mCHAR_LITERAL() throws RecognitionException {
 		try {
-			int _type = IDENTIFIER;
+			int _type = CHAR_LITERAL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:151:5: ( LETTER ( LETTER | DIGIT )* )
-			// src/vb/stil/Stil.g:151:9: LETTER ( LETTER | DIGIT )*
+			// Stil.g:154:5: ( APOS LETTER APOS )
+			// Stil.g:154:9: APOS LETTER APOS
 			{
+			mAPOS(); 
+
 			mLETTER(); 
 
-			// src/vb/stil/Stil.g:151:16: ( LETTER | DIGIT )*
+			mAPOS(); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "CHAR_LITERAL"
+
+	// $ANTLR start "INT_LITERAL"
+	public final void mINT_LITERAL() throws RecognitionException {
+		try {
+			int _type = INT_LITERAL;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// Stil.g:158:5: ( ( DIGIT )+ )
+			// Stil.g:158:9: ( DIGIT )+
+			{
+			// Stil.g:158:9: ( DIGIT )+
+			int cnt1=0;
 			loop1:
 			while (true) {
 				int alt1=2;
 				int LA1_0 = input.LA(1);
-				if ( ((LA1_0 >= '0' && LA1_0 <= '9')||(LA1_0 >= 'A' && LA1_0 <= 'Z')||(LA1_0 >= 'a' && LA1_0 <= 'z')) ) {
+				if ( ((LA1_0 >= '0' && LA1_0 <= '9')) ) {
 					alt1=1;
 				}
 
 				switch (alt1) {
 				case 1 :
-					// src/vb/stil/Stil.g:
+					// Stil.g:
+					{
+					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+						input.consume();
+					}
+					else {
+						MismatchedSetException mse = new MismatchedSetException(null,input);
+						recover(mse);
+						throw mse;
+					}
+					}
+					break;
+
+				default :
+					if ( cnt1 >= 1 ) break loop1;
+					EarlyExitException eee = new EarlyExitException(1, input);
+					throw eee;
+				}
+				cnt1++;
+			}
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "INT_LITERAL"
+
+	// $ANTLR start "IDENTIFIER"
+	public final void mIDENTIFIER() throws RecognitionException {
+		try {
+			int _type = IDENTIFIER;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// Stil.g:162:5: ( LETTER ( LETTER | DIGIT )* )
+			// Stil.g:162:9: LETTER ( LETTER | DIGIT )*
+			{
+			mLETTER(); 
+
+			// Stil.g:162:16: ( LETTER | DIGIT )*
+			loop2:
+			while (true) {
+				int alt2=2;
+				int LA2_0 = input.LA(1);
+				if ( ((LA2_0 >= '0' && LA2_0 <= '9')||(LA2_0 >= 'A' && LA2_0 <= 'Z')||(LA2_0 >= 'a' && LA2_0 <= 'z')) ) {
+					alt2=1;
+				}
+
+				switch (alt2) {
+				case 1 :
+					// Stil.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 						input.consume();
@@ -780,7 +924,7 @@ public class StilLexer extends Lexer {
 					break;
 
 				default :
-					break loop1;
+					break loop2;
 				}
 			}
 
@@ -795,69 +939,17 @@ public class StilLexer extends Lexer {
 	}
 	// $ANTLR end "IDENTIFIER"
 
-	// $ANTLR start "INT_LITERAL"
-	public final void mINT_LITERAL() throws RecognitionException {
-		try {
-			int _type = INT_LITERAL;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:155:5: ( ( DIGIT )+ )
-			// src/vb/stil/Stil.g:155:9: ( DIGIT )+
-			{
-			// src/vb/stil/Stil.g:155:9: ( DIGIT )+
-			int cnt2=0;
-			loop2:
-			while (true) {
-				int alt2=2;
-				int LA2_0 = input.LA(1);
-				if ( ((LA2_0 >= '0' && LA2_0 <= '9')) ) {
-					alt2=1;
-				}
-
-				switch (alt2) {
-				case 1 :
-					// src/vb/stil/Stil.g:
-					{
-					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
-						input.consume();
-					}
-					else {
-						MismatchedSetException mse = new MismatchedSetException(null,input);
-						recover(mse);
-						throw mse;
-					}
-					}
-					break;
-
-				default :
-					if ( cnt2 >= 1 ) break loop2;
-					EarlyExitException eee = new EarlyExitException(2, input);
-					throw eee;
-				}
-				cnt2++;
-			}
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "INT_LITERAL"
-
 	// $ANTLR start "COMMENT"
 	public final void mCOMMENT() throws RecognitionException {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:159:5: ( '//' ( . )* '\\n' )
-			// src/vb/stil/Stil.g:159:9: '//' ( . )* '\\n'
+			// Stil.g:166:5: ( '//' ( . )* '\\n' )
+			// Stil.g:166:9: '//' ( . )* '\\n'
 			{
 			match("//"); 
 
-			// src/vb/stil/Stil.g:159:14: ( . )*
+			// Stil.g:166:14: ( . )*
 			loop3:
 			while (true) {
 				int alt3=2;
@@ -871,7 +963,7 @@ public class StilLexer extends Lexer {
 
 				switch (alt3) {
 				case 1 :
-					// src/vb/stil/Stil.g:159:14: .
+					// Stil.g:166:14: .
 					{
 					matchAny(); 
 					}
@@ -900,10 +992,10 @@ public class StilLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/vb/stil/Stil.g:164:5: ( ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+ )
-			// src/vb/stil/Stil.g:164:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+			// Stil.g:171:5: ( ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+ )
+			// Stil.g:171:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
 			{
-			// src/vb/stil/Stil.g:164:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+			// Stil.g:171:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
 			int cnt4=0;
 			loop4:
 			while (true) {
@@ -915,7 +1007,7 @@ public class StilLexer extends Lexer {
 
 				switch (alt4) {
 				case 1 :
-					// src/vb/stil/Stil.g:
+					// Stil.g:
 					{
 					if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||(input.LA(1) >= '\f' && input.LA(1) <= '\r')||input.LA(1)==' ' ) {
 						input.consume();
@@ -951,8 +1043,8 @@ public class StilLexer extends Lexer {
 	// $ANTLR start "DIGIT"
 	public final void mDIGIT() throws RecognitionException {
 		try {
-			// src/vb/stil/Stil.g:168:17: ( ( '0' .. '9' ) )
-			// src/vb/stil/Stil.g:
+			// Stil.g:175:17: ( ( '0' .. '9' ) )
+			// Stil.g:
 			{
 			if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 				input.consume();
@@ -974,8 +1066,8 @@ public class StilLexer extends Lexer {
 	// $ANTLR start "LOWER"
 	public final void mLOWER() throws RecognitionException {
 		try {
-			// src/vb/stil/Stil.g:169:17: ( ( 'a' .. 'z' ) )
-			// src/vb/stil/Stil.g:
+			// Stil.g:176:17: ( ( 'a' .. 'z' ) )
+			// Stil.g:
 			{
 			if ( (input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -997,8 +1089,8 @@ public class StilLexer extends Lexer {
 	// $ANTLR start "UPPER"
 	public final void mUPPER() throws RecognitionException {
 		try {
-			// src/vb/stil/Stil.g:170:17: ( ( 'A' .. 'Z' ) )
-			// src/vb/stil/Stil.g:
+			// Stil.g:177:17: ( ( 'A' .. 'Z' ) )
+			// Stil.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') ) {
 				input.consume();
@@ -1020,8 +1112,8 @@ public class StilLexer extends Lexer {
 	// $ANTLR start "LETTER"
 	public final void mLETTER() throws RecognitionException {
 		try {
-			// src/vb/stil/Stil.g:171:17: ( LOWER | UPPER )
-			// src/vb/stil/Stil.g:
+			// Stil.g:178:17: ( LOWER | UPPER )
+			// Stil.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -1042,264 +1134,292 @@ public class StilLexer extends Lexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// src/vb/stil/Stil.g:1:8: ( AND | APOS | BECOMES | BOOL | CHAR | COLON | COMMA | CONST | DIVIDE | EQ | FALSE | GT | GTE | INT | LCURLY | LPAREN | LT | LTE | MINUS | MODULO | MULTIPLY | NEQ | NOT | OR | PLUS | PRINT | PROGRAM | RCURLY | READ | RPAREN | SEMICOLON | TRUE | VAR | IDENTIFIER | INT_LITERAL | COMMENT | WS )
-		int alt5=37;
+		// Stil.g:1:8: ( AND | APOS | BECOMES | BOOL | CHAR | COLON | COMMA | CONST | DIVIDE | EQ | FALSE | GT | GTE | INT | LCURLY | LPAREN | LT | LTE | MINUS | MODULO | MULTIPLY | NEQ | NOT | OR | PLUS | PRINT | PROGRAM | RCURLY | READ | RPAREN | SEMICOLON | TRUE | UNARY_MINUS | UNARY_NOT | UNARY_PLUS | VAR | CHAR_LITERAL | INT_LITERAL | IDENTIFIER | COMMENT | WS )
+		int alt5=41;
 		alt5 = dfa5.predict(input);
 		switch (alt5) {
 			case 1 :
-				// src/vb/stil/Stil.g:1:10: AND
+				// Stil.g:1:10: AND
 				{
 				mAND(); 
 
 				}
 				break;
 			case 2 :
-				// src/vb/stil/Stil.g:1:14: APOS
+				// Stil.g:1:14: APOS
 				{
 				mAPOS(); 
 
 				}
 				break;
 			case 3 :
-				// src/vb/stil/Stil.g:1:19: BECOMES
+				// Stil.g:1:19: BECOMES
 				{
 				mBECOMES(); 
 
 				}
 				break;
 			case 4 :
-				// src/vb/stil/Stil.g:1:27: BOOL
+				// Stil.g:1:27: BOOL
 				{
 				mBOOL(); 
 
 				}
 				break;
 			case 5 :
-				// src/vb/stil/Stil.g:1:32: CHAR
+				// Stil.g:1:32: CHAR
 				{
 				mCHAR(); 
 
 				}
 				break;
 			case 6 :
-				// src/vb/stil/Stil.g:1:37: COLON
+				// Stil.g:1:37: COLON
 				{
 				mCOLON(); 
 
 				}
 				break;
 			case 7 :
-				// src/vb/stil/Stil.g:1:43: COMMA
+				// Stil.g:1:43: COMMA
 				{
 				mCOMMA(); 
 
 				}
 				break;
 			case 8 :
-				// src/vb/stil/Stil.g:1:49: CONST
+				// Stil.g:1:49: CONST
 				{
 				mCONST(); 
 
 				}
 				break;
 			case 9 :
-				// src/vb/stil/Stil.g:1:55: DIVIDE
+				// Stil.g:1:55: DIVIDE
 				{
 				mDIVIDE(); 
 
 				}
 				break;
 			case 10 :
-				// src/vb/stil/Stil.g:1:62: EQ
+				// Stil.g:1:62: EQ
 				{
 				mEQ(); 
 
 				}
 				break;
 			case 11 :
-				// src/vb/stil/Stil.g:1:65: FALSE
+				// Stil.g:1:65: FALSE
 				{
 				mFALSE(); 
 
 				}
 				break;
 			case 12 :
-				// src/vb/stil/Stil.g:1:71: GT
+				// Stil.g:1:71: GT
 				{
 				mGT(); 
 
 				}
 				break;
 			case 13 :
-				// src/vb/stil/Stil.g:1:74: GTE
+				// Stil.g:1:74: GTE
 				{
 				mGTE(); 
 
 				}
 				break;
 			case 14 :
-				// src/vb/stil/Stil.g:1:78: INT
+				// Stil.g:1:78: INT
 				{
 				mINT(); 
 
 				}
 				break;
 			case 15 :
-				// src/vb/stil/Stil.g:1:82: LCURLY
+				// Stil.g:1:82: LCURLY
 				{
 				mLCURLY(); 
 
 				}
 				break;
 			case 16 :
-				// src/vb/stil/Stil.g:1:89: LPAREN
+				// Stil.g:1:89: LPAREN
 				{
 				mLPAREN(); 
 
 				}
 				break;
 			case 17 :
-				// src/vb/stil/Stil.g:1:96: LT
+				// Stil.g:1:96: LT
 				{
 				mLT(); 
 
 				}
 				break;
 			case 18 :
-				// src/vb/stil/Stil.g:1:99: LTE
+				// Stil.g:1:99: LTE
 				{
 				mLTE(); 
 
 				}
 				break;
 			case 19 :
-				// src/vb/stil/Stil.g:1:103: MINUS
+				// Stil.g:1:103: MINUS
 				{
 				mMINUS(); 
 
 				}
 				break;
 			case 20 :
-				// src/vb/stil/Stil.g:1:109: MODULO
+				// Stil.g:1:109: MODULO
 				{
 				mMODULO(); 
 
 				}
 				break;
 			case 21 :
-				// src/vb/stil/Stil.g:1:116: MULTIPLY
+				// Stil.g:1:116: MULTIPLY
 				{
 				mMULTIPLY(); 
 
 				}
 				break;
 			case 22 :
-				// src/vb/stil/Stil.g:1:125: NEQ
+				// Stil.g:1:125: NEQ
 				{
 				mNEQ(); 
 
 				}
 				break;
 			case 23 :
-				// src/vb/stil/Stil.g:1:129: NOT
+				// Stil.g:1:129: NOT
 				{
 				mNOT(); 
 
 				}
 				break;
 			case 24 :
-				// src/vb/stil/Stil.g:1:133: OR
+				// Stil.g:1:133: OR
 				{
 				mOR(); 
 
 				}
 				break;
 			case 25 :
-				// src/vb/stil/Stil.g:1:136: PLUS
+				// Stil.g:1:136: PLUS
 				{
 				mPLUS(); 
 
 				}
 				break;
 			case 26 :
-				// src/vb/stil/Stil.g:1:141: PRINT
+				// Stil.g:1:141: PRINT
 				{
 				mPRINT(); 
 
 				}
 				break;
 			case 27 :
-				// src/vb/stil/Stil.g:1:147: PROGRAM
+				// Stil.g:1:147: PROGRAM
 				{
 				mPROGRAM(); 
 
 				}
 				break;
 			case 28 :
-				// src/vb/stil/Stil.g:1:155: RCURLY
+				// Stil.g:1:155: RCURLY
 				{
 				mRCURLY(); 
 
 				}
 				break;
 			case 29 :
-				// src/vb/stil/Stil.g:1:162: READ
+				// Stil.g:1:162: READ
 				{
 				mREAD(); 
 
 				}
 				break;
 			case 30 :
-				// src/vb/stil/Stil.g:1:167: RPAREN
+				// Stil.g:1:167: RPAREN
 				{
 				mRPAREN(); 
 
 				}
 				break;
 			case 31 :
-				// src/vb/stil/Stil.g:1:174: SEMICOLON
+				// Stil.g:1:174: SEMICOLON
 				{
 				mSEMICOLON(); 
 
 				}
 				break;
 			case 32 :
-				// src/vb/stil/Stil.g:1:184: TRUE
+				// Stil.g:1:184: TRUE
 				{
 				mTRUE(); 
 
 				}
 				break;
 			case 33 :
-				// src/vb/stil/Stil.g:1:189: VAR
+				// Stil.g:1:189: UNARY_MINUS
+				{
+				mUNARY_MINUS(); 
+
+				}
+				break;
+			case 34 :
+				// Stil.g:1:201: UNARY_NOT
+				{
+				mUNARY_NOT(); 
+
+				}
+				break;
+			case 35 :
+				// Stil.g:1:211: UNARY_PLUS
+				{
+				mUNARY_PLUS(); 
+
+				}
+				break;
+			case 36 :
+				// Stil.g:1:222: VAR
 				{
 				mVAR(); 
 
 				}
 				break;
-			case 34 :
-				// src/vb/stil/Stil.g:1:193: IDENTIFIER
+			case 37 :
+				// Stil.g:1:226: CHAR_LITERAL
 				{
-				mIDENTIFIER(); 
+				mCHAR_LITERAL(); 
 
 				}
 				break;
-			case 35 :
-				// src/vb/stil/Stil.g:1:204: INT_LITERAL
+			case 38 :
+				// Stil.g:1:239: INT_LITERAL
 				{
 				mINT_LITERAL(); 
 
 				}
 				break;
-			case 36 :
-				// src/vb/stil/Stil.g:1:216: COMMENT
+			case 39 :
+				// Stil.g:1:251: IDENTIFIER
+				{
+				mIDENTIFIER(); 
+
+				}
+				break;
+			case 40 :
+				// Stil.g:1:262: COMMENT
 				{
 				mCOMMENT(); 
 
 				}
 				break;
-			case 37 :
-				// src/vb/stil/Stil.g:1:224: WS
+			case 41 :
+				// Stil.g:1:270: WS
 				{
 				mWS(); 
 
@@ -1312,118 +1432,138 @@ public class StilLexer extends Lexer {
 
 	protected DFA5 dfa5 = new DFA5(this);
 	static final String DFA5_eotS =
-		"\3\uffff\1\40\2\34\1\uffff\1\45\1\uffff\1\34\1\50\1\34\2\uffff\1\54\6"+
-		"\uffff\1\34\1\uffff\1\34\2\uffff\2\34\5\uffff\3\34\2\uffff\1\34\2\uffff"+
-		"\1\34\3\uffff\10\34\1\77\4\34\1\104\1\105\1\106\2\34\1\uffff\2\34\1\113"+
-		"\1\114\3\uffff\1\115\1\116\1\117\1\34\5\uffff\1\34\1\122\1\uffff";
+		"\2\uffff\1\41\1\44\2\37\1\uffff\1\51\1\uffff\1\37\1\54\1\37\2\uffff\1"+
+		"\60\6\uffff\1\37\1\uffff\1\37\2\uffff\4\37\7\uffff\3\37\2\uffff\1\37\2"+
+		"\uffff\1\37\3\uffff\13\37\1\111\6\37\1\120\1\121\1\122\1\123\2\37\1\uffff"+
+		"\2\37\1\130\1\131\1\132\1\37\4\uffff\1\134\1\135\1\136\1\37\3\uffff\1"+
+		"\140\3\uffff\1\37\1\uffff\1\142\1\uffff";
 	static final String DFA5_eofS =
-		"\123\uffff";
+		"\143\uffff";
 	static final String DFA5_minS =
-		"\1\11\2\uffff\1\75\1\157\1\150\1\uffff\1\57\1\uffff\1\141\1\75\1\156\2"+
-		"\uffff\1\75\6\uffff\1\162\1\uffff\1\145\2\uffff\1\162\1\141\5\uffff\1"+
-		"\157\1\141\1\156\2\uffff\1\154\2\uffff\1\164\3\uffff\1\151\1\141\1\165"+
-		"\1\162\1\154\1\162\2\163\1\60\1\156\1\147\1\144\1\145\3\60\1\164\1\145"+
-		"\1\uffff\1\164\1\162\2\60\3\uffff\3\60\1\141\5\uffff\1\155\1\60\1\uffff";
+		"\1\11\1\uffff\1\101\1\75\1\157\1\150\1\uffff\1\57\1\uffff\1\141\1\75\1"+
+		"\156\2\uffff\1\75\6\uffff\1\154\1\uffff\1\145\2\uffff\1\162\1\151\1\157"+
+		"\1\141\7\uffff\1\157\1\141\1\156\2\uffff\1\154\2\uffff\1\164\3\uffff\1"+
+		"\151\1\165\1\141\1\165\1\156\1\164\1\162\1\154\1\162\2\163\1\60\1\156"+
+		"\1\147\1\163\1\144\1\145\1\165\4\60\1\164\1\145\1\uffff\1\164\1\162\3"+
+		"\60\1\163\4\uffff\3\60\1\141\3\uffff\1\60\3\uffff\1\155\1\uffff\1\60\1"+
+		"\uffff";
 	static final String DFA5_maxS =
-		"\1\175\2\uffff\1\75\2\157\1\uffff\1\57\1\uffff\1\141\1\75\1\156\2\uffff"+
-		"\1\76\6\uffff\1\162\1\uffff\1\145\2\uffff\1\162\1\141\5\uffff\1\157\1"+
-		"\141\1\156\2\uffff\1\154\2\uffff\1\164\3\uffff\1\157\1\141\1\165\1\162"+
-		"\1\154\1\162\2\163\1\172\1\156\1\147\1\144\1\145\3\172\1\164\1\145\1\uffff"+
-		"\1\164\1\162\2\172\3\uffff\3\172\1\141\5\uffff\1\155\1\172\1\uffff";
+		"\1\175\1\uffff\1\172\1\75\2\157\1\uffff\1\57\1\uffff\1\141\1\75\1\156"+
+		"\2\uffff\1\76\6\uffff\1\162\1\uffff\1\145\2\uffff\1\162\1\151\1\157\1"+
+		"\141\7\uffff\1\157\1\141\1\156\2\uffff\1\154\2\uffff\1\164\3\uffff\1\157"+
+		"\1\165\1\141\1\165\1\156\1\164\1\162\1\154\1\162\2\163\1\172\1\156\1\147"+
+		"\1\163\1\144\1\145\1\165\4\172\1\164\1\145\1\uffff\1\164\1\162\3\172\1"+
+		"\163\4\uffff\3\172\1\141\3\uffff\1\172\3\uffff\1\155\1\uffff\1\172\1\uffff";
 	static final String DFA5_acceptS =
-		"\1\uffff\1\1\1\2\3\uffff\1\7\1\uffff\1\12\3\uffff\1\17\1\20\1\uffff\1"+
-		"\23\1\24\1\25\1\27\1\30\1\31\1\uffff\1\34\1\uffff\1\36\1\37\2\uffff\1"+
-		"\42\1\43\1\45\1\3\1\6\3\uffff\1\44\1\11\1\uffff\1\15\1\14\1\uffff\1\22"+
-		"\1\26\1\21\22\uffff\1\16\4\uffff\1\41\1\4\1\5\4\uffff\1\35\1\40\1\10\1"+
-		"\13\1\32\2\uffff\1\33";
+		"\1\uffff\1\1\4\uffff\1\7\1\uffff\1\12\3\uffff\1\17\1\20\1\uffff\1\23\1"+
+		"\24\1\25\1\27\1\30\1\31\1\uffff\1\34\1\uffff\1\36\1\37\4\uffff\1\46\1"+
+		"\47\1\51\1\2\1\45\1\3\1\6\3\uffff\1\50\1\11\1\uffff\1\15\1\14\1\uffff"+
+		"\1\22\1\26\1\21\30\uffff\1\16\6\uffff\1\42\1\44\1\4\1\5\4\uffff\1\43\1"+
+		"\35\1\40\1\uffff\1\10\1\13\1\32\1\uffff\1\41\1\uffff\1\33";
 	static final String DFA5_specialS =
-		"\123\uffff}>";
+		"\143\uffff}>";
 	static final String[] DFA5_transitionS = {
-			"\2\36\1\uffff\2\36\22\uffff\1\36\1\22\3\uffff\1\20\1\1\1\2\1\15\1\30"+
-			"\1\21\1\24\1\6\1\17\1\uffff\1\7\12\35\1\3\1\31\1\16\1\10\1\12\2\uffff"+
-			"\32\34\6\uffff\1\34\1\4\1\5\2\34\1\11\2\34\1\13\6\34\1\25\1\34\1\27\1"+
-			"\34\1\32\1\34\1\33\4\34\1\14\1\23\1\26",
+			"\2\40\1\uffff\2\40\22\uffff\1\40\1\22\3\uffff\1\20\1\1\1\2\1\15\1\30"+
+			"\1\21\1\24\1\6\1\17\1\uffff\1\7\12\36\1\3\1\31\1\16\1\10\1\12\2\uffff"+
+			"\32\37\6\uffff\1\37\1\4\1\5\2\37\1\11\2\37\1\13\3\37\1\33\1\34\1\37\1"+
+			"\25\1\37\1\27\1\37\1\32\1\37\1\35\4\37\1\14\1\23\1\26",
 			"",
+			"\32\42\6\uffff\32\42",
+			"\1\43",
+			"\1\45",
+			"\1\46\6\uffff\1\47",
 			"",
-			"\1\37",
-			"\1\41",
-			"\1\42\6\uffff\1\43",
+			"\1\50",
 			"",
-			"\1\44",
-			"",
-			"\1\46",
-			"\1\47",
-			"\1\51",
-			"",
-			"",
-			"\1\52\1\53",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
+			"\1\52",
+			"\1\53",
 			"\1\55",
 			"",
-			"\1\56",
 			"",
-			"",
-			"\1\57",
-			"\1\60",
+			"\1\56\1\57",
 			"",
 			"",
 			"",
 			"",
 			"",
-			"\1\61",
-			"\1\62",
+			"",
+			"\1\62\5\uffff\1\61",
+			"",
 			"\1\63",
 			"",
 			"",
 			"\1\64",
-			"",
-			"",
 			"\1\65",
+			"\1\66",
+			"\1\67",
 			"",
 			"",
 			"",
-			"\1\66\5\uffff\1\67",
+			"",
+			"",
+			"",
+			"",
 			"\1\70",
 			"\1\71",
 			"\1\72",
+			"",
+			"",
 			"\1\73",
+			"",
+			"",
 			"\1\74",
-			"\1\75",
-			"\1\76",
-			"\12\34\7\uffff\32\34\6\uffff\32\34",
+			"",
+			"",
+			"",
+			"\1\75\5\uffff\1\76",
+			"\1\77",
 			"\1\100",
 			"\1\101",
 			"\1\102",
 			"\1\103",
-			"\12\34\7\uffff\32\34\6\uffff\32\34",
-			"\12\34\7\uffff\32\34\6\uffff\32\34",
-			"\12\34\7\uffff\32\34\6\uffff\32\34",
+			"\1\104",
+			"\1\105",
+			"\1\106",
 			"\1\107",
 			"\1\110",
-			"",
-			"\1\111",
+			"\12\37\7\uffff\32\37\6\uffff\32\37",
 			"\1\112",
-			"\12\34\7\uffff\32\34\6\uffff\32\34",
-			"\12\34\7\uffff\32\34\6\uffff\32\34",
+			"\1\113",
+			"\1\114",
+			"\1\115",
+			"\1\116",
+			"\1\117",
+			"\12\37\7\uffff\32\37\6\uffff\32\37",
+			"\12\37\7\uffff\32\37\6\uffff\32\37",
+			"\12\37\7\uffff\32\37\6\uffff\32\37",
+			"\12\37\7\uffff\32\37\6\uffff\32\37",
+			"\1\124",
+			"\1\125",
+			"",
+			"\1\126",
+			"\1\127",
+			"\12\37\7\uffff\32\37\6\uffff\32\37",
+			"\12\37\7\uffff\32\37\6\uffff\32\37",
+			"\12\37\7\uffff\32\37\6\uffff\32\37",
+			"\1\133",
 			"",
 			"",
 			"",
-			"\12\34\7\uffff\32\34\6\uffff\32\34",
-			"\12\34\7\uffff\32\34\6\uffff\32\34",
-			"\12\34\7\uffff\32\34\6\uffff\32\34",
-			"\1\120",
+			"",
+			"\12\37\7\uffff\32\37\6\uffff\32\37",
+			"\12\37\7\uffff\32\37\6\uffff\32\37",
+			"\12\37\7\uffff\32\37\6\uffff\32\37",
+			"\1\137",
 			"",
 			"",
 			"",
+			"\12\37\7\uffff\32\37\6\uffff\32\37",
 			"",
 			"",
-			"\1\121",
-			"\12\34\7\uffff\32\34\6\uffff\32\34",
+			"",
+			"\1\141",
+			"",
+			"\12\37\7\uffff\32\37\6\uffff\32\37",
 			""
 	};
 
@@ -1458,7 +1598,7 @@ public class StilLexer extends Lexer {
 		}
 		@Override
 		public String getDescription() {
-			return "1:1: Tokens : ( AND | APOS | BECOMES | BOOL | CHAR | COLON | COMMA | CONST | DIVIDE | EQ | FALSE | GT | GTE | INT | LCURLY | LPAREN | LT | LTE | MINUS | MODULO | MULTIPLY | NEQ | NOT | OR | PLUS | PRINT | PROGRAM | RCURLY | READ | RPAREN | SEMICOLON | TRUE | VAR | IDENTIFIER | INT_LITERAL | COMMENT | WS );";
+			return "1:1: Tokens : ( AND | APOS | BECOMES | BOOL | CHAR | COLON | COMMA | CONST | DIVIDE | EQ | FALSE | GT | GTE | INT | LCURLY | LPAREN | LT | LTE | MINUS | MODULO | MULTIPLY | NEQ | NOT | OR | PLUS | PRINT | PROGRAM | RCURLY | READ | RPAREN | SEMICOLON | TRUE | UNARY_MINUS | UNARY_NOT | UNARY_PLUS | VAR | CHAR_LITERAL | INT_LITERAL | IDENTIFIER | COMMENT | WS );";
 		}
 	}
 

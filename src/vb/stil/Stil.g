@@ -43,6 +43,9 @@ tokens {
     PROGRAM     =   'program'   ;
     READ        =   'read'      ;
     TRUE        =   'true'      ;
+    UNARY_MINUS =   'minus'     ;
+    UNARY_NOT   =   'not'       ;
+    UNARY_PLUS  =   'plus'      ;
     VAR         =   'var'       ;
 }
 
@@ -98,7 +101,7 @@ arithmetic_expression_pr5
     ;
 
 arithmetic_expression_pr4
-    :   arithmetic_expression_pr3 ((LTE^ | LT^ | GTE^ | GT^ | NEQ^ | EQ^) arithmetic_expression_pr3)*
+    :   arithmetic_expression_pr3 ((LT^ | LTE^ | GT^ | GTE^ | EQ^ | NEQ^) arithmetic_expression_pr3)*
     ;
 
 arithmetic_expression_pr3
@@ -106,17 +109,20 @@ arithmetic_expression_pr3
     ;
 
 arithmetic_expression_pr2
-    :   arithmetic_expression_pr1 ((MULTIPLY^ | DIVIDE^ | MODULO^) arithmetic_expression_pr1)*
+    :   arithmetic_expression_pr1 ((DIVIDE^ | MULTIPLY^ | MODULO^) arithmetic_expression_pr1)*
     ;
 
 arithmetic_expression_pr1
-    :   (MINUS^ | PLUS^ | NOT^)? operand
+    :   PLUS operand    -> ^(UNARY_PLUS operand)
+    |   MINUS operand   -> ^(UNARY_MINUS operand)
+    |   NOT operand     -> ^(UNARY_NOT operand)
+    |   operand
     ;
 
 operand
     :   bool_literal
-    |   char_literal
-    |   INT_LITERAL
+    |   CHAR_LITERAL<LiteralNode>
+    |   INT_LITERAL<LiteralNode>
     |   IDENTIFIER<IdNode>
     |   LPAREN! expression RPAREN!
     ;
@@ -138,21 +144,22 @@ type
     ;
 
 bool_literal
-    :   TRUE | FALSE
-    ;
-
-char_literal 
-    :   APOS! LETTER APOS!
+    :   TRUE<LiteralNode> 
+    |   FALSE<LiteralNode>
     ;
 
 // Lexer rules
 
-IDENTIFIER
-    :   LETTER (LETTER | DIGIT)*
+CHAR_LITERAL
+    :   APOS LETTER APOS
     ;
 
 INT_LITERAL
     :   DIGIT+
+    ;
+
+IDENTIFIER
+    :   LETTER (LETTER | DIGIT)*
     ;
 
 COMMENT

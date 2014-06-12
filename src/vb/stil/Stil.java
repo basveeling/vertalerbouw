@@ -25,7 +25,7 @@ import vb.stil.tree.StilNodeAdaptor;
 public class Stil {
 	private static final Set<Option> options = EnumSet.noneOf(Option.class);
 	private static String inputFile;
-
+	
 	public static void parseOptions(String[] args) {
 		if (args.length == 0) {
 			System.err.println(USAGE_MESSAGE);
@@ -51,43 +51,43 @@ public class Stil {
 			}
 		}
 	}
-
+	
 	public static void main(String[] args) {
 		parseOptions(args);
-
+		
 		try {
 			InputStream in = inputFile == null ? System.in : new FileInputStream(inputFile);
 			StilLexer lexer = new StilLexer(new ANTLRInputStream(in));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-
+			
 			StilParser parser = new StilParser(tokens);
 			parser.setTreeAdaptor(new StilNodeAdaptor()); // Use StilTree nodes
-
+			
 			StilParser.program_return result = parser.program();
 			CommonTree tree = (CommonTree) result.getTree();
-			
+
 			if (!options.contains(Option.NO_CHECKER)) { // check the AST
 				CommonTreeNodeStream nodes = new CommonTreeNodeStream(tree);
 				StilChecker checker = new StilChecker(nodes);
 				checker.program();
 			}
-
+			
 			// if (!options.contains(Option.NO_INTERPRETER) && !options.contains(Option.CODE_GENERATOR)) { // interpret the AST
 			// TreeNodeStream nodes = new BufferedTreeNodeStream(tree);
 			// StilInterpreter interpreter = new StilInterpreter(nodes);
 			// interpreter.program();
 			// }
-
+			
 			if (options.contains(Option.AST)) { // print the AST as string
 				System.out.println(tree.toStringTree());
 			}
-
+			
 			if (options.contains(Option.DOT)) { // print the AST as DOT specification
 				DOTTreeGenerator gen = new DOTTreeGenerator();
 				StringTemplate st = gen.toDOT(tree);
 				System.out.println(st);
 			}
-
+			
 		} catch (RecognitionException e) {
 			System.err.print("ERROR: recognition exception thrown by compiler: ");
 			System.err.println(e.getMessage());
@@ -98,7 +98,7 @@ public class Stil {
 			e.printStackTrace();
 		}
 	}
-
+	
 	private static Option getOption(String text) throws IllegalArgumentException {
 		if (!text.startsWith(OPTION_PREFIX)) {
 			return null;
@@ -111,9 +111,9 @@ public class Stil {
 		}
 		throw new IllegalArgumentException(String.format("Illegal option value '%s'", text));
 	}
-
+	
 	private static final String USAGE_MESSAGE;
-
+	
 	static {
 		StringBuilder message = new StringBuilder("Usage:");
 		for (Option option : Option.values()) {
@@ -124,21 +124,21 @@ public class Stil {
 		message.append(" [filename]");
 		USAGE_MESSAGE = message.toString();
 	}
-
+	
 	private static enum Option {
 		DOT, AST, NO_CHECKER, NO_INTERPRETER, CODE_GENERATOR;
-
+		
 		private Option() {
-			this.text = name().toLowerCase();
+			text = name().toLowerCase();
 		}
-
+		
 		/** Returns the option text of this option. */
 		public String getText() {
-			return this.text;
+			return text;
 		}
-
+		
 		private final String text;
 	}
-
+	
 	private static final String OPTION_PREFIX = "-";
 }

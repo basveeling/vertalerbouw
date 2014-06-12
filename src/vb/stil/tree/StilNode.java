@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package vb.stil.tree;
 
@@ -11,21 +11,21 @@ import org.antlr.runtime.tree.CommonTree;
  *
  */
 public class StilNode extends CommonTree {
-	
+
 	/**
-	 * 
+	 *
 	 */
 	public StilNode() {
 		super();
 	}
-
+	
 	/**
 	 * @param node
 	 */
 	public StilNode(CommonTree node) {
 		super(node);
 	}
-
+	
 	/**
 	 * @param t
 	 */
@@ -33,4 +33,9 @@ public class StilNode extends CommonTree {
 		super(t);
 	}
 
+	@Override
+	public StilNode dupNode() {
+		return new StilNode(this);
+	}
+	
 }
