@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 src/vb/stil/StilChecker.g 2014-06-17 10:44:51
+// $ANTLR 3.5.2 src/vb/stil/StilChecker.g 2014-06-17 11:00:05
 
     package vb.stil;
     import  vb.stil.checker.*;
@@ -250,7 +250,7 @@ public class StilChecker extends TreeParser {
 			                entry.setDeclNode((DeclNode)CONST1);
 			                symtab.enter((id!=null?id.getText():null), entry);
 			            } catch (SymbolTableException e) {
-			                System.err.println(e.getMessage());
+			                throw new StilException(e.getMessage());
 			            }
 			        
 			}
@@ -299,7 +299,7 @@ public class StilChecker extends TreeParser {
 			                entry.setDeclNode((DeclNode)VAR2);
 			                symtab.enter((id!=null?id.getText():null), entry);
 			            } catch (SymbolTableException e) {
-			                System.err.println(e.getMessage());
+			                throw new StilException(e.getMessage());
 			            }
 			        
 			}
@@ -558,13 +558,14 @@ public class StilChecker extends TreeParser {
 			// src/vb/stil/StilChecker.g:108:9: ^( COMPOUND_EXPR c= compound_expression )
 			{
 			match(input,COMPOUND_EXPR,FOLLOW_COMPOUND_EXPR_in_closed_compound_expression374); 
+			 symtab.openScope(); 
 			if ( input.LA(1)==Token.DOWN ) {
 				match(input, Token.DOWN, null); 
-				pushFollow(FOLLOW_compound_expression_in_closed_compound_expression378);
+				pushFollow(FOLLOW_compound_expression_in_closed_compound_expression380);
 				c=compound_expression();
 				state._fsp--;
 
-				 entityType = c; 
+				 entityType = c; symtab.closeScope(); 
 				match(input, Token.UP, null); 
 			}
 
@@ -722,7 +723,7 @@ public class StilChecker extends TreeParser {
 				case 1 :
 					// src/vb/stil/StilChecker.g:111:9: p= print_statement
 					{
-					pushFollow(FOLLOW_print_statement_in_expression406);
+					pushFollow(FOLLOW_print_statement_in_expression408);
 					p=print_statement();
 					state._fsp--;
 
@@ -732,7 +733,7 @@ public class StilChecker extends TreeParser {
 				case 2 :
 					// src/vb/stil/StilChecker.g:112:9: r= read_statement
 					{
-					pushFollow(FOLLOW_read_statement_in_expression420);
+					pushFollow(FOLLOW_read_statement_in_expression422);
 					r=read_statement();
 					state._fsp--;
 
@@ -742,7 +743,7 @@ public class StilChecker extends TreeParser {
 				case 3 :
 					// src/vb/stil/StilChecker.g:113:9: o= operand
 					{
-					pushFollow(FOLLOW_operand_in_expression434);
+					pushFollow(FOLLOW_operand_in_expression436);
 					o=operand();
 					state._fsp--;
 
@@ -752,7 +753,7 @@ public class StilChecker extends TreeParser {
 				case 4 :
 					// src/vb/stil/StilChecker.g:114:9: c= closed_compound_expression
 					{
-					pushFollow(FOLLOW_closed_compound_expression_in_expression448);
+					pushFollow(FOLLOW_closed_compound_expression_in_expression450);
 					c=closed_compound_expression();
 					state._fsp--;
 
@@ -762,10 +763,10 @@ public class StilChecker extends TreeParser {
 				case 5 :
 					// src/vb/stil/StilChecker.g:115:9: ^(node= BECOMES id= IDENTIFIER t1= expression )
 					{
-					node=(StilNode)match(input,BECOMES,FOLLOW_BECOMES_in_expression463); 
+					node=(StilNode)match(input,BECOMES,FOLLOW_BECOMES_in_expression465); 
 					match(input, Token.DOWN, null); 
-					id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_expression467); 
-					pushFollow(FOLLOW_expression_in_expression471);
+					id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_expression469); 
+					pushFollow(FOLLOW_expression_in_expression473);
 					t1=expression();
 					state._fsp--;
 
@@ -791,13 +792,13 @@ public class StilChecker extends TreeParser {
 				case 6 :
 					// src/vb/stil/StilChecker.g:131:9: ^(node= OR t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,OR,FOLLOW_OR_in_expression498); 
+					node=(StilNode)match(input,OR,FOLLOW_OR_in_expression500); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression502);
+					pushFollow(FOLLOW_expression_in_expression504);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression506);
+					pushFollow(FOLLOW_expression_in_expression508);
 					t2=expression();
 					state._fsp--;
 
@@ -809,13 +810,13 @@ public class StilChecker extends TreeParser {
 				case 7 :
 					// src/vb/stil/StilChecker.g:132:9: ^(node= AND t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,AND,FOLLOW_AND_in_expression528); 
+					node=(StilNode)match(input,AND,FOLLOW_AND_in_expression530); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression532);
+					pushFollow(FOLLOW_expression_in_expression534);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression536);
+					pushFollow(FOLLOW_expression_in_expression538);
 					t2=expression();
 					state._fsp--;
 
@@ -827,13 +828,13 @@ public class StilChecker extends TreeParser {
 				case 8 :
 					// src/vb/stil/StilChecker.g:133:9: ^(node= LT t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,LT,FOLLOW_LT_in_expression557); 
+					node=(StilNode)match(input,LT,FOLLOW_LT_in_expression559); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression561);
+					pushFollow(FOLLOW_expression_in_expression563);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression565);
+					pushFollow(FOLLOW_expression_in_expression567);
 					t2=expression();
 					state._fsp--;
 
@@ -845,13 +846,13 @@ public class StilChecker extends TreeParser {
 				case 9 :
 					// src/vb/stil/StilChecker.g:134:9: ^(node= LTE t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,LTE,FOLLOW_LTE_in_expression587); 
+					node=(StilNode)match(input,LTE,FOLLOW_LTE_in_expression589); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression591);
+					pushFollow(FOLLOW_expression_in_expression593);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression595);
+					pushFollow(FOLLOW_expression_in_expression597);
 					t2=expression();
 					state._fsp--;
 
@@ -863,13 +864,13 @@ public class StilChecker extends TreeParser {
 				case 10 :
 					// src/vb/stil/StilChecker.g:135:9: ^(node= GT t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,GT,FOLLOW_GT_in_expression616); 
+					node=(StilNode)match(input,GT,FOLLOW_GT_in_expression618); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression620);
+					pushFollow(FOLLOW_expression_in_expression622);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression624);
+					pushFollow(FOLLOW_expression_in_expression626);
 					t2=expression();
 					state._fsp--;
 
@@ -881,13 +882,13 @@ public class StilChecker extends TreeParser {
 				case 11 :
 					// src/vb/stil/StilChecker.g:136:9: ^(node= GTE t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,GTE,FOLLOW_GTE_in_expression646); 
+					node=(StilNode)match(input,GTE,FOLLOW_GTE_in_expression648); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression650);
+					pushFollow(FOLLOW_expression_in_expression652);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression654);
+					pushFollow(FOLLOW_expression_in_expression656);
 					t2=expression();
 					state._fsp--;
 
@@ -899,13 +900,13 @@ public class StilChecker extends TreeParser {
 				case 12 :
 					// src/vb/stil/StilChecker.g:137:9: ^(node= EQ t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,EQ,FOLLOW_EQ_in_expression675); 
+					node=(StilNode)match(input,EQ,FOLLOW_EQ_in_expression677); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression679);
+					pushFollow(FOLLOW_expression_in_expression681);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression683);
+					pushFollow(FOLLOW_expression_in_expression685);
 					t2=expression();
 					state._fsp--;
 
@@ -917,13 +918,13 @@ public class StilChecker extends TreeParser {
 				case 13 :
 					// src/vb/stil/StilChecker.g:138:9: ^(node= NEQ t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,NEQ,FOLLOW_NEQ_in_expression705); 
+					node=(StilNode)match(input,NEQ,FOLLOW_NEQ_in_expression707); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression709);
+					pushFollow(FOLLOW_expression_in_expression711);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression713);
+					pushFollow(FOLLOW_expression_in_expression715);
 					t2=expression();
 					state._fsp--;
 
@@ -935,13 +936,13 @@ public class StilChecker extends TreeParser {
 				case 14 :
 					// src/vb/stil/StilChecker.g:139:9: ^(node= PLUS t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,PLUS,FOLLOW_PLUS_in_expression734); 
+					node=(StilNode)match(input,PLUS,FOLLOW_PLUS_in_expression736); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression738);
+					pushFollow(FOLLOW_expression_in_expression740);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression742);
+					pushFollow(FOLLOW_expression_in_expression744);
 					t2=expression();
 					state._fsp--;
 
@@ -953,13 +954,13 @@ public class StilChecker extends TreeParser {
 				case 15 :
 					// src/vb/stil/StilChecker.g:140:9: ^(node= MINUS t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,MINUS,FOLLOW_MINUS_in_expression762); 
+					node=(StilNode)match(input,MINUS,FOLLOW_MINUS_in_expression764); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression766);
+					pushFollow(FOLLOW_expression_in_expression768);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression770);
+					pushFollow(FOLLOW_expression_in_expression772);
 					t2=expression();
 					state._fsp--;
 
@@ -971,13 +972,13 @@ public class StilChecker extends TreeParser {
 				case 16 :
 					// src/vb/stil/StilChecker.g:141:9: ^(node= DIVIDE t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,DIVIDE,FOLLOW_DIVIDE_in_expression789); 
+					node=(StilNode)match(input,DIVIDE,FOLLOW_DIVIDE_in_expression791); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression793);
+					pushFollow(FOLLOW_expression_in_expression795);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression797);
+					pushFollow(FOLLOW_expression_in_expression799);
 					t2=expression();
 					state._fsp--;
 
@@ -989,13 +990,13 @@ public class StilChecker extends TreeParser {
 				case 17 :
 					// src/vb/stil/StilChecker.g:142:9: ^(node= MULTIPLY t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,MULTIPLY,FOLLOW_MULTIPLY_in_expression815); 
+					node=(StilNode)match(input,MULTIPLY,FOLLOW_MULTIPLY_in_expression817); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression819);
+					pushFollow(FOLLOW_expression_in_expression821);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression823);
+					pushFollow(FOLLOW_expression_in_expression825);
 					t2=expression();
 					state._fsp--;
 
@@ -1007,13 +1008,13 @@ public class StilChecker extends TreeParser {
 				case 18 :
 					// src/vb/stil/StilChecker.g:143:9: ^(node= MODULO t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,MODULO,FOLLOW_MODULO_in_expression839); 
+					node=(StilNode)match(input,MODULO,FOLLOW_MODULO_in_expression841); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression843);
+					pushFollow(FOLLOW_expression_in_expression845);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression847);
+					pushFollow(FOLLOW_expression_in_expression849);
 					t2=expression();
 					state._fsp--;
 
@@ -1025,9 +1026,9 @@ public class StilChecker extends TreeParser {
 				case 19 :
 					// src/vb/stil/StilChecker.g:144:9: ^(node= UNARY_PLUS t1= expression )
 					{
-					node=(StilNode)match(input,UNARY_PLUS,FOLLOW_UNARY_PLUS_in_expression865); 
+					node=(StilNode)match(input,UNARY_PLUS,FOLLOW_UNARY_PLUS_in_expression867); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression869);
+					pushFollow(FOLLOW_expression_in_expression871);
 					t1=expression();
 					state._fsp--;
 
@@ -1039,9 +1040,9 @@ public class StilChecker extends TreeParser {
 				case 20 :
 					// src/vb/stil/StilChecker.g:145:9: ^(node= UNARY_MINUS t1= expression )
 					{
-					node=(StilNode)match(input,UNARY_MINUS,FOLLOW_UNARY_MINUS_in_expression897); 
+					node=(StilNode)match(input,UNARY_MINUS,FOLLOW_UNARY_MINUS_in_expression899); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression901);
+					pushFollow(FOLLOW_expression_in_expression903);
 					t1=expression();
 					state._fsp--;
 
@@ -1053,9 +1054,9 @@ public class StilChecker extends TreeParser {
 				case 21 :
 					// src/vb/stil/StilChecker.g:146:9: ^(node= UNARY_NOT t1= expression )
 					{
-					node=(StilNode)match(input,UNARY_NOT,FOLLOW_UNARY_NOT_in_expression928); 
+					node=(StilNode)match(input,UNARY_NOT,FOLLOW_UNARY_NOT_in_expression930); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression932);
+					pushFollow(FOLLOW_expression_in_expression934);
 					t1=expression();
 					state._fsp--;
 
@@ -1123,7 +1124,7 @@ public class StilChecker extends TreeParser {
 				case 1 :
 					// src/vb/stil/StilChecker.g:151:9: id= IDENTIFIER
 					{
-					id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand979); 
+					id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand981); 
 					   
 					            IdEntry entry = symtab.retrieve((id!=null?id.getText():null));
 
@@ -1152,14 +1153,14 @@ public class StilChecker extends TreeParser {
 				case 3 :
 					// src/vb/stil/StilChecker.g:162:9: CHAR_LITERAL
 					{
-					match(input,CHAR_LITERAL,FOLLOW_CHAR_LITERAL_in_operand1019); 
+					match(input,CHAR_LITERAL,FOLLOW_CHAR_LITERAL_in_operand1021); 
 					 entityType = EntityType.CHAR; 
 					}
 					break;
 				case 4 :
 					// src/vb/stil/StilChecker.g:163:9: INT_LITERAL
 					{
-					match(input,INT_LITERAL,FOLLOW_INT_LITERAL_in_operand1034); 
+					match(input,INT_LITERAL,FOLLOW_INT_LITERAL_in_operand1036); 
 					 entityType = EntityType.INT; 
 					}
 					break;
@@ -1214,21 +1215,21 @@ public class StilChecker extends TreeParser {
 				case 1 :
 					// src/vb/stil/StilChecker.g:167:9: BOOL
 					{
-					match(input,BOOL,FOLLOW_BOOL_in_type1067); 
+					match(input,BOOL,FOLLOW_BOOL_in_type1069); 
 					 entityType = EntityType.BOOL; 
 					}
 					break;
 				case 2 :
 					// src/vb/stil/StilChecker.g:168:9: CHAR
 					{
-					match(input,CHAR,FOLLOW_CHAR_in_type1082); 
+					match(input,CHAR,FOLLOW_CHAR_in_type1084); 
 					 entityType = EntityType.CHAR; 
 					}
 					break;
 				case 3 :
 					// src/vb/stil/StilChecker.g:169:9: INT
 					{
-					match(input,INT,FOLLOW_INT_in_type1097); 
+					match(input,INT,FOLLOW_INT_in_type1099); 
 					 entityType = EntityType.INT; 
 					}
 					break;
@@ -1271,64 +1272,64 @@ public class StilChecker extends TreeParser {
 	public static final BitSet FOLLOW_declaration_in_compound_expression341 = new BitSet(new long[]{0x0001793BF0BF6250L});
 	public static final BitSet FOLLOW_expression_in_compound_expression347 = new BitSet(new long[]{0x0001793BF0BF6252L});
 	public static final BitSet FOLLOW_COMPOUND_EXPR_in_closed_compound_expression374 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_compound_expression_in_closed_compound_expression378 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_print_statement_in_expression406 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_read_statement_in_expression420 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_operand_in_expression434 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_closed_compound_expression_in_expression448 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_BECOMES_in_expression463 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_expression467 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression471 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_OR_in_expression498 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression502 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression506 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_AND_in_expression528 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression532 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression536 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_LT_in_expression557 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression561 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression565 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_LTE_in_expression587 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression591 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression595 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_GT_in_expression616 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression620 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression624 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_GTE_in_expression646 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression650 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression654 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_EQ_in_expression675 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression679 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression683 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_NEQ_in_expression705 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression709 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression713 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_PLUS_in_expression734 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression738 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression742 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MINUS_in_expression762 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression766 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression770 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_DIVIDE_in_expression789 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression793 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression797 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MULTIPLY_in_expression815 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression819 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression823 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MODULO_in_expression839 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression843 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression847 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_UNARY_PLUS_in_expression865 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression869 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_UNARY_MINUS_in_expression897 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression901 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_UNARY_NOT_in_expression928 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression932 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_operand979 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_set_in_operand1000 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CHAR_LITERAL_in_operand1019 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_INT_LITERAL_in_operand1034 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_BOOL_in_type1067 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CHAR_in_type1082 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_INT_in_type1097 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_compound_expression_in_closed_compound_expression380 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_print_statement_in_expression408 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_read_statement_in_expression422 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_operand_in_expression436 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_closed_compound_expression_in_expression450 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_BECOMES_in_expression465 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_expression469 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression473 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_OR_in_expression500 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression504 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression508 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_AND_in_expression530 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression534 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression538 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_LT_in_expression559 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression563 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression567 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_LTE_in_expression589 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression593 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression597 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_GT_in_expression618 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression622 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression626 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_GTE_in_expression648 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression652 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression656 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_EQ_in_expression677 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression681 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression685 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_NEQ_in_expression707 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression711 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression715 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_PLUS_in_expression736 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression740 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression744 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MINUS_in_expression764 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression768 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression772 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_DIVIDE_in_expression791 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression795 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression799 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MULTIPLY_in_expression817 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression821 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression825 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MODULO_in_expression841 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression845 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression849 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_UNARY_PLUS_in_expression867 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression871 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_UNARY_MINUS_in_expression899 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression903 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_UNARY_NOT_in_expression930 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression934 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_operand981 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_operand1002 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CHAR_LITERAL_in_operand1021 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INT_LITERAL_in_operand1036 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_BOOL_in_type1069 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CHAR_in_type1084 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INT_in_type1099 = new BitSet(new long[]{0x0000000000000002L});
 }

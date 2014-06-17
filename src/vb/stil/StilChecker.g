@@ -48,7 +48,7 @@ constant_declaration
                 entry.setDeclNode((DeclNode)$CONST);
                 symtab.enter($id.text, entry);
             } catch (SymbolTableException e) {
-                System.err.println(e.getMessage());
+                throw new StilException(e.getMessage());
             }
         }
     ;
@@ -65,7 +65,7 @@ var_declaration
                 entry.setDeclNode((DeclNode)$VAR);
                 symtab.enter($id.text, entry);
             } catch (SymbolTableException e) {
-                System.err.println(e.getMessage());
+                throw new StilException(e.getMessage());
             }
         }
     ;
@@ -105,7 +105,7 @@ compound_expression returns [EntityType entityType = null;]
     :   ((declaration)* expr=expression { entityType = expr; })*
     ;
 closed_compound_expression returns [EntityType entityType = null;]
-    :   ^(COMPOUND_EXPR c=compound_expression { entityType = c; })
+    :   ^(COMPOUND_EXPR { symtab.openScope(); } c=compound_expression { entityType = c; symtab.closeScope(); })
     ;
 expression returns [EntityType entityType = null;] 
     :   p=print_statement { entityType = p;}

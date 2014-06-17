@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 src/vb/stil/Stil.g 2014-06-17 10:44:51
+// $ANTLR 3.5.2 src/vb/stil/Stil.g 2014-06-17 11:00:05
 
     package vb.stil;
 
