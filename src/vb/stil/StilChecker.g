@@ -101,11 +101,17 @@ read_statement returns [EntityType entityType = null;]
                 entityType = EntityType.VOID;
             })*)
     ;
-
+compound_expression returns [EntityType entityType = null;]
+    :   ((declaration)* expr=expression { entityType = expr; })*
+    ;
+closed_compound_expression returns [EntityType entityType = null;]
+    :   ^(COMPOUND_EXPR c=compound_expression { entityType = c; })
+    ;
 expression returns [EntityType entityType = null;] 
     :   p=print_statement { entityType = p;}
     |   r=read_statement { entityType = r;}
     |   o=operand { entityType = o; }
+    |   c=closed_compound_expression { entityType = c; }
     |   ^(node=BECOMES id=IDENTIFIER t1=expression)
         {   
             IdEntry symbol = symtab.retrieve($id.text);

@@ -34,19 +34,20 @@ tokens {
     NOT         =   '!'     ;
 
     // keywords
-    BOOL        =   'bool'      ;
-    CONST       =   'const'     ;
-    CHAR        =   'char'      ;
-    FALSE       =   'false'     ;
-    INT         =   'int'       ;
-    PRINT       =   'print'     ;
-    PROGRAM     =   'program'   ;
-    READ        =   'read'      ;
-    TRUE        =   'true'      ;
-    UNARY_MINUS =   'minus'     ;
-    UNARY_NOT   =   'not'       ;
-    UNARY_PLUS  =   'plus'      ;
-    VAR         =   'var'       ;
+    BOOL          =   'bool'      ;
+    CONST         =   'const'     ;
+    CHAR          =   'char'      ;
+    FALSE         =   'false'     ;
+    INT           =   'int'       ;
+    PRINT         =   'print'     ;
+    PROGRAM       =   'program'   ;
+    READ          =   'read'      ;
+    TRUE          =   'true'      ;
+    UNARY_MINUS   =   'minus'     ;
+    UNARY_NOT     =   'not'       ;
+    UNARY_PLUS    =   'plus'      ;
+    VAR           =   'var'       ;
+    COMPOUND_EXPR =   'compound'       ;
 }
 
 @lexer::header {
@@ -66,7 +67,7 @@ program
     ;
 
 declarations_and_expressions
-    :   ((declaration | expression) SEMICOLON!)*
+    : ((declaration | expression) SEMICOLON!)*
     ;
 
 declaration
@@ -84,11 +85,15 @@ var_declaration
 
 expression
     :   (IDENTIFIER<IdNode> BECOMES) => assignment_statement
-    |   (compound_expression | arithmetic_expression | print_statement | read_statement)
+    |   (closed_compound_expression | arithmetic_expression | print_statement | read_statement)
     ;
 
 compound_expression
-    :   LCURLY! declarations_and_expressions RCURLY!
+    :   ((declaration SEMICOLON!)* expression SEMICOLON!)+
+    ;
+
+closed_compound_expression
+    :   LCURLY compound_expression RCURLY -> ^(COMPOUND_EXPR compound_expression)
     ;
 
 // priority 6
