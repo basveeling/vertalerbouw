@@ -1,4 +1,4 @@
-package vb.stil;
+package vb.stil.exceptions;
 
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.Tree;

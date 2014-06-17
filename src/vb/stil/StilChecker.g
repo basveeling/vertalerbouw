@@ -10,6 +10,7 @@ options {
     import  vb.stil.checker.*;
     import  vb.stil.symtab.*;
     import  vb.stil.tree.*;
+    import  vb.stil.exceptions.*;
 }
 
 // Alter code generation so catch-clauses get replaced with this action. 
@@ -33,6 +34,7 @@ declaration
     :   constant_declaration 
     |   var_declaration
     ;
+
 
 constant_declaration
     :   ^(CONST t=type id=IDENTIFIER)
@@ -67,15 +69,49 @@ var_declaration
             }
         }
     ;
-    
+
+print_statement returns [EntityType entityType = null;] 
+    :   ^(node=PRINT t=expression {
+            if (t == EntityType.VOID) {
+                throw new StilException("print expressions can't return VOID");
+            }
+            entityType = t;
+            } (t=expression {
+                if (t == EntityType.VOID) {
+                    throw new StilException("print expressions can't return VOID");
+                }   
+                entityType = EntityType.VOID;
+            })*)
+    ;
+
+
+read_statement returns [EntityType entityType = null;] 
+    :   ^(node=READ id = IDENTIFIER {
+            IdEntry symbol = symtab.retrieve($id.text);
+            if (symbol == null) {
+                throw new NotDeclaredStilException();
+            }
+            DeclNode declNode = symbol.getDeclNode();
+            entityType = declNode.getEntityType();
+            } (id = IDENTIFIER<IdNode> {
+                symbol = symtab.retrieve($id.text);
+                if (symbol == null) {
+                    throw new NotDeclaredStilException();
+                }
+                entityType = EntityType.VOID;
+            })*)
+    ;
+
 expression returns [EntityType entityType = null;] 
-    :   o=operand { entityType = o; }
+    :   p=print_statement { entityType = p;}
+    |   r=read_statement { entityType = r;}
+    |   o=operand { entityType = o; }
     |   ^(node=BECOMES id=IDENTIFIER t1=expression)
         {   
             IdEntry symbol = symtab.retrieve($id.text);
 
             if (symbol == null) {
-                throw new StilException($id, "is not declared");
+                throw new NotDeclaredStilException();
             }
 
             DeclNode declNode = symbol.getDeclNode();
@@ -111,7 +147,7 @@ operand returns [EntityType entityType = null;]
             IdEntry entry = symtab.retrieve($id.text);
 
             if (entry == null) {
-                throw new StilException($id, "is not declared");
+                throw new NotDeclaredStilException();
             }
 
             entityType = entry.getDeclNode().getEntityType();

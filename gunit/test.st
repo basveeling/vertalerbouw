@@ -1,0 +1,1 @@
+var int x; var int y; x := print(x);

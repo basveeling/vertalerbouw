@@ -1,6 +1,6 @@
 package vb.stil.checker;
 
-import vb.stil.StilException;
+import vb.stil.exceptions.StilException;
 import vb.stil.tree.DeclNode;
 import vb.stil.tree.EntityType;
 import vb.stil.tree.Operator;

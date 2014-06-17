@@ -1,7 +1,31 @@
 gunit StilChecker walks Stil;
+
+options {
+  TreeAdaptor = vb.stil.tree.StilNodeAdaptor;
+}
+
 @header{package vb.stil;}
 //------------------- program
 program walks program:
 simple.st          OK
 duplicatedecl.st  FAIL
 
+// PRINT
+"var int x; print(y);"                    FAIL // Can't print non-existing variables
+"var int x; var int y; print(x,y,z);"     FAIL // Can't print non-existing variables
+"var int x; x := print(x);"               OK   // Single print statement returns parameter
+"var int x; var int y; x := print(x,y);"  FAIL // Multiple print doesn't
+"var int x; x := print(3*3);"             OK   // Expressions
+"var bool t; t := print(5>3);"            OK   // Bool expressions
+"var int x; var bool t; x := print(t);"   FAIL // Single print statement returns wrong parameter
+"var int x; var bool t; t := print(x+5);" FAIL
+
+// READ
+"var int x; read(y);"                    FAIL // Can't read non-existing variables
+"var int x; var int y; read(x,y,z);"     FAIL // Can't read non-existing variables
+"var int x; var int y; y := read(x);"    OK   // Single read statement returns parameter
+"var int x; var int y; x := read(x,y);"  FAIL // Multiple read doesn't
+"var int x; x := read(3*3);"             FAIL // Expressions can't be read
+"var int x; var bool t; x := read(t);"   FAIL // Single read statement returns wrong parameter
+
+// COMPOUND

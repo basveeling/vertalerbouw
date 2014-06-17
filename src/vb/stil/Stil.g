@@ -121,8 +121,8 @@ arithmetic_expression_pr1
 
 operand
     :   bool_literal
-    |   CHAR_LITERAL<LiteralNode>
-    |   INT_LITERAL<LiteralNode>
+    |   CHAR_LITERAL
+    |   INT_LITERAL
     |   IDENTIFIER<IdNode>
     |   LPAREN! expression RPAREN!
     ;
@@ -132,7 +132,7 @@ assignment_statement
     ;
 
 print_statement
-    :   PRINT^ LPAREN! IDENTIFIER<IdNode> (COMMA! IDENTIFIER<IdNode>)* RPAREN!
+    :   PRINT^ LPAREN! expression (COMMA! expression)* RPAREN!
     ;
 
 read_statement
@@ -144,8 +144,8 @@ type
     ;
 
 bool_literal
-    :   TRUE<LiteralNode> 
-    |   FALSE<LiteralNode>
+    :   TRUE 
+    |   FALSE
     ;
 
 // Lexer rules
