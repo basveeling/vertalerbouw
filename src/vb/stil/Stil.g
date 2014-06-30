@@ -34,19 +34,20 @@ tokens {
     NOT         =   '!'     ;
 
     // keywords
-    BOOL        =   'bool'      ;
-    CONST       =   'const'     ;
-    CHAR        =   'char'      ;
-    FALSE       =   'false'     ;
-    INT         =   'int'       ;
-    PRINT       =   'print'     ;
-    PROGRAM     =   'program'   ;
-    READ        =   'read'      ;
-    TRUE        =   'true'      ;
-    UNARY_MINUS =   'minus'     ;
-    UNARY_NOT   =   'not'       ;
-    UNARY_PLUS  =   'plus'      ;
-    VAR         =   'var'       ;
+    BOOL          =   'bool'      ;
+    CONST         =   'const'     ;
+    CHAR          =   'char'      ;
+    FALSE         =   'false'     ;
+    INT           =   'int'       ;
+    PRINT         =   'print'     ;
+    PROGRAM       =   'program'   ;
+    READ          =   'read'      ;
+    TRUE          =   'true'      ;
+    UNARY_MINUS   =   'minus'     ;
+    UNARY_NOT     =   'not'       ;
+    UNARY_PLUS    =   'plus'      ;
+    VAR           =   'var'       ;
+    COMPOUND_EXPR =   'compound'       ;
 }
 
 @lexer::header {
@@ -66,7 +67,7 @@ program
     ;
 
 declarations_and_expressions
-    :   ((declaration | expression) SEMICOLON!)*
+    : ((declaration | expression) SEMICOLON!)*
     ;
 
 declaration
@@ -84,11 +85,15 @@ var_declaration
 
 expression
     :   (IDENTIFIER<IdNode> BECOMES) => assignment_statement
-    |   (compound_expression | arithmetic_expression | print_statement | read_statement)
+    |   (closed_compound_expression | arithmetic_expression | print_statement | read_statement)
     ;
 
 compound_expression
-    :   LCURLY! declarations_and_expressions RCURLY!
+    :   ((declaration SEMICOLON!)* expression SEMICOLON!)+
+    ;
+
+closed_compound_expression
+    :   LCURLY compound_expression RCURLY -> ^(COMPOUND_EXPR compound_expression)
     ;
 
 // priority 6
@@ -121,8 +126,8 @@ arithmetic_expression_pr1
 
 operand
     :   bool_literal
-    |   CHAR_LITERAL<LiteralNode>
-    |   INT_LITERAL<LiteralNode>
+    |   CHAR_LITERAL
+    |   INT_LITERAL
     |   IDENTIFIER<IdNode>
     |   LPAREN! expression RPAREN!
     ;
@@ -132,7 +137,7 @@ assignment_statement
     ;
 
 print_statement
-    :   PRINT^ LPAREN! IDENTIFIER<IdNode> (COMMA! IDENTIFIER<IdNode>)* RPAREN!
+    :   PRINT^ LPAREN! expression (COMMA! expression)* RPAREN!
     ;
 
 read_statement
@@ -144,8 +149,8 @@ type
     ;
 
 bool_literal
-    :   TRUE<LiteralNode> 
-    |   FALSE<LiteralNode>
+    :   TRUE 
+    |   FALSE
     ;
 
 // Lexer rules

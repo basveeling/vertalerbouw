@@ -26,15 +26,17 @@ fi
 
 if [[ $compile = true ]]; then
 echo "Compiling..."
+# TODO: make this platform agnostic
 java -jar /Applications/eclipse/plugins/org.eclipse.jdt.core_*.jar -d bin/ -1.7 src/
 fi
 
 if [[ $rungunit = true ]]; then
 echo "Running gunit tests..."
-cd bin; java org.antlr.gunit.Interp ../gunit/*.gunit
+cd bin; java org.antlr.gunit.Interp ../gunit/Stil.gunit
+java org.antlr.gunit.Interp ../gunit/StilChecker.gunit
 fi
 
 if [[ $makejunit = true ]]; then
 echo "Make junit tests from gunit..."
-cd bin; java org.antlr.gunit.Interp -o ../gunit/Stil.gunit
+java org.antlr.gunit.Interp -o ../gunit/*.gunit
 fi

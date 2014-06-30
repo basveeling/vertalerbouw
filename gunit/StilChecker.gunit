@@ -1,7 +1,42 @@
 gunit StilChecker walks Stil;
+
+options {
+  TreeAdaptor = vb.stil.tree.StilNodeAdaptor;
+}
+
 @header{package vb.stil;}
 //------------------- program
 program walks program:
 simple.st          OK
 duplicatedecl.st  FAIL
 
+// Declarations
+"var int x; var int x;"                             FAIL // No double declarations
+"var int x; x := print({var int x; read(x); x+5;});"  OK   // Same declarations in multiple levels
+
+// PRINT
+"var int x; print(y);"                    FAIL // Can't print non-existing variables
+"var int x; var int y; print(x,y,z);"     FAIL // Can't print non-existing variables
+"var int x; x := print(x);"               OK   // Single print statement returns parameter
+"var int x; var int y; x := print(x,y);"  FAIL // Multiple print doesn't
+"var int x; x := print(3*3);"             OK   // Expressions
+"var bool t; t := print(5>3);"            OK   // Bool expressions
+"var int x; var bool t; x := print(t);"   FAIL // Single print statement returns wrong parameter
+"var int x; var bool t; t := print(x+5);" FAIL
+
+// READ
+"var int x; read(y);"                    FAIL // Can't read non-existing variables
+"var int x; var int y; read(x,y,z);"     FAIL // Can't read non-existing variables
+"var int x; var int y; y := read(x);"    OK   // Single read statement returns parameter
+"var int x; var int y; x := read(x,y);"  FAIL // Multiple read doesn't
+"var int x; x := read(3*3);"             FAIL // Expressions can't be read
+"var int x; var bool t; x := read(t);"   FAIL // Single read statement returns wrong parameter
+
+// COMPOUND
+"var int x; read(x); x := print({var int y; read(y); x + y;});" OK
+"var int x; read(x); x := {var int y; read(y); x + y;};"        OK
+"var int x; x := {var bool y; read(y); x;};"                    OK
+"var int x; {var int x; read(x);};"                             OK   // Same declarations in multiple levels
+"var int x; x := {var bool y; read(y); y;};"                    FAIL // Wrong type
+"var int x; x := {x; var bool y;};"                             FAIL // Can't end with declaration
+"var int x; x := {var bool y; read(y); x;}; print(y);"          FAIL // Can't use vars from closed scope

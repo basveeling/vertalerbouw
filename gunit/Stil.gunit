@@ -1,8 +1,12 @@
 gunit Stil;
+
 @header{package vb.stil;}
 //------------------- program
 program:
 basic.st OK
+
+// COMPOUND
+"var int x; read(x); x := print({var int y; read(y); x + y;});" OK
 
 //------------------- IDENTIFIER
 IDENTIFIER:
