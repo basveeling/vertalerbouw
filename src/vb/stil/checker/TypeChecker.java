@@ -18,7 +18,7 @@ public class TypeChecker {
 	 * @return EntityType
 	 * @throws StilException
 	 */
-	public EntityType validateAssignmentExpression(StilNode node, StilNode id, EntityType t1, SymbolTable<IdEntry> symtab) throws StilException {
+	public DeclNode validateAssignmentExpression(StilNode node, StilNode id, EntityType t1, SymbolTable<IdEntry> symtab) throws StilException {
 		IdEntry symbol = symtab.retrieve(id.getText());
 		
 		if (symbol == null) {
@@ -26,13 +26,45 @@ public class TypeChecker {
 		}
 		
 		DeclNode declNode = symbol.getDeclNode();
-		
-		if (!declNode.isVariable()) {
-			throw new StilException(node, "identifier must be declared as variable");
-		}
 
 		if (declNode.getEntityType() != t1) {
 			throw new StilException(node, "operand type does not match variable type");
+		}
+		
+		return declNode;
+	}
+	
+	/**
+	 * Validate operand type of constant assignment expression
+	 *
+	 * @param declNode
+	 * @param t1
+	 * @return EntityType
+	 * @throws StilException
+	 */
+	public EntityType validateConstantAssignmentExpression(StilNode node, StilNode id, EntityType t1, SymbolTable<IdEntry> symtab) throws StilException {
+		DeclNode declNode = validateAssignmentExpression(node, id, t1, symtab);
+		
+		if (!declNode.isConstant()) {
+			throw new StilException(node, "identifier must be declared as variable");
+		}
+		
+		return t1;
+	}
+	
+	/**
+	 * Validate operand type of variable assignment expression
+	 *
+	 * @param declNode
+	 * @param t1
+	 * @return EntityType
+	 * @throws StilException
+	 */
+	public EntityType validateVariableAssignmentExpression(StilNode node, StilNode id, EntityType t1, SymbolTable<IdEntry> symtab) throws StilException {
+		DeclNode declNode = validateAssignmentExpression(node, id, t1, symtab);
+		
+		if (!declNode.isVariable()) {
+			throw new StilException(node, "identifier must be declared as variable");
 		}
 		
 		return t1;

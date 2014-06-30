@@ -1,2 +1,2 @@
 var bool a;
-const bool b;
+const bool b := true;

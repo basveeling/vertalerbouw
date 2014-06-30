@@ -37,8 +37,9 @@ declaration
 
 
 constant_declaration
-    :   ^(CONST t=type id=IDENTIFIER) { 
+    :   ^(CONST t=type id=IDENTIFIER expr=expression) { 
             declarationChecker.processConstantDeclaration($CONST, $id, t, symtab); 
+            typeChecker.validateConstantAssignmentExpression($CONST, $id, expr, symtab);
         }
     ;
 
@@ -76,7 +77,7 @@ expression returns [EntityType entityType = null;]
     |   r=read_statement                { entityType = r;}
     |   o=operand                       { entityType = o; }
     |   c=closed_compound_expression    { entityType = c; }
-    |   ^(node=BECOMES id=IDENTIFIER t1=expression)  { entityType = typeChecker.validateAssignmentExpression($node, $id, t1, symtab); }   
+    |   ^(node=BECOMES id=IDENTIFIER t1=expression)  { entityType = typeChecker.validateVariableAssignmentExpression($node, $id, t1, symtab); }   
     |   ^(node=OR t1=expression t2=expression)       { entityType = typeChecker.validateLogicExpression($node, Operator.OR, t1, t2); }
     |   ^(node=AND t1=expression t2=expression)      { entityType = typeChecker.validateLogicExpression($node, Operator.AND, t1, t2); }
     |   ^(node=LT t1=expression t2=expression)       { entityType = typeChecker.validateLogicExpression($node, Operator.LT, t1, t2); }

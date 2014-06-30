@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 src/vb/stil/Stil.g 2014-06-30 17:21:08
+// $ANTLR 3.5.2 src/vb/stil/Stil.g 2014-06-30 17:46:38
 
     package vb.stil;
     import  vb.stil.tree.*;
@@ -395,7 +395,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "constant_declaration"
-	// src/vb/stil/Stil.g:78:1: constant_declaration : CONST ^ type IDENTIFIER ;
+	// src/vb/stil/Stil.g:78:1: constant_declaration : CONST ^ type IDENTIFIER BECOMES ! expression ;
 	public final StilParser.constant_declaration_return constant_declaration() throws RecognitionException {
 		StilParser.constant_declaration_return retval = new StilParser.constant_declaration_return();
 		retval.start = input.LT(1);
@@ -404,14 +404,17 @@ public class StilParser extends Parser {
 
 		Token CONST8=null;
 		Token IDENTIFIER10=null;
+		Token BECOMES11=null;
 		ParserRuleReturnScope type9 =null;
+		ParserRuleReturnScope expression12 =null;
 
 		Object CONST8_tree=null;
 		Object IDENTIFIER10_tree=null;
+		Object BECOMES11_tree=null;
 
 		try {
-			// src/vb/stil/Stil.g:79:5: ( CONST ^ type IDENTIFIER )
-			// src/vb/stil/Stil.g:79:9: CONST ^ type IDENTIFIER
+			// src/vb/stil/Stil.g:79:5: ( CONST ^ type IDENTIFIER BECOMES ! expression )
+			// src/vb/stil/Stil.g:79:9: CONST ^ type IDENTIFIER BECOMES ! expression
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -433,6 +436,13 @@ public class StilParser extends Parser {
 			IDENTIFIER10_tree = new IdNode(IDENTIFIER10) ;
 			adaptor.addChild(root_0, IDENTIFIER10_tree);
 			}
+
+			BECOMES11=(Token)match(input,BECOMES,FOLLOW_BECOMES_in_constant_declaration1114); if (state.failed) return retval;
+			pushFollow(FOLLOW_expression_in_constant_declaration1117);
+			expression12=expression();
+			state._fsp--;
+			if (state.failed) return retval;
+			if ( state.backtracking==0 ) adaptor.addChild(root_0, expression12.getTree());
 
 			}
 
@@ -471,12 +481,12 @@ public class StilParser extends Parser {
 
 		Object root_0 = null;
 
-		Token VAR11=null;
-		Token IDENTIFIER13=null;
-		ParserRuleReturnScope type12 =null;
+		Token VAR13=null;
+		Token IDENTIFIER15=null;
+		ParserRuleReturnScope type14 =null;
 
-		Object VAR11_tree=null;
-		Object IDENTIFIER13_tree=null;
+		Object VAR13_tree=null;
+		Object IDENTIFIER15_tree=null;
 
 		try {
 			// src/vb/stil/Stil.g:83:5: ( VAR ^ type IDENTIFIER )
@@ -485,22 +495,22 @@ public class StilParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			VAR11=(Token)match(input,VAR,FOLLOW_VAR_in_var_declaration1131); if (state.failed) return retval;
+			VAR13=(Token)match(input,VAR,FOLLOW_VAR_in_var_declaration1136); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			VAR11_tree = new DeclNode(VAR11) ;
-			root_0 = (Object)adaptor.becomeRoot(VAR11_tree, root_0);
+			VAR13_tree = new DeclNode(VAR13) ;
+			root_0 = (Object)adaptor.becomeRoot(VAR13_tree, root_0);
 			}
 
-			pushFollow(FOLLOW_type_in_var_declaration1137);
-			type12=type();
+			pushFollow(FOLLOW_type_in_var_declaration1142);
+			type14=type();
 			state._fsp--;
 			if (state.failed) return retval;
-			if ( state.backtracking==0 ) adaptor.addChild(root_0, type12.getTree());
+			if ( state.backtracking==0 ) adaptor.addChild(root_0, type14.getTree());
 
-			IDENTIFIER13=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_var_declaration1139); if (state.failed) return retval;
+			IDENTIFIER15=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_var_declaration1144); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			IDENTIFIER13_tree = new IdNode(IDENTIFIER13) ;
-			adaptor.addChild(root_0, IDENTIFIER13_tree);
+			IDENTIFIER15_tree = new IdNode(IDENTIFIER15) ;
+			adaptor.addChild(root_0, IDENTIFIER15_tree);
 			}
 
 			}
@@ -540,11 +550,11 @@ public class StilParser extends Parser {
 
 		Object root_0 = null;
 
-		ParserRuleReturnScope assignment_statement14 =null;
-		ParserRuleReturnScope closed_compound_expression15 =null;
-		ParserRuleReturnScope arithmetic_expression16 =null;
-		ParserRuleReturnScope print_statement17 =null;
-		ParserRuleReturnScope read_statement18 =null;
+		ParserRuleReturnScope assignment_statement16 =null;
+		ParserRuleReturnScope closed_compound_expression17 =null;
+		ParserRuleReturnScope arithmetic_expression18 =null;
+		ParserRuleReturnScope print_statement19 =null;
+		ParserRuleReturnScope read_statement20 =null;
 
 
 		try {
@@ -579,11 +589,11 @@ public class StilParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_assignment_statement_in_expression1172);
-					assignment_statement14=assignment_statement();
+					pushFollow(FOLLOW_assignment_statement_in_expression1177);
+					assignment_statement16=assignment_statement();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, assignment_statement14.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, assignment_statement16.getTree());
 
 					}
 					break;
@@ -634,44 +644,44 @@ public class StilParser extends Parser {
 						case 1 :
 							// src/vb/stil/Stil.g:88:10: closed_compound_expression
 							{
-							pushFollow(FOLLOW_closed_compound_expression_in_expression1183);
-							closed_compound_expression15=closed_compound_expression();
+							pushFollow(FOLLOW_closed_compound_expression_in_expression1188);
+							closed_compound_expression17=closed_compound_expression();
 							state._fsp--;
 							if (state.failed) return retval;
-							if ( state.backtracking==0 ) adaptor.addChild(root_0, closed_compound_expression15.getTree());
+							if ( state.backtracking==0 ) adaptor.addChild(root_0, closed_compound_expression17.getTree());
 
 							}
 							break;
 						case 2 :
 							// src/vb/stil/Stil.g:88:39: arithmetic_expression
 							{
-							pushFollow(FOLLOW_arithmetic_expression_in_expression1187);
-							arithmetic_expression16=arithmetic_expression();
+							pushFollow(FOLLOW_arithmetic_expression_in_expression1192);
+							arithmetic_expression18=arithmetic_expression();
 							state._fsp--;
 							if (state.failed) return retval;
-							if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression16.getTree());
+							if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression18.getTree());
 
 							}
 							break;
 						case 3 :
 							// src/vb/stil/Stil.g:88:63: print_statement
 							{
-							pushFollow(FOLLOW_print_statement_in_expression1191);
-							print_statement17=print_statement();
+							pushFollow(FOLLOW_print_statement_in_expression1196);
+							print_statement19=print_statement();
 							state._fsp--;
 							if (state.failed) return retval;
-							if ( state.backtracking==0 ) adaptor.addChild(root_0, print_statement17.getTree());
+							if ( state.backtracking==0 ) adaptor.addChild(root_0, print_statement19.getTree());
 
 							}
 							break;
 						case 4 :
 							// src/vb/stil/Stil.g:88:81: read_statement
 							{
-							pushFollow(FOLLOW_read_statement_in_expression1195);
-							read_statement18=read_statement();
+							pushFollow(FOLLOW_read_statement_in_expression1200);
+							read_statement20=read_statement();
 							state._fsp--;
 							if (state.failed) return retval;
-							if ( state.backtracking==0 ) adaptor.addChild(root_0, read_statement18.getTree());
+							if ( state.backtracking==0 ) adaptor.addChild(root_0, read_statement20.getTree());
 
 							}
 							break;
@@ -717,13 +727,13 @@ public class StilParser extends Parser {
 
 		Object root_0 = null;
 
-		Token SEMICOLON20=null;
 		Token SEMICOLON22=null;
-		ParserRuleReturnScope declaration19 =null;
-		ParserRuleReturnScope expression21 =null;
+		Token SEMICOLON24=null;
+		ParserRuleReturnScope declaration21 =null;
+		ParserRuleReturnScope expression23 =null;
 
-		Object SEMICOLON20_tree=null;
 		Object SEMICOLON22_tree=null;
+		Object SEMICOLON24_tree=null;
 
 		try {
 			// src/vb/stil/Stil.g:92:5: ( ( ( declaration SEMICOLON !)* expression SEMICOLON !)+ )
@@ -759,13 +769,13 @@ public class StilParser extends Parser {
 						case 1 :
 							// src/vb/stil/Stil.g:92:11: declaration SEMICOLON !
 							{
-							pushFollow(FOLLOW_declaration_in_compound_expression1217);
-							declaration19=declaration();
+							pushFollow(FOLLOW_declaration_in_compound_expression1222);
+							declaration21=declaration();
 							state._fsp--;
 							if (state.failed) return retval;
-							if ( state.backtracking==0 ) adaptor.addChild(root_0, declaration19.getTree());
+							if ( state.backtracking==0 ) adaptor.addChild(root_0, declaration21.getTree());
 
-							SEMICOLON20=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_compound_expression1219); if (state.failed) return retval;
+							SEMICOLON22=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_compound_expression1224); if (state.failed) return retval;
 							}
 							break;
 
@@ -774,13 +784,13 @@ public class StilParser extends Parser {
 						}
 					}
 
-					pushFollow(FOLLOW_expression_in_compound_expression1224);
-					expression21=expression();
+					pushFollow(FOLLOW_expression_in_compound_expression1229);
+					expression23=expression();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, expression21.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, expression23.getTree());
 
-					SEMICOLON22=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_compound_expression1226); if (state.failed) return retval;
+					SEMICOLON24=(Token)match(input,SEMICOLON,FOLLOW_SEMICOLON_in_compound_expression1231); if (state.failed) return retval;
 					}
 					break;
 
@@ -830,12 +840,12 @@ public class StilParser extends Parser {
 
 		Object root_0 = null;
 
-		Token LCURLY23=null;
-		Token RCURLY25=null;
-		ParserRuleReturnScope compound_expression24 =null;
+		Token LCURLY25=null;
+		Token RCURLY27=null;
+		ParserRuleReturnScope compound_expression26 =null;
 
-		Object LCURLY23_tree=null;
-		Object RCURLY25_tree=null;
+		Object LCURLY25_tree=null;
+		Object RCURLY27_tree=null;
 		RewriteRuleTokenStream stream_LCURLY=new RewriteRuleTokenStream(adaptor,"token LCURLY");
 		RewriteRuleTokenStream stream_RCURLY=new RewriteRuleTokenStream(adaptor,"token RCURLY");
 		RewriteRuleSubtreeStream stream_compound_expression=new RewriteRuleSubtreeStream(adaptor,"rule compound_expression");
@@ -844,16 +854,16 @@ public class StilParser extends Parser {
 			// src/vb/stil/Stil.g:96:5: ( LCURLY compound_expression RCURLY -> ^( COMPOUND_EXPR compound_expression ) )
 			// src/vb/stil/Stil.g:96:9: LCURLY compound_expression RCURLY
 			{
-			LCURLY23=(Token)match(input,LCURLY,FOLLOW_LCURLY_in_closed_compound_expression1248); if (state.failed) return retval; 
-			if ( state.backtracking==0 ) stream_LCURLY.add(LCURLY23);
+			LCURLY25=(Token)match(input,LCURLY,FOLLOW_LCURLY_in_closed_compound_expression1253); if (state.failed) return retval; 
+			if ( state.backtracking==0 ) stream_LCURLY.add(LCURLY25);
 
-			pushFollow(FOLLOW_compound_expression_in_closed_compound_expression1250);
-			compound_expression24=compound_expression();
+			pushFollow(FOLLOW_compound_expression_in_closed_compound_expression1255);
+			compound_expression26=compound_expression();
 			state._fsp--;
 			if (state.failed) return retval;
-			if ( state.backtracking==0 ) stream_compound_expression.add(compound_expression24.getTree());
-			RCURLY25=(Token)match(input,RCURLY,FOLLOW_RCURLY_in_closed_compound_expression1252); if (state.failed) return retval; 
-			if ( state.backtracking==0 ) stream_RCURLY.add(RCURLY25);
+			if ( state.backtracking==0 ) stream_compound_expression.add(compound_expression26.getTree());
+			RCURLY27=(Token)match(input,RCURLY,FOLLOW_RCURLY_in_closed_compound_expression1257); if (state.failed) return retval; 
+			if ( state.backtracking==0 ) stream_RCURLY.add(RCURLY27);
 
 			// AST REWRITE
 			// elements: compound_expression
@@ -920,11 +930,11 @@ public class StilParser extends Parser {
 
 		Object root_0 = null;
 
-		Token OR27=null;
-		ParserRuleReturnScope arithmetic_expression_pr526 =null;
+		Token OR29=null;
 		ParserRuleReturnScope arithmetic_expression_pr528 =null;
+		ParserRuleReturnScope arithmetic_expression_pr530 =null;
 
-		Object OR27_tree=null;
+		Object OR29_tree=null;
 
 		try {
 			// src/vb/stil/Stil.g:101:5: ( arithmetic_expression_pr5 ( OR ^ arithmetic_expression_pr5 )* )
@@ -933,11 +943,11 @@ public class StilParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			pushFollow(FOLLOW_arithmetic_expression_pr5_in_arithmetic_expression1280);
-			arithmetic_expression_pr526=arithmetic_expression_pr5();
+			pushFollow(FOLLOW_arithmetic_expression_pr5_in_arithmetic_expression1285);
+			arithmetic_expression_pr528=arithmetic_expression_pr5();
 			state._fsp--;
 			if (state.failed) return retval;
-			if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr526.getTree());
+			if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr528.getTree());
 
 			// src/vb/stil/Stil.g:101:35: ( OR ^ arithmetic_expression_pr5 )*
 			loop8:
@@ -952,17 +962,17 @@ public class StilParser extends Parser {
 				case 1 :
 					// src/vb/stil/Stil.g:101:36: OR ^ arithmetic_expression_pr5
 					{
-					OR27=(Token)match(input,OR,FOLLOW_OR_in_arithmetic_expression1283); if (state.failed) return retval;
+					OR29=(Token)match(input,OR,FOLLOW_OR_in_arithmetic_expression1288); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					OR27_tree = (Object)adaptor.create(OR27);
-					root_0 = (Object)adaptor.becomeRoot(OR27_tree, root_0);
+					OR29_tree = (Object)adaptor.create(OR29);
+					root_0 = (Object)adaptor.becomeRoot(OR29_tree, root_0);
 					}
 
-					pushFollow(FOLLOW_arithmetic_expression_pr5_in_arithmetic_expression1286);
-					arithmetic_expression_pr528=arithmetic_expression_pr5();
+					pushFollow(FOLLOW_arithmetic_expression_pr5_in_arithmetic_expression1291);
+					arithmetic_expression_pr530=arithmetic_expression_pr5();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr528.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr530.getTree());
 
 					}
 					break;
@@ -1009,11 +1019,11 @@ public class StilParser extends Parser {
 
 		Object root_0 = null;
 
-		Token AND30=null;
-		ParserRuleReturnScope arithmetic_expression_pr429 =null;
+		Token AND32=null;
 		ParserRuleReturnScope arithmetic_expression_pr431 =null;
+		ParserRuleReturnScope arithmetic_expression_pr433 =null;
 
-		Object AND30_tree=null;
+		Object AND32_tree=null;
 
 		try {
 			// src/vb/stil/Stil.g:105:5: ( arithmetic_expression_pr4 ( AND ^ arithmetic_expression_pr4 )* )
@@ -1022,11 +1032,11 @@ public class StilParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			pushFollow(FOLLOW_arithmetic_expression_pr4_in_arithmetic_expression_pr51307);
-			arithmetic_expression_pr429=arithmetic_expression_pr4();
+			pushFollow(FOLLOW_arithmetic_expression_pr4_in_arithmetic_expression_pr51312);
+			arithmetic_expression_pr431=arithmetic_expression_pr4();
 			state._fsp--;
 			if (state.failed) return retval;
-			if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr429.getTree());
+			if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr431.getTree());
 
 			// src/vb/stil/Stil.g:105:35: ( AND ^ arithmetic_expression_pr4 )*
 			loop9:
@@ -1041,17 +1051,17 @@ public class StilParser extends Parser {
 				case 1 :
 					// src/vb/stil/Stil.g:105:36: AND ^ arithmetic_expression_pr4
 					{
-					AND30=(Token)match(input,AND,FOLLOW_AND_in_arithmetic_expression_pr51310); if (state.failed) return retval;
+					AND32=(Token)match(input,AND,FOLLOW_AND_in_arithmetic_expression_pr51315); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					AND30_tree = (Object)adaptor.create(AND30);
-					root_0 = (Object)adaptor.becomeRoot(AND30_tree, root_0);
+					AND32_tree = (Object)adaptor.create(AND32);
+					root_0 = (Object)adaptor.becomeRoot(AND32_tree, root_0);
 					}
 
-					pushFollow(FOLLOW_arithmetic_expression_pr4_in_arithmetic_expression_pr51313);
-					arithmetic_expression_pr431=arithmetic_expression_pr4();
+					pushFollow(FOLLOW_arithmetic_expression_pr4_in_arithmetic_expression_pr51318);
+					arithmetic_expression_pr433=arithmetic_expression_pr4();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr431.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr433.getTree());
 
 					}
 					break;
@@ -1098,21 +1108,21 @@ public class StilParser extends Parser {
 
 		Object root_0 = null;
 
-		Token LT33=null;
-		Token LTE34=null;
-		Token GT35=null;
-		Token GTE36=null;
-		Token EQ37=null;
-		Token NEQ38=null;
-		ParserRuleReturnScope arithmetic_expression_pr332 =null;
-		ParserRuleReturnScope arithmetic_expression_pr339 =null;
+		Token LT35=null;
+		Token LTE36=null;
+		Token GT37=null;
+		Token GTE38=null;
+		Token EQ39=null;
+		Token NEQ40=null;
+		ParserRuleReturnScope arithmetic_expression_pr334 =null;
+		ParserRuleReturnScope arithmetic_expression_pr341 =null;
 
-		Object LT33_tree=null;
-		Object LTE34_tree=null;
-		Object GT35_tree=null;
-		Object GTE36_tree=null;
-		Object EQ37_tree=null;
-		Object NEQ38_tree=null;
+		Object LT35_tree=null;
+		Object LTE36_tree=null;
+		Object GT37_tree=null;
+		Object GTE38_tree=null;
+		Object EQ39_tree=null;
+		Object NEQ40_tree=null;
 
 		try {
 			// src/vb/stil/Stil.g:109:5: ( arithmetic_expression_pr3 ( ( LT ^| LTE ^| GT ^| GTE ^| EQ ^| NEQ ^) arithmetic_expression_pr3 )* )
@@ -1121,11 +1131,11 @@ public class StilParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			pushFollow(FOLLOW_arithmetic_expression_pr3_in_arithmetic_expression_pr41334);
-			arithmetic_expression_pr332=arithmetic_expression_pr3();
+			pushFollow(FOLLOW_arithmetic_expression_pr3_in_arithmetic_expression_pr41339);
+			arithmetic_expression_pr334=arithmetic_expression_pr3();
 			state._fsp--;
 			if (state.failed) return retval;
-			if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr332.getTree());
+			if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr334.getTree());
 
 			// src/vb/stil/Stil.g:109:35: ( ( LT ^| LTE ^| GT ^| GTE ^| EQ ^| NEQ ^) arithmetic_expression_pr3 )*
 			loop11:
@@ -1183,10 +1193,10 @@ public class StilParser extends Parser {
 						case 1 :
 							// src/vb/stil/Stil.g:109:37: LT ^
 							{
-							LT33=(Token)match(input,LT,FOLLOW_LT_in_arithmetic_expression_pr41338); if (state.failed) return retval;
+							LT35=(Token)match(input,LT,FOLLOW_LT_in_arithmetic_expression_pr41343); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
-							LT33_tree = (Object)adaptor.create(LT33);
-							root_0 = (Object)adaptor.becomeRoot(LT33_tree, root_0);
+							LT35_tree = (Object)adaptor.create(LT35);
+							root_0 = (Object)adaptor.becomeRoot(LT35_tree, root_0);
 							}
 
 							}
@@ -1194,10 +1204,10 @@ public class StilParser extends Parser {
 						case 2 :
 							// src/vb/stil/Stil.g:109:43: LTE ^
 							{
-							LTE34=(Token)match(input,LTE,FOLLOW_LTE_in_arithmetic_expression_pr41343); if (state.failed) return retval;
+							LTE36=(Token)match(input,LTE,FOLLOW_LTE_in_arithmetic_expression_pr41348); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
-							LTE34_tree = (Object)adaptor.create(LTE34);
-							root_0 = (Object)adaptor.becomeRoot(LTE34_tree, root_0);
+							LTE36_tree = (Object)adaptor.create(LTE36);
+							root_0 = (Object)adaptor.becomeRoot(LTE36_tree, root_0);
 							}
 
 							}
@@ -1205,10 +1215,10 @@ public class StilParser extends Parser {
 						case 3 :
 							// src/vb/stil/Stil.g:109:50: GT ^
 							{
-							GT35=(Token)match(input,GT,FOLLOW_GT_in_arithmetic_expression_pr41348); if (state.failed) return retval;
+							GT37=(Token)match(input,GT,FOLLOW_GT_in_arithmetic_expression_pr41353); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
-							GT35_tree = (Object)adaptor.create(GT35);
-							root_0 = (Object)adaptor.becomeRoot(GT35_tree, root_0);
+							GT37_tree = (Object)adaptor.create(GT37);
+							root_0 = (Object)adaptor.becomeRoot(GT37_tree, root_0);
 							}
 
 							}
@@ -1216,10 +1226,10 @@ public class StilParser extends Parser {
 						case 4 :
 							// src/vb/stil/Stil.g:109:56: GTE ^
 							{
-							GTE36=(Token)match(input,GTE,FOLLOW_GTE_in_arithmetic_expression_pr41353); if (state.failed) return retval;
+							GTE38=(Token)match(input,GTE,FOLLOW_GTE_in_arithmetic_expression_pr41358); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
-							GTE36_tree = (Object)adaptor.create(GTE36);
-							root_0 = (Object)adaptor.becomeRoot(GTE36_tree, root_0);
+							GTE38_tree = (Object)adaptor.create(GTE38);
+							root_0 = (Object)adaptor.becomeRoot(GTE38_tree, root_0);
 							}
 
 							}
@@ -1227,10 +1237,10 @@ public class StilParser extends Parser {
 						case 5 :
 							// src/vb/stil/Stil.g:109:63: EQ ^
 							{
-							EQ37=(Token)match(input,EQ,FOLLOW_EQ_in_arithmetic_expression_pr41358); if (state.failed) return retval;
+							EQ39=(Token)match(input,EQ,FOLLOW_EQ_in_arithmetic_expression_pr41363); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
-							EQ37_tree = (Object)adaptor.create(EQ37);
-							root_0 = (Object)adaptor.becomeRoot(EQ37_tree, root_0);
+							EQ39_tree = (Object)adaptor.create(EQ39);
+							root_0 = (Object)adaptor.becomeRoot(EQ39_tree, root_0);
 							}
 
 							}
@@ -1238,10 +1248,10 @@ public class StilParser extends Parser {
 						case 6 :
 							// src/vb/stil/Stil.g:109:69: NEQ ^
 							{
-							NEQ38=(Token)match(input,NEQ,FOLLOW_NEQ_in_arithmetic_expression_pr41363); if (state.failed) return retval;
+							NEQ40=(Token)match(input,NEQ,FOLLOW_NEQ_in_arithmetic_expression_pr41368); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
-							NEQ38_tree = (Object)adaptor.create(NEQ38);
-							root_0 = (Object)adaptor.becomeRoot(NEQ38_tree, root_0);
+							NEQ40_tree = (Object)adaptor.create(NEQ40);
+							root_0 = (Object)adaptor.becomeRoot(NEQ40_tree, root_0);
 							}
 
 							}
@@ -1249,11 +1259,11 @@ public class StilParser extends Parser {
 
 					}
 
-					pushFollow(FOLLOW_arithmetic_expression_pr3_in_arithmetic_expression_pr41367);
-					arithmetic_expression_pr339=arithmetic_expression_pr3();
+					pushFollow(FOLLOW_arithmetic_expression_pr3_in_arithmetic_expression_pr41372);
+					arithmetic_expression_pr341=arithmetic_expression_pr3();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr339.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr341.getTree());
 
 					}
 					break;
@@ -1300,13 +1310,13 @@ public class StilParser extends Parser {
 
 		Object root_0 = null;
 
-		Token PLUS41=null;
-		Token MINUS42=null;
-		ParserRuleReturnScope arithmetic_expression_pr240 =null;
-		ParserRuleReturnScope arithmetic_expression_pr243 =null;
+		Token PLUS43=null;
+		Token MINUS44=null;
+		ParserRuleReturnScope arithmetic_expression_pr242 =null;
+		ParserRuleReturnScope arithmetic_expression_pr245 =null;
 
-		Object PLUS41_tree=null;
-		Object MINUS42_tree=null;
+		Object PLUS43_tree=null;
+		Object MINUS44_tree=null;
 
 		try {
 			// src/vb/stil/Stil.g:113:5: ( arithmetic_expression_pr2 ( ( PLUS ^| MINUS ^) arithmetic_expression_pr2 )* )
@@ -1315,11 +1325,11 @@ public class StilParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			pushFollow(FOLLOW_arithmetic_expression_pr2_in_arithmetic_expression_pr31388);
-			arithmetic_expression_pr240=arithmetic_expression_pr2();
+			pushFollow(FOLLOW_arithmetic_expression_pr2_in_arithmetic_expression_pr31393);
+			arithmetic_expression_pr242=arithmetic_expression_pr2();
 			state._fsp--;
 			if (state.failed) return retval;
-			if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr240.getTree());
+			if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr242.getTree());
 
 			// src/vb/stil/Stil.g:113:35: ( ( PLUS ^| MINUS ^) arithmetic_expression_pr2 )*
 			loop13:
@@ -1355,10 +1365,10 @@ public class StilParser extends Parser {
 						case 1 :
 							// src/vb/stil/Stil.g:113:37: PLUS ^
 							{
-							PLUS41=(Token)match(input,PLUS,FOLLOW_PLUS_in_arithmetic_expression_pr31392); if (state.failed) return retval;
+							PLUS43=(Token)match(input,PLUS,FOLLOW_PLUS_in_arithmetic_expression_pr31397); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
-							PLUS41_tree = (Object)adaptor.create(PLUS41);
-							root_0 = (Object)adaptor.becomeRoot(PLUS41_tree, root_0);
+							PLUS43_tree = (Object)adaptor.create(PLUS43);
+							root_0 = (Object)adaptor.becomeRoot(PLUS43_tree, root_0);
 							}
 
 							}
@@ -1366,10 +1376,10 @@ public class StilParser extends Parser {
 						case 2 :
 							// src/vb/stil/Stil.g:113:45: MINUS ^
 							{
-							MINUS42=(Token)match(input,MINUS,FOLLOW_MINUS_in_arithmetic_expression_pr31397); if (state.failed) return retval;
+							MINUS44=(Token)match(input,MINUS,FOLLOW_MINUS_in_arithmetic_expression_pr31402); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
-							MINUS42_tree = (Object)adaptor.create(MINUS42);
-							root_0 = (Object)adaptor.becomeRoot(MINUS42_tree, root_0);
+							MINUS44_tree = (Object)adaptor.create(MINUS44);
+							root_0 = (Object)adaptor.becomeRoot(MINUS44_tree, root_0);
 							}
 
 							}
@@ -1377,11 +1387,11 @@ public class StilParser extends Parser {
 
 					}
 
-					pushFollow(FOLLOW_arithmetic_expression_pr2_in_arithmetic_expression_pr31401);
-					arithmetic_expression_pr243=arithmetic_expression_pr2();
+					pushFollow(FOLLOW_arithmetic_expression_pr2_in_arithmetic_expression_pr31406);
+					arithmetic_expression_pr245=arithmetic_expression_pr2();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr243.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr245.getTree());
 
 					}
 					break;
@@ -1428,15 +1438,15 @@ public class StilParser extends Parser {
 
 		Object root_0 = null;
 
-		Token DIVIDE45=null;
-		Token MULTIPLY46=null;
-		Token MODULO47=null;
-		ParserRuleReturnScope arithmetic_expression_pr144 =null;
-		ParserRuleReturnScope arithmetic_expression_pr148 =null;
+		Token DIVIDE47=null;
+		Token MULTIPLY48=null;
+		Token MODULO49=null;
+		ParserRuleReturnScope arithmetic_expression_pr146 =null;
+		ParserRuleReturnScope arithmetic_expression_pr150 =null;
 
-		Object DIVIDE45_tree=null;
-		Object MULTIPLY46_tree=null;
-		Object MODULO47_tree=null;
+		Object DIVIDE47_tree=null;
+		Object MULTIPLY48_tree=null;
+		Object MODULO49_tree=null;
 
 		try {
 			// src/vb/stil/Stil.g:117:5: ( arithmetic_expression_pr1 ( ( DIVIDE ^| MULTIPLY ^| MODULO ^) arithmetic_expression_pr1 )* )
@@ -1445,11 +1455,11 @@ public class StilParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			pushFollow(FOLLOW_arithmetic_expression_pr1_in_arithmetic_expression_pr21422);
-			arithmetic_expression_pr144=arithmetic_expression_pr1();
+			pushFollow(FOLLOW_arithmetic_expression_pr1_in_arithmetic_expression_pr21427);
+			arithmetic_expression_pr146=arithmetic_expression_pr1();
 			state._fsp--;
 			if (state.failed) return retval;
-			if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr144.getTree());
+			if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr146.getTree());
 
 			// src/vb/stil/Stil.g:117:35: ( ( DIVIDE ^| MULTIPLY ^| MODULO ^) arithmetic_expression_pr1 )*
 			loop15:
@@ -1492,10 +1502,10 @@ public class StilParser extends Parser {
 						case 1 :
 							// src/vb/stil/Stil.g:117:37: DIVIDE ^
 							{
-							DIVIDE45=(Token)match(input,DIVIDE,FOLLOW_DIVIDE_in_arithmetic_expression_pr21426); if (state.failed) return retval;
+							DIVIDE47=(Token)match(input,DIVIDE,FOLLOW_DIVIDE_in_arithmetic_expression_pr21431); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
-							DIVIDE45_tree = (Object)adaptor.create(DIVIDE45);
-							root_0 = (Object)adaptor.becomeRoot(DIVIDE45_tree, root_0);
+							DIVIDE47_tree = (Object)adaptor.create(DIVIDE47);
+							root_0 = (Object)adaptor.becomeRoot(DIVIDE47_tree, root_0);
 							}
 
 							}
@@ -1503,10 +1513,10 @@ public class StilParser extends Parser {
 						case 2 :
 							// src/vb/stil/Stil.g:117:47: MULTIPLY ^
 							{
-							MULTIPLY46=(Token)match(input,MULTIPLY,FOLLOW_MULTIPLY_in_arithmetic_expression_pr21431); if (state.failed) return retval;
+							MULTIPLY48=(Token)match(input,MULTIPLY,FOLLOW_MULTIPLY_in_arithmetic_expression_pr21436); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
-							MULTIPLY46_tree = (Object)adaptor.create(MULTIPLY46);
-							root_0 = (Object)adaptor.becomeRoot(MULTIPLY46_tree, root_0);
+							MULTIPLY48_tree = (Object)adaptor.create(MULTIPLY48);
+							root_0 = (Object)adaptor.becomeRoot(MULTIPLY48_tree, root_0);
 							}
 
 							}
@@ -1514,10 +1524,10 @@ public class StilParser extends Parser {
 						case 3 :
 							// src/vb/stil/Stil.g:117:59: MODULO ^
 							{
-							MODULO47=(Token)match(input,MODULO,FOLLOW_MODULO_in_arithmetic_expression_pr21436); if (state.failed) return retval;
+							MODULO49=(Token)match(input,MODULO,FOLLOW_MODULO_in_arithmetic_expression_pr21441); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
-							MODULO47_tree = (Object)adaptor.create(MODULO47);
-							root_0 = (Object)adaptor.becomeRoot(MODULO47_tree, root_0);
+							MODULO49_tree = (Object)adaptor.create(MODULO49);
+							root_0 = (Object)adaptor.becomeRoot(MODULO49_tree, root_0);
 							}
 
 							}
@@ -1525,11 +1535,11 @@ public class StilParser extends Parser {
 
 					}
 
-					pushFollow(FOLLOW_arithmetic_expression_pr1_in_arithmetic_expression_pr21440);
-					arithmetic_expression_pr148=arithmetic_expression_pr1();
+					pushFollow(FOLLOW_arithmetic_expression_pr1_in_arithmetic_expression_pr21445);
+					arithmetic_expression_pr150=arithmetic_expression_pr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr148.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr150.getTree());
 
 					}
 					break;
@@ -1576,17 +1586,17 @@ public class StilParser extends Parser {
 
 		Object root_0 = null;
 
-		Token PLUS49=null;
-		Token MINUS51=null;
-		Token NOT53=null;
-		ParserRuleReturnScope operand50 =null;
+		Token PLUS51=null;
+		Token MINUS53=null;
+		Token NOT55=null;
 		ParserRuleReturnScope operand52 =null;
 		ParserRuleReturnScope operand54 =null;
-		ParserRuleReturnScope operand55 =null;
+		ParserRuleReturnScope operand56 =null;
+		ParserRuleReturnScope operand57 =null;
 
-		Object PLUS49_tree=null;
-		Object MINUS51_tree=null;
-		Object NOT53_tree=null;
+		Object PLUS51_tree=null;
+		Object MINUS53_tree=null;
+		Object NOT55_tree=null;
 		RewriteRuleTokenStream stream_NOT=new RewriteRuleTokenStream(adaptor,"token NOT");
 		RewriteRuleTokenStream stream_PLUS=new RewriteRuleTokenStream(adaptor,"token PLUS");
 		RewriteRuleTokenStream stream_MINUS=new RewriteRuleTokenStream(adaptor,"token MINUS");
@@ -1631,14 +1641,14 @@ public class StilParser extends Parser {
 				case 1 :
 					// src/vb/stil/Stil.g:121:9: PLUS operand
 					{
-					PLUS49=(Token)match(input,PLUS,FOLLOW_PLUS_in_arithmetic_expression_pr11461); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_PLUS.add(PLUS49);
+					PLUS51=(Token)match(input,PLUS,FOLLOW_PLUS_in_arithmetic_expression_pr11466); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_PLUS.add(PLUS51);
 
-					pushFollow(FOLLOW_operand_in_arithmetic_expression_pr11463);
-					operand50=operand();
+					pushFollow(FOLLOW_operand_in_arithmetic_expression_pr11468);
+					operand52=operand();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_operand.add(operand50.getTree());
+					if ( state.backtracking==0 ) stream_operand.add(operand52.getTree());
 					// AST REWRITE
 					// elements: operand
 					// token labels: 
@@ -1672,14 +1682,14 @@ public class StilParser extends Parser {
 				case 2 :
 					// src/vb/stil/Stil.g:122:9: MINUS operand
 					{
-					MINUS51=(Token)match(input,MINUS,FOLLOW_MINUS_in_arithmetic_expression_pr11484); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_MINUS.add(MINUS51);
+					MINUS53=(Token)match(input,MINUS,FOLLOW_MINUS_in_arithmetic_expression_pr11489); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_MINUS.add(MINUS53);
 
-					pushFollow(FOLLOW_operand_in_arithmetic_expression_pr11486);
-					operand52=operand();
+					pushFollow(FOLLOW_operand_in_arithmetic_expression_pr11491);
+					operand54=operand();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_operand.add(operand52.getTree());
+					if ( state.backtracking==0 ) stream_operand.add(operand54.getTree());
 					// AST REWRITE
 					// elements: operand
 					// token labels: 
@@ -1713,14 +1723,14 @@ public class StilParser extends Parser {
 				case 3 :
 					// src/vb/stil/Stil.g:123:9: NOT operand
 					{
-					NOT53=(Token)match(input,NOT,FOLLOW_NOT_in_arithmetic_expression_pr11506); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_NOT.add(NOT53);
+					NOT55=(Token)match(input,NOT,FOLLOW_NOT_in_arithmetic_expression_pr11511); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_NOT.add(NOT55);
 
-					pushFollow(FOLLOW_operand_in_arithmetic_expression_pr11508);
-					operand54=operand();
+					pushFollow(FOLLOW_operand_in_arithmetic_expression_pr11513);
+					operand56=operand();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_operand.add(operand54.getTree());
+					if ( state.backtracking==0 ) stream_operand.add(operand56.getTree());
 					// AST REWRITE
 					// elements: operand
 					// token labels: 
@@ -1757,11 +1767,11 @@ public class StilParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_operand_in_arithmetic_expression_pr11530);
-					operand55=operand();
+					pushFollow(FOLLOW_operand_in_arithmetic_expression_pr11535);
+					operand57=operand();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, operand55.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, operand57.getTree());
 
 					}
 					break;
@@ -1802,19 +1812,19 @@ public class StilParser extends Parser {
 
 		Object root_0 = null;
 
-		Token CHAR_LITERAL57=null;
-		Token INT_LITERAL58=null;
-		Token IDENTIFIER59=null;
-		Token LPAREN60=null;
-		Token RPAREN62=null;
-		ParserRuleReturnScope bool_literal56 =null;
-		ParserRuleReturnScope expression61 =null;
+		Token CHAR_LITERAL59=null;
+		Token INT_LITERAL60=null;
+		Token IDENTIFIER61=null;
+		Token LPAREN62=null;
+		Token RPAREN64=null;
+		ParserRuleReturnScope bool_literal58 =null;
+		ParserRuleReturnScope expression63 =null;
 
-		Object CHAR_LITERAL57_tree=null;
-		Object INT_LITERAL58_tree=null;
-		Object IDENTIFIER59_tree=null;
-		Object LPAREN60_tree=null;
-		Object RPAREN62_tree=null;
+		Object CHAR_LITERAL59_tree=null;
+		Object INT_LITERAL60_tree=null;
+		Object IDENTIFIER61_tree=null;
+		Object LPAREN62_tree=null;
+		Object RPAREN64_tree=null;
 
 		try {
 			// src/vb/stil/Stil.g:128:5: ( bool_literal | CHAR_LITERAL | INT_LITERAL | IDENTIFIER | LPAREN ! expression RPAREN !)
@@ -1859,11 +1869,11 @@ public class StilParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_bool_literal_in_operand1549);
-					bool_literal56=bool_literal();
+					pushFollow(FOLLOW_bool_literal_in_operand1554);
+					bool_literal58=bool_literal();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, bool_literal56.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, bool_literal58.getTree());
 
 					}
 					break;
@@ -1873,10 +1883,10 @@ public class StilParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					CHAR_LITERAL57=(Token)match(input,CHAR_LITERAL,FOLLOW_CHAR_LITERAL_in_operand1559); if (state.failed) return retval;
+					CHAR_LITERAL59=(Token)match(input,CHAR_LITERAL,FOLLOW_CHAR_LITERAL_in_operand1564); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					CHAR_LITERAL57_tree = (Object)adaptor.create(CHAR_LITERAL57);
-					adaptor.addChild(root_0, CHAR_LITERAL57_tree);
+					CHAR_LITERAL59_tree = (Object)adaptor.create(CHAR_LITERAL59);
+					adaptor.addChild(root_0, CHAR_LITERAL59_tree);
 					}
 
 					}
@@ -1887,10 +1897,10 @@ public class StilParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					INT_LITERAL58=(Token)match(input,INT_LITERAL,FOLLOW_INT_LITERAL_in_operand1569); if (state.failed) return retval;
+					INT_LITERAL60=(Token)match(input,INT_LITERAL,FOLLOW_INT_LITERAL_in_operand1574); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					INT_LITERAL58_tree = (Object)adaptor.create(INT_LITERAL58);
-					adaptor.addChild(root_0, INT_LITERAL58_tree);
+					INT_LITERAL60_tree = (Object)adaptor.create(INT_LITERAL60);
+					adaptor.addChild(root_0, INT_LITERAL60_tree);
 					}
 
 					}
@@ -1901,10 +1911,10 @@ public class StilParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					IDENTIFIER59=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand1579); if (state.failed) return retval;
+					IDENTIFIER61=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand1584); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					IDENTIFIER59_tree = new IdNode(IDENTIFIER59) ;
-					adaptor.addChild(root_0, IDENTIFIER59_tree);
+					IDENTIFIER61_tree = new IdNode(IDENTIFIER61) ;
+					adaptor.addChild(root_0, IDENTIFIER61_tree);
 					}
 
 					}
@@ -1915,14 +1925,14 @@ public class StilParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					LPAREN60=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_operand1592); if (state.failed) return retval;
-					pushFollow(FOLLOW_expression_in_operand1595);
-					expression61=expression();
+					LPAREN62=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_operand1597); if (state.failed) return retval;
+					pushFollow(FOLLOW_expression_in_operand1600);
+					expression63=expression();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, expression61.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, expression63.getTree());
 
-					RPAREN62=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_operand1597); if (state.failed) return retval;
+					RPAREN64=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_operand1602); if (state.failed) return retval;
 					}
 					break;
 
@@ -1962,12 +1972,12 @@ public class StilParser extends Parser {
 
 		Object root_0 = null;
 
-		Token IDENTIFIER63=null;
-		Token BECOMES64=null;
-		ParserRuleReturnScope expression65 =null;
+		Token IDENTIFIER65=null;
+		Token BECOMES66=null;
+		ParserRuleReturnScope expression67 =null;
 
-		Object IDENTIFIER63_tree=null;
-		Object BECOMES64_tree=null;
+		Object IDENTIFIER65_tree=null;
+		Object BECOMES66_tree=null;
 
 		try {
 			// src/vb/stil/Stil.g:136:5: ( IDENTIFIER BECOMES ^ expression )
@@ -1976,23 +1986,23 @@ public class StilParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			IDENTIFIER63=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_assignment_statement1617); if (state.failed) return retval;
+			IDENTIFIER65=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_assignment_statement1622); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			IDENTIFIER63_tree = new IdNode(IDENTIFIER63) ;
-			adaptor.addChild(root_0, IDENTIFIER63_tree);
+			IDENTIFIER65_tree = new IdNode(IDENTIFIER65) ;
+			adaptor.addChild(root_0, IDENTIFIER65_tree);
 			}
 
-			BECOMES64=(Token)match(input,BECOMES,FOLLOW_BECOMES_in_assignment_statement1622); if (state.failed) return retval;
+			BECOMES66=(Token)match(input,BECOMES,FOLLOW_BECOMES_in_assignment_statement1627); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			BECOMES64_tree = (Object)adaptor.create(BECOMES64);
-			root_0 = (Object)adaptor.becomeRoot(BECOMES64_tree, root_0);
+			BECOMES66_tree = (Object)adaptor.create(BECOMES66);
+			root_0 = (Object)adaptor.becomeRoot(BECOMES66_tree, root_0);
 			}
 
-			pushFollow(FOLLOW_expression_in_assignment_statement1625);
-			expression65=expression();
+			pushFollow(FOLLOW_expression_in_assignment_statement1630);
+			expression67=expression();
 			state._fsp--;
 			if (state.failed) return retval;
-			if ( state.backtracking==0 ) adaptor.addChild(root_0, expression65.getTree());
+			if ( state.backtracking==0 ) adaptor.addChild(root_0, expression67.getTree());
 
 			}
 
@@ -2031,17 +2041,17 @@ public class StilParser extends Parser {
 
 		Object root_0 = null;
 
-		Token PRINT66=null;
-		Token LPAREN67=null;
-		Token COMMA69=null;
-		Token RPAREN71=null;
-		ParserRuleReturnScope expression68 =null;
+		Token PRINT68=null;
+		Token LPAREN69=null;
+		Token COMMA71=null;
+		Token RPAREN73=null;
 		ParserRuleReturnScope expression70 =null;
+		ParserRuleReturnScope expression72 =null;
 
-		Object PRINT66_tree=null;
-		Object LPAREN67_tree=null;
-		Object COMMA69_tree=null;
-		Object RPAREN71_tree=null;
+		Object PRINT68_tree=null;
+		Object LPAREN69_tree=null;
+		Object COMMA71_tree=null;
+		Object RPAREN73_tree=null;
 
 		try {
 			// src/vb/stil/Stil.g:140:5: ( PRINT ^ LPAREN ! expression ( COMMA ! expression )* RPAREN !)
@@ -2050,18 +2060,18 @@ public class StilParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			PRINT66=(Token)match(input,PRINT,FOLLOW_PRINT_in_print_statement1644); if (state.failed) return retval;
+			PRINT68=(Token)match(input,PRINT,FOLLOW_PRINT_in_print_statement1649); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			PRINT66_tree = (Object)adaptor.create(PRINT66);
-			root_0 = (Object)adaptor.becomeRoot(PRINT66_tree, root_0);
+			PRINT68_tree = (Object)adaptor.create(PRINT68);
+			root_0 = (Object)adaptor.becomeRoot(PRINT68_tree, root_0);
 			}
 
-			LPAREN67=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_print_statement1647); if (state.failed) return retval;
-			pushFollow(FOLLOW_expression_in_print_statement1650);
-			expression68=expression();
+			LPAREN69=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_print_statement1652); if (state.failed) return retval;
+			pushFollow(FOLLOW_expression_in_print_statement1655);
+			expression70=expression();
 			state._fsp--;
 			if (state.failed) return retval;
-			if ( state.backtracking==0 ) adaptor.addChild(root_0, expression68.getTree());
+			if ( state.backtracking==0 ) adaptor.addChild(root_0, expression70.getTree());
 
 			// src/vb/stil/Stil.g:140:35: ( COMMA ! expression )*
 			loop18:
@@ -2076,12 +2086,12 @@ public class StilParser extends Parser {
 				case 1 :
 					// src/vb/stil/Stil.g:140:36: COMMA ! expression
 					{
-					COMMA69=(Token)match(input,COMMA,FOLLOW_COMMA_in_print_statement1653); if (state.failed) return retval;
-					pushFollow(FOLLOW_expression_in_print_statement1656);
-					expression70=expression();
+					COMMA71=(Token)match(input,COMMA,FOLLOW_COMMA_in_print_statement1658); if (state.failed) return retval;
+					pushFollow(FOLLOW_expression_in_print_statement1661);
+					expression72=expression();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, expression70.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, expression72.getTree());
 
 					}
 					break;
@@ -2091,7 +2101,7 @@ public class StilParser extends Parser {
 				}
 			}
 
-			RPAREN71=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_print_statement1660); if (state.failed) return retval;
+			RPAREN73=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_print_statement1665); if (state.failed) return retval;
 			}
 
 			retval.stop = input.LT(-1);
@@ -2129,19 +2139,19 @@ public class StilParser extends Parser {
 
 		Object root_0 = null;
 
-		Token READ72=null;
-		Token LPAREN73=null;
-		Token IDENTIFIER74=null;
-		Token COMMA75=null;
+		Token READ74=null;
+		Token LPAREN75=null;
 		Token IDENTIFIER76=null;
-		Token RPAREN77=null;
+		Token COMMA77=null;
+		Token IDENTIFIER78=null;
+		Token RPAREN79=null;
 
-		Object READ72_tree=null;
-		Object LPAREN73_tree=null;
-		Object IDENTIFIER74_tree=null;
-		Object COMMA75_tree=null;
+		Object READ74_tree=null;
+		Object LPAREN75_tree=null;
 		Object IDENTIFIER76_tree=null;
-		Object RPAREN77_tree=null;
+		Object COMMA77_tree=null;
+		Object IDENTIFIER78_tree=null;
+		Object RPAREN79_tree=null;
 
 		try {
 			// src/vb/stil/Stil.g:144:5: ( READ ^ LPAREN ! IDENTIFIER ( COMMA ! IDENTIFIER )* RPAREN !)
@@ -2150,17 +2160,17 @@ public class StilParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			READ72=(Token)match(input,READ,FOLLOW_READ_in_read_statement1680); if (state.failed) return retval;
+			READ74=(Token)match(input,READ,FOLLOW_READ_in_read_statement1685); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			READ72_tree = (Object)adaptor.create(READ72);
-			root_0 = (Object)adaptor.becomeRoot(READ72_tree, root_0);
+			READ74_tree = (Object)adaptor.create(READ74);
+			root_0 = (Object)adaptor.becomeRoot(READ74_tree, root_0);
 			}
 
-			LPAREN73=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_read_statement1683); if (state.failed) return retval;
-			IDENTIFIER74=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_read_statement1686); if (state.failed) return retval;
+			LPAREN75=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_read_statement1688); if (state.failed) return retval;
+			IDENTIFIER76=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_read_statement1691); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			IDENTIFIER74_tree = new IdNode(IDENTIFIER74) ;
-			adaptor.addChild(root_0, IDENTIFIER74_tree);
+			IDENTIFIER76_tree = new IdNode(IDENTIFIER76) ;
+			adaptor.addChild(root_0, IDENTIFIER76_tree);
 			}
 
 			// src/vb/stil/Stil.g:144:42: ( COMMA ! IDENTIFIER )*
@@ -2176,11 +2186,11 @@ public class StilParser extends Parser {
 				case 1 :
 					// src/vb/stil/Stil.g:144:43: COMMA ! IDENTIFIER
 					{
-					COMMA75=(Token)match(input,COMMA,FOLLOW_COMMA_in_read_statement1692); if (state.failed) return retval;
-					IDENTIFIER76=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_read_statement1695); if (state.failed) return retval;
+					COMMA77=(Token)match(input,COMMA,FOLLOW_COMMA_in_read_statement1697); if (state.failed) return retval;
+					IDENTIFIER78=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_read_statement1700); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					IDENTIFIER76_tree = new IdNode(IDENTIFIER76) ;
-					adaptor.addChild(root_0, IDENTIFIER76_tree);
+					IDENTIFIER78_tree = new IdNode(IDENTIFIER78) ;
+					adaptor.addChild(root_0, IDENTIFIER78_tree);
 					}
 
 					}
@@ -2191,7 +2201,7 @@ public class StilParser extends Parser {
 				}
 			}
 
-			RPAREN77=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_read_statement1702); if (state.failed) return retval;
+			RPAREN79=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_read_statement1707); if (state.failed) return retval;
 			}
 
 			retval.stop = input.LT(-1);
@@ -2229,9 +2239,9 @@ public class StilParser extends Parser {
 
 		Object root_0 = null;
 
-		Token set78=null;
+		Token set80=null;
 
-		Object set78_tree=null;
+		Object set80_tree=null;
 
 		try {
 			// src/vb/stil/Stil.g:148:5: ( BOOL | CHAR | INT )
@@ -2240,10 +2250,10 @@ public class StilParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			set78=input.LT(1);
+			set80=input.LT(1);
 			if ( (input.LA(1) >= BOOL && input.LA(1) <= CHAR)||input.LA(1)==INT ) {
 				input.consume();
-				if ( state.backtracking==0 ) adaptor.addChild(root_0, (Object)adaptor.create(set78));
+				if ( state.backtracking==0 ) adaptor.addChild(root_0, (Object)adaptor.create(set80));
 				state.errorRecovery=false;
 				state.failed=false;
 			}
@@ -2289,9 +2299,9 @@ public class StilParser extends Parser {
 
 		Object root_0 = null;
 
-		Token set79=null;
+		Token set81=null;
 
-		Object set79_tree=null;
+		Object set81_tree=null;
 
 		try {
 			// src/vb/stil/Stil.g:152:5: ( TRUE | FALSE )
@@ -2300,10 +2310,10 @@ public class StilParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			set79=input.LT(1);
+			set81=input.LT(1);
 			if ( input.LA(1)==FALSE||input.LA(1)==TRUE ) {
 				input.consume();
-				if ( state.backtracking==0 ) adaptor.addChild(root_0, (Object)adaptor.create(set79));
+				if ( state.backtracking==0 ) adaptor.addChild(root_0, (Object)adaptor.create(set81));
 				state.errorRecovery=false;
 				state.failed=false;
 			}
@@ -2338,9 +2348,9 @@ public class StilParser extends Parser {
 		// src/vb/stil/Stil.g:87:9: ( IDENTIFIER BECOMES )
 		// src/vb/stil/Stil.g:87:10: IDENTIFIER BECOMES
 		{
-		match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_synpred1_Stil1162); if (state.failed) return;
+		match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_synpred1_Stil1167); if (state.failed) return;
 
-		match(input,BECOMES,FOLLOW_BECOMES_in_synpred1_Stil1167); if (state.failed) return;
+		match(input,BECOMES,FOLLOW_BECOMES_in_synpred1_Stil1172); if (state.failed) return;
 
 		}
 
@@ -2375,74 +2385,76 @@ public class StilParser extends Parser {
 	public static final BitSet FOLLOW_var_declaration_in_declaration1082 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_CONST_in_constant_declaration1101 = new BitSet(new long[]{0x0000000000400180L});
 	public static final BitSet FOLLOW_type_in_constant_declaration1107 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_constant_declaration1109 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_VAR_in_var_declaration1131 = new BitSet(new long[]{0x0000000000400180L});
-	public static final BitSet FOLLOW_type_in_var_declaration1137 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_var_declaration1139 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_assignment_statement_in_expression1172 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_closed_compound_expression_in_expression1183 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_arithmetic_expression_in_expression1187 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_print_statement_in_expression1191 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_read_statement_in_expression1195 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_declaration_in_compound_expression1217 = new BitSet(new long[]{0x0000040000000000L});
-	public static final BitSet FOLLOW_SEMICOLON_in_compound_expression1219 = new BitSet(new long[]{0x0001093449A44200L});
-	public static final BitSet FOLLOW_expression_in_compound_expression1224 = new BitSet(new long[]{0x0000040000000000L});
-	public static final BitSet FOLLOW_SEMICOLON_in_compound_expression1226 = new BitSet(new long[]{0x0001093449A44202L});
-	public static final BitSet FOLLOW_LCURLY_in_closed_compound_expression1248 = new BitSet(new long[]{0x0001093449A44200L});
-	public static final BitSet FOLLOW_compound_expression_in_closed_compound_expression1250 = new BitSet(new long[]{0x0000008000000000L});
-	public static final BitSet FOLLOW_RCURLY_in_closed_compound_expression1252 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_arithmetic_expression_pr5_in_arithmetic_expression1280 = new BitSet(new long[]{0x0000000800000002L});
-	public static final BitSet FOLLOW_OR_in_arithmetic_expression1283 = new BitSet(new long[]{0x0000081448A40200L});
-	public static final BitSet FOLLOW_arithmetic_expression_pr5_in_arithmetic_expression1286 = new BitSet(new long[]{0x0000000800000002L});
-	public static final BitSet FOLLOW_arithmetic_expression_pr4_in_arithmetic_expression_pr51307 = new BitSet(new long[]{0x0000000000000012L});
-	public static final BitSet FOLLOW_AND_in_arithmetic_expression_pr51310 = new BitSet(new long[]{0x0000081448A40200L});
-	public static final BitSet FOLLOW_arithmetic_expression_pr4_in_arithmetic_expression_pr51313 = new BitSet(new long[]{0x0000000000000012L});
-	public static final BitSet FOLLOW_arithmetic_expression_pr3_in_arithmetic_expression_pr41334 = new BitSet(new long[]{0x00000002301A0002L});
-	public static final BitSet FOLLOW_LT_in_arithmetic_expression_pr41338 = new BitSet(new long[]{0x0000081448A40200L});
-	public static final BitSet FOLLOW_LTE_in_arithmetic_expression_pr41343 = new BitSet(new long[]{0x0000081448A40200L});
-	public static final BitSet FOLLOW_GT_in_arithmetic_expression_pr41348 = new BitSet(new long[]{0x0000081448A40200L});
-	public static final BitSet FOLLOW_GTE_in_arithmetic_expression_pr41353 = new BitSet(new long[]{0x0000081448A40200L});
-	public static final BitSet FOLLOW_EQ_in_arithmetic_expression_pr41358 = new BitSet(new long[]{0x0000081448A40200L});
-	public static final BitSet FOLLOW_NEQ_in_arithmetic_expression_pr41363 = new BitSet(new long[]{0x0000081448A40200L});
-	public static final BitSet FOLLOW_arithmetic_expression_pr3_in_arithmetic_expression_pr41367 = new BitSet(new long[]{0x00000002301A0002L});
-	public static final BitSet FOLLOW_arithmetic_expression_pr2_in_arithmetic_expression_pr31388 = new BitSet(new long[]{0x0000001040000002L});
-	public static final BitSet FOLLOW_PLUS_in_arithmetic_expression_pr31392 = new BitSet(new long[]{0x0000081448A40200L});
-	public static final BitSet FOLLOW_MINUS_in_arithmetic_expression_pr31397 = new BitSet(new long[]{0x0000081448A40200L});
-	public static final BitSet FOLLOW_arithmetic_expression_pr2_in_arithmetic_expression_pr31401 = new BitSet(new long[]{0x0000001040000002L});
-	public static final BitSet FOLLOW_arithmetic_expression_pr1_in_arithmetic_expression_pr21422 = new BitSet(new long[]{0x0000000180010002L});
-	public static final BitSet FOLLOW_DIVIDE_in_arithmetic_expression_pr21426 = new BitSet(new long[]{0x0000081448A40200L});
-	public static final BitSet FOLLOW_MULTIPLY_in_arithmetic_expression_pr21431 = new BitSet(new long[]{0x0000081448A40200L});
-	public static final BitSet FOLLOW_MODULO_in_arithmetic_expression_pr21436 = new BitSet(new long[]{0x0000081448A40200L});
-	public static final BitSet FOLLOW_arithmetic_expression_pr1_in_arithmetic_expression_pr21440 = new BitSet(new long[]{0x0000000180010002L});
-	public static final BitSet FOLLOW_PLUS_in_arithmetic_expression_pr11461 = new BitSet(new long[]{0x0000080008A40200L});
-	public static final BitSet FOLLOW_operand_in_arithmetic_expression_pr11463 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MINUS_in_arithmetic_expression_pr11484 = new BitSet(new long[]{0x0000080008A40200L});
-	public static final BitSet FOLLOW_operand_in_arithmetic_expression_pr11486 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NOT_in_arithmetic_expression_pr11506 = new BitSet(new long[]{0x0000080008A40200L});
-	public static final BitSet FOLLOW_operand_in_arithmetic_expression_pr11508 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_operand_in_arithmetic_expression_pr11530 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_bool_literal_in_operand1549 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CHAR_LITERAL_in_operand1559 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_INT_LITERAL_in_operand1569 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_operand1579 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LPAREN_in_operand1592 = new BitSet(new long[]{0x0000093449A40200L});
-	public static final BitSet FOLLOW_expression_in_operand1595 = new BitSet(new long[]{0x0000020000000000L});
-	public static final BitSet FOLLOW_RPAREN_in_operand1597 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_assignment_statement1617 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_BECOMES_in_assignment_statement1622 = new BitSet(new long[]{0x0000093449A40200L});
-	public static final BitSet FOLLOW_expression_in_assignment_statement1625 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_PRINT_in_print_statement1644 = new BitSet(new long[]{0x0000000008000000L});
-	public static final BitSet FOLLOW_LPAREN_in_print_statement1647 = new BitSet(new long[]{0x0000093449A40200L});
-	public static final BitSet FOLLOW_expression_in_print_statement1650 = new BitSet(new long[]{0x0000020000000800L});
-	public static final BitSet FOLLOW_COMMA_in_print_statement1653 = new BitSet(new long[]{0x0000093449A40200L});
-	public static final BitSet FOLLOW_expression_in_print_statement1656 = new BitSet(new long[]{0x0000020000000800L});
-	public static final BitSet FOLLOW_RPAREN_in_print_statement1660 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_READ_in_read_statement1680 = new BitSet(new long[]{0x0000000008000000L});
-	public static final BitSet FOLLOW_LPAREN_in_read_statement1683 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_read_statement1686 = new BitSet(new long[]{0x0000020000000800L});
-	public static final BitSet FOLLOW_COMMA_in_read_statement1692 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_read_statement1695 = new BitSet(new long[]{0x0000020000000800L});
-	public static final BitSet FOLLOW_RPAREN_in_read_statement1702 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_synpred1_Stil1162 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_BECOMES_in_synpred1_Stil1167 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_constant_declaration1109 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_BECOMES_in_constant_declaration1114 = new BitSet(new long[]{0x0000093449A40200L});
+	public static final BitSet FOLLOW_expression_in_constant_declaration1117 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_VAR_in_var_declaration1136 = new BitSet(new long[]{0x0000000000400180L});
+	public static final BitSet FOLLOW_type_in_var_declaration1142 = new BitSet(new long[]{0x0000000000200000L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_var_declaration1144 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_assignment_statement_in_expression1177 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_closed_compound_expression_in_expression1188 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_arithmetic_expression_in_expression1192 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_print_statement_in_expression1196 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_read_statement_in_expression1200 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_declaration_in_compound_expression1222 = new BitSet(new long[]{0x0000040000000000L});
+	public static final BitSet FOLLOW_SEMICOLON_in_compound_expression1224 = new BitSet(new long[]{0x0001093449A44200L});
+	public static final BitSet FOLLOW_expression_in_compound_expression1229 = new BitSet(new long[]{0x0000040000000000L});
+	public static final BitSet FOLLOW_SEMICOLON_in_compound_expression1231 = new BitSet(new long[]{0x0001093449A44202L});
+	public static final BitSet FOLLOW_LCURLY_in_closed_compound_expression1253 = new BitSet(new long[]{0x0001093449A44200L});
+	public static final BitSet FOLLOW_compound_expression_in_closed_compound_expression1255 = new BitSet(new long[]{0x0000008000000000L});
+	public static final BitSet FOLLOW_RCURLY_in_closed_compound_expression1257 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_arithmetic_expression_pr5_in_arithmetic_expression1285 = new BitSet(new long[]{0x0000000800000002L});
+	public static final BitSet FOLLOW_OR_in_arithmetic_expression1288 = new BitSet(new long[]{0x0000081448A40200L});
+	public static final BitSet FOLLOW_arithmetic_expression_pr5_in_arithmetic_expression1291 = new BitSet(new long[]{0x0000000800000002L});
+	public static final BitSet FOLLOW_arithmetic_expression_pr4_in_arithmetic_expression_pr51312 = new BitSet(new long[]{0x0000000000000012L});
+	public static final BitSet FOLLOW_AND_in_arithmetic_expression_pr51315 = new BitSet(new long[]{0x0000081448A40200L});
+	public static final BitSet FOLLOW_arithmetic_expression_pr4_in_arithmetic_expression_pr51318 = new BitSet(new long[]{0x0000000000000012L});
+	public static final BitSet FOLLOW_arithmetic_expression_pr3_in_arithmetic_expression_pr41339 = new BitSet(new long[]{0x00000002301A0002L});
+	public static final BitSet FOLLOW_LT_in_arithmetic_expression_pr41343 = new BitSet(new long[]{0x0000081448A40200L});
+	public static final BitSet FOLLOW_LTE_in_arithmetic_expression_pr41348 = new BitSet(new long[]{0x0000081448A40200L});
+	public static final BitSet FOLLOW_GT_in_arithmetic_expression_pr41353 = new BitSet(new long[]{0x0000081448A40200L});
+	public static final BitSet FOLLOW_GTE_in_arithmetic_expression_pr41358 = new BitSet(new long[]{0x0000081448A40200L});
+	public static final BitSet FOLLOW_EQ_in_arithmetic_expression_pr41363 = new BitSet(new long[]{0x0000081448A40200L});
+	public static final BitSet FOLLOW_NEQ_in_arithmetic_expression_pr41368 = new BitSet(new long[]{0x0000081448A40200L});
+	public static final BitSet FOLLOW_arithmetic_expression_pr3_in_arithmetic_expression_pr41372 = new BitSet(new long[]{0x00000002301A0002L});
+	public static final BitSet FOLLOW_arithmetic_expression_pr2_in_arithmetic_expression_pr31393 = new BitSet(new long[]{0x0000001040000002L});
+	public static final BitSet FOLLOW_PLUS_in_arithmetic_expression_pr31397 = new BitSet(new long[]{0x0000081448A40200L});
+	public static final BitSet FOLLOW_MINUS_in_arithmetic_expression_pr31402 = new BitSet(new long[]{0x0000081448A40200L});
+	public static final BitSet FOLLOW_arithmetic_expression_pr2_in_arithmetic_expression_pr31406 = new BitSet(new long[]{0x0000001040000002L});
+	public static final BitSet FOLLOW_arithmetic_expression_pr1_in_arithmetic_expression_pr21427 = new BitSet(new long[]{0x0000000180010002L});
+	public static final BitSet FOLLOW_DIVIDE_in_arithmetic_expression_pr21431 = new BitSet(new long[]{0x0000081448A40200L});
+	public static final BitSet FOLLOW_MULTIPLY_in_arithmetic_expression_pr21436 = new BitSet(new long[]{0x0000081448A40200L});
+	public static final BitSet FOLLOW_MODULO_in_arithmetic_expression_pr21441 = new BitSet(new long[]{0x0000081448A40200L});
+	public static final BitSet FOLLOW_arithmetic_expression_pr1_in_arithmetic_expression_pr21445 = new BitSet(new long[]{0x0000000180010002L});
+	public static final BitSet FOLLOW_PLUS_in_arithmetic_expression_pr11466 = new BitSet(new long[]{0x0000080008A40200L});
+	public static final BitSet FOLLOW_operand_in_arithmetic_expression_pr11468 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MINUS_in_arithmetic_expression_pr11489 = new BitSet(new long[]{0x0000080008A40200L});
+	public static final BitSet FOLLOW_operand_in_arithmetic_expression_pr11491 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NOT_in_arithmetic_expression_pr11511 = new BitSet(new long[]{0x0000080008A40200L});
+	public static final BitSet FOLLOW_operand_in_arithmetic_expression_pr11513 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_operand_in_arithmetic_expression_pr11535 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_bool_literal_in_operand1554 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CHAR_LITERAL_in_operand1564 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INT_LITERAL_in_operand1574 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_operand1584 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LPAREN_in_operand1597 = new BitSet(new long[]{0x0000093449A40200L});
+	public static final BitSet FOLLOW_expression_in_operand1600 = new BitSet(new long[]{0x0000020000000000L});
+	public static final BitSet FOLLOW_RPAREN_in_operand1602 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_assignment_statement1622 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_BECOMES_in_assignment_statement1627 = new BitSet(new long[]{0x0000093449A40200L});
+	public static final BitSet FOLLOW_expression_in_assignment_statement1630 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_PRINT_in_print_statement1649 = new BitSet(new long[]{0x0000000008000000L});
+	public static final BitSet FOLLOW_LPAREN_in_print_statement1652 = new BitSet(new long[]{0x0000093449A40200L});
+	public static final BitSet FOLLOW_expression_in_print_statement1655 = new BitSet(new long[]{0x0000020000000800L});
+	public static final BitSet FOLLOW_COMMA_in_print_statement1658 = new BitSet(new long[]{0x0000093449A40200L});
+	public static final BitSet FOLLOW_expression_in_print_statement1661 = new BitSet(new long[]{0x0000020000000800L});
+	public static final BitSet FOLLOW_RPAREN_in_print_statement1665 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_READ_in_read_statement1685 = new BitSet(new long[]{0x0000000008000000L});
+	public static final BitSet FOLLOW_LPAREN_in_read_statement1688 = new BitSet(new long[]{0x0000000000200000L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_read_statement1691 = new BitSet(new long[]{0x0000020000000800L});
+	public static final BitSet FOLLOW_COMMA_in_read_statement1697 = new BitSet(new long[]{0x0000000000200000L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_read_statement1700 = new BitSet(new long[]{0x0000020000000800L});
+	public static final BitSet FOLLOW_RPAREN_in_read_statement1707 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_synpred1_Stil1167 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_BECOMES_in_synpred1_Stil1172 = new BitSet(new long[]{0x0000000000000002L});
 }

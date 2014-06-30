@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 src/vb/stil/StilChecker.g 2014-06-30 17:21:08
+// $ANTLR 3.5.2 src/vb/stil/StilChecker.g 2014-06-30 17:46:39
 
     package vb.stil;
     import  vb.stil.checker.*;
@@ -220,15 +220,16 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "constant_declaration"
-	// src/vb/stil/StilChecker.g:39:1: constant_declaration : ^( CONST t= type id= IDENTIFIER ) ;
+	// src/vb/stil/StilChecker.g:39:1: constant_declaration : ^( CONST t= type id= IDENTIFIER expr= expression ) ;
 	public final void constant_declaration() throws RecognitionException {
 		StilNode id=null;
 		StilNode CONST1=null;
 		EntityType t =null;
+		EntityType expr =null;
 
 		try {
-			// src/vb/stil/StilChecker.g:40:5: ( ^( CONST t= type id= IDENTIFIER ) )
-			// src/vb/stil/StilChecker.g:40:9: ^( CONST t= type id= IDENTIFIER )
+			// src/vb/stil/StilChecker.g:40:5: ( ^( CONST t= type id= IDENTIFIER expr= expression ) )
+			// src/vb/stil/StilChecker.g:40:9: ^( CONST t= type id= IDENTIFIER expr= expression )
 			{
 			CONST1=(StilNode)match(input,CONST,FOLLOW_CONST_in_constant_declaration156); 
 			match(input, Token.DOWN, null); 
@@ -237,10 +238,15 @@ public class StilChecker extends TreeParser {
 			state._fsp--;
 
 			id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_constant_declaration164); 
+			pushFollow(FOLLOW_expression_in_constant_declaration168);
+			expr=expression();
+			state._fsp--;
+
 			match(input, Token.UP, null); 
 
 			 
 			            declarationChecker.processConstantDeclaration(CONST1, id, t, symtab); 
+			            typeChecker.validateConstantAssignmentExpression(CONST1, id, expr, symtab);
 			        
 			}
 
@@ -259,23 +265,23 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "var_declaration"
-	// src/vb/stil/StilChecker.g:45:1: var_declaration : ^( VAR t= type id= IDENTIFIER ) ;
+	// src/vb/stil/StilChecker.g:46:1: var_declaration : ^( VAR t= type id= IDENTIFIER ) ;
 	public final void var_declaration() throws RecognitionException {
 		StilNode id=null;
 		StilNode VAR2=null;
 		EntityType t =null;
 
 		try {
-			// src/vb/stil/StilChecker.g:46:5: ( ^( VAR t= type id= IDENTIFIER ) )
-			// src/vb/stil/StilChecker.g:46:9: ^( VAR t= type id= IDENTIFIER )
+			// src/vb/stil/StilChecker.g:47:5: ( ^( VAR t= type id= IDENTIFIER ) )
+			// src/vb/stil/StilChecker.g:47:9: ^( VAR t= type id= IDENTIFIER )
 			{
-			VAR2=(StilNode)match(input,VAR,FOLLOW_VAR_in_var_declaration187); 
+			VAR2=(StilNode)match(input,VAR,FOLLOW_VAR_in_var_declaration191); 
 			match(input, Token.DOWN, null); 
-			pushFollow(FOLLOW_type_in_var_declaration191);
+			pushFollow(FOLLOW_type_in_var_declaration195);
 			t=type();
 			state._fsp--;
 
-			id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_var_declaration195); 
+			id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_var_declaration199); 
 			match(input, Token.UP, null); 
 
 			 
@@ -298,7 +304,7 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "print_statement"
-	// src/vb/stil/StilChecker.g:51:1: print_statement returns [EntityType entityType = null;] : ^(node= PRINT t= expression (t= expression )* ) ;
+	// src/vb/stil/StilChecker.g:52:1: print_statement returns [EntityType entityType = null;] : ^(node= PRINT t= expression (t= expression )* ) ;
 	public final EntityType print_statement() throws RecognitionException {
 		EntityType entityType =  null;;
 
@@ -307,17 +313,17 @@ public class StilChecker extends TreeParser {
 		EntityType t =null;
 
 		try {
-			// src/vb/stil/StilChecker.g:52:5: ( ^(node= PRINT t= expression (t= expression )* ) )
-			// src/vb/stil/StilChecker.g:52:9: ^(node= PRINT t= expression (t= expression )* )
+			// src/vb/stil/StilChecker.g:53:5: ( ^(node= PRINT t= expression (t= expression )* ) )
+			// src/vb/stil/StilChecker.g:53:9: ^(node= PRINT t= expression (t= expression )* )
 			{
-			node=(StilNode)match(input,PRINT,FOLLOW_PRINT_in_print_statement227); 
+			node=(StilNode)match(input,PRINT,FOLLOW_PRINT_in_print_statement231); 
 			match(input, Token.DOWN, null); 
-			pushFollow(FOLLOW_expression_in_print_statement244);
+			pushFollow(FOLLOW_expression_in_print_statement248);
 			t=expression();
 			state._fsp--;
 
 			 entityType = typeChecker.validatePrintStatement(node, t); 
-			// src/vb/stil/StilChecker.g:54:10: (t= expression )*
+			// src/vb/stil/StilChecker.g:55:10: (t= expression )*
 			loop3:
 			while (true) {
 				int alt3=2;
@@ -328,9 +334,9 @@ public class StilChecker extends TreeParser {
 
 				switch (alt3) {
 				case 1 :
-					// src/vb/stil/StilChecker.g:54:13: t= expression
+					// src/vb/stil/StilChecker.g:55:13: t= expression
 					{
-					pushFollow(FOLLOW_expression_in_print_statement263);
+					pushFollow(FOLLOW_expression_in_print_statement267);
 					t=expression();
 					state._fsp--;
 
@@ -363,7 +369,7 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "read_statement"
-	// src/vb/stil/StilChecker.g:58:1: read_statement returns [EntityType entityType = null;] : ^(node= READ id= IDENTIFIER (id= IDENTIFIER )* ) ;
+	// src/vb/stil/StilChecker.g:59:1: read_statement returns [EntityType entityType = null;] : ^(node= READ id= IDENTIFIER (id= IDENTIFIER )* ) ;
 	public final EntityType read_statement() throws RecognitionException {
 		EntityType entityType =  null;;
 
@@ -372,14 +378,14 @@ public class StilChecker extends TreeParser {
 		StilNode id=null;
 
 		try {
-			// src/vb/stil/StilChecker.g:59:5: ( ^(node= READ id= IDENTIFIER (id= IDENTIFIER )* ) )
-			// src/vb/stil/StilChecker.g:59:9: ^(node= READ id= IDENTIFIER (id= IDENTIFIER )* )
+			// src/vb/stil/StilChecker.g:60:5: ( ^(node= READ id= IDENTIFIER (id= IDENTIFIER )* ) )
+			// src/vb/stil/StilChecker.g:60:9: ^(node= READ id= IDENTIFIER (id= IDENTIFIER )* )
 			{
-			node=(StilNode)match(input,READ,FOLLOW_READ_in_read_statement298); 
+			node=(StilNode)match(input,READ,FOLLOW_READ_in_read_statement302); 
 			match(input, Token.DOWN, null); 
-			id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_read_statement315); 
+			id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_read_statement319); 
 			 entityType = declarationChecker.retrieveDeclaration(node, id, symtab); 
-			// src/vb/stil/StilChecker.g:61:9: (id= IDENTIFIER )*
+			// src/vb/stil/StilChecker.g:62:9: (id= IDENTIFIER )*
 			loop4:
 			while (true) {
 				int alt4=2;
@@ -390,9 +396,9 @@ public class StilChecker extends TreeParser {
 
 				switch (alt4) {
 				case 1 :
-					// src/vb/stil/StilChecker.g:61:13: id= IDENTIFIER
+					// src/vb/stil/StilChecker.g:62:13: id= IDENTIFIER
 					{
-					id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_read_statement334); 
+					id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_read_statement338); 
 					 entityType = declarationChecker.retrieveMultipleDeclaration(node, id, symtab); 
 					}
 					break;
@@ -422,7 +428,7 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "compound_expression"
-	// src/vb/stil/StilChecker.g:64:1: compound_expression returns [EntityType entityType = null;] : ( ( declaration )* expr= expression )* ;
+	// src/vb/stil/StilChecker.g:65:1: compound_expression returns [EntityType entityType = null;] : ( ( declaration )* expr= expression )* ;
 	public final EntityType compound_expression() throws RecognitionException {
 		EntityType entityType =  null;;
 
@@ -430,10 +436,10 @@ public class StilChecker extends TreeParser {
 		EntityType expr =null;
 
 		try {
-			// src/vb/stil/StilChecker.g:65:5: ( ( ( declaration )* expr= expression )* )
-			// src/vb/stil/StilChecker.g:65:9: ( ( declaration )* expr= expression )*
+			// src/vb/stil/StilChecker.g:66:5: ( ( ( declaration )* expr= expression )* )
+			// src/vb/stil/StilChecker.g:66:9: ( ( declaration )* expr= expression )*
 			{
-			// src/vb/stil/StilChecker.g:65:9: ( ( declaration )* expr= expression )*
+			// src/vb/stil/StilChecker.g:66:9: ( ( declaration )* expr= expression )*
 			loop6:
 			while (true) {
 				int alt6=2;
@@ -444,9 +450,9 @@ public class StilChecker extends TreeParser {
 
 				switch (alt6) {
 				case 1 :
-					// src/vb/stil/StilChecker.g:65:10: ( declaration )* expr= expression
+					// src/vb/stil/StilChecker.g:66:10: ( declaration )* expr= expression
 					{
-					// src/vb/stil/StilChecker.g:65:10: ( declaration )*
+					// src/vb/stil/StilChecker.g:66:10: ( declaration )*
 					loop5:
 					while (true) {
 						int alt5=2;
@@ -457,9 +463,9 @@ public class StilChecker extends TreeParser {
 
 						switch (alt5) {
 						case 1 :
-							// src/vb/stil/StilChecker.g:65:11: declaration
+							// src/vb/stil/StilChecker.g:66:11: declaration
 							{
-							pushFollow(FOLLOW_declaration_in_compound_expression364);
+							pushFollow(FOLLOW_declaration_in_compound_expression368);
 							declaration();
 							state._fsp--;
 
@@ -471,7 +477,7 @@ public class StilChecker extends TreeParser {
 						}
 					}
 
-					pushFollow(FOLLOW_expression_in_compound_expression370);
+					pushFollow(FOLLOW_expression_in_compound_expression374);
 					expr=expression();
 					state._fsp--;
 
@@ -502,7 +508,7 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "closed_compound_expression"
-	// src/vb/stil/StilChecker.g:68:1: closed_compound_expression returns [EntityType entityType = null;] : ^( COMPOUND_EXPR c= compound_expression ) ;
+	// src/vb/stil/StilChecker.g:69:1: closed_compound_expression returns [EntityType entityType = null;] : ^( COMPOUND_EXPR c= compound_expression ) ;
 	public final EntityType closed_compound_expression() throws RecognitionException {
 		EntityType entityType =  null;;
 
@@ -510,14 +516,14 @@ public class StilChecker extends TreeParser {
 		EntityType c =null;
 
 		try {
-			// src/vb/stil/StilChecker.g:69:5: ( ^( COMPOUND_EXPR c= compound_expression ) )
-			// src/vb/stil/StilChecker.g:69:9: ^( COMPOUND_EXPR c= compound_expression )
+			// src/vb/stil/StilChecker.g:70:5: ( ^( COMPOUND_EXPR c= compound_expression ) )
+			// src/vb/stil/StilChecker.g:70:9: ^( COMPOUND_EXPR c= compound_expression )
 			{
-			match(input,COMPOUND_EXPR,FOLLOW_COMPOUND_EXPR_in_closed_compound_expression400); 
+			match(input,COMPOUND_EXPR,FOLLOW_COMPOUND_EXPR_in_closed_compound_expression404); 
 			   symtab.openScope();     
 			if ( input.LA(1)==Token.DOWN ) {
 				match(input, Token.DOWN, null); 
-				pushFollow(FOLLOW_compound_expression_in_closed_compound_expression429);
+				pushFollow(FOLLOW_compound_expression_in_closed_compound_expression433);
 				c=compound_expression();
 				state._fsp--;
 
@@ -544,7 +550,7 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "expression"
-	// src/vb/stil/StilChecker.g:74:1: expression returns [EntityType entityType = null;] : (p= print_statement |r= read_statement |o= operand |c= closed_compound_expression | ^(node= BECOMES id= IDENTIFIER t1= expression ) | ^(node= OR t1= expression t2= expression ) | ^(node= AND t1= expression t2= expression ) | ^(node= LT t1= expression t2= expression ) | ^(node= LTE t1= expression t2= expression ) | ^(node= GT t1= expression t2= expression ) | ^(node= GTE t1= expression t2= expression ) | ^(node= EQ t1= expression t2= expression ) | ^(node= NEQ t1= expression t2= expression ) | ^(node= PLUS t1= expression t2= expression ) | ^(node= MINUS t1= expression t2= expression ) | ^(node= DIVIDE t1= expression t2= expression ) | ^(node= MULTIPLY t1= expression t2= expression ) | ^(node= MODULO t1= expression t2= expression ) | ^(node= UNARY_PLUS t1= expression ) | ^(node= UNARY_MINUS t1= expression ) | ^(node= UNARY_NOT t1= expression ) );
+	// src/vb/stil/StilChecker.g:75:1: expression returns [EntityType entityType = null;] : (p= print_statement |r= read_statement |o= operand |c= closed_compound_expression | ^(node= BECOMES id= IDENTIFIER t1= expression ) | ^(node= OR t1= expression t2= expression ) | ^(node= AND t1= expression t2= expression ) | ^(node= LT t1= expression t2= expression ) | ^(node= LTE t1= expression t2= expression ) | ^(node= GT t1= expression t2= expression ) | ^(node= GTE t1= expression t2= expression ) | ^(node= EQ t1= expression t2= expression ) | ^(node= NEQ t1= expression t2= expression ) | ^(node= PLUS t1= expression t2= expression ) | ^(node= MINUS t1= expression t2= expression ) | ^(node= DIVIDE t1= expression t2= expression ) | ^(node= MULTIPLY t1= expression t2= expression ) | ^(node= MODULO t1= expression t2= expression ) | ^(node= UNARY_PLUS t1= expression ) | ^(node= UNARY_MINUS t1= expression ) | ^(node= UNARY_NOT t1= expression ) );
 	public final EntityType expression() throws RecognitionException {
 		EntityType entityType =  null;;
 
@@ -559,7 +565,7 @@ public class StilChecker extends TreeParser {
 		EntityType t2 =null;
 
 		try {
-			// src/vb/stil/StilChecker.g:75:5: (p= print_statement |r= read_statement |o= operand |c= closed_compound_expression | ^(node= BECOMES id= IDENTIFIER t1= expression ) | ^(node= OR t1= expression t2= expression ) | ^(node= AND t1= expression t2= expression ) | ^(node= LT t1= expression t2= expression ) | ^(node= LTE t1= expression t2= expression ) | ^(node= GT t1= expression t2= expression ) | ^(node= GTE t1= expression t2= expression ) | ^(node= EQ t1= expression t2= expression ) | ^(node= NEQ t1= expression t2= expression ) | ^(node= PLUS t1= expression t2= expression ) | ^(node= MINUS t1= expression t2= expression ) | ^(node= DIVIDE t1= expression t2= expression ) | ^(node= MULTIPLY t1= expression t2= expression ) | ^(node= MODULO t1= expression t2= expression ) | ^(node= UNARY_PLUS t1= expression ) | ^(node= UNARY_MINUS t1= expression ) | ^(node= UNARY_NOT t1= expression ) )
+			// src/vb/stil/StilChecker.g:76:5: (p= print_statement |r= read_statement |o= operand |c= closed_compound_expression | ^(node= BECOMES id= IDENTIFIER t1= expression ) | ^(node= OR t1= expression t2= expression ) | ^(node= AND t1= expression t2= expression ) | ^(node= LT t1= expression t2= expression ) | ^(node= LTE t1= expression t2= expression ) | ^(node= GT t1= expression t2= expression ) | ^(node= GTE t1= expression t2= expression ) | ^(node= EQ t1= expression t2= expression ) | ^(node= NEQ t1= expression t2= expression ) | ^(node= PLUS t1= expression t2= expression ) | ^(node= MINUS t1= expression t2= expression ) | ^(node= DIVIDE t1= expression t2= expression ) | ^(node= MULTIPLY t1= expression t2= expression ) | ^(node= MODULO t1= expression t2= expression ) | ^(node= UNARY_PLUS t1= expression ) | ^(node= UNARY_MINUS t1= expression ) | ^(node= UNARY_NOT t1= expression ) )
 			int alt7=21;
 			switch ( input.LA(1) ) {
 			case PRINT:
@@ -678,9 +684,9 @@ public class StilChecker extends TreeParser {
 			}
 			switch (alt7) {
 				case 1 :
-					// src/vb/stil/StilChecker.g:75:9: p= print_statement
+					// src/vb/stil/StilChecker.g:76:9: p= print_statement
 					{
-					pushFollow(FOLLOW_print_statement_in_expression460);
+					pushFollow(FOLLOW_print_statement_in_expression464);
 					p=print_statement();
 					state._fsp--;
 
@@ -688,9 +694,9 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// src/vb/stil/StilChecker.g:76:9: r= read_statement
+					// src/vb/stil/StilChecker.g:77:9: r= read_statement
 					{
-					pushFollow(FOLLOW_read_statement_in_expression488);
+					pushFollow(FOLLOW_read_statement_in_expression492);
 					r=read_statement();
 					state._fsp--;
 
@@ -698,9 +704,9 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 3 :
-					// src/vb/stil/StilChecker.g:77:9: o= operand
+					// src/vb/stil/StilChecker.g:78:9: o= operand
 					{
-					pushFollow(FOLLOW_operand_in_expression517);
+					pushFollow(FOLLOW_operand_in_expression521);
 					o=operand();
 					state._fsp--;
 
@@ -708,9 +714,9 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 4 :
-					// src/vb/stil/StilChecker.g:78:9: c= closed_compound_expression
+					// src/vb/stil/StilChecker.g:79:9: c= closed_compound_expression
 					{
-					pushFollow(FOLLOW_closed_compound_expression_in_expression553);
+					pushFollow(FOLLOW_closed_compound_expression_in_expression557);
 					c=closed_compound_expression();
 					state._fsp--;
 
@@ -718,30 +724,30 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 5 :
-					// src/vb/stil/StilChecker.g:79:9: ^(node= BECOMES id= IDENTIFIER t1= expression )
+					// src/vb/stil/StilChecker.g:80:9: ^(node= BECOMES id= IDENTIFIER t1= expression )
 					{
-					node=(StilNode)match(input,BECOMES,FOLLOW_BECOMES_in_expression571); 
+					node=(StilNode)match(input,BECOMES,FOLLOW_BECOMES_in_expression575); 
 					match(input, Token.DOWN, null); 
-					id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_expression575); 
-					pushFollow(FOLLOW_expression_in_expression579);
+					id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_expression579); 
+					pushFollow(FOLLOW_expression_in_expression583);
 					t1=expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
-					 entityType = typeChecker.validateAssignmentExpression(node, id, t1, symtab); 
+					 entityType = typeChecker.validateVariableAssignmentExpression(node, id, t1, symtab); 
 					}
 					break;
 				case 6 :
-					// src/vb/stil/StilChecker.g:80:9: ^(node= OR t1= expression t2= expression )
+					// src/vb/stil/StilChecker.g:81:9: ^(node= OR t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,OR,FOLLOW_OR_in_expression599); 
+					node=(StilNode)match(input,OR,FOLLOW_OR_in_expression603); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression603);
+					pushFollow(FOLLOW_expression_in_expression607);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression607);
+					pushFollow(FOLLOW_expression_in_expression611);
 					t2=expression();
 					state._fsp--;
 
@@ -751,15 +757,15 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 7 :
-					// src/vb/stil/StilChecker.g:81:9: ^(node= AND t1= expression t2= expression )
+					// src/vb/stil/StilChecker.g:82:9: ^(node= AND t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,AND,FOLLOW_AND_in_expression629); 
+					node=(StilNode)match(input,AND,FOLLOW_AND_in_expression633); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression633);
+					pushFollow(FOLLOW_expression_in_expression637);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression637);
+					pushFollow(FOLLOW_expression_in_expression641);
 					t2=expression();
 					state._fsp--;
 
@@ -769,15 +775,15 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 8 :
-					// src/vb/stil/StilChecker.g:82:9: ^(node= LT t1= expression t2= expression )
+					// src/vb/stil/StilChecker.g:83:9: ^(node= LT t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,LT,FOLLOW_LT_in_expression658); 
+					node=(StilNode)match(input,LT,FOLLOW_LT_in_expression662); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression662);
+					pushFollow(FOLLOW_expression_in_expression666);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression666);
+					pushFollow(FOLLOW_expression_in_expression670);
 					t2=expression();
 					state._fsp--;
 
@@ -787,15 +793,15 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 9 :
-					// src/vb/stil/StilChecker.g:83:9: ^(node= LTE t1= expression t2= expression )
+					// src/vb/stil/StilChecker.g:84:9: ^(node= LTE t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,LTE,FOLLOW_LTE_in_expression688); 
+					node=(StilNode)match(input,LTE,FOLLOW_LTE_in_expression692); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression692);
+					pushFollow(FOLLOW_expression_in_expression696);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression696);
+					pushFollow(FOLLOW_expression_in_expression700);
 					t2=expression();
 					state._fsp--;
 
@@ -805,15 +811,15 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 10 :
-					// src/vb/stil/StilChecker.g:84:9: ^(node= GT t1= expression t2= expression )
+					// src/vb/stil/StilChecker.g:85:9: ^(node= GT t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,GT,FOLLOW_GT_in_expression717); 
+					node=(StilNode)match(input,GT,FOLLOW_GT_in_expression721); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression721);
+					pushFollow(FOLLOW_expression_in_expression725);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression725);
+					pushFollow(FOLLOW_expression_in_expression729);
 					t2=expression();
 					state._fsp--;
 
@@ -823,15 +829,15 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 11 :
-					// src/vb/stil/StilChecker.g:85:9: ^(node= GTE t1= expression t2= expression )
+					// src/vb/stil/StilChecker.g:86:9: ^(node= GTE t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,GTE,FOLLOW_GTE_in_expression747); 
+					node=(StilNode)match(input,GTE,FOLLOW_GTE_in_expression751); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression751);
+					pushFollow(FOLLOW_expression_in_expression755);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression755);
+					pushFollow(FOLLOW_expression_in_expression759);
 					t2=expression();
 					state._fsp--;
 
@@ -841,15 +847,15 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 12 :
-					// src/vb/stil/StilChecker.g:86:9: ^(node= EQ t1= expression t2= expression )
+					// src/vb/stil/StilChecker.g:87:9: ^(node= EQ t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,EQ,FOLLOW_EQ_in_expression776); 
+					node=(StilNode)match(input,EQ,FOLLOW_EQ_in_expression780); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression780);
+					pushFollow(FOLLOW_expression_in_expression784);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression784);
+					pushFollow(FOLLOW_expression_in_expression788);
 					t2=expression();
 					state._fsp--;
 
@@ -859,15 +865,15 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 13 :
-					// src/vb/stil/StilChecker.g:87:9: ^(node= NEQ t1= expression t2= expression )
+					// src/vb/stil/StilChecker.g:88:9: ^(node= NEQ t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,NEQ,FOLLOW_NEQ_in_expression806); 
+					node=(StilNode)match(input,NEQ,FOLLOW_NEQ_in_expression810); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression810);
+					pushFollow(FOLLOW_expression_in_expression814);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression814);
+					pushFollow(FOLLOW_expression_in_expression818);
 					t2=expression();
 					state._fsp--;
 
@@ -877,15 +883,15 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 14 :
-					// src/vb/stil/StilChecker.g:88:9: ^(node= PLUS t1= expression t2= expression )
+					// src/vb/stil/StilChecker.g:89:9: ^(node= PLUS t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,PLUS,FOLLOW_PLUS_in_expression835); 
+					node=(StilNode)match(input,PLUS,FOLLOW_PLUS_in_expression839); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression839);
+					pushFollow(FOLLOW_expression_in_expression843);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression843);
+					pushFollow(FOLLOW_expression_in_expression847);
 					t2=expression();
 					state._fsp--;
 
@@ -895,15 +901,15 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 15 :
-					// src/vb/stil/StilChecker.g:89:9: ^(node= MINUS t1= expression t2= expression )
+					// src/vb/stil/StilChecker.g:90:9: ^(node= MINUS t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,MINUS,FOLLOW_MINUS_in_expression863); 
+					node=(StilNode)match(input,MINUS,FOLLOW_MINUS_in_expression867); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression867);
+					pushFollow(FOLLOW_expression_in_expression871);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression871);
+					pushFollow(FOLLOW_expression_in_expression875);
 					t2=expression();
 					state._fsp--;
 
@@ -913,15 +919,15 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 16 :
-					// src/vb/stil/StilChecker.g:90:9: ^(node= DIVIDE t1= expression t2= expression )
+					// src/vb/stil/StilChecker.g:91:9: ^(node= DIVIDE t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,DIVIDE,FOLLOW_DIVIDE_in_expression890); 
+					node=(StilNode)match(input,DIVIDE,FOLLOW_DIVIDE_in_expression894); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression894);
+					pushFollow(FOLLOW_expression_in_expression898);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression898);
+					pushFollow(FOLLOW_expression_in_expression902);
 					t2=expression();
 					state._fsp--;
 
@@ -931,15 +937,15 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 17 :
-					// src/vb/stil/StilChecker.g:91:9: ^(node= MULTIPLY t1= expression t2= expression )
+					// src/vb/stil/StilChecker.g:92:9: ^(node= MULTIPLY t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,MULTIPLY,FOLLOW_MULTIPLY_in_expression916); 
+					node=(StilNode)match(input,MULTIPLY,FOLLOW_MULTIPLY_in_expression920); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression920);
+					pushFollow(FOLLOW_expression_in_expression924);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression924);
+					pushFollow(FOLLOW_expression_in_expression928);
 					t2=expression();
 					state._fsp--;
 
@@ -949,15 +955,15 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 18 :
-					// src/vb/stil/StilChecker.g:92:9: ^(node= MODULO t1= expression t2= expression )
+					// src/vb/stil/StilChecker.g:93:9: ^(node= MODULO t1= expression t2= expression )
 					{
-					node=(StilNode)match(input,MODULO,FOLLOW_MODULO_in_expression940); 
+					node=(StilNode)match(input,MODULO,FOLLOW_MODULO_in_expression944); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression944);
+					pushFollow(FOLLOW_expression_in_expression948);
 					t1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression948);
+					pushFollow(FOLLOW_expression_in_expression952);
 					t2=expression();
 					state._fsp--;
 
@@ -967,11 +973,11 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 19 :
-					// src/vb/stil/StilChecker.g:93:9: ^(node= UNARY_PLUS t1= expression )
+					// src/vb/stil/StilChecker.g:94:9: ^(node= UNARY_PLUS t1= expression )
 					{
-					node=(StilNode)match(input,UNARY_PLUS,FOLLOW_UNARY_PLUS_in_expression966); 
+					node=(StilNode)match(input,UNARY_PLUS,FOLLOW_UNARY_PLUS_in_expression970); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression970);
+					pushFollow(FOLLOW_expression_in_expression974);
 					t1=expression();
 					state._fsp--;
 
@@ -981,11 +987,11 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 20 :
-					// src/vb/stil/StilChecker.g:94:9: ^(node= UNARY_MINUS t1= expression )
+					// src/vb/stil/StilChecker.g:95:9: ^(node= UNARY_MINUS t1= expression )
 					{
-					node=(StilNode)match(input,UNARY_MINUS,FOLLOW_UNARY_MINUS_in_expression998); 
+					node=(StilNode)match(input,UNARY_MINUS,FOLLOW_UNARY_MINUS_in_expression1002); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression1002);
+					pushFollow(FOLLOW_expression_in_expression1006);
 					t1=expression();
 					state._fsp--;
 
@@ -995,11 +1001,11 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 21 :
-					// src/vb/stil/StilChecker.g:95:9: ^(node= UNARY_NOT t1= expression )
+					// src/vb/stil/StilChecker.g:96:9: ^(node= UNARY_NOT t1= expression )
 					{
-					node=(StilNode)match(input,UNARY_NOT,FOLLOW_UNARY_NOT_in_expression1029); 
+					node=(StilNode)match(input,UNARY_NOT,FOLLOW_UNARY_NOT_in_expression1033); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression1033);
+					pushFollow(FOLLOW_expression_in_expression1037);
 					t1=expression();
 					state._fsp--;
 
@@ -1026,7 +1032,7 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "operand"
-	// src/vb/stil/StilChecker.g:99:1: operand returns [EntityType entityType = null;] : (id= IDENTIFIER | ( TRUE | FALSE ) | CHAR_LITERAL | INT_LITERAL );
+	// src/vb/stil/StilChecker.g:100:1: operand returns [EntityType entityType = null;] : (id= IDENTIFIER | ( TRUE | FALSE ) | CHAR_LITERAL | INT_LITERAL );
 	public final EntityType operand() throws RecognitionException {
 		EntityType entityType =  null;;
 
@@ -1034,7 +1040,7 @@ public class StilChecker extends TreeParser {
 		StilNode id=null;
 
 		try {
-			// src/vb/stil/StilChecker.g:100:5: (id= IDENTIFIER | ( TRUE | FALSE ) | CHAR_LITERAL | INT_LITERAL )
+			// src/vb/stil/StilChecker.g:101:5: (id= IDENTIFIER | ( TRUE | FALSE ) | CHAR_LITERAL | INT_LITERAL )
 			int alt8=4;
 			switch ( input.LA(1) ) {
 			case IDENTIFIER:
@@ -1065,14 +1071,14 @@ public class StilChecker extends TreeParser {
 			}
 			switch (alt8) {
 				case 1 :
-					// src/vb/stil/StilChecker.g:100:9: id= IDENTIFIER
+					// src/vb/stil/StilChecker.g:101:9: id= IDENTIFIER
 					{
-					id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand1080); 
+					id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand1084); 
 					 entityType = declarationChecker.retrieveDeclaration(id, id, symtab); 
 					}
 					break;
 				case 2 :
-					// src/vb/stil/StilChecker.g:101:9: ( TRUE | FALSE )
+					// src/vb/stil/StilChecker.g:102:9: ( TRUE | FALSE )
 					{
 					if ( input.LA(1)==FALSE||input.LA(1)==TRUE ) {
 						input.consume();
@@ -1086,16 +1092,16 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 3 :
-					// src/vb/stil/StilChecker.g:102:9: CHAR_LITERAL
+					// src/vb/stil/StilChecker.g:103:9: CHAR_LITERAL
 					{
-					match(input,CHAR_LITERAL,FOLLOW_CHAR_LITERAL_in_operand1113); 
+					match(input,CHAR_LITERAL,FOLLOW_CHAR_LITERAL_in_operand1117); 
 					 entityType = EntityType.CHAR; 
 					}
 					break;
 				case 4 :
-					// src/vb/stil/StilChecker.g:103:9: INT_LITERAL
+					// src/vb/stil/StilChecker.g:104:9: INT_LITERAL
 					{
-					match(input,INT_LITERAL,FOLLOW_INT_LITERAL_in_operand1128); 
+					match(input,INT_LITERAL,FOLLOW_INT_LITERAL_in_operand1132); 
 					 entityType = EntityType.INT; 
 					}
 					break;
@@ -1117,13 +1123,13 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "type"
-	// src/vb/stil/StilChecker.g:106:1: type returns [EntityType entityType = null;] : ( BOOL | CHAR | INT );
+	// src/vb/stil/StilChecker.g:107:1: type returns [EntityType entityType = null;] : ( BOOL | CHAR | INT );
 	public final EntityType type() throws RecognitionException {
 		EntityType entityType =  null;;
 
 
 		try {
-			// src/vb/stil/StilChecker.g:107:5: ( BOOL | CHAR | INT )
+			// src/vb/stil/StilChecker.g:108:5: ( BOOL | CHAR | INT )
 			int alt9=3;
 			switch ( input.LA(1) ) {
 			case BOOL:
@@ -1148,23 +1154,23 @@ public class StilChecker extends TreeParser {
 			}
 			switch (alt9) {
 				case 1 :
-					// src/vb/stil/StilChecker.g:107:9: BOOL
+					// src/vb/stil/StilChecker.g:108:9: BOOL
 					{
-					match(input,BOOL,FOLLOW_BOOL_in_type1161); 
+					match(input,BOOL,FOLLOW_BOOL_in_type1165); 
 					 entityType = EntityType.BOOL; 
 					}
 					break;
 				case 2 :
-					// src/vb/stil/StilChecker.g:108:9: CHAR
+					// src/vb/stil/StilChecker.g:109:9: CHAR
 					{
-					match(input,CHAR,FOLLOW_CHAR_in_type1176); 
+					match(input,CHAR,FOLLOW_CHAR_in_type1180); 
 					 entityType = EntityType.CHAR; 
 					}
 					break;
 				case 3 :
-					// src/vb/stil/StilChecker.g:109:9: INT
+					// src/vb/stil/StilChecker.g:110:9: INT
 					{
-					match(input,INT,FOLLOW_INT_in_type1191); 
+					match(input,INT,FOLLOW_INT_in_type1195); 
 					 entityType = EntityType.INT; 
 					}
 					break;
@@ -1194,77 +1200,78 @@ public class StilChecker extends TreeParser {
 	public static final BitSet FOLLOW_var_declaration_in_declaration135 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_CONST_in_constant_declaration156 = new BitSet(new long[]{0x0000000000000004L});
 	public static final BitSet FOLLOW_type_in_constant_declaration160 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_constant_declaration164 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_VAR_in_var_declaration187 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_type_in_var_declaration191 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_var_declaration195 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_PRINT_in_print_statement227 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_print_statement244 = new BitSet(new long[]{0x0000793BF0BF2258L});
-	public static final BitSet FOLLOW_expression_in_print_statement263 = new BitSet(new long[]{0x0000793BF0BF2258L});
-	public static final BitSet FOLLOW_READ_in_read_statement298 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_read_statement315 = new BitSet(new long[]{0x0000000000200008L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_read_statement334 = new BitSet(new long[]{0x0000000000200008L});
-	public static final BitSet FOLLOW_declaration_in_compound_expression364 = new BitSet(new long[]{0x0001793BF0BF6250L});
-	public static final BitSet FOLLOW_expression_in_compound_expression370 = new BitSet(new long[]{0x0001793BF0BF6252L});
-	public static final BitSet FOLLOW_COMPOUND_EXPR_in_closed_compound_expression400 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_compound_expression_in_closed_compound_expression429 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_print_statement_in_expression460 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_read_statement_in_expression488 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_operand_in_expression517 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_closed_compound_expression_in_expression553 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_BECOMES_in_expression571 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_expression575 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression579 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_OR_in_expression599 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression603 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression607 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_AND_in_expression629 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression633 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression637 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_LT_in_expression658 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression662 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression666 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_LTE_in_expression688 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression692 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression696 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_GT_in_expression717 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression721 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression725 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_GTE_in_expression747 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression751 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression755 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_EQ_in_expression776 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression780 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression784 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_NEQ_in_expression806 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression810 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression814 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_PLUS_in_expression835 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression839 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression843 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MINUS_in_expression863 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression867 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression871 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_DIVIDE_in_expression890 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression894 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression898 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MULTIPLY_in_expression916 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression920 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression924 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MODULO_in_expression940 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression944 = new BitSet(new long[]{0x0000793BF0BF2250L});
-	public static final BitSet FOLLOW_expression_in_expression948 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_UNARY_PLUS_in_expression966 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression970 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_UNARY_MINUS_in_expression998 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression1002 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_UNARY_NOT_in_expression1029 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression1033 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_operand1080 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_set_in_operand1094 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CHAR_LITERAL_in_operand1113 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_INT_LITERAL_in_operand1128 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_BOOL_in_type1161 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CHAR_in_type1176 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_INT_in_type1191 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_constant_declaration164 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_constant_declaration168 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_VAR_in_var_declaration191 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_type_in_var_declaration195 = new BitSet(new long[]{0x0000000000200000L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_var_declaration199 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_PRINT_in_print_statement231 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_print_statement248 = new BitSet(new long[]{0x0000793BF0BF2258L});
+	public static final BitSet FOLLOW_expression_in_print_statement267 = new BitSet(new long[]{0x0000793BF0BF2258L});
+	public static final BitSet FOLLOW_READ_in_read_statement302 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_read_statement319 = new BitSet(new long[]{0x0000000000200008L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_read_statement338 = new BitSet(new long[]{0x0000000000200008L});
+	public static final BitSet FOLLOW_declaration_in_compound_expression368 = new BitSet(new long[]{0x0001793BF0BF6250L});
+	public static final BitSet FOLLOW_expression_in_compound_expression374 = new BitSet(new long[]{0x0001793BF0BF6252L});
+	public static final BitSet FOLLOW_COMPOUND_EXPR_in_closed_compound_expression404 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_compound_expression_in_closed_compound_expression433 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_print_statement_in_expression464 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_read_statement_in_expression492 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_operand_in_expression521 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_closed_compound_expression_in_expression557 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_BECOMES_in_expression575 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_expression579 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression583 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_OR_in_expression603 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression607 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression611 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_AND_in_expression633 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression637 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression641 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_LT_in_expression662 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression666 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression670 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_LTE_in_expression692 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression696 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression700 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_GT_in_expression721 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression725 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression729 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_GTE_in_expression751 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression755 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression759 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_EQ_in_expression780 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression784 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression788 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_NEQ_in_expression810 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression814 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression818 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_PLUS_in_expression839 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression843 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression847 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MINUS_in_expression867 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression871 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression875 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_DIVIDE_in_expression894 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression898 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression902 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MULTIPLY_in_expression920 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression924 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression928 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MODULO_in_expression944 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression948 = new BitSet(new long[]{0x0000793BF0BF2250L});
+	public static final BitSet FOLLOW_expression_in_expression952 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_UNARY_PLUS_in_expression970 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression974 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_UNARY_MINUS_in_expression1002 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression1006 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_UNARY_NOT_in_expression1033 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression1037 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_operand1084 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_operand1098 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CHAR_LITERAL_in_operand1117 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INT_LITERAL_in_operand1132 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_BOOL_in_type1165 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CHAR_in_type1180 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INT_in_type1195 = new BitSet(new long[]{0x0000000000000002L});
 }
