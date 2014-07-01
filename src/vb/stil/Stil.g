@@ -156,7 +156,7 @@ bool_literal
 // Lexer rules
 
 CHAR_LITERAL
-    :   APOS LETTER APOS
+    :   APOS l=LETTER APOS { setText(l.getText()); }
     ;
 
 INT_LITERAL
