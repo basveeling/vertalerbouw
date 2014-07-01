@@ -1,11 +1,11 @@
 group stil;
 
 jasminFile(maxStackDepth, maxLocals, instructions) ::= <<
-; public class Calc extends Object { ...}
-.class public Calc
+; public class Program extends Object { ...}
+.class public Program
 .super java/lang/Object
 
-; public Calc() { super(); }
+; public Program() { super(); }
 .method public \<init\>()V
    aload_0
    invokenonvirtual java/lang/Object/\<init\>()V
@@ -16,11 +16,9 @@ jasminFile(maxStackDepth, maxLocals, instructions) ::= <<
 .method public static main([Ljava/lang/String;)V
    .limit stack <maxStackDepth> ; how much stack space do we need?
    .limit locals <maxLocals> ; how many locals do we need?
-   getstatic java/lang/System/out Ljava/io/PrintStream;
    ; code translated from input stream
    <instructions; separator="\n">
    ; print result on top of stack
-   invokevirtual java/io/PrintStream/println(I)V
    return
 .end method
 >>
@@ -36,14 +34,11 @@ int(v) ::= "ldc <v>"
 var(id, varNum) ::= "iload <varNum> ; <id>"
 
 printexp(expr) ::= <<
-
-<expr> lol
 ; push System.out onto the stack
-getstaic java/lang/System/out Ljava/io/PrintStream; 
+getstatic java/lang/System/out Ljava/io/PrintStream; 
 
-
-; call the PrintStream.println() method.
-invokevirtual java/io/PrintStream/println(I;)V
 <expr>
 
+; call the PrintStream.println() method.
+invokevirtual java/io/PrintStream/println(I)V
 >>

@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 src/vb/stil/Stil.g 2014-07-01 14:07:22
+// $ANTLR 3.5.2 Stil.g 2014-07-01 14:47:11
 
     package vb.stil;
     import  vb.stil.tree.*;
@@ -97,7 +97,7 @@ public class StilParser extends Parser {
 		return adaptor;
 	}
 	@Override public String[] getTokenNames() { return StilParser.tokenNames; }
-	@Override public String getGrammarFileName() { return "src/vb/stil/Stil.g"; }
+	@Override public String getGrammarFileName() { return "Stil.g"; }
 
 
 	public static class program_return extends ParserRuleReturnScope {
@@ -108,7 +108,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "program"
-	// src/vb/stil/Stil.g:64:1: program : declarations_and_expressions EOF -> ^( PROGRAM declarations_and_expressions ) ;
+	// Stil.g:64:1: program : declarations_and_expressions EOF -> ^( PROGRAM declarations_and_expressions ) ;
 	public final StilParser.program_return program() throws RecognitionException {
 		StilParser.program_return retval = new StilParser.program_return();
 		retval.start = input.LT(1);
@@ -123,8 +123,8 @@ public class StilParser extends Parser {
 		RewriteRuleSubtreeStream stream_declarations_and_expressions=new RewriteRuleSubtreeStream(adaptor,"rule declarations_and_expressions");
 
 		try {
-			// src/vb/stil/Stil.g:65:5: ( declarations_and_expressions EOF -> ^( PROGRAM declarations_and_expressions ) )
-			// src/vb/stil/Stil.g:65:9: declarations_and_expressions EOF
+			// Stil.g:65:5: ( declarations_and_expressions EOF -> ^( PROGRAM declarations_and_expressions ) )
+			// Stil.g:65:9: declarations_and_expressions EOF
 			{
 			pushFollow(FOLLOW_declarations_and_expressions_in_program1000);
 			declarations_and_expressions1=declarations_and_expressions();
@@ -148,7 +148,7 @@ public class StilParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 			// 66:13: -> ^( PROGRAM declarations_and_expressions )
 			{
-				// src/vb/stil/Stil.g:66:17: ^( PROGRAM declarations_and_expressions )
+				// Stil.g:66:17: ^( PROGRAM declarations_and_expressions )
 				{
 				Object root_1 = (Object)adaptor.nil();
 				root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(PROGRAM, "PROGRAM"), root_1);
@@ -192,7 +192,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "declarations_and_expressions"
-	// src/vb/stil/Stil.g:69:1: declarations_and_expressions : ( ( declaration | expression ) SEMICOLON !)* ;
+	// Stil.g:69:1: declarations_and_expressions : ( ( declaration | expression ) SEMICOLON !)* ;
 	public final StilParser.declarations_and_expressions_return declarations_and_expressions() throws RecognitionException {
 		StilParser.declarations_and_expressions_return retval = new StilParser.declarations_and_expressions_return();
 		retval.start = input.LT(1);
@@ -206,13 +206,13 @@ public class StilParser extends Parser {
 		Object SEMICOLON5_tree=null;
 
 		try {
-			// src/vb/stil/Stil.g:70:5: ( ( ( declaration | expression ) SEMICOLON !)* )
-			// src/vb/stil/Stil.g:70:7: ( ( declaration | expression ) SEMICOLON !)*
+			// Stil.g:70:5: ( ( ( declaration | expression ) SEMICOLON !)* )
+			// Stil.g:70:7: ( ( declaration | expression ) SEMICOLON !)*
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			// src/vb/stil/Stil.g:70:7: ( ( declaration | expression ) SEMICOLON !)*
+			// Stil.g:70:7: ( ( declaration | expression ) SEMICOLON !)*
 			loop2:
 			while (true) {
 				int alt2=2;
@@ -223,9 +223,9 @@ public class StilParser extends Parser {
 
 				switch (alt2) {
 				case 1 :
-					// src/vb/stil/Stil.g:70:8: ( declaration | expression ) SEMICOLON !
+					// Stil.g:70:8: ( declaration | expression ) SEMICOLON !
 					{
-					// src/vb/stil/Stil.g:70:8: ( declaration | expression )
+					// Stil.g:70:8: ( declaration | expression )
 					int alt1=2;
 					int LA1_0 = input.LA(1);
 					if ( (LA1_0==CONST||LA1_0==VAR) ) {
@@ -244,7 +244,7 @@ public class StilParser extends Parser {
 
 					switch (alt1) {
 						case 1 :
-							// src/vb/stil/Stil.g:70:9: declaration
+							// Stil.g:70:9: declaration
 							{
 							pushFollow(FOLLOW_declaration_in_declarations_and_expressions1042);
 							declaration3=declaration();
@@ -255,7 +255,7 @@ public class StilParser extends Parser {
 							}
 							break;
 						case 2 :
-							// src/vb/stil/Stil.g:70:23: expression
+							// Stil.g:70:23: expression
 							{
 							pushFollow(FOLLOW_expression_in_declarations_and_expressions1046);
 							expression4=expression();
@@ -307,7 +307,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "declaration"
-	// src/vb/stil/Stil.g:73:1: declaration : ( constant_declaration | var_declaration );
+	// Stil.g:73:1: declaration : ( constant_declaration | var_declaration );
 	public final StilParser.declaration_return declaration() throws RecognitionException {
 		StilParser.declaration_return retval = new StilParser.declaration_return();
 		retval.start = input.LT(1);
@@ -319,7 +319,7 @@ public class StilParser extends Parser {
 
 
 		try {
-			// src/vb/stil/Stil.g:74:5: ( constant_declaration | var_declaration )
+			// Stil.g:74:5: ( constant_declaration | var_declaration )
 			int alt3=2;
 			int LA3_0 = input.LA(1);
 			if ( (LA3_0==CONST) ) {
@@ -338,7 +338,7 @@ public class StilParser extends Parser {
 
 			switch (alt3) {
 				case 1 :
-					// src/vb/stil/Stil.g:74:9: constant_declaration
+					// Stil.g:74:9: constant_declaration
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -352,7 +352,7 @@ public class StilParser extends Parser {
 					}
 					break;
 				case 2 :
-					// src/vb/stil/Stil.g:75:9: var_declaration
+					// Stil.g:75:9: var_declaration
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -395,7 +395,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "constant_declaration"
-	// src/vb/stil/Stil.g:78:1: constant_declaration : CONST ^ type IDENTIFIER ;
+	// Stil.g:78:1: constant_declaration : CONST ^ type IDENTIFIER ;
 	public final StilParser.constant_declaration_return constant_declaration() throws RecognitionException {
 		StilParser.constant_declaration_return retval = new StilParser.constant_declaration_return();
 		retval.start = input.LT(1);
@@ -410,8 +410,8 @@ public class StilParser extends Parser {
 		Object IDENTIFIER10_tree=null;
 
 		try {
-			// src/vb/stil/Stil.g:79:5: ( CONST ^ type IDENTIFIER )
-			// src/vb/stil/Stil.g:79:9: CONST ^ type IDENTIFIER
+			// Stil.g:79:5: ( CONST ^ type IDENTIFIER )
+			// Stil.g:79:9: CONST ^ type IDENTIFIER
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -464,7 +464,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "var_declaration"
-	// src/vb/stil/Stil.g:82:1: var_declaration : VAR ^ type IDENTIFIER ;
+	// Stil.g:82:1: var_declaration : VAR ^ type IDENTIFIER ;
 	public final StilParser.var_declaration_return var_declaration() throws RecognitionException {
 		StilParser.var_declaration_return retval = new StilParser.var_declaration_return();
 		retval.start = input.LT(1);
@@ -479,8 +479,8 @@ public class StilParser extends Parser {
 		Object IDENTIFIER13_tree=null;
 
 		try {
-			// src/vb/stil/Stil.g:83:5: ( VAR ^ type IDENTIFIER )
-			// src/vb/stil/Stil.g:83:9: VAR ^ type IDENTIFIER
+			// Stil.g:83:5: ( VAR ^ type IDENTIFIER )
+			// Stil.g:83:9: VAR ^ type IDENTIFIER
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -533,7 +533,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "expression"
-	// src/vb/stil/Stil.g:86:1: expression : ( ( IDENTIFIER BECOMES )=> assignment_statement | ( closed_compound_expression | arithmetic_expression | print_statement | read_statement ) );
+	// Stil.g:86:1: expression : ( ( IDENTIFIER BECOMES )=> assignment_statement | ( closed_compound_expression | arithmetic_expression | print_statement | read_statement ) );
 	public final StilParser.expression_return expression() throws RecognitionException {
 		StilParser.expression_return retval = new StilParser.expression_return();
 		retval.start = input.LT(1);
@@ -548,7 +548,7 @@ public class StilParser extends Parser {
 
 
 		try {
-			// src/vb/stil/Stil.g:87:5: ( ( IDENTIFIER BECOMES )=> assignment_statement | ( closed_compound_expression | arithmetic_expression | print_statement | read_statement ) )
+			// Stil.g:87:5: ( ( IDENTIFIER BECOMES )=> assignment_statement | ( closed_compound_expression | arithmetic_expression | print_statement | read_statement ) )
 			int alt5=2;
 			int LA5_0 = input.LA(1);
 			if ( (LA5_0==IDENTIFIER) ) {
@@ -574,7 +574,7 @@ public class StilParser extends Parser {
 
 			switch (alt5) {
 				case 1 :
-					// src/vb/stil/Stil.g:87:9: ( IDENTIFIER BECOMES )=> assignment_statement
+					// Stil.g:87:9: ( IDENTIFIER BECOMES )=> assignment_statement
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -588,12 +588,12 @@ public class StilParser extends Parser {
 					}
 					break;
 				case 2 :
-					// src/vb/stil/Stil.g:88:9: ( closed_compound_expression | arithmetic_expression | print_statement | read_statement )
+					// Stil.g:88:9: ( closed_compound_expression | arithmetic_expression | print_statement | read_statement )
 					{
 					root_0 = (Object)adaptor.nil();
 
 
-					// src/vb/stil/Stil.g:88:9: ( closed_compound_expression | arithmetic_expression | print_statement | read_statement )
+					// Stil.g:88:9: ( closed_compound_expression | arithmetic_expression | print_statement | read_statement )
 					int alt4=4;
 					switch ( input.LA(1) ) {
 					case LCURLY:
@@ -632,7 +632,7 @@ public class StilParser extends Parser {
 					}
 					switch (alt4) {
 						case 1 :
-							// src/vb/stil/Stil.g:88:10: closed_compound_expression
+							// Stil.g:88:10: closed_compound_expression
 							{
 							pushFollow(FOLLOW_closed_compound_expression_in_expression1183);
 							closed_compound_expression15=closed_compound_expression();
@@ -643,7 +643,7 @@ public class StilParser extends Parser {
 							}
 							break;
 						case 2 :
-							// src/vb/stil/Stil.g:88:39: arithmetic_expression
+							// Stil.g:88:39: arithmetic_expression
 							{
 							pushFollow(FOLLOW_arithmetic_expression_in_expression1187);
 							arithmetic_expression16=arithmetic_expression();
@@ -654,7 +654,7 @@ public class StilParser extends Parser {
 							}
 							break;
 						case 3 :
-							// src/vb/stil/Stil.g:88:63: print_statement
+							// Stil.g:88:63: print_statement
 							{
 							pushFollow(FOLLOW_print_statement_in_expression1191);
 							print_statement17=print_statement();
@@ -665,7 +665,7 @@ public class StilParser extends Parser {
 							}
 							break;
 						case 4 :
-							// src/vb/stil/Stil.g:88:81: read_statement
+							// Stil.g:88:81: read_statement
 							{
 							pushFollow(FOLLOW_read_statement_in_expression1195);
 							read_statement18=read_statement();
@@ -710,7 +710,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "compound_expression"
-	// src/vb/stil/Stil.g:91:1: compound_expression : ( ( declaration SEMICOLON !)* expression SEMICOLON !)+ ;
+	// Stil.g:91:1: compound_expression : ( ( declaration SEMICOLON !)* expression SEMICOLON !)+ ;
 	public final StilParser.compound_expression_return compound_expression() throws RecognitionException {
 		StilParser.compound_expression_return retval = new StilParser.compound_expression_return();
 		retval.start = input.LT(1);
@@ -726,13 +726,13 @@ public class StilParser extends Parser {
 		Object SEMICOLON22_tree=null;
 
 		try {
-			// src/vb/stil/Stil.g:92:5: ( ( ( declaration SEMICOLON !)* expression SEMICOLON !)+ )
-			// src/vb/stil/Stil.g:92:9: ( ( declaration SEMICOLON !)* expression SEMICOLON !)+
+			// Stil.g:92:5: ( ( ( declaration SEMICOLON !)* expression SEMICOLON !)+ )
+			// Stil.g:92:9: ( ( declaration SEMICOLON !)* expression SEMICOLON !)+
 			{
 			root_0 = (Object)adaptor.nil();
 
 
-			// src/vb/stil/Stil.g:92:9: ( ( declaration SEMICOLON !)* expression SEMICOLON !)+
+			// Stil.g:92:9: ( ( declaration SEMICOLON !)* expression SEMICOLON !)+
 			int cnt7=0;
 			loop7:
 			while (true) {
@@ -744,9 +744,9 @@ public class StilParser extends Parser {
 
 				switch (alt7) {
 				case 1 :
-					// src/vb/stil/Stil.g:92:10: ( declaration SEMICOLON !)* expression SEMICOLON !
+					// Stil.g:92:10: ( declaration SEMICOLON !)* expression SEMICOLON !
 					{
-					// src/vb/stil/Stil.g:92:10: ( declaration SEMICOLON !)*
+					// Stil.g:92:10: ( declaration SEMICOLON !)*
 					loop6:
 					while (true) {
 						int alt6=2;
@@ -757,7 +757,7 @@ public class StilParser extends Parser {
 
 						switch (alt6) {
 						case 1 :
-							// src/vb/stil/Stil.g:92:11: declaration SEMICOLON !
+							// Stil.g:92:11: declaration SEMICOLON !
 							{
 							pushFollow(FOLLOW_declaration_in_compound_expression1217);
 							declaration19=declaration();
@@ -823,7 +823,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "closed_compound_expression"
-	// src/vb/stil/Stil.g:95:1: closed_compound_expression : LCURLY compound_expression RCURLY -> ^( COMPOUND_EXPR compound_expression ) ;
+	// Stil.g:95:1: closed_compound_expression : LCURLY compound_expression RCURLY -> ^( COMPOUND_EXPR compound_expression ) ;
 	public final StilParser.closed_compound_expression_return closed_compound_expression() throws RecognitionException {
 		StilParser.closed_compound_expression_return retval = new StilParser.closed_compound_expression_return();
 		retval.start = input.LT(1);
@@ -841,8 +841,8 @@ public class StilParser extends Parser {
 		RewriteRuleSubtreeStream stream_compound_expression=new RewriteRuleSubtreeStream(adaptor,"rule compound_expression");
 
 		try {
-			// src/vb/stil/Stil.g:96:5: ( LCURLY compound_expression RCURLY -> ^( COMPOUND_EXPR compound_expression ) )
-			// src/vb/stil/Stil.g:96:9: LCURLY compound_expression RCURLY
+			// Stil.g:96:5: ( LCURLY compound_expression RCURLY -> ^( COMPOUND_EXPR compound_expression ) )
+			// Stil.g:96:9: LCURLY compound_expression RCURLY
 			{
 			LCURLY23=(Token)match(input,LCURLY,FOLLOW_LCURLY_in_closed_compound_expression1248); if (state.failed) return retval; 
 			if ( state.backtracking==0 ) stream_LCURLY.add(LCURLY23);
@@ -869,7 +869,7 @@ public class StilParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 			// 96:43: -> ^( COMPOUND_EXPR compound_expression )
 			{
-				// src/vb/stil/Stil.g:96:46: ^( COMPOUND_EXPR compound_expression )
+				// Stil.g:96:46: ^( COMPOUND_EXPR compound_expression )
 				{
 				Object root_1 = (Object)adaptor.nil();
 				root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(COMPOUND_EXPR, "COMPOUND_EXPR"), root_1);
@@ -913,7 +913,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "arithmetic_expression"
-	// src/vb/stil/Stil.g:100:1: arithmetic_expression : arithmetic_expression_pr5 ( OR ^ arithmetic_expression_pr5 )* ;
+	// Stil.g:100:1: arithmetic_expression : arithmetic_expression_pr5 ( OR ^ arithmetic_expression_pr5 )* ;
 	public final StilParser.arithmetic_expression_return arithmetic_expression() throws RecognitionException {
 		StilParser.arithmetic_expression_return retval = new StilParser.arithmetic_expression_return();
 		retval.start = input.LT(1);
@@ -927,8 +927,8 @@ public class StilParser extends Parser {
 		Object OR27_tree=null;
 
 		try {
-			// src/vb/stil/Stil.g:101:5: ( arithmetic_expression_pr5 ( OR ^ arithmetic_expression_pr5 )* )
-			// src/vb/stil/Stil.g:101:9: arithmetic_expression_pr5 ( OR ^ arithmetic_expression_pr5 )*
+			// Stil.g:101:5: ( arithmetic_expression_pr5 ( OR ^ arithmetic_expression_pr5 )* )
+			// Stil.g:101:9: arithmetic_expression_pr5 ( OR ^ arithmetic_expression_pr5 )*
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -939,7 +939,7 @@ public class StilParser extends Parser {
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr526.getTree());
 
-			// src/vb/stil/Stil.g:101:35: ( OR ^ arithmetic_expression_pr5 )*
+			// Stil.g:101:35: ( OR ^ arithmetic_expression_pr5 )*
 			loop8:
 			while (true) {
 				int alt8=2;
@@ -950,7 +950,7 @@ public class StilParser extends Parser {
 
 				switch (alt8) {
 				case 1 :
-					// src/vb/stil/Stil.g:101:36: OR ^ arithmetic_expression_pr5
+					// Stil.g:101:36: OR ^ arithmetic_expression_pr5
 					{
 					OR27=(Token)match(input,OR,FOLLOW_OR_in_arithmetic_expression1283); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
@@ -1002,7 +1002,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "arithmetic_expression_pr5"
-	// src/vb/stil/Stil.g:104:1: arithmetic_expression_pr5 : arithmetic_expression_pr4 ( AND ^ arithmetic_expression_pr4 )* ;
+	// Stil.g:104:1: arithmetic_expression_pr5 : arithmetic_expression_pr4 ( AND ^ arithmetic_expression_pr4 )* ;
 	public final StilParser.arithmetic_expression_pr5_return arithmetic_expression_pr5() throws RecognitionException {
 		StilParser.arithmetic_expression_pr5_return retval = new StilParser.arithmetic_expression_pr5_return();
 		retval.start = input.LT(1);
@@ -1016,8 +1016,8 @@ public class StilParser extends Parser {
 		Object AND30_tree=null;
 
 		try {
-			// src/vb/stil/Stil.g:105:5: ( arithmetic_expression_pr4 ( AND ^ arithmetic_expression_pr4 )* )
-			// src/vb/stil/Stil.g:105:9: arithmetic_expression_pr4 ( AND ^ arithmetic_expression_pr4 )*
+			// Stil.g:105:5: ( arithmetic_expression_pr4 ( AND ^ arithmetic_expression_pr4 )* )
+			// Stil.g:105:9: arithmetic_expression_pr4 ( AND ^ arithmetic_expression_pr4 )*
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -1028,7 +1028,7 @@ public class StilParser extends Parser {
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr429.getTree());
 
-			// src/vb/stil/Stil.g:105:35: ( AND ^ arithmetic_expression_pr4 )*
+			// Stil.g:105:35: ( AND ^ arithmetic_expression_pr4 )*
 			loop9:
 			while (true) {
 				int alt9=2;
@@ -1039,7 +1039,7 @@ public class StilParser extends Parser {
 
 				switch (alt9) {
 				case 1 :
-					// src/vb/stil/Stil.g:105:36: AND ^ arithmetic_expression_pr4
+					// Stil.g:105:36: AND ^ arithmetic_expression_pr4
 					{
 					AND30=(Token)match(input,AND,FOLLOW_AND_in_arithmetic_expression_pr51310); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
@@ -1091,7 +1091,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "arithmetic_expression_pr4"
-	// src/vb/stil/Stil.g:108:1: arithmetic_expression_pr4 : arithmetic_expression_pr3 ( ( LT ^| LTE ^| GT ^| GTE ^| EQ ^| NEQ ^) arithmetic_expression_pr3 )* ;
+	// Stil.g:108:1: arithmetic_expression_pr4 : arithmetic_expression_pr3 ( ( LT ^| LTE ^| GT ^| GTE ^| EQ ^| NEQ ^) arithmetic_expression_pr3 )* ;
 	public final StilParser.arithmetic_expression_pr4_return arithmetic_expression_pr4() throws RecognitionException {
 		StilParser.arithmetic_expression_pr4_return retval = new StilParser.arithmetic_expression_pr4_return();
 		retval.start = input.LT(1);
@@ -1115,8 +1115,8 @@ public class StilParser extends Parser {
 		Object NEQ38_tree=null;
 
 		try {
-			// src/vb/stil/Stil.g:109:5: ( arithmetic_expression_pr3 ( ( LT ^| LTE ^| GT ^| GTE ^| EQ ^| NEQ ^) arithmetic_expression_pr3 )* )
-			// src/vb/stil/Stil.g:109:9: arithmetic_expression_pr3 ( ( LT ^| LTE ^| GT ^| GTE ^| EQ ^| NEQ ^) arithmetic_expression_pr3 )*
+			// Stil.g:109:5: ( arithmetic_expression_pr3 ( ( LT ^| LTE ^| GT ^| GTE ^| EQ ^| NEQ ^) arithmetic_expression_pr3 )* )
+			// Stil.g:109:9: arithmetic_expression_pr3 ( ( LT ^| LTE ^| GT ^| GTE ^| EQ ^| NEQ ^) arithmetic_expression_pr3 )*
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -1127,7 +1127,7 @@ public class StilParser extends Parser {
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr332.getTree());
 
-			// src/vb/stil/Stil.g:109:35: ( ( LT ^| LTE ^| GT ^| GTE ^| EQ ^| NEQ ^) arithmetic_expression_pr3 )*
+			// Stil.g:109:35: ( ( LT ^| LTE ^| GT ^| GTE ^| EQ ^| NEQ ^) arithmetic_expression_pr3 )*
 			loop11:
 			while (true) {
 				int alt11=2;
@@ -1138,9 +1138,9 @@ public class StilParser extends Parser {
 
 				switch (alt11) {
 				case 1 :
-					// src/vb/stil/Stil.g:109:36: ( LT ^| LTE ^| GT ^| GTE ^| EQ ^| NEQ ^) arithmetic_expression_pr3
+					// Stil.g:109:36: ( LT ^| LTE ^| GT ^| GTE ^| EQ ^| NEQ ^) arithmetic_expression_pr3
 					{
-					// src/vb/stil/Stil.g:109:36: ( LT ^| LTE ^| GT ^| GTE ^| EQ ^| NEQ ^)
+					// Stil.g:109:36: ( LT ^| LTE ^| GT ^| GTE ^| EQ ^| NEQ ^)
 					int alt10=6;
 					switch ( input.LA(1) ) {
 					case LT:
@@ -1181,7 +1181,7 @@ public class StilParser extends Parser {
 					}
 					switch (alt10) {
 						case 1 :
-							// src/vb/stil/Stil.g:109:37: LT ^
+							// Stil.g:109:37: LT ^
 							{
 							LT33=(Token)match(input,LT,FOLLOW_LT_in_arithmetic_expression_pr41338); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
@@ -1192,7 +1192,7 @@ public class StilParser extends Parser {
 							}
 							break;
 						case 2 :
-							// src/vb/stil/Stil.g:109:43: LTE ^
+							// Stil.g:109:43: LTE ^
 							{
 							LTE34=(Token)match(input,LTE,FOLLOW_LTE_in_arithmetic_expression_pr41343); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
@@ -1203,7 +1203,7 @@ public class StilParser extends Parser {
 							}
 							break;
 						case 3 :
-							// src/vb/stil/Stil.g:109:50: GT ^
+							// Stil.g:109:50: GT ^
 							{
 							GT35=(Token)match(input,GT,FOLLOW_GT_in_arithmetic_expression_pr41348); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
@@ -1214,7 +1214,7 @@ public class StilParser extends Parser {
 							}
 							break;
 						case 4 :
-							// src/vb/stil/Stil.g:109:56: GTE ^
+							// Stil.g:109:56: GTE ^
 							{
 							GTE36=(Token)match(input,GTE,FOLLOW_GTE_in_arithmetic_expression_pr41353); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
@@ -1225,7 +1225,7 @@ public class StilParser extends Parser {
 							}
 							break;
 						case 5 :
-							// src/vb/stil/Stil.g:109:63: EQ ^
+							// Stil.g:109:63: EQ ^
 							{
 							EQ37=(Token)match(input,EQ,FOLLOW_EQ_in_arithmetic_expression_pr41358); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
@@ -1236,7 +1236,7 @@ public class StilParser extends Parser {
 							}
 							break;
 						case 6 :
-							// src/vb/stil/Stil.g:109:69: NEQ ^
+							// Stil.g:109:69: NEQ ^
 							{
 							NEQ38=(Token)match(input,NEQ,FOLLOW_NEQ_in_arithmetic_expression_pr41363); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
@@ -1293,7 +1293,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "arithmetic_expression_pr3"
-	// src/vb/stil/Stil.g:112:1: arithmetic_expression_pr3 : arithmetic_expression_pr2 ( ( PLUS ^| MINUS ^) arithmetic_expression_pr2 )* ;
+	// Stil.g:112:1: arithmetic_expression_pr3 : arithmetic_expression_pr2 ( ( PLUS ^| MINUS ^) arithmetic_expression_pr2 )* ;
 	public final StilParser.arithmetic_expression_pr3_return arithmetic_expression_pr3() throws RecognitionException {
 		StilParser.arithmetic_expression_pr3_return retval = new StilParser.arithmetic_expression_pr3_return();
 		retval.start = input.LT(1);
@@ -1309,8 +1309,8 @@ public class StilParser extends Parser {
 		Object MINUS42_tree=null;
 
 		try {
-			// src/vb/stil/Stil.g:113:5: ( arithmetic_expression_pr2 ( ( PLUS ^| MINUS ^) arithmetic_expression_pr2 )* )
-			// src/vb/stil/Stil.g:113:9: arithmetic_expression_pr2 ( ( PLUS ^| MINUS ^) arithmetic_expression_pr2 )*
+			// Stil.g:113:5: ( arithmetic_expression_pr2 ( ( PLUS ^| MINUS ^) arithmetic_expression_pr2 )* )
+			// Stil.g:113:9: arithmetic_expression_pr2 ( ( PLUS ^| MINUS ^) arithmetic_expression_pr2 )*
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -1321,7 +1321,7 @@ public class StilParser extends Parser {
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr240.getTree());
 
-			// src/vb/stil/Stil.g:113:35: ( ( PLUS ^| MINUS ^) arithmetic_expression_pr2 )*
+			// Stil.g:113:35: ( ( PLUS ^| MINUS ^) arithmetic_expression_pr2 )*
 			loop13:
 			while (true) {
 				int alt13=2;
@@ -1332,9 +1332,9 @@ public class StilParser extends Parser {
 
 				switch (alt13) {
 				case 1 :
-					// src/vb/stil/Stil.g:113:36: ( PLUS ^| MINUS ^) arithmetic_expression_pr2
+					// Stil.g:113:36: ( PLUS ^| MINUS ^) arithmetic_expression_pr2
 					{
-					// src/vb/stil/Stil.g:113:36: ( PLUS ^| MINUS ^)
+					// Stil.g:113:36: ( PLUS ^| MINUS ^)
 					int alt12=2;
 					int LA12_0 = input.LA(1);
 					if ( (LA12_0==PLUS) ) {
@@ -1353,7 +1353,7 @@ public class StilParser extends Parser {
 
 					switch (alt12) {
 						case 1 :
-							// src/vb/stil/Stil.g:113:37: PLUS ^
+							// Stil.g:113:37: PLUS ^
 							{
 							PLUS41=(Token)match(input,PLUS,FOLLOW_PLUS_in_arithmetic_expression_pr31392); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
@@ -1364,7 +1364,7 @@ public class StilParser extends Parser {
 							}
 							break;
 						case 2 :
-							// src/vb/stil/Stil.g:113:45: MINUS ^
+							// Stil.g:113:45: MINUS ^
 							{
 							MINUS42=(Token)match(input,MINUS,FOLLOW_MINUS_in_arithmetic_expression_pr31397); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
@@ -1421,7 +1421,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "arithmetic_expression_pr2"
-	// src/vb/stil/Stil.g:116:1: arithmetic_expression_pr2 : arithmetic_expression_pr1 ( ( DIVIDE ^| MULTIPLY ^| MODULO ^) arithmetic_expression_pr1 )* ;
+	// Stil.g:116:1: arithmetic_expression_pr2 : arithmetic_expression_pr1 ( ( DIVIDE ^| MULTIPLY ^| MODULO ^) arithmetic_expression_pr1 )* ;
 	public final StilParser.arithmetic_expression_pr2_return arithmetic_expression_pr2() throws RecognitionException {
 		StilParser.arithmetic_expression_pr2_return retval = new StilParser.arithmetic_expression_pr2_return();
 		retval.start = input.LT(1);
@@ -1439,8 +1439,8 @@ public class StilParser extends Parser {
 		Object MODULO47_tree=null;
 
 		try {
-			// src/vb/stil/Stil.g:117:5: ( arithmetic_expression_pr1 ( ( DIVIDE ^| MULTIPLY ^| MODULO ^) arithmetic_expression_pr1 )* )
-			// src/vb/stil/Stil.g:117:9: arithmetic_expression_pr1 ( ( DIVIDE ^| MULTIPLY ^| MODULO ^) arithmetic_expression_pr1 )*
+			// Stil.g:117:5: ( arithmetic_expression_pr1 ( ( DIVIDE ^| MULTIPLY ^| MODULO ^) arithmetic_expression_pr1 )* )
+			// Stil.g:117:9: arithmetic_expression_pr1 ( ( DIVIDE ^| MULTIPLY ^| MODULO ^) arithmetic_expression_pr1 )*
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -1451,7 +1451,7 @@ public class StilParser extends Parser {
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) adaptor.addChild(root_0, arithmetic_expression_pr144.getTree());
 
-			// src/vb/stil/Stil.g:117:35: ( ( DIVIDE ^| MULTIPLY ^| MODULO ^) arithmetic_expression_pr1 )*
+			// Stil.g:117:35: ( ( DIVIDE ^| MULTIPLY ^| MODULO ^) arithmetic_expression_pr1 )*
 			loop15:
 			while (true) {
 				int alt15=2;
@@ -1462,9 +1462,9 @@ public class StilParser extends Parser {
 
 				switch (alt15) {
 				case 1 :
-					// src/vb/stil/Stil.g:117:36: ( DIVIDE ^| MULTIPLY ^| MODULO ^) arithmetic_expression_pr1
+					// Stil.g:117:36: ( DIVIDE ^| MULTIPLY ^| MODULO ^) arithmetic_expression_pr1
 					{
-					// src/vb/stil/Stil.g:117:36: ( DIVIDE ^| MULTIPLY ^| MODULO ^)
+					// Stil.g:117:36: ( DIVIDE ^| MULTIPLY ^| MODULO ^)
 					int alt14=3;
 					switch ( input.LA(1) ) {
 					case DIVIDE:
@@ -1490,7 +1490,7 @@ public class StilParser extends Parser {
 					}
 					switch (alt14) {
 						case 1 :
-							// src/vb/stil/Stil.g:117:37: DIVIDE ^
+							// Stil.g:117:37: DIVIDE ^
 							{
 							DIVIDE45=(Token)match(input,DIVIDE,FOLLOW_DIVIDE_in_arithmetic_expression_pr21426); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
@@ -1501,7 +1501,7 @@ public class StilParser extends Parser {
 							}
 							break;
 						case 2 :
-							// src/vb/stil/Stil.g:117:47: MULTIPLY ^
+							// Stil.g:117:47: MULTIPLY ^
 							{
 							MULTIPLY46=(Token)match(input,MULTIPLY,FOLLOW_MULTIPLY_in_arithmetic_expression_pr21431); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
@@ -1512,7 +1512,7 @@ public class StilParser extends Parser {
 							}
 							break;
 						case 3 :
-							// src/vb/stil/Stil.g:117:59: MODULO ^
+							// Stil.g:117:59: MODULO ^
 							{
 							MODULO47=(Token)match(input,MODULO,FOLLOW_MODULO_in_arithmetic_expression_pr21436); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
@@ -1569,7 +1569,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "arithmetic_expression_pr1"
-	// src/vb/stil/Stil.g:120:1: arithmetic_expression_pr1 : ( PLUS operand -> ^( UNARY_PLUS operand ) | MINUS operand -> ^( UNARY_MINUS operand ) | NOT operand -> ^( UNARY_NOT operand ) | operand );
+	// Stil.g:120:1: arithmetic_expression_pr1 : ( PLUS operand -> ^( UNARY_PLUS operand ) | MINUS operand -> ^( UNARY_MINUS operand ) | NOT operand -> ^( UNARY_NOT operand ) | operand );
 	public final StilParser.arithmetic_expression_pr1_return arithmetic_expression_pr1() throws RecognitionException {
 		StilParser.arithmetic_expression_pr1_return retval = new StilParser.arithmetic_expression_pr1_return();
 		retval.start = input.LT(1);
@@ -1593,7 +1593,7 @@ public class StilParser extends Parser {
 		RewriteRuleSubtreeStream stream_operand=new RewriteRuleSubtreeStream(adaptor,"rule operand");
 
 		try {
-			// src/vb/stil/Stil.g:121:5: ( PLUS operand -> ^( UNARY_PLUS operand ) | MINUS operand -> ^( UNARY_MINUS operand ) | NOT operand -> ^( UNARY_NOT operand ) | operand )
+			// Stil.g:121:5: ( PLUS operand -> ^( UNARY_PLUS operand ) | MINUS operand -> ^( UNARY_MINUS operand ) | NOT operand -> ^( UNARY_NOT operand ) | operand )
 			int alt16=4;
 			switch ( input.LA(1) ) {
 			case PLUS:
@@ -1629,7 +1629,7 @@ public class StilParser extends Parser {
 			}
 			switch (alt16) {
 				case 1 :
-					// src/vb/stil/Stil.g:121:9: PLUS operand
+					// Stil.g:121:9: PLUS operand
 					{
 					PLUS49=(Token)match(input,PLUS,FOLLOW_PLUS_in_arithmetic_expression_pr11461); if (state.failed) return retval; 
 					if ( state.backtracking==0 ) stream_PLUS.add(PLUS49);
@@ -1653,7 +1653,7 @@ public class StilParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 					// 121:25: -> ^( UNARY_PLUS operand )
 					{
-						// src/vb/stil/Stil.g:121:28: ^( UNARY_PLUS operand )
+						// Stil.g:121:28: ^( UNARY_PLUS operand )
 						{
 						Object root_1 = (Object)adaptor.nil();
 						root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(UNARY_PLUS, "UNARY_PLUS"), root_1);
@@ -1670,7 +1670,7 @@ public class StilParser extends Parser {
 					}
 					break;
 				case 2 :
-					// src/vb/stil/Stil.g:122:9: MINUS operand
+					// Stil.g:122:9: MINUS operand
 					{
 					MINUS51=(Token)match(input,MINUS,FOLLOW_MINUS_in_arithmetic_expression_pr11484); if (state.failed) return retval; 
 					if ( state.backtracking==0 ) stream_MINUS.add(MINUS51);
@@ -1694,7 +1694,7 @@ public class StilParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 					// 122:25: -> ^( UNARY_MINUS operand )
 					{
-						// src/vb/stil/Stil.g:122:28: ^( UNARY_MINUS operand )
+						// Stil.g:122:28: ^( UNARY_MINUS operand )
 						{
 						Object root_1 = (Object)adaptor.nil();
 						root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(UNARY_MINUS, "UNARY_MINUS"), root_1);
@@ -1711,7 +1711,7 @@ public class StilParser extends Parser {
 					}
 					break;
 				case 3 :
-					// src/vb/stil/Stil.g:123:9: NOT operand
+					// Stil.g:123:9: NOT operand
 					{
 					NOT53=(Token)match(input,NOT,FOLLOW_NOT_in_arithmetic_expression_pr11506); if (state.failed) return retval; 
 					if ( state.backtracking==0 ) stream_NOT.add(NOT53);
@@ -1735,7 +1735,7 @@ public class StilParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 					// 123:25: -> ^( UNARY_NOT operand )
 					{
-						// src/vb/stil/Stil.g:123:28: ^( UNARY_NOT operand )
+						// Stil.g:123:28: ^( UNARY_NOT operand )
 						{
 						Object root_1 = (Object)adaptor.nil();
 						root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(UNARY_NOT, "UNARY_NOT"), root_1);
@@ -1752,7 +1752,7 @@ public class StilParser extends Parser {
 					}
 					break;
 				case 4 :
-					// src/vb/stil/Stil.g:124:9: operand
+					// Stil.g:124:9: operand
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -1795,7 +1795,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "operand"
-	// src/vb/stil/Stil.g:127:1: operand : ( bool_literal | CHAR_LITERAL | INT_LITERAL | IDENTIFIER | LPAREN ! expression RPAREN !);
+	// Stil.g:127:1: operand : ( bool_literal | CHAR_LITERAL | INT_LITERAL | IDENTIFIER | LPAREN ! expression RPAREN !);
 	public final StilParser.operand_return operand() throws RecognitionException {
 		StilParser.operand_return retval = new StilParser.operand_return();
 		retval.start = input.LT(1);
@@ -1817,7 +1817,7 @@ public class StilParser extends Parser {
 		Object RPAREN62_tree=null;
 
 		try {
-			// src/vb/stil/Stil.g:128:5: ( bool_literal | CHAR_LITERAL | INT_LITERAL | IDENTIFIER | LPAREN ! expression RPAREN !)
+			// Stil.g:128:5: ( bool_literal | CHAR_LITERAL | INT_LITERAL | IDENTIFIER | LPAREN ! expression RPAREN !)
 			int alt17=5;
 			switch ( input.LA(1) ) {
 			case FALSE:
@@ -1854,7 +1854,7 @@ public class StilParser extends Parser {
 			}
 			switch (alt17) {
 				case 1 :
-					// src/vb/stil/Stil.g:128:9: bool_literal
+					// Stil.g:128:9: bool_literal
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -1868,7 +1868,7 @@ public class StilParser extends Parser {
 					}
 					break;
 				case 2 :
-					// src/vb/stil/Stil.g:129:9: CHAR_LITERAL
+					// Stil.g:129:9: CHAR_LITERAL
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -1882,7 +1882,7 @@ public class StilParser extends Parser {
 					}
 					break;
 				case 3 :
-					// src/vb/stil/Stil.g:130:9: INT_LITERAL
+					// Stil.g:130:9: INT_LITERAL
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -1896,7 +1896,7 @@ public class StilParser extends Parser {
 					}
 					break;
 				case 4 :
-					// src/vb/stil/Stil.g:131:9: IDENTIFIER
+					// Stil.g:131:9: IDENTIFIER
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -1910,7 +1910,7 @@ public class StilParser extends Parser {
 					}
 					break;
 				case 5 :
-					// src/vb/stil/Stil.g:132:9: LPAREN ! expression RPAREN !
+					// Stil.g:132:9: LPAREN ! expression RPAREN !
 					{
 					root_0 = (Object)adaptor.nil();
 
@@ -1955,7 +1955,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "assignment_statement"
-	// src/vb/stil/Stil.g:135:1: assignment_statement : IDENTIFIER BECOMES ^ expression ;
+	// Stil.g:135:1: assignment_statement : IDENTIFIER BECOMES ^ expression ;
 	public final StilParser.assignment_statement_return assignment_statement() throws RecognitionException {
 		StilParser.assignment_statement_return retval = new StilParser.assignment_statement_return();
 		retval.start = input.LT(1);
@@ -1970,8 +1970,8 @@ public class StilParser extends Parser {
 		Object BECOMES64_tree=null;
 
 		try {
-			// src/vb/stil/Stil.g:136:5: ( IDENTIFIER BECOMES ^ expression )
-			// src/vb/stil/Stil.g:136:9: IDENTIFIER BECOMES ^ expression
+			// Stil.g:136:5: ( IDENTIFIER BECOMES ^ expression )
+			// Stil.g:136:9: IDENTIFIER BECOMES ^ expression
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -2024,7 +2024,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "print_statement"
-	// src/vb/stil/Stil.g:139:1: print_statement : PRINT ^ LPAREN ! expression ( COMMA ! expression )* RPAREN !;
+	// Stil.g:139:1: print_statement : PRINT ^ LPAREN ! expression ( COMMA ! expression )* RPAREN !;
 	public final StilParser.print_statement_return print_statement() throws RecognitionException {
 		StilParser.print_statement_return retval = new StilParser.print_statement_return();
 		retval.start = input.LT(1);
@@ -2044,8 +2044,8 @@ public class StilParser extends Parser {
 		Object RPAREN71_tree=null;
 
 		try {
-			// src/vb/stil/Stil.g:140:5: ( PRINT ^ LPAREN ! expression ( COMMA ! expression )* RPAREN !)
-			// src/vb/stil/Stil.g:140:9: PRINT ^ LPAREN ! expression ( COMMA ! expression )* RPAREN !
+			// Stil.g:140:5: ( PRINT ^ LPAREN ! expression ( COMMA ! expression )* RPAREN !)
+			// Stil.g:140:9: PRINT ^ LPAREN ! expression ( COMMA ! expression )* RPAREN !
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -2063,7 +2063,7 @@ public class StilParser extends Parser {
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) adaptor.addChild(root_0, expression68.getTree());
 
-			// src/vb/stil/Stil.g:140:35: ( COMMA ! expression )*
+			// Stil.g:140:35: ( COMMA ! expression )*
 			loop18:
 			while (true) {
 				int alt18=2;
@@ -2074,7 +2074,7 @@ public class StilParser extends Parser {
 
 				switch (alt18) {
 				case 1 :
-					// src/vb/stil/Stil.g:140:36: COMMA ! expression
+					// Stil.g:140:36: COMMA ! expression
 					{
 					COMMA69=(Token)match(input,COMMA,FOLLOW_COMMA_in_print_statement1653); if (state.failed) return retval;
 					pushFollow(FOLLOW_expression_in_print_statement1656);
@@ -2122,7 +2122,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "read_statement"
-	// src/vb/stil/Stil.g:143:1: read_statement : READ ^ LPAREN ! IDENTIFIER ( COMMA ! IDENTIFIER )* RPAREN !;
+	// Stil.g:143:1: read_statement : READ ^ LPAREN ! IDENTIFIER ( COMMA ! IDENTIFIER )* RPAREN !;
 	public final StilParser.read_statement_return read_statement() throws RecognitionException {
 		StilParser.read_statement_return retval = new StilParser.read_statement_return();
 		retval.start = input.LT(1);
@@ -2144,8 +2144,8 @@ public class StilParser extends Parser {
 		Object RPAREN77_tree=null;
 
 		try {
-			// src/vb/stil/Stil.g:144:5: ( READ ^ LPAREN ! IDENTIFIER ( COMMA ! IDENTIFIER )* RPAREN !)
-			// src/vb/stil/Stil.g:144:9: READ ^ LPAREN ! IDENTIFIER ( COMMA ! IDENTIFIER )* RPAREN !
+			// Stil.g:144:5: ( READ ^ LPAREN ! IDENTIFIER ( COMMA ! IDENTIFIER )* RPAREN !)
+			// Stil.g:144:9: READ ^ LPAREN ! IDENTIFIER ( COMMA ! IDENTIFIER )* RPAREN !
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -2163,7 +2163,7 @@ public class StilParser extends Parser {
 			adaptor.addChild(root_0, IDENTIFIER74_tree);
 			}
 
-			// src/vb/stil/Stil.g:144:42: ( COMMA ! IDENTIFIER )*
+			// Stil.g:144:42: ( COMMA ! IDENTIFIER )*
 			loop19:
 			while (true) {
 				int alt19=2;
@@ -2174,7 +2174,7 @@ public class StilParser extends Parser {
 
 				switch (alt19) {
 				case 1 :
-					// src/vb/stil/Stil.g:144:43: COMMA ! IDENTIFIER
+					// Stil.g:144:43: COMMA ! IDENTIFIER
 					{
 					COMMA75=(Token)match(input,COMMA,FOLLOW_COMMA_in_read_statement1692); if (state.failed) return retval;
 					IDENTIFIER76=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_read_statement1695); if (state.failed) return retval;
@@ -2222,7 +2222,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "type"
-	// src/vb/stil/Stil.g:147:1: type : ( BOOL | CHAR | INT );
+	// Stil.g:147:1: type : ( BOOL | CHAR | INT );
 	public final StilParser.type_return type() throws RecognitionException {
 		StilParser.type_return retval = new StilParser.type_return();
 		retval.start = input.LT(1);
@@ -2234,8 +2234,8 @@ public class StilParser extends Parser {
 		Object set78_tree=null;
 
 		try {
-			// src/vb/stil/Stil.g:148:5: ( BOOL | CHAR | INT )
-			// src/vb/stil/Stil.g:
+			// Stil.g:148:5: ( BOOL | CHAR | INT )
+			// Stil.g:
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -2282,7 +2282,7 @@ public class StilParser extends Parser {
 
 
 	// $ANTLR start "bool_literal"
-	// src/vb/stil/Stil.g:151:1: bool_literal : ( TRUE | FALSE );
+	// Stil.g:151:1: bool_literal : ( TRUE | FALSE );
 	public final StilParser.bool_literal_return bool_literal() throws RecognitionException {
 		StilParser.bool_literal_return retval = new StilParser.bool_literal_return();
 		retval.start = input.LT(1);
@@ -2294,8 +2294,8 @@ public class StilParser extends Parser {
 		Object set79_tree=null;
 
 		try {
-			// src/vb/stil/Stil.g:152:5: ( TRUE | FALSE )
-			// src/vb/stil/Stil.g:
+			// Stil.g:152:5: ( TRUE | FALSE )
+			// Stil.g:
 			{
 			root_0 = (Object)adaptor.nil();
 
@@ -2335,8 +2335,8 @@ public class StilParser extends Parser {
 
 	// $ANTLR start synpred1_Stil
 	public final void synpred1_Stil_fragment() throws RecognitionException {
-		// src/vb/stil/Stil.g:87:9: ( IDENTIFIER BECOMES )
-		// src/vb/stil/Stil.g:87:10: IDENTIFIER BECOMES
+		// Stil.g:87:9: ( IDENTIFIER BECOMES )
+		// Stil.g:87:10: IDENTIFIER BECOMES
 		{
 		match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_synpred1_Stil1162); if (state.failed) return;
 

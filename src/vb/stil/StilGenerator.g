@@ -36,8 +36,8 @@ program[int numOps, int locals]//SymbolTable<IdEntry> symtab]
     ;
 
 expression
-    : PRINT {System.out.println("print");} expr=intlit -> printexp(expr={$expr.st})
+    : ^(PRINT expr=intlit)-> printexp(expr={$expr.st})
     ;
 intlit
-    : INT_LITERAL {System.out.println("lit");}  -> int(v={$INT_LITERAL.text})
+    : INT_LITERAL -> int(v={$INT_LITERAL.text})
     ;

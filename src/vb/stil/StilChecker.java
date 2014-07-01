@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 src/vb/stil/StilChecker.g 2014-07-01 14:07:23
+// $ANTLR 3.5.2 StilChecker.g 2014-07-01 14:47:12
 
     package vb.stil;
     import  vb.stil.checker.*;
@@ -88,7 +88,7 @@ public class StilChecker extends TreeParser {
 	}
 
 	@Override public String[] getTokenNames() { return StilChecker.tokenNames; }
-	@Override public String getGrammarFileName() { return "src/vb/stil/StilChecker.g"; }
+	@Override public String getGrammarFileName() { return "StilChecker.g"; }
 
 
 	    protected SymbolTable<IdEntry> symtab = new SymbolTable<>();
@@ -97,19 +97,19 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "program"
-	// src/vb/stil/StilChecker.g:29:1: program : ^( PROGRAM ( declaration |expr= expression )* ) ;
+	// StilChecker.g:29:1: program : ^( PROGRAM ( declaration |expr= expression )* ) ;
 	public final void program() throws RecognitionException {
 		EntityType expr =null;
 
 		try {
-			// src/vb/stil/StilChecker.g:30:5: ( ^( PROGRAM ( declaration |expr= expression )* ) )
-			// src/vb/stil/StilChecker.g:30:9: ^( PROGRAM ( declaration |expr= expression )* )
+			// StilChecker.g:30:5: ( ^( PROGRAM ( declaration |expr= expression )* ) )
+			// StilChecker.g:30:9: ^( PROGRAM ( declaration |expr= expression )* )
 			{
 			match(input,PROGRAM,FOLLOW_PROGRAM_in_program96); 
 			 symtab.openScope(); 
 			if ( input.LA(1)==Token.DOWN ) {
 				match(input, Token.DOWN, null); 
-				// src/vb/stil/StilChecker.g:30:43: ( declaration |expr= expression )*
+				// StilChecker.g:30:43: ( declaration |expr= expression )*
 				loop1:
 				while (true) {
 					int alt1=3;
@@ -123,7 +123,7 @@ public class StilChecker extends TreeParser {
 
 					switch (alt1) {
 					case 1 :
-						// src/vb/stil/StilChecker.g:30:44: declaration
+						// StilChecker.g:30:44: declaration
 						{
 						pushFollow(FOLLOW_declaration_in_program101);
 						declaration();
@@ -132,7 +132,7 @@ public class StilChecker extends TreeParser {
 						}
 						break;
 					case 2 :
-						// src/vb/stil/StilChecker.g:30:58: expr= expression
+						// StilChecker.g:30:58: expr= expression
 						{
 						pushFollow(FOLLOW_expression_in_program107);
 						expr=expression();
@@ -166,10 +166,10 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "declaration"
-	// src/vb/stil/StilChecker.g:33:1: declaration : ( constant_declaration | var_declaration );
+	// StilChecker.g:33:1: declaration : ( constant_declaration | var_declaration );
 	public final void declaration() throws RecognitionException {
 		try {
-			// src/vb/stil/StilChecker.g:34:5: ( constant_declaration | var_declaration )
+			// StilChecker.g:34:5: ( constant_declaration | var_declaration )
 			int alt2=2;
 			int LA2_0 = input.LA(1);
 			if ( (LA2_0==CONST) ) {
@@ -187,7 +187,7 @@ public class StilChecker extends TreeParser {
 
 			switch (alt2) {
 				case 1 :
-					// src/vb/stil/StilChecker.g:34:9: constant_declaration
+					// StilChecker.g:34:9: constant_declaration
 					{
 					pushFollow(FOLLOW_constant_declaration_in_declaration133);
 					constant_declaration();
@@ -196,7 +196,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// src/vb/stil/StilChecker.g:35:9: var_declaration
+					// StilChecker.g:35:9: var_declaration
 					{
 					pushFollow(FOLLOW_var_declaration_in_declaration144);
 					var_declaration();
@@ -221,15 +221,15 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "constant_declaration"
-	// src/vb/stil/StilChecker.g:39:1: constant_declaration : ^( CONST t= type id= IDENTIFIER ) ;
+	// StilChecker.g:39:1: constant_declaration : ^( CONST t= type id= IDENTIFIER ) ;
 	public final void constant_declaration() throws RecognitionException {
 		StilNode id=null;
 		StilNode CONST1=null;
 		EntityType t =null;
 
 		try {
-			// src/vb/stil/StilChecker.g:40:5: ( ^( CONST t= type id= IDENTIFIER ) )
-			// src/vb/stil/StilChecker.g:40:9: ^( CONST t= type id= IDENTIFIER )
+			// StilChecker.g:40:5: ( ^( CONST t= type id= IDENTIFIER ) )
+			// StilChecker.g:40:9: ^( CONST t= type id= IDENTIFIER )
 			{
 			CONST1=(StilNode)match(input,CONST,FOLLOW_CONST_in_constant_declaration165); 
 			match(input, Token.DOWN, null); 
@@ -270,15 +270,15 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "var_declaration"
-	// src/vb/stil/StilChecker.g:56:1: var_declaration : ^( VAR t= type id= IDENTIFIER ) ;
+	// StilChecker.g:56:1: var_declaration : ^( VAR t= type id= IDENTIFIER ) ;
 	public final void var_declaration() throws RecognitionException {
 		StilNode id=null;
 		StilNode VAR2=null;
 		EntityType t =null;
 
 		try {
-			// src/vb/stil/StilChecker.g:57:5: ( ^( VAR t= type id= IDENTIFIER ) )
-			// src/vb/stil/StilChecker.g:57:9: ^( VAR t= type id= IDENTIFIER )
+			// StilChecker.g:57:5: ( ^( VAR t= type id= IDENTIFIER ) )
+			// StilChecker.g:57:9: ^( VAR t= type id= IDENTIFIER )
 			{
 			VAR2=(StilNode)match(input,VAR,FOLLOW_VAR_in_var_declaration204); 
 			match(input, Token.DOWN, null); 
@@ -319,7 +319,7 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "print_statement"
-	// src/vb/stil/StilChecker.g:73:1: print_statement returns [EntityType entityType = null;] : ^(node= PRINT t= expression (t= expression )* ) ;
+	// StilChecker.g:73:1: print_statement returns [EntityType entityType = null;] : ^(node= PRINT t= expression (t= expression )* ) ;
 	public final EntityType print_statement() throws RecognitionException {
 		EntityType entityType =  null;;
 
@@ -328,8 +328,8 @@ public class StilChecker extends TreeParser {
 		EntityType t =null;
 
 		try {
-			// src/vb/stil/StilChecker.g:74:5: ( ^(node= PRINT t= expression (t= expression )* ) )
-			// src/vb/stil/StilChecker.g:74:9: ^(node= PRINT t= expression (t= expression )* )
+			// StilChecker.g:74:5: ( ^(node= PRINT t= expression (t= expression )* ) )
+			// StilChecker.g:74:9: ^(node= PRINT t= expression (t= expression )* )
 			{
 			node=(StilNode)match(input,PRINT,FOLLOW_PRINT_in_print_statement250); 
 			match(input, Token.DOWN, null); 
@@ -343,7 +343,7 @@ public class StilChecker extends TreeParser {
 			            }
 			            entityType = t;
 			            
-			// src/vb/stil/StilChecker.g:79:15: (t= expression )*
+			// StilChecker.g:79:15: (t= expression )*
 			loop3:
 			while (true) {
 				int alt3=2;
@@ -354,7 +354,7 @@ public class StilChecker extends TreeParser {
 
 				switch (alt3) {
 				case 1 :
-					// src/vb/stil/StilChecker.g:79:16: t= expression
+					// StilChecker.g:79:16: t= expression
 					{
 					pushFollow(FOLLOW_expression_in_print_statement261);
 					t=expression();
@@ -394,7 +394,7 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "read_statement"
-	// src/vb/stil/StilChecker.g:88:1: read_statement returns [EntityType entityType = null;] : ^(node= READ id= IDENTIFIER (id= IDENTIFIER )* ) ;
+	// StilChecker.g:88:1: read_statement returns [EntityType entityType = null;] : ^(node= READ id= IDENTIFIER (id= IDENTIFIER )* ) ;
 	public final EntityType read_statement() throws RecognitionException {
 		EntityType entityType =  null;;
 
@@ -403,8 +403,8 @@ public class StilChecker extends TreeParser {
 		StilNode id=null;
 
 		try {
-			// src/vb/stil/StilChecker.g:89:5: ( ^(node= READ id= IDENTIFIER (id= IDENTIFIER )* ) )
-			// src/vb/stil/StilChecker.g:89:9: ^(node= READ id= IDENTIFIER (id= IDENTIFIER )* )
+			// StilChecker.g:89:5: ( ^(node= READ id= IDENTIFIER (id= IDENTIFIER )* ) )
+			// StilChecker.g:89:9: ^(node= READ id= IDENTIFIER (id= IDENTIFIER )* )
 			{
 			node=(StilNode)match(input,READ,FOLLOW_READ_in_read_statement294); 
 			match(input, Token.DOWN, null); 
@@ -417,7 +417,7 @@ public class StilChecker extends TreeParser {
 			            DeclNode declNode = symbol.getDeclNode();
 			            entityType = declNode.getEntityType();
 			            
-			// src/vb/stil/StilChecker.g:96:15: (id= IDENTIFIER )*
+			// StilChecker.g:96:15: (id= IDENTIFIER )*
 			loop4:
 			while (true) {
 				int alt4=2;
@@ -428,7 +428,7 @@ public class StilChecker extends TreeParser {
 
 				switch (alt4) {
 				case 1 :
-					// src/vb/stil/StilChecker.g:96:16: id= IDENTIFIER
+					// StilChecker.g:96:16: id= IDENTIFIER
 					{
 					id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_read_statement309); 
 
@@ -466,7 +466,7 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "compound_expression"
-	// src/vb/stil/StilChecker.g:104:1: compound_expression returns [EntityType entityType = null;] : ( ( declaration )* expr= expression )* ;
+	// StilChecker.g:104:1: compound_expression returns [EntityType entityType = null;] : ( ( declaration )* expr= expression )* ;
 	public final EntityType compound_expression() throws RecognitionException {
 		EntityType entityType =  null;;
 
@@ -474,10 +474,10 @@ public class StilChecker extends TreeParser {
 		EntityType expr =null;
 
 		try {
-			// src/vb/stil/StilChecker.g:105:5: ( ( ( declaration )* expr= expression )* )
-			// src/vb/stil/StilChecker.g:105:9: ( ( declaration )* expr= expression )*
+			// StilChecker.g:105:5: ( ( ( declaration )* expr= expression )* )
+			// StilChecker.g:105:9: ( ( declaration )* expr= expression )*
 			{
-			// src/vb/stil/StilChecker.g:105:9: ( ( declaration )* expr= expression )*
+			// StilChecker.g:105:9: ( ( declaration )* expr= expression )*
 			loop6:
 			while (true) {
 				int alt6=2;
@@ -488,9 +488,9 @@ public class StilChecker extends TreeParser {
 
 				switch (alt6) {
 				case 1 :
-					// src/vb/stil/StilChecker.g:105:10: ( declaration )* expr= expression
+					// StilChecker.g:105:10: ( declaration )* expr= expression
 					{
-					// src/vb/stil/StilChecker.g:105:10: ( declaration )*
+					// StilChecker.g:105:10: ( declaration )*
 					loop5:
 					while (true) {
 						int alt5=2;
@@ -501,7 +501,7 @@ public class StilChecker extends TreeParser {
 
 						switch (alt5) {
 						case 1 :
-							// src/vb/stil/StilChecker.g:105:11: declaration
+							// StilChecker.g:105:11: declaration
 							{
 							pushFollow(FOLLOW_declaration_in_compound_expression341);
 							declaration();
@@ -546,7 +546,7 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "closed_compound_expression"
-	// src/vb/stil/StilChecker.g:107:1: closed_compound_expression returns [EntityType entityType = null;] : ^( COMPOUND_EXPR c= compound_expression ) ;
+	// StilChecker.g:107:1: closed_compound_expression returns [EntityType entityType = null;] : ^( COMPOUND_EXPR c= compound_expression ) ;
 	public final EntityType closed_compound_expression() throws RecognitionException {
 		EntityType entityType =  null;;
 
@@ -554,8 +554,8 @@ public class StilChecker extends TreeParser {
 		EntityType c =null;
 
 		try {
-			// src/vb/stil/StilChecker.g:108:5: ( ^( COMPOUND_EXPR c= compound_expression ) )
-			// src/vb/stil/StilChecker.g:108:9: ^( COMPOUND_EXPR c= compound_expression )
+			// StilChecker.g:108:5: ( ^( COMPOUND_EXPR c= compound_expression ) )
+			// StilChecker.g:108:9: ^( COMPOUND_EXPR c= compound_expression )
 			{
 			match(input,COMPOUND_EXPR,FOLLOW_COMPOUND_EXPR_in_closed_compound_expression374); 
 			 symtab.openScope(); 
@@ -587,7 +587,7 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "expression"
-	// src/vb/stil/StilChecker.g:110:1: expression returns [EntityType entityType = null;] : (p= print_statement |r= read_statement |o= operand |c= closed_compound_expression | ^(node= BECOMES id= IDENTIFIER t1= expression ) | ^(node= OR t1= expression t2= expression ) | ^(node= AND t1= expression t2= expression ) | ^(node= LT t1= expression t2= expression ) | ^(node= LTE t1= expression t2= expression ) | ^(node= GT t1= expression t2= expression ) | ^(node= GTE t1= expression t2= expression ) | ^(node= EQ t1= expression t2= expression ) | ^(node= NEQ t1= expression t2= expression ) | ^(node= PLUS t1= expression t2= expression ) | ^(node= MINUS t1= expression t2= expression ) | ^(node= DIVIDE t1= expression t2= expression ) | ^(node= MULTIPLY t1= expression t2= expression ) | ^(node= MODULO t1= expression t2= expression ) | ^(node= UNARY_PLUS t1= expression ) | ^(node= UNARY_MINUS t1= expression ) | ^(node= UNARY_NOT t1= expression ) );
+	// StilChecker.g:110:1: expression returns [EntityType entityType = null;] : (p= print_statement |r= read_statement |o= operand |c= closed_compound_expression | ^(node= BECOMES id= IDENTIFIER t1= expression ) | ^(node= OR t1= expression t2= expression ) | ^(node= AND t1= expression t2= expression ) | ^(node= LT t1= expression t2= expression ) | ^(node= LTE t1= expression t2= expression ) | ^(node= GT t1= expression t2= expression ) | ^(node= GTE t1= expression t2= expression ) | ^(node= EQ t1= expression t2= expression ) | ^(node= NEQ t1= expression t2= expression ) | ^(node= PLUS t1= expression t2= expression ) | ^(node= MINUS t1= expression t2= expression ) | ^(node= DIVIDE t1= expression t2= expression ) | ^(node= MULTIPLY t1= expression t2= expression ) | ^(node= MODULO t1= expression t2= expression ) | ^(node= UNARY_PLUS t1= expression ) | ^(node= UNARY_MINUS t1= expression ) | ^(node= UNARY_NOT t1= expression ) );
 	public final EntityType expression() throws RecognitionException {
 		EntityType entityType =  null;;
 
@@ -602,7 +602,7 @@ public class StilChecker extends TreeParser {
 		EntityType t2 =null;
 
 		try {
-			// src/vb/stil/StilChecker.g:111:5: (p= print_statement |r= read_statement |o= operand |c= closed_compound_expression | ^(node= BECOMES id= IDENTIFIER t1= expression ) | ^(node= OR t1= expression t2= expression ) | ^(node= AND t1= expression t2= expression ) | ^(node= LT t1= expression t2= expression ) | ^(node= LTE t1= expression t2= expression ) | ^(node= GT t1= expression t2= expression ) | ^(node= GTE t1= expression t2= expression ) | ^(node= EQ t1= expression t2= expression ) | ^(node= NEQ t1= expression t2= expression ) | ^(node= PLUS t1= expression t2= expression ) | ^(node= MINUS t1= expression t2= expression ) | ^(node= DIVIDE t1= expression t2= expression ) | ^(node= MULTIPLY t1= expression t2= expression ) | ^(node= MODULO t1= expression t2= expression ) | ^(node= UNARY_PLUS t1= expression ) | ^(node= UNARY_MINUS t1= expression ) | ^(node= UNARY_NOT t1= expression ) )
+			// StilChecker.g:111:5: (p= print_statement |r= read_statement |o= operand |c= closed_compound_expression | ^(node= BECOMES id= IDENTIFIER t1= expression ) | ^(node= OR t1= expression t2= expression ) | ^(node= AND t1= expression t2= expression ) | ^(node= LT t1= expression t2= expression ) | ^(node= LTE t1= expression t2= expression ) | ^(node= GT t1= expression t2= expression ) | ^(node= GTE t1= expression t2= expression ) | ^(node= EQ t1= expression t2= expression ) | ^(node= NEQ t1= expression t2= expression ) | ^(node= PLUS t1= expression t2= expression ) | ^(node= MINUS t1= expression t2= expression ) | ^(node= DIVIDE t1= expression t2= expression ) | ^(node= MULTIPLY t1= expression t2= expression ) | ^(node= MODULO t1= expression t2= expression ) | ^(node= UNARY_PLUS t1= expression ) | ^(node= UNARY_MINUS t1= expression ) | ^(node= UNARY_NOT t1= expression ) )
 			int alt7=21;
 			switch ( input.LA(1) ) {
 			case PRINT:
@@ -721,7 +721,7 @@ public class StilChecker extends TreeParser {
 			}
 			switch (alt7) {
 				case 1 :
-					// src/vb/stil/StilChecker.g:111:9: p= print_statement
+					// StilChecker.g:111:9: p= print_statement
 					{
 					pushFollow(FOLLOW_print_statement_in_expression408);
 					p=print_statement();
@@ -731,7 +731,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// src/vb/stil/StilChecker.g:112:9: r= read_statement
+					// StilChecker.g:112:9: r= read_statement
 					{
 					pushFollow(FOLLOW_read_statement_in_expression422);
 					r=read_statement();
@@ -741,7 +741,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 3 :
-					// src/vb/stil/StilChecker.g:113:9: o= operand
+					// StilChecker.g:113:9: o= operand
 					{
 					pushFollow(FOLLOW_operand_in_expression436);
 					o=operand();
@@ -751,7 +751,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 4 :
-					// src/vb/stil/StilChecker.g:114:9: c= closed_compound_expression
+					// StilChecker.g:114:9: c= closed_compound_expression
 					{
 					pushFollow(FOLLOW_closed_compound_expression_in_expression450);
 					c=closed_compound_expression();
@@ -761,7 +761,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 5 :
-					// src/vb/stil/StilChecker.g:115:9: ^(node= BECOMES id= IDENTIFIER t1= expression )
+					// StilChecker.g:115:9: ^(node= BECOMES id= IDENTIFIER t1= expression )
 					{
 					node=(StilNode)match(input,BECOMES,FOLLOW_BECOMES_in_expression465); 
 					match(input, Token.DOWN, null); 
@@ -790,7 +790,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 6 :
-					// src/vb/stil/StilChecker.g:131:9: ^(node= OR t1= expression t2= expression )
+					// StilChecker.g:131:9: ^(node= OR t1= expression t2= expression )
 					{
 					node=(StilNode)match(input,OR,FOLLOW_OR_in_expression500); 
 					match(input, Token.DOWN, null); 
@@ -808,7 +808,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 7 :
-					// src/vb/stil/StilChecker.g:132:9: ^(node= AND t1= expression t2= expression )
+					// StilChecker.g:132:9: ^(node= AND t1= expression t2= expression )
 					{
 					node=(StilNode)match(input,AND,FOLLOW_AND_in_expression530); 
 					match(input, Token.DOWN, null); 
@@ -826,7 +826,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 8 :
-					// src/vb/stil/StilChecker.g:133:9: ^(node= LT t1= expression t2= expression )
+					// StilChecker.g:133:9: ^(node= LT t1= expression t2= expression )
 					{
 					node=(StilNode)match(input,LT,FOLLOW_LT_in_expression559); 
 					match(input, Token.DOWN, null); 
@@ -844,7 +844,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 9 :
-					// src/vb/stil/StilChecker.g:134:9: ^(node= LTE t1= expression t2= expression )
+					// StilChecker.g:134:9: ^(node= LTE t1= expression t2= expression )
 					{
 					node=(StilNode)match(input,LTE,FOLLOW_LTE_in_expression589); 
 					match(input, Token.DOWN, null); 
@@ -862,7 +862,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 10 :
-					// src/vb/stil/StilChecker.g:135:9: ^(node= GT t1= expression t2= expression )
+					// StilChecker.g:135:9: ^(node= GT t1= expression t2= expression )
 					{
 					node=(StilNode)match(input,GT,FOLLOW_GT_in_expression618); 
 					match(input, Token.DOWN, null); 
@@ -880,7 +880,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 11 :
-					// src/vb/stil/StilChecker.g:136:9: ^(node= GTE t1= expression t2= expression )
+					// StilChecker.g:136:9: ^(node= GTE t1= expression t2= expression )
 					{
 					node=(StilNode)match(input,GTE,FOLLOW_GTE_in_expression648); 
 					match(input, Token.DOWN, null); 
@@ -898,7 +898,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 12 :
-					// src/vb/stil/StilChecker.g:137:9: ^(node= EQ t1= expression t2= expression )
+					// StilChecker.g:137:9: ^(node= EQ t1= expression t2= expression )
 					{
 					node=(StilNode)match(input,EQ,FOLLOW_EQ_in_expression677); 
 					match(input, Token.DOWN, null); 
@@ -916,7 +916,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 13 :
-					// src/vb/stil/StilChecker.g:138:9: ^(node= NEQ t1= expression t2= expression )
+					// StilChecker.g:138:9: ^(node= NEQ t1= expression t2= expression )
 					{
 					node=(StilNode)match(input,NEQ,FOLLOW_NEQ_in_expression707); 
 					match(input, Token.DOWN, null); 
@@ -934,7 +934,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 14 :
-					// src/vb/stil/StilChecker.g:139:9: ^(node= PLUS t1= expression t2= expression )
+					// StilChecker.g:139:9: ^(node= PLUS t1= expression t2= expression )
 					{
 					node=(StilNode)match(input,PLUS,FOLLOW_PLUS_in_expression736); 
 					match(input, Token.DOWN, null); 
@@ -952,7 +952,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 15 :
-					// src/vb/stil/StilChecker.g:140:9: ^(node= MINUS t1= expression t2= expression )
+					// StilChecker.g:140:9: ^(node= MINUS t1= expression t2= expression )
 					{
 					node=(StilNode)match(input,MINUS,FOLLOW_MINUS_in_expression764); 
 					match(input, Token.DOWN, null); 
@@ -970,7 +970,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 16 :
-					// src/vb/stil/StilChecker.g:141:9: ^(node= DIVIDE t1= expression t2= expression )
+					// StilChecker.g:141:9: ^(node= DIVIDE t1= expression t2= expression )
 					{
 					node=(StilNode)match(input,DIVIDE,FOLLOW_DIVIDE_in_expression791); 
 					match(input, Token.DOWN, null); 
@@ -988,7 +988,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 17 :
-					// src/vb/stil/StilChecker.g:142:9: ^(node= MULTIPLY t1= expression t2= expression )
+					// StilChecker.g:142:9: ^(node= MULTIPLY t1= expression t2= expression )
 					{
 					node=(StilNode)match(input,MULTIPLY,FOLLOW_MULTIPLY_in_expression817); 
 					match(input, Token.DOWN, null); 
@@ -1006,7 +1006,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 18 :
-					// src/vb/stil/StilChecker.g:143:9: ^(node= MODULO t1= expression t2= expression )
+					// StilChecker.g:143:9: ^(node= MODULO t1= expression t2= expression )
 					{
 					node=(StilNode)match(input,MODULO,FOLLOW_MODULO_in_expression841); 
 					match(input, Token.DOWN, null); 
@@ -1024,7 +1024,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 19 :
-					// src/vb/stil/StilChecker.g:144:9: ^(node= UNARY_PLUS t1= expression )
+					// StilChecker.g:144:9: ^(node= UNARY_PLUS t1= expression )
 					{
 					node=(StilNode)match(input,UNARY_PLUS,FOLLOW_UNARY_PLUS_in_expression867); 
 					match(input, Token.DOWN, null); 
@@ -1038,7 +1038,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 20 :
-					// src/vb/stil/StilChecker.g:145:9: ^(node= UNARY_MINUS t1= expression )
+					// StilChecker.g:145:9: ^(node= UNARY_MINUS t1= expression )
 					{
 					node=(StilNode)match(input,UNARY_MINUS,FOLLOW_UNARY_MINUS_in_expression899); 
 					match(input, Token.DOWN, null); 
@@ -1052,7 +1052,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 21 :
-					// src/vb/stil/StilChecker.g:146:9: ^(node= UNARY_NOT t1= expression )
+					// StilChecker.g:146:9: ^(node= UNARY_NOT t1= expression )
 					{
 					node=(StilNode)match(input,UNARY_NOT,FOLLOW_UNARY_NOT_in_expression930); 
 					match(input, Token.DOWN, null); 
@@ -1083,7 +1083,7 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "operand"
-	// src/vb/stil/StilChecker.g:150:1: operand returns [EntityType entityType = null;] : (id= IDENTIFIER | ( TRUE | FALSE ) | CHAR_LITERAL | INT_LITERAL );
+	// StilChecker.g:150:1: operand returns [EntityType entityType = null;] : (id= IDENTIFIER | ( TRUE | FALSE ) | CHAR_LITERAL | INT_LITERAL );
 	public final EntityType operand() throws RecognitionException {
 		EntityType entityType =  null;;
 
@@ -1091,7 +1091,7 @@ public class StilChecker extends TreeParser {
 		StilNode id=null;
 
 		try {
-			// src/vb/stil/StilChecker.g:151:5: (id= IDENTIFIER | ( TRUE | FALSE ) | CHAR_LITERAL | INT_LITERAL )
+			// StilChecker.g:151:5: (id= IDENTIFIER | ( TRUE | FALSE ) | CHAR_LITERAL | INT_LITERAL )
 			int alt8=4;
 			switch ( input.LA(1) ) {
 			case IDENTIFIER:
@@ -1122,7 +1122,7 @@ public class StilChecker extends TreeParser {
 			}
 			switch (alt8) {
 				case 1 :
-					// src/vb/stil/StilChecker.g:151:9: id= IDENTIFIER
+					// StilChecker.g:151:9: id= IDENTIFIER
 					{
 					id=(StilNode)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand981); 
 					   
@@ -1137,7 +1137,7 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// src/vb/stil/StilChecker.g:161:9: ( TRUE | FALSE )
+					// StilChecker.g:161:9: ( TRUE | FALSE )
 					{
 					if ( input.LA(1)==FALSE||input.LA(1)==TRUE ) {
 						input.consume();
@@ -1151,14 +1151,14 @@ public class StilChecker extends TreeParser {
 					}
 					break;
 				case 3 :
-					// src/vb/stil/StilChecker.g:162:9: CHAR_LITERAL
+					// StilChecker.g:162:9: CHAR_LITERAL
 					{
 					match(input,CHAR_LITERAL,FOLLOW_CHAR_LITERAL_in_operand1021); 
 					 entityType = EntityType.CHAR; 
 					}
 					break;
 				case 4 :
-					// src/vb/stil/StilChecker.g:163:9: INT_LITERAL
+					// StilChecker.g:163:9: INT_LITERAL
 					{
 					match(input,INT_LITERAL,FOLLOW_INT_LITERAL_in_operand1036); 
 					 entityType = EntityType.INT; 
@@ -1182,13 +1182,13 @@ public class StilChecker extends TreeParser {
 
 
 	// $ANTLR start "type"
-	// src/vb/stil/StilChecker.g:166:1: type returns [EntityType entityType = null;] : ( BOOL | CHAR | INT );
+	// StilChecker.g:166:1: type returns [EntityType entityType = null;] : ( BOOL | CHAR | INT );
 	public final EntityType type() throws RecognitionException {
 		EntityType entityType =  null;;
 
 
 		try {
-			// src/vb/stil/StilChecker.g:167:5: ( BOOL | CHAR | INT )
+			// StilChecker.g:167:5: ( BOOL | CHAR | INT )
 			int alt9=3;
 			switch ( input.LA(1) ) {
 			case BOOL:
@@ -1213,21 +1213,21 @@ public class StilChecker extends TreeParser {
 			}
 			switch (alt9) {
 				case 1 :
-					// src/vb/stil/StilChecker.g:167:9: BOOL
+					// StilChecker.g:167:9: BOOL
 					{
 					match(input,BOOL,FOLLOW_BOOL_in_type1069); 
 					 entityType = EntityType.BOOL; 
 					}
 					break;
 				case 2 :
-					// src/vb/stil/StilChecker.g:168:9: CHAR
+					// StilChecker.g:168:9: CHAR
 					{
 					match(input,CHAR,FOLLOW_CHAR_in_type1084); 
 					 entityType = EntityType.CHAR; 
 					}
 					break;
 				case 3 :
-					// src/vb/stil/StilChecker.g:169:9: INT
+					// StilChecker.g:169:9: INT
 					{
 					match(input,INT,FOLLOW_INT_in_type1099); 
 					 entityType = EntityType.INT; 

@@ -2,6 +2,7 @@ package vb.stil;
 
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.InputStream;
 import java.util.EnumSet;
 import java.util.Set;
@@ -86,7 +87,9 @@ public class Stil {
 				StilGenerator.program_return r2 = generator.program(100, 100); // TODO: dynamisch uit checker halen
 				
 				StringTemplate output = (StringTemplate)r2.getTemplate(); 
-		        System.out.println(output.toString()); // render full template
+		        FileWriter jasmine = new FileWriter("gen/program.j");
+		        jasmine.write(output.toString());
+		        jasmine.close();
 			}
 			
 			if (options.contains(Option.AST)) { // print the AST as string
