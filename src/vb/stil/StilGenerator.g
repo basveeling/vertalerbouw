@@ -3,7 +3,6 @@ tree grammar StilGenerator;
 options {
     tokenVocab=Stil;                    // import tokens from Stil.tokens
     ASTLabelType = StilNode;            // AST nodes are of type StilNode
-    output=template;
 }
 
 @header {
@@ -11,7 +10,7 @@ options {
     import  vb.stil.symtab.*;
     import  vb.stil.tree.*;
     import  vb.stil.exceptions.*;
-    import  org.stringtemplate.v4.*;
+    import  org.antlr.stringtemplate.*;
 }
 
 // Alter code generation so catch-clauses get replaced with this action. 
@@ -22,20 +21,18 @@ options {
     } 
 }
 
-program[int numOps, int locals]
-    :   ^(PROGRAM (l += expression)*) -> jasminFile(    instructions={$l},
-                                                        maxStackDepth={numOps+1+1},
-                                                        maxLocals={locals}) 
+program[int numOps, int locals] returns [StringTemplate code = null]
+    :   ^(PROGRAM expression*) 
     ;
 
-print_statement
-    :   ^(PRINT (l += expression)+) -> printMultiple(expressions={$l})
+print_statement returns [StringTemplate code = null]
+    :   ^(PRINT expression+)
     ;
 
-expression
-    :   call=print_statement    { $st = $call.st; }
+expression returns [StringTemplate code = null]
+    :   call=print_statement 
 //    |   read_statement
-    |   call=operand            { $st = $call.st; }
+    |   call=operand
 //    |   closed_compound_expression
 //    |   ^(BECOMES IDENTIFIER expression)  { entityType = typeChecker.validateVariableAssignmentExpression($node, $id, t1, symtab); }   
 //    |   ^(OR expression expression)       -> expressionLogicOR()
@@ -56,9 +53,9 @@ expression
 //    |   ^(UNARY_NOT expression)           { entityType = typeChecker.validateLogicExpression($node, Operator.NOT, t1); }
     ;
 
-operand
+operand returns [StringTemplate code = null]
 //    :   id=IDENTIFIER 
 //    |   (TRUE | FALSE) 
-    :   v=CHAR_LITERAL      -> charLiteral(value={$v.text})
-    |   v=INT_LITERAL       -> intLiteral(value={$v.text})
+    :   v=CHAR_LITERAL
+    |   v=INT_LITERAL
     ;

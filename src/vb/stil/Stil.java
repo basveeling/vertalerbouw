@@ -28,7 +28,7 @@ import vb.stil.tree.StilNodeAdaptor;
 public class Stil {
 	private static final Set<Option> options = EnumSet.noneOf(Option.class);
 	private static String inputFile;
-	
+
 	public static void parseOptions(String[] args) {
 		if (args.length == 0) {
 			System.err.println(USAGE_MESSAGE);
@@ -54,54 +54,58 @@ public class Stil {
 			}
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		parseOptions(args);
-		
+
 		try {
 			InputStream in = inputFile == null ? System.in : new FileInputStream(inputFile);
 			StilLexer lexer = new StilLexer(new ANTLRInputStream(in));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			
+
 			StilParser parser = new StilParser(tokens);
 			parser.setTreeAdaptor(new StilNodeAdaptor()); // Use StilTree nodes
-			
+
 			StilParser.program_return result = parser.program();
 			CommonTree tree = (CommonTree) result.getTree();
+
 			StilChecker checker = null;
 			if (!options.contains(Option.NO_CHECKER)) { // check the AST
 				CommonTreeNodeStream nodes = new CommonTreeNodeStream(tree);
 				checker = new StilChecker(nodes);
 				checker.program();
 			}
-			System.out.println(tree.toStringTree());
+
 			if (!options.contains(Option.NO_CODE_GENERATOR) && !options.contains(Option.NO_CHECKER)) { // interpret the AST
 				CommonTreeNodeStream nodes = new CommonTreeNodeStream(tree);
-//				nodes.setTokenStream(tokens);
+				
 				StilGenerator generator = new StilGenerator(nodes);
+				
 				FileReader groupFileR = new FileReader("src/stil.stg");
-				StringTemplateGroup templates = new StringTemplateGroup(groupFileR); 
+				
+				StringTemplateGroup templates = new StringTemplateGroup(groupFileR);
+				// generator.setTemplateLib(templates);
+				
 				groupFileR.close();
-				generator.setTemplateLib(templates);
 				
-				StilGenerator.program_return r2 = generator.program(100, 100); // TODO: dynamisch uit checker halen
+				StringTemplate output = generator.program(100, 100); // TODO: dynamisch uit checker halen
 				
-				StringTemplate output = (StringTemplate)r2.getTemplate(); 
-		        FileWriter jasmine = new FileWriter("gen/program.j");
-		        jasmine.write(output.toString());
-		        jasmine.close();
+				FileWriter jasmin = new FileWriter("gen/program.j");
+				jasmin.write(output.toString());
+
+				jasmin.close();
 			}
-			
+
 			if (options.contains(Option.AST)) { // print the AST as string
 				System.out.println(tree.toStringTree());
 			}
-			
+
 			if (options.contains(Option.DOT)) { // print the AST as DOT specification
 				DOTTreeGenerator gen = new DOTTreeGenerator();
 				StringTemplate st = gen.toDOT(tree);
 				System.out.println(st);
 			}
-			
+
 		} catch (RecognitionException e) {
 			System.err.print("ERROR: recognition exception thrown by compiler: ");
 			System.err.println(e.getMessage());
@@ -112,7 +116,7 @@ public class Stil {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private static Option getOption(String text) throws IllegalArgumentException {
 		if (!text.startsWith(OPTION_PREFIX)) {
 			return null;
@@ -125,9 +129,9 @@ public class Stil {
 		}
 		throw new IllegalArgumentException(String.format("Illegal option value '%s'", text));
 	}
-	
+
 	private static final String USAGE_MESSAGE;
-	
+
 	static {
 		StringBuilder message = new StringBuilder("Usage:");
 		for (Option option : Option.values()) {
@@ -138,21 +142,21 @@ public class Stil {
 		message.append(" [filename]");
 		USAGE_MESSAGE = message.toString();
 	}
-	
+
 	private static enum Option {
 		DOT, AST, NO_CHECKER, NO_INTERPRETER, NO_CODE_GENERATOR;
-		
+
 		private Option() {
 			text = name().toLowerCase();
 		}
-		
+
 		/** Returns the option text of this option. */
 		public String getText() {
 			return text;
 		}
-		
+
 		private final String text;
 	}
-	
+
 	private static final String OPTION_PREFIX = "-";
 }

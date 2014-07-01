@@ -98,9 +98,9 @@ expression returns [EntityType entityType = null;]
 
 operand returns [EntityType entityType = null;] 
     :   id=IDENTIFIER   { entityType = declarationChecker.retrieveDeclaration($id, $id, symtab); }
-    |   (TRUE | FALSE)  { entityType = EntityType.BOOL; }
-    |   CHAR_LITERAL    { entityType = EntityType.CHAR; }
-    |   INT_LITERAL     { entityType = EntityType.INT; }
+    |   node=(TRUE | FALSE)  { entityType = EntityType.BOOL; ((LiteralNode)$node).setEntityType(entityType); }
+    |   node=CHAR_LITERAL    { entityType = EntityType.CHAR; ((LiteralNode)$node).setEntityType(entityType); }
+    |   node=INT_LITERAL     { entityType = EntityType.INT; ((LiteralNode)$node).setEntityType(entityType); }
     ;
     
 type returns [EntityType entityType = null;]

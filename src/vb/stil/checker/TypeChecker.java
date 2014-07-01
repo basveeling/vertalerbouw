@@ -35,6 +35,8 @@ public class TypeChecker {
 		if (!declNode.isVariable()) {
 			throw new StilException(node, "identifier must be declared as variable");
 		}
+		
+		node.setEntityType(t1);
 
 		return t1;
 	}
@@ -63,6 +65,8 @@ public class TypeChecker {
 			
 			result = EntityType.BOOL;
 		}
+		
+		node.setEntityType(result);
 		
 		return result;
 	}
@@ -118,6 +122,8 @@ public class TypeChecker {
 			result = EntityType.INT;
 		}
 		
+		node.setEntityType(result);
+		
 		return result;
 	}
 
@@ -133,7 +139,9 @@ public class TypeChecker {
 		if (type == EntityType.VOID) {
 			throw new StilException(node, "print expression parameters cannot return type void");
 		}
-		
+
+		node.setEntityType(type);
+
 		return type;
 	}
 	
@@ -147,7 +155,11 @@ public class TypeChecker {
 	 */
 	public EntityType processMultiplePrintStatement(ExprNode node, EntityType type) throws StilException {
 		processPrintStatement(node, type);
+
+		EntityType result = EntityType.VOID;
+
+		node.setEntityType(result);
 		
-		return EntityType.VOID;
+		return result;
 	}
 }
