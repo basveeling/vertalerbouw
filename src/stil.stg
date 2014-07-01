@@ -1,0 +1,44 @@
+group stil;
+
+jasminFile(maxStackDepth, maxLocals, instructions) ::= <<
+; public class Program extends Object { ...}
+.class public Program
+.super java/lang/Object
+
+; public Program() { super(); }
+.method public \<init\>()V
+   aload_0
+   invokenonvirtual java/lang/Object/\<init\>()V
+   return
+.end method
+
+; main(): Expr.g will generate bytecode in this method
+.method public static main([Ljava/lang/String;)V
+   .limit stack <maxStackDepth> ; how much stack space do we need?
+   .limit locals <maxLocals> ; how many locals do we need?
+   ; code translated from input stream
+   <instructions; separator="\n">
+   ; print result on top of stack
+   return
+.end method
+>>
+
+assign(varNum,v,descr,id) ::= <<
+; compute <descr>
+<v>
+istore <varNum> ; <id>
+>>
+
+int(v) ::= "ldc <v>"
+
+var(id, varNum) ::= "iload <varNum> ; <id>"
+
+printexp(expr) ::= <<
+; push System.out onto the stack
+getstatic java/lang/System/out Ljava/io/PrintStream; 
+
+<expr>
+
+; call the PrintStream.println() method.
+invokevirtual java/io/PrintStream/println(I)V
+>>

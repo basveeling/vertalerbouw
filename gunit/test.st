@@ -1,1 +1,0 @@
-var int x; read(x); x := print({var int y; read(y); x + y;});

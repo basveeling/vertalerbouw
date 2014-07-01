@@ -6,3 +6,5 @@
 /src/vb/stil/StilChecker.java
 /src/vb/stil/StilLexer.java
 /src/vb/stil/StilParser.java
+/src/vb/stil/StilGenerator.java
+
