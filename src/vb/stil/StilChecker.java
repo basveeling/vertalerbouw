@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 src/vb/stil/StilChecker.g 2014-06-17 11:00:05
+// $ANTLR 3.5.2 src/vb/stil/StilChecker.g 2014-07-01 09:23:13
 
     package vb.stil;
     import  vb.stil.checker.*;

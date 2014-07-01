@@ -72,11 +72,12 @@ public class Stil {
 				checker.program();
 			}
 			
-			// if (!options.contains(Option.NO_INTERPRETER) && !options.contains(Option.CODE_GENERATOR)) { // interpret the AST
-			// TreeNodeStream nodes = new BufferedTreeNodeStream(tree);
-			// StilInterpreter interpreter = new StilInterpreter(nodes);
-			// interpreter.program();
-			// }
+			if (!options.contains(Option.NO_CODE_GENERATOR)) { // interpret the AST
+				CommonTreeNodeStream nodes = new CommonTreeNodeStream(tree);
+				StilGenerator generator = new StilGenerator(nodes);
+				StringBuffer code = generator.program();
+				System.out.println(code);
+			}
 			
 			if (options.contains(Option.AST)) { // print the AST as string
 				System.out.println(tree.toStringTree());
@@ -126,7 +127,7 @@ public class Stil {
 	}
 	
 	private static enum Option {
-		DOT, AST, NO_CHECKER, NO_INTERPRETER, CODE_GENERATOR;
+		DOT, AST, NO_CHECKER, NO_INTERPRETER, NO_CODE_GENERATOR;
 		
 		private Option() {
 			text = name().toLowerCase();
