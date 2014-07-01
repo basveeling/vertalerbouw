@@ -2,7 +2,7 @@ var bool a;
 var int b;
 
 // below fails
-// b := 'a';
+b := 'a';
 
 // basic test
 b := -5;

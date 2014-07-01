@@ -11,19 +11,12 @@ import org.antlr.runtime.tree.CommonTreeAdaptor;
  *
  */
 public class StilNodeAdaptor extends CommonTreeAdaptor {
-
-	/**
-	 *
-	 */
-	public StilNodeAdaptor() {
-		// TODO Auto-generated constructor stub
-	}
-
+	
 	@Override
 	public Object create(Token token) {
 		return new StilNode(token);
 	}
-	
+
 	@Override
 	public Object dupNode(Object t) {
 		if (null == t) {
@@ -31,7 +24,7 @@ public class StilNodeAdaptor extends CommonTreeAdaptor {
 		}
 		return create(((StilNode) t).token);
 	}
-
+	
 	@Override
 	public Token getToken(Object t) {
 		if (t instanceof StilNode) {
@@ -39,5 +32,5 @@ public class StilNodeAdaptor extends CommonTreeAdaptor {
 		}
 		return null;
 	}
-
+	
 }

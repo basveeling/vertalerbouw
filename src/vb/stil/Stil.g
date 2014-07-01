@@ -76,7 +76,7 @@ declaration
     ;
 
 constant_declaration
-    :   CONST<DeclNode>^ type IDENTIFIER<IdNode>
+    :   CONST<DeclNode>^ type IDENTIFIER<IdNode> BECOMES! expression
     ;
 
 var_declaration
