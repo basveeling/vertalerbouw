@@ -7,10 +7,11 @@ options {
 
 @header {
     package vb.stil;
+    import  vb.stil.codegenerator.*;
     import  vb.stil.symtab.*;
     import  vb.stil.tree.*;
     import  vb.stil.exceptions.*;
-    import  org.antlr.stringtemplate.*;
+    import  org.stringtemplate.v4.*;
 }
 
 // Alter code generation so catch-clauses get replaced with this action. 
@@ -21,18 +22,28 @@ options {
     } 
 }
 
-program[int numOps, int locals] returns [StringTemplate code = null]
-    :   ^(PROGRAM expression*) 
+@members {
+    protected CodeGenerator codeGenerator = new JasminCodeGenerator();
+}
+
+program[int numOps, int locals] returns [ST template = null]
+    @init {
+        template = codeGenerator.program();
+    }
+    :   ^(PROGRAM (st=expression { template.add("instructions", st); })*) 
     ;
 
-print_statement returns [StringTemplate code = null]
-    :   ^(PRINT expression+)
+print_statement returns [ST template = null]
+    @init { 
+        template = codeGenerator.printStatement(); 
+    }
+    :   ^(node=PRINT (st=expression { template.add("expressions", st); })+) 
     ;
 
-expression returns [StringTemplate code = null]
-    :   call=print_statement 
+expression returns [ST template = null]
+    :   st=print_statement  { template = st; }
 //    |   read_statement
-    |   call=operand
+    |   st=operand          { template = st; }
 //    |   closed_compound_expression
 //    |   ^(BECOMES IDENTIFIER expression)  { entityType = typeChecker.validateVariableAssignmentExpression($node, $id, t1, symtab); }   
 //    |   ^(OR expression expression)       -> expressionLogicOR()
@@ -53,9 +64,9 @@ expression returns [StringTemplate code = null]
 //    |   ^(UNARY_NOT expression)           { entityType = typeChecker.validateLogicExpression($node, Operator.NOT, t1); }
     ;
 
-operand returns [StringTemplate code = null]
+operand returns [ST template = null]
 //    :   id=IDENTIFIER 
 //    |   (TRUE | FALSE) 
     :   v=CHAR_LITERAL
-    |   v=INT_LITERAL
+    |   v=INT_LITERAL   { template = codeGenerator.intLiteral((LiteralNode)$v); }
     ;
