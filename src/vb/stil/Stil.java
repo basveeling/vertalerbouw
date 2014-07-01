@@ -1,6 +1,7 @@
 package vb.stil;
 
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.util.EnumSet;
 import java.util.Set;
@@ -12,6 +13,7 @@ import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
 import org.antlr.runtime.tree.DOTTreeGenerator;
 import org.antlr.stringtemplate.StringTemplate;
+import org.antlr.stringtemplate.StringTemplateGroup;
 
 import vb.stil.tree.StilNodeAdaptor;
 
@@ -65,18 +67,26 @@ public class Stil {
 			
 			StilParser.program_return result = parser.program();
 			CommonTree tree = (CommonTree) result.getTree();
-
+			StilChecker checker = null;
 			if (!options.contains(Option.NO_CHECKER)) { // check the AST
 				CommonTreeNodeStream nodes = new CommonTreeNodeStream(tree);
-				StilChecker checker = new StilChecker(nodes);
+				checker = new StilChecker(nodes);
 				checker.program();
 			}
-			
-			if (!options.contains(Option.NO_CODE_GENERATOR)) { // interpret the AST
+			System.out.println(tree.toStringTree());
+			if (!options.contains(Option.NO_CODE_GENERATOR) && !options.contains(Option.NO_CHECKER)) { // interpret the AST
 				CommonTreeNodeStream nodes = new CommonTreeNodeStream(tree);
+//				nodes.setTokenStream(tokens);
 				StilGenerator generator = new StilGenerator(nodes);
-				StringBuffer code = generator.program();
-				System.out.println(code);
+				FileReader groupFileR = new FileReader("src/stil.stg");
+				StringTemplateGroup templates = new StringTemplateGroup(groupFileR); 
+				groupFileR.close();
+				generator.setTemplateLib(templates);
+				
+				StilGenerator.program_return r2 = generator.program(100, 100); // TODO: dynamisch uit checker halen
+				
+				StringTemplate output = (StringTemplate)r2.getTemplate(); 
+		        System.out.println(output.toString()); // render full template
 			}
 			
 			if (options.contains(Option.AST)) { // print the AST as string

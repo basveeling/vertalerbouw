@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 src/vb/stil/StilGenerator.g 2014-07-01 09:23:13
+// $ANTLR 3.5.2 src/vb/stil/StilGenerator.g 2014-07-01 14:07:23
 
     package vb.stil;
     import  vb.stil.symtab.*;
@@ -13,6 +13,9 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.antlr.stringtemplate.*;
+import org.antlr.stringtemplate.language.*;
+import java.util.HashMap;
 @SuppressWarnings("all")
 public class StilGenerator extends TreeParser {
 	public static final String[] tokenNames = new String[] {
@@ -87,51 +90,76 @@ public class StilGenerator extends TreeParser {
 		super(input, state);
 	}
 
+	protected StringTemplateGroup templateLib =
+	  new StringTemplateGroup("StilGeneratorTemplates", AngleBracketTemplateLexer.class);
+
+	public void setTemplateLib(StringTemplateGroup templateLib) {
+	  this.templateLib = templateLib;
+	}
+	public StringTemplateGroup getTemplateLib() {
+	  return templateLib;
+	}
+	/** allows convenient multi-value initialization:
+	 *  "new STAttrMap().put(...).put(...)"
+	 */
+	@SuppressWarnings("serial")
+	public static class STAttrMap extends HashMap<String, Object> {
+		public STAttrMap put(String attrName, Object value) {
+			super.put(attrName, value);
+			return this;
+		}
+	}
 	@Override public String[] getTokenNames() { return StilGenerator.tokenNames; }
 	@Override public String getGrammarFileName() { return "src/vb/stil/StilGenerator.g"; }
 
 
-	    protected STGroup g = new STGroupFile("stil.stg");
-	    protected StringBuffer res;
+	    protected SymbolTable<IdEntry> symtab;
 
+
+	public static class program_return extends TreeRuleReturnScope {
+		public StringTemplate st;
+		public Object getTemplate() { return st; }
+		public String toString() { return st==null?null:st.toString(); }
+	};
 
 
 	// $ANTLR start "program"
-	// src/vb/stil/StilGenerator.g:29:1: program returns [StringBuffer res = new StringBuffer()] : ^( PROGRAM (asdfasdf= expression )* ) ;
-	public final StringBuffer program() throws RecognitionException {
-		StringBuffer res =  new StringBuffer();
+	// src/vb/stil/StilGenerator.g:29:1: program[int numOps, int locals] : ^( PROGRAM (s+= expression )* ) -> jasminFile(instructions=$smaxStackDepth=numOps+1+1maxLocals=locals);
+	public final StilGenerator.program_return program(int numOps, int locals) throws RecognitionException {
+		StilGenerator.program_return retval = new StilGenerator.program_return();
+		retval.start = input.LT(1);
 
+		List<Object> list_s=null;
+		RuleReturnScope s = null;
+
+		    this.symtab = symtab;
 
 		try {
-			// src/vb/stil/StilGenerator.g:30:5: ( ^( PROGRAM (asdfasdf= expression )* ) )
-			// src/vb/stil/StilGenerator.g:30:9: ^( PROGRAM (asdfasdf= expression )* )
+			// src/vb/stil/StilGenerator.g:33:5: ( ^( PROGRAM (s+= expression )* ) -> jasminFile(instructions=$smaxStackDepth=numOps+1+1maxLocals=locals))
+			// src/vb/stil/StilGenerator.g:33:9: ^( PROGRAM (s+= expression )* )
 			{
-			match(input,PROGRAM,FOLLOW_PROGRAM_in_program101); 
-
-			            this.res = res;
-			            ST st = g.getInstanceOf("program");
-			            //st.add("type", "int");
-			        
+			match(input,PROGRAM,FOLLOW_PROGRAM_in_program111); 
 			if ( input.LA(1)==Token.DOWN ) {
 				match(input, Token.DOWN, null); 
-				// src/vb/stil/StilGenerator.g:34:10: (asdfasdf= expression )*
+				// src/vb/stil/StilGenerator.g:33:19: (s+= expression )*
 				loop1:
 				while (true) {
 					int alt1=2;
 					int LA1_0 = input.LA(1);
-					if ( (LA1_0==INT_LITERAL||LA1_0==PRINT) ) {
+					if ( (LA1_0==PRINT) ) {
 						alt1=1;
 					}
 
 					switch (alt1) {
 					case 1 :
-						// src/vb/stil/StilGenerator.g:34:11: asdfasdf= expression
+						// src/vb/stil/StilGenerator.g:33:20: s+= expression
 						{
-						pushFollow(FOLLOW_expression_in_program109);
-						expression();
+						pushFollow(FOLLOW_expression_in_program118);
+						s=expression();
 						state._fsp--;
 
-						st.add("code", asdfasdf);
+						if (list_s==null) list_s=new ArrayList<Object>();
+						list_s.add(s.getTemplate());
 						}
 						break;
 
@@ -143,7 +171,14 @@ public class StilGenerator extends TreeParser {
 				match(input, Token.UP, null); 
 			}
 
-			res.append(st.render());
+			// TEMPLATE REWRITE
+			// 33:40: -> jasminFile(instructions=$smaxStackDepth=numOps+1+1maxLocals=locals)
+			{
+				retval.st = templateLib.getInstanceOf("jasminFile",new STAttrMap().put("instructions", list_s).put("maxStackDepth", numOps+1+1).put("maxLocals", locals));
+			}
+
+
+
 			}
 
 		}
@@ -155,108 +190,46 @@ public class StilGenerator extends TreeParser {
 		finally {
 			// do for sure before leaving
 		}
-		return res;
+		return retval;
 	}
 	// $ANTLR end "program"
 
 
-
-	// $ANTLR start "print_statement"
-	// src/vb/stil/StilGenerator.g:38:1: print_statement : ^(node= PRINT t= expression (t= expression )* ) ;
-	public final void print_statement() throws RecognitionException {
-		StilNode node=null;
-
-		try {
-			// src/vb/stil/StilGenerator.g:39:5: ( ^(node= PRINT t= expression (t= expression )* ) )
-			// src/vb/stil/StilGenerator.g:39:9: ^(node= PRINT t= expression (t= expression )* )
-			{
-			node=(StilNode)match(input,PRINT,FOLLOW_PRINT_in_print_statement148); 
-			match(input, Token.DOWN, null); 
-			pushFollow(FOLLOW_expression_in_print_statement152);
-			expression();
-			state._fsp--;
-
-			// src/vb/stil/StilGenerator.g:39:35: (t= expression )*
-			loop2:
-			while (true) {
-				int alt2=2;
-				int LA2_0 = input.LA(1);
-				if ( (LA2_0==INT_LITERAL||LA2_0==PRINT) ) {
-					alt2=1;
-				}
-
-				switch (alt2) {
-				case 1 :
-					// src/vb/stil/StilGenerator.g:39:36: t= expression
-					{
-					pushFollow(FOLLOW_expression_in_print_statement157);
-					expression();
-					state._fsp--;
-
-					}
-					break;
-
-				default :
-					break loop2;
-				}
-			}
-
-			match(input, Token.UP, null); 
-
-			}
-
-		}
-		 
-		    catch (RecognitionException e) { 
-		        throw e; 
-		    } 
-
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "print_statement"
-
+	public static class expression_return extends TreeRuleReturnScope {
+		public StringTemplate st;
+		public Object getTemplate() { return st; }
+		public String toString() { return st==null?null:st.toString(); }
+	};
 
 
 	// $ANTLR start "expression"
-	// src/vb/stil/StilGenerator.g:42:1: expression : ( print_statement | INT_LITERAL );
-	public final void expression() throws RecognitionException {
+	// src/vb/stil/StilGenerator.g:38:1: expression : PRINT expr= intlit -> printexp(expr=$expr.st);
+	public final StilGenerator.expression_return expression() throws RecognitionException {
+		StilGenerator.expression_return retval = new StilGenerator.expression_return();
+		retval.start = input.LT(1);
+
+		TreeRuleReturnScope expr =null;
+
 		try {
-			// src/vb/stil/StilGenerator.g:43:5: ( print_statement | INT_LITERAL )
-			int alt3=2;
-			int LA3_0 = input.LA(1);
-			if ( (LA3_0==PRINT) ) {
-				alt3=1;
-			}
-			else if ( (LA3_0==INT_LITERAL) ) {
-				alt3=2;
+			// src/vb/stil/StilGenerator.g:39:5: ( PRINT expr= intlit -> printexp(expr=$expr.st))
+			// src/vb/stil/StilGenerator.g:39:7: PRINT expr= intlit
+			{
+			match(input,PRINT,FOLLOW_PRINT_in_expression261); 
+			System.out.println("print");
+			pushFollow(FOLLOW_intlit_in_expression267);
+			expr=intlit();
+			state._fsp--;
+
+			// TEMPLATE REWRITE
+			// 39:56: -> printexp(expr=$expr.st)
+			{
+				retval.st = templateLib.getInstanceOf("printexp",new STAttrMap().put("expr", (expr!=null?((StringTemplate)expr.getTemplate()):null)));
 			}
 
-			else {
-				NoViableAltException nvae =
-					new NoViableAltException("", 3, 0, input);
-				throw nvae;
-			}
 
-			switch (alt3) {
-				case 1 :
-					// src/vb/stil/StilGenerator.g:43:7: print_statement
-					{
-					pushFollow(FOLLOW_print_statement_in_expression177);
-					print_statement();
-					state._fsp--;
-
-					}
-					break;
-				case 2 :
-					// src/vb/stil/StilGenerator.g:44:7: INT_LITERAL
-					{
-					match(input,INT_LITERAL,FOLLOW_INT_LITERAL_in_expression185); 
-					}
-					break;
 
 			}
+
 		}
 		 
 		    catch (RecognitionException e) { 
@@ -266,18 +239,62 @@ public class StilGenerator extends TreeParser {
 		finally {
 			// do for sure before leaving
 		}
+		return retval;
 	}
 	// $ANTLR end "expression"
+
+
+	public static class intlit_return extends TreeRuleReturnScope {
+		public StringTemplate st;
+		public Object getTemplate() { return st; }
+		public String toString() { return st==null?null:st.toString(); }
+	};
+
+
+	// $ANTLR start "intlit"
+	// src/vb/stil/StilGenerator.g:41:1: intlit : INT_LITERAL -> int(v=$INT_LITERAL.text);
+	public final StilGenerator.intlit_return intlit() throws RecognitionException {
+		StilGenerator.intlit_return retval = new StilGenerator.intlit_return();
+		retval.start = input.LT(1);
+
+		StilNode INT_LITERAL1=null;
+
+		try {
+			// src/vb/stil/StilGenerator.g:42:5: ( INT_LITERAL -> int(v=$INT_LITERAL.text))
+			// src/vb/stil/StilGenerator.g:42:7: INT_LITERAL
+			{
+			INT_LITERAL1=(StilNode)match(input,INT_LITERAL,FOLLOW_INT_LITERAL_in_intlit292); 
+			System.out.println("lit");
+			// TEMPLATE REWRITE
+			// 42:49: -> int(v=$INT_LITERAL.text)
+			{
+				retval.st = templateLib.getInstanceOf("int",new STAttrMap().put("v", (INT_LITERAL1!=null?INT_LITERAL1.getText():null)));
+			}
+
+
+
+			}
+
+		}
+		 
+		    catch (RecognitionException e) { 
+		        throw e; 
+		    } 
+
+		finally {
+			// do for sure before leaving
+		}
+		return retval;
+	}
+	// $ANTLR end "intlit"
 
 	// Delegated rules
 
 
 
-	public static final BitSet FOLLOW_PROGRAM_in_program101 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_program109 = new BitSet(new long[]{0x0000002000800008L});
-	public static final BitSet FOLLOW_PRINT_in_print_statement148 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_print_statement152 = new BitSet(new long[]{0x0000002000800008L});
-	public static final BitSet FOLLOW_expression_in_print_statement157 = new BitSet(new long[]{0x0000002000800008L});
-	public static final BitSet FOLLOW_print_statement_in_expression177 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_INT_LITERAL_in_expression185 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_PROGRAM_in_program111 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_program118 = new BitSet(new long[]{0x0000002000000008L});
+	public static final BitSet FOLLOW_PRINT_in_expression261 = new BitSet(new long[]{0x0000000000800000L});
+	public static final BitSet FOLLOW_intlit_in_expression267 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INT_LITERAL_in_intlit292 = new BitSet(new long[]{0x0000000000000002L});
 }

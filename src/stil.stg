@@ -1,39 +1,49 @@
-program(code) ::=  <<
-.source Test.j
-.class public HelloWorld
-    .super java/lang/Object
+group stil;
 
-    ;
-    ; standard initializer (calls java.lang.Object's initializer)
-    ;
-    .method public \<init\>()V
-       aload_0
-       invokenonvirtual java/lang/Object/\<init\>()V
-       return
-    .end method
+jasminFile(maxStackDepth, maxLocals, instructions) ::= <<
+; public class Calc extends Object { ...}
+.class public Calc
+.super java/lang/Object
 
-    ;
-    ; main() - prints out Hello World
-    ;
-    .method public static main([Ljava/lang/String;)V
-      .limit stack 10 // TODO: Dynamisch bepalen
-      .limit locals 2 // TODO: Dynamisch bepalen
-      // CODE HERE
-      <code>
-      ; done
-      return
-    .end method
+; public Calc() { super(); }
+.method public \<init\>()V
+   aload_0
+   invokenonvirtual java/lang/Object/\<init\>()V
+   return
+.end method
+
+; main(): Expr.g will generate bytecode in this method
+.method public static main([Ljava/lang/String;)V
+   .limit stack <maxStackDepth> ; how much stack space do we need?
+   .limit locals <maxLocals> ; how many locals do we need?
+   getstatic java/lang/System/out Ljava/io/PrintStream;
+   ; code translated from input stream
+   <instructions; separator="\n">
+   ; print result on top of stack
+   invokevirtual java/io/PrintStream/println(I)V
+   return
+.end method
 >>
 
+assign(varNum,v,descr,id) ::= <<
+; compute <descr>
+<v>
+istore <varNum> ; <id>
+>>
 
-print(expression) ::= <<
+int(v) ::= "ldc <v>"
+
+var(id, varNum) ::= "iload <varNum> ; <id>"
+
+printexp(expr) ::= <<
+
+<expr> lol
 ; push System.out onto the stack
-getstatic java/lang/System/out Ljava/io/PrintStream;
+getstaic java/lang/System/out Ljava/io/PrintStream; 
 
-<expression>
 
 ; call the PrintStream.println() method.
-invokevirtual java/io/PrintStream/println(I;)V // use type
->>
+invokevirtual java/io/PrintStream/println(I;)V
+<expr>
 
-int_literal(literal) ::= "bipush\n<literal>;push literal value"
+>>

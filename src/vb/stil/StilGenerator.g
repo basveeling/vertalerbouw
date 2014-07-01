@@ -3,6 +3,7 @@ tree grammar StilGenerator;
 options {
     tokenVocab=Stil;                    // import tokens from Stil.tokens
     ASTLabelType = StilNode;            // AST nodes are of type StilNode
+    output=template;
 }
 
 @header {
@@ -22,24 +23,21 @@ options {
 }
 
 @members {
-    protected STGroup g = new STGroupFile("stil.stg");
-    protected StringBuffer res;
+    protected SymbolTable<IdEntry> symtab;
 }
 
-program returns [StringBuffer res = new StringBuffer()] 
-    :   ^(PROGRAM {
-            this.res = res;
-            ST st = g.getInstanceOf("program");
-            //st.add("type", "int");
-        }(expression)*) 
-        {res.append(st.render());}
-    ;
- 
-print_statement
-    :   ^(node=PRINT t=expression)
+program[int numOps, int locals]//SymbolTable<IdEntry> symtab]
+@init {
+    this.symtab = symtab;
+}
+    :   ^(PROGRAM (s += expression)* ) -> jasminFile(instructions={$s},
+                                                   maxStackDepth={numOps+1+1},
+                                                   maxLocals={locals}) // maxLocals={locals.size()+1})
     ;
 
-expression returns [StringBuffer res = new StringBuffer()]
-    : print_statement
-    | lit = INT_LITERAL {res.append($lit.value)}
+expression
+    : PRINT {System.out.println("print");} expr=intlit -> printexp(expr={$expr.st})
+    ;
+intlit
+    : INT_LITERAL {System.out.println("lit");}  -> int(v={$INT_LITERAL.text})
     ;
