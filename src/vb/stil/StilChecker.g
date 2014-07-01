@@ -38,28 +38,27 @@ declaration
 
 constant_declaration
     :   ^(CONST t=type id=IDENTIFIER expr=expression) { 
-            declarationChecker.processConstantDeclaration($CONST, $id, t, symtab); 
-            typeChecker.validateConstantAssignmentExpression($CONST, $id, expr, symtab);
+            declarationChecker.processConstantDeclaration((DeclNode)$CONST, $id, t, symtab); 
         }
     ;
 
 var_declaration
     :   ^(VAR t=type id=IDENTIFIER) { 
-            declarationChecker.processVariableDeclaration($VAR, $id, t, symtab); 
+            declarationChecker.processVariableDeclaration((DeclNode)$VAR, $id, t, symtab);
         }
     ;
 
 print_statement returns [EntityType entityType = null;] 
     :   ^(  node=PRINT 
-            t=expression { entityType = typeChecker.validatePrintStatement($node, t); } 
-         (  t=expression { entityType = typeChecker.validateMultiplePrintStatement($node, t); })*)
+            t=expression { entityType = typeChecker.processPrintStatement((ExprNode)$node, t); } 
+         (  t=expression { entityType = typeChecker.processMultiplePrintStatement((ExprNode)$node, t); })*)
     ;
 
 
 read_statement returns [EntityType entityType = null;] 
     :   ^(  node=READ 
-            id=IDENTIFIER { entityType = declarationChecker.retrieveDeclaration($node, $id, symtab); } 
-        (   id=IDENTIFIER { entityType = declarationChecker.retrieveMultipleDeclaration($node, $id, symtab); })*)
+            id=IDENTIFIER { entityType = declarationChecker.retrieveDeclaration((ExprNode)$node, $id, symtab); } 
+        (   id=IDENTIFIER { entityType = declarationChecker.retrieveMultipleDeclaration((ExprNode)$node, $id, symtab); })*)
     ;
 
 compound_expression returns [EntityType entityType = null;]
@@ -77,23 +76,23 @@ expression returns [EntityType entityType = null;]
     |   r=read_statement                { entityType = r;}
     |   o=operand                       { entityType = o; }
     |   c=closed_compound_expression    { entityType = c; }
-    |   ^(node=BECOMES id=IDENTIFIER t1=expression)  { entityType = typeChecker.validateVariableAssignmentExpression($node, $id, t1, symtab); }   
-    |   ^(node=OR t1=expression t2=expression)       { entityType = typeChecker.validateLogicExpression($node, Operator.OR, t1, t2); }
-    |   ^(node=AND t1=expression t2=expression)      { entityType = typeChecker.validateLogicExpression($node, Operator.AND, t1, t2); }
-    |   ^(node=LT t1=expression t2=expression)       { entityType = typeChecker.validateLogicExpression($node, Operator.LT, t1, t2); }
-    |   ^(node=LTE t1=expression t2=expression)      { entityType = typeChecker.validateLogicExpression($node, Operator.LTE, t1, t2); }
-    |   ^(node=GT t1=expression t2=expression)       { entityType = typeChecker.validateLogicExpression($node, Operator.GT, t1, t2); }
-    |   ^(node=GTE t1=expression t2=expression)      { entityType = typeChecker.validateLogicExpression($node, Operator.GTE, t1, t2); }
-    |   ^(node=EQ t1=expression t2=expression)       { entityType = typeChecker.validateLogicExpression($node, Operator.EQ, t1, t2); }
-    |   ^(node=NEQ t1=expression t2=expression)      { entityType = typeChecker.validateLogicExpression($node, Operator.NEQ, t1, t2); }
-    |   ^(node=PLUS t1=expression t2=expression)     { entityType = typeChecker.validateLogicExpression($node, Operator.PLUS, t1, t2); }
-    |   ^(node=MINUS t1=expression t2=expression)    { entityType = typeChecker.validateLogicExpression($node, Operator.MINUS, t1, t2); }
-    |   ^(node=DIVIDE t1=expression t2=expression)   { entityType = typeChecker.validateLogicExpression($node, Operator.DIVIDE, t1, t2); }
-    |   ^(node=MULTIPLY t1=expression t2=expression) { entityType = typeChecker.validateLogicExpression($node, Operator.MULTIPLY, t1, t2); }
-    |   ^(node=MODULO t1=expression t2=expression)   { entityType = typeChecker.validateLogicExpression($node, Operator.MODULO, t1, t2); }
-    |   ^(node=UNARY_PLUS t1=expression)             { entityType = typeChecker.validateLogicExpression($node, Operator.PLUS, t1); }
-    |   ^(node=UNARY_MINUS t1=expression)            { entityType = typeChecker.validateLogicExpression($node, Operator.MINUS, t1); }
-    |   ^(node=UNARY_NOT t1=expression)              { entityType = typeChecker.validateLogicExpression($node, Operator.NOT, t1); }
+    |   ^(node=BECOMES id=IDENTIFIER t1=expression)  { entityType = typeChecker.processAssignmentExpression((ExprNode)$node, $id, t1, symtab); }   
+    |   ^(node=OR t1=expression t2=expression)       { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.OR, t1, t2); }
+    |   ^(node=AND t1=expression t2=expression)      { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.AND, t1, t2); }
+    |   ^(node=LT t1=expression t2=expression)       { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.LT, t1, t2); }
+    |   ^(node=LTE t1=expression t2=expression)      { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.LTE, t1, t2); }
+    |   ^(node=GT t1=expression t2=expression)       { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.GT, t1, t2); }
+    |   ^(node=GTE t1=expression t2=expression)      { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.GTE, t1, t2); }
+    |   ^(node=EQ t1=expression t2=expression)       { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.EQ, t1, t2); }
+    |   ^(node=NEQ t1=expression t2=expression)      { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.NEQ, t1, t2); }
+    |   ^(node=PLUS t1=expression t2=expression)     { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.PLUS, t1, t2); }
+    |   ^(node=MINUS t1=expression t2=expression)    { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.MINUS, t1, t2); }
+    |   ^(node=DIVIDE t1=expression t2=expression)   { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.DIVIDE, t1, t2); }
+    |   ^(node=MULTIPLY t1=expression t2=expression) { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.MULTIPLY, t1, t2); }
+    |   ^(node=MODULO t1=expression t2=expression)   { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.MODULO, t1, t2); }
+    |   ^(node=UNARY_PLUS t1=expression)             { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.PLUS, t1); }
+    |   ^(node=UNARY_MINUS t1=expression)            { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.MINUS, t1); }
+    |   ^(node=UNARY_NOT t1=expression)              { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.NOT, t1); }
     ;
     
 
