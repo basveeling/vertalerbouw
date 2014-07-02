@@ -1,123 +1,122 @@
 group stil;
 typeCharMap ::= [
-        "int":"i",
-        "boolean":"b",
-        "char":"c",
-        default:"i" // anything other than an atomic type
+    "int":"i",
+    "boolean":"b",
+    "char":"c",
+    default:"i" // anything other than an atomic type
 ]
 
 program(maxStackDepth, maxLocals, instructions) ::= <<
-    .class public Program
-    .super java/lang/Object
-    .method public \<init>()V
-        aload_0
-        invokenonvirtual java/lang/Object/\<init>()V
-        return
-    .end method
+  .class public Program
+  .super java/lang/Object
+  .method public \<init>()V
+    aload_0
+    invokenonvirtual java/lang/Object/\<init>()V
+    return
+  .end method
 
-    .method public static main([Ljava/lang/String;)V
-        .limit stack 102
-        .limit locals 100
-        <instructions ; separator="\npop\n">
-        pop
-        return
-    .end method
+  .method public static main([Ljava/lang/String;)V
+    .limit stack 102
+    .limit locals 100
+    <instructions ; separator="\npop\n">
+    pop
+    return
+  .end method
 >>
 
 becomes(varnum, expression, id) ::= <<
-    <expression>
-    dup
-    istore <varnum> ; <id>
+  <expression>
+  dup
+  istore <varnum> ; <id>
 >>
 
 
 
 idOperand(id, varnum, type) ::= <<
-    iload <varnum> ; <id>
+  iload <varnum> ; <id>
 >>
 
 
 charLiteral(value) ::= <<
-    ldc "<value>"
+  ldc "<value>"
 >>
 
 
 intLiteral(value) ::= <<
-    ldc <value>
+  ldc <value>
 >>
 
 
 divide(expr1, expr2) ::= <<
-    <expr1>
-    <expr2>
-    idiv
+  <expr1>
+  <expr2>
+  idiv
 >>
 
 
 minus(expr1, expr2) ::= <<
-    <expr1>
-    <expr2>
-    isub
+  <expr1>
+  <expr2>
+  isub
 >>
 
 
 not(expr1) ::= <<
-    <expr1>
-    ifeq
+  <expr1>
+  ifeq
 >>
 
 
 modulo(expr1, expr2) ::= <<
-    <expr1>
-    <expr2>
-    irem
+  <expr1>
+  <expr2>
+  irem
 >>
 
 
 multiply(expr1, expr2) ::= <<
-    <expr1>
-    <expr2>
-    imul
+  <expr1>
+  <expr2>
+  imul
 >>
 
 
 plus(expr1, expr2) ::= <<
-    <expr1>
-    <expr2>
-    iadd
+  <expr1>
+  <expr2>
+  iadd
 >>
 
 
 unary_minus(expr1) ::= <<
-    <expr1>
-    ineg
+  <expr1>
+  ineg
 >>
 
 
 unary_plus(expr1) ::= <<
-    <expr1>
+  <expr1>
 >>
 
 
 printChar(expression) ::= <<
-    <expression>
-    dup
-    getstatic java/lang/System/out Ljava/io/PrintStream; 
-    swap
-    invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
+  <expression>
+  dup
+  getstatic java/lang/System/out Ljava/io/PrintStream; 
+  swap
+  invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
 >>
 
 
 printInt(expression) ::= <<
-    <expression>
-    dup
-    getstatic java/lang/System/out Ljava/io/PrintStream; 
-    swap
-    invokevirtual java/io/PrintStream/println(I)V
+  <expression>
+  dup
+  getstatic java/lang/System/out Ljava/io/PrintStream; 
+  swap
+  invokevirtual java/io/PrintStream/println(I)V
 >>
 
 
 printMultiple(statements) ::= <<
-    <statements ; separator="\npop\n">
-    ; TODO: Make sure this doesn't return anything.
+  <statements ; separator="\npop\n">
 >>
