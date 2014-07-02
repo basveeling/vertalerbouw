@@ -1,5 +1,10 @@
 group stil;
-
+typeCharMap ::= [
+        "int":"i",
+        "boolean":"b",
+        "char":"c",
+        default:"i" // anything other than an atomic type
+]
 
 program(maxStackDepth, maxLocals, instructions) ::= <<
     .class public Program
@@ -13,21 +18,21 @@ program(maxStackDepth, maxLocals, instructions) ::= <<
     .method public static main([Ljava/lang/String;)V
         .limit stack 102
         .limit locals 100
-            <instructions ; separator="\n">
+            <instructions ; separator="\npop\n">
         return
     .end method
 >>
 
-
-assign(varNum, v, id) ::= <<
-    <v>
-    istore <varNum> ; <id>
+becomes(varnum, expression, id) ::= <<
+    <expression>
+    dup
+    istore <varnum> ; <id>
 >>
 
 
 
-var(id, varNum) ::= <<
-    iload <varNum> ; <id>
+idOperand(id, varnum, type) ::= <<
+    iload <varnum> ; <id>
 >>
 
 
@@ -42,19 +47,25 @@ intLiteral(value) ::= <<
 
 
 printChar(expression) ::= <<
-    getstatic java/lang/System/out Ljava/io/PrintStream; 
     <expression>
+    dup
+    getstatic java/lang/System/out Ljava/io/PrintStream; 
+    swap
     invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
 >>
 
 
 printInt(expression) ::= <<
-    getstatic java/lang/System/out Ljava/io/PrintStream; 
     <expression>
+    dup
+    getstatic java/lang/System/out Ljava/io/PrintStream; 
+    swap
     invokevirtual java/io/PrintStream/println(I)V
 >>
 
 
 printMultiple(statements) ::= <<
-    <statements ; separator="\n">
+    <statements ; separator="\npop\n">
+    dup
+    ; TODO: Make sure this doesn't return anything.
 >>

@@ -3,7 +3,7 @@ package vb.stil.tree;
 import org.antlr.runtime.Token;
 
 // TODO: Remove?
-public class IdNode extends StilNode {
+public class IdNode extends ExprNode {
 	public IdNode() {
 		super();
 	}

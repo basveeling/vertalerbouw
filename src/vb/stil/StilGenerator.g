@@ -27,7 +27,26 @@ options {
 }
 
 program[int numOps, int locals] returns [ST template = null] 
-    :   ^(PROGRAM expression*) { template = codeGenerator.program((StilNode)$PROGRAM); }
+    :   ^(PROGRAM (declaration | expression)*) { template = codeGenerator.program((StilNode)$PROGRAM); }
+    ;
+
+    
+declaration returns [ST template = null]
+    :   var_declaration
+    //|   constant_declaration 
+    ;
+
+
+// constant_declaration returns [ST template = null]
+//     :   ^(CONST t=type id=IDENTIFIER expr=expression) { 
+//             codeGenerator.constDeclaration((DeclNode)$CONST); ((DeclNode)$CONST).setST(template); 
+//         }
+//     ;
+
+var_declaration returns [ST template = null]
+    :   ^(VAR type id=IDENTIFIER) { 
+            codeGenerator.varDeclaration((DeclNode)$VAR,(IdNode)$id); ((DeclNode)$VAR).setST(template); 
+        }
     ;
 
 print_statement returns [ST template = null]
@@ -39,7 +58,7 @@ expression returns [ST template = null]
 //    |   read_statement
     |   st=operand          { template = st; }
 //    |   closed_compound_expression
-//    |   ^(BECOMES IDENTIFIER expression)  { entityType = typeChecker.validateVariableAssignmentExpression($node, $id, t1, symtab); }   
+    |   ^(BECOMES IDENTIFIER expression)  { template = codeGenerator.becomes((ExprNode)$BECOMES); ((ExprNode)$BECOMES).setST(template);  }   
 //    |   ^(OR expression expression)       -> expressionLogicOR()
 //    |   ^(AND expression expression)      { entityType = typeChecker.validateLogicExpression($node, Operator.AND, t1, t2); }
 //    |   ^(LT expression expression)       { entityType = typeChecker.validateLogicExpression($node, Operator.LT, t1, t2); }
@@ -59,8 +78,16 @@ expression returns [ST template = null]
     ;
 
 operand returns [ST template = null]
-//    :   id=IDENTIFIER 
+    :   id=IDENTIFIER   { template = codeGenerator.idOperand((IdNode)$id); ((IdNode)$id).setST(template); }
 //    |   (TRUE | FALSE) 
-    :   v=CHAR_LITERAL  { template = codeGenerator.charLiteral((LiteralNode)$v); ((LiteralNode)$v).setST(template); }
+    |   v=CHAR_LITERAL  { template = codeGenerator.charLiteral((LiteralNode)$v); ((LiteralNode)$v).setST(template); }
     |   v=INT_LITERAL   { template = codeGenerator.intLiteral((LiteralNode)$v); ((LiteralNode)$v).setST(template); }
     ;
+
+type
+    :   BOOL
+    |   CHAR
+    |   INT
+    ;
+    
+

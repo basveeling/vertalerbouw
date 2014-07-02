@@ -1,5 +1,8 @@
-print(1);
-print(5);
-print(3,4);
-print('a');
-print(6);
+var int i;
+var int j;
+i := j := 6;
+print(i);
+print(j);
+j := 7;
+print(i);
+print(j);
