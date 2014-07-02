@@ -77,22 +77,22 @@ expression returns [EntityType entityType = null;]
     |   o=operand                       { entityType = o; }
     |   c=closed_compound_expression    { entityType = c; }
     |   ^(node=BECOMES id=IDENTIFIER t1=expression)  { entityType = typeChecker.processAssignmentExpression((ExprNode)$node, $id, t1, symtab); }   
-    |   ^(node=OR t1=expression t2=expression)       { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.OR, t1, t2); }
-    |   ^(node=AND t1=expression t2=expression)      { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.AND, t1, t2); }
-    |   ^(node=LT t1=expression t2=expression)       { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.LT, t1, t2); }
-    |   ^(node=LTE t1=expression t2=expression)      { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.LTE, t1, t2); }
-    |   ^(node=GT t1=expression t2=expression)       { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.GT, t1, t2); }
-    |   ^(node=GTE t1=expression t2=expression)      { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.GTE, t1, t2); }
-    |   ^(node=EQ t1=expression t2=expression)       { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.EQ, t1, t2); }
-    |   ^(node=NEQ t1=expression t2=expression)      { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.NEQ, t1, t2); }
-    |   ^(node=PLUS t1=expression t2=expression)     { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.PLUS, t1, t2); }
-    |   ^(node=MINUS t1=expression t2=expression)    { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.MINUS, t1, t2); }
-    |   ^(node=DIVIDE t1=expression t2=expression)   { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.DIVIDE, t1, t2); }
-    |   ^(node=MULTIPLY t1=expression t2=expression) { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.MULTIPLY, t1, t2); }
-    |   ^(node=MODULO t1=expression t2=expression)   { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.MODULO, t1, t2); }
-    |   ^(node=UNARY_PLUS t1=expression)             { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.PLUS, t1); }
-    |   ^(node=UNARY_MINUS t1=expression)            { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.MINUS, t1); }
-    |   ^(node=UNARY_NOT t1=expression)              { entityType = typeChecker.processLogicExpression((ExprNode)$node, Operator.NOT, t1); }
+    |   ^(node=OR t1=expression t2=expression)       { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.OR, t1, t2); }
+    |   ^(node=AND t1=expression t2=expression)      { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.AND, t1, t2); }
+    |   ^(node=LT t1=expression t2=expression)       { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.LT, t1, t2); }
+    |   ^(node=LTE t1=expression t2=expression)      { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.LTE, t1, t2); }
+    |   ^(node=GT t1=expression t2=expression)       { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.GT, t1, t2); }
+    |   ^(node=GTE t1=expression t2=expression)      { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.GTE, t1, t2); }
+    |   ^(node=EQ t1=expression t2=expression)       { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.EQ, t1, t2); }
+    |   ^(node=NEQ t1=expression t2=expression)      { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.NEQ, t1, t2); }
+    |   ^(node=PLUS t1=expression t2=expression)     { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.PLUS, t1, t2); }
+    |   ^(node=MINUS t1=expression t2=expression)    { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.MINUS, t1, t2); }
+    |   ^(node=DIVIDE t1=expression t2=expression)   { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.DIVIDE, t1, t2); }
+    |   ^(node=MULTIPLY t1=expression t2=expression) { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.MULTIPLY, t1, t2); }
+    |   ^(node=MODULO t1=expression t2=expression)   { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.MODULO, t1, t2); }
+    |   ^(node=UNARY_PLUS t1=expression)             { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.UNARY_PLUS, t1); }
+    |   ^(node=UNARY_MINUS t1=expression)            { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.UNARY_MINUS, t1); }
+    |   ^(node=UNARY_NOT t1=expression)              { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.NOT, t1); }
     ;
     
 
