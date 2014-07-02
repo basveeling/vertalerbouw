@@ -7,4 +7,5 @@
 /src/vb/stil/StilLexer.java
 /src/vb/stil/StilParser.java
 /src/vb/stil/StilGenerator.java
-
+/gen/program.j
+/gen/Program.class
