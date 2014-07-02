@@ -47,7 +47,7 @@ tokens {
     UNARY_NOT     =   'not'       ;
     UNARY_PLUS    =   'plus'      ;
     VAR           =   'var'       ;
-    COMPOUND_EXPR =   'compound'       ;
+    COMPOUND_EXPR =   'compound'  ;
 }
 
 @lexer::header {
@@ -93,55 +93,55 @@ compound_expression
     ;
 
 closed_compound_expression
-    :   LCURLY compound_expression RCURLY -> ^(COMPOUND_EXPR compound_expression)
+    :   LCURLY compound_expression RCURLY -> ^(COMPOUND_EXPR<ExprNode> compound_expression)
     ;
 
 // priority 6
 arithmetic_expression
-    :   arithmetic_expression_pr5 (OR^ arithmetic_expression_pr5)*
+    :   arithmetic_expression_pr5 (OR<ExprNode>^ arithmetic_expression_pr5)*
     ;
 
 arithmetic_expression_pr5
-    :   arithmetic_expression_pr4 (AND^ arithmetic_expression_pr4)*
+    :   arithmetic_expression_pr4 (AND<ExprNode>^ arithmetic_expression_pr4)*
     ;
 
 arithmetic_expression_pr4
-    :   arithmetic_expression_pr3 ((LT^ | LTE^ | GT^ | GTE^ | EQ^ | NEQ^) arithmetic_expression_pr3)*
+    :   arithmetic_expression_pr3 ((LT<ExprNode>^ | LTE<ExprNode>^ | GT<ExprNode>^ | GTE<ExprNode>^ | EQ<ExprNode>^ | NEQ<ExprNode>^) arithmetic_expression_pr3)*
     ;
 
 arithmetic_expression_pr3
-    :   arithmetic_expression_pr2 ((PLUS^ | MINUS^) arithmetic_expression_pr2)*
+    :   arithmetic_expression_pr2 ((PLUS<ExprNode>^ | MINUS<ExprNode>^) arithmetic_expression_pr2)*
     ;
 
 arithmetic_expression_pr2
-    :   arithmetic_expression_pr1 ((DIVIDE^ | MULTIPLY^ | MODULO^) arithmetic_expression_pr1)*
+    :   arithmetic_expression_pr1 ((DIVIDE<ExprNode>^ | MULTIPLY<ExprNode>^ | MODULO<ExprNode>^) arithmetic_expression_pr1)*
     ;
 
 arithmetic_expression_pr1
-    :   PLUS operand    -> ^(UNARY_PLUS operand)
-    |   MINUS operand   -> ^(UNARY_MINUS operand)
-    |   NOT operand     -> ^(UNARY_NOT operand)
+    :   PLUS operand    -> ^(UNARY_PLUS<ExprNode> operand)
+    |   MINUS operand   -> ^(UNARY_MINUS<ExprNode> operand)
+    |   NOT operand     -> ^(UNARY_NOT<ExprNode> operand)
     |   operand
     ;
 
 operand
     :   bool_literal
-    |   CHAR_LITERAL
-    |   INT_LITERAL
+    |   CHAR_LITERAL<LiteralNode>
+    |   INT_LITERAL<LiteralNode>
     |   IDENTIFIER<IdNode>
     |   LPAREN! expression RPAREN!
     ;
 
 assignment_statement
-    :   IDENTIFIER<IdNode> BECOMES^ expression
+    :   IDENTIFIER<IdNode> BECOMES<ExprNode>^ expression
     ;
 
 print_statement
-    :   PRINT^ LPAREN! expression (COMMA! expression)* RPAREN!
+    :   PRINT<ExprNode>^ LPAREN! expression (COMMA! expression)* RPAREN!
     ;
 
 read_statement
-    :   READ^ LPAREN! IDENTIFIER<IdNode> (COMMA! IDENTIFIER<IdNode>)* RPAREN!
+    :   READ<ExprNode>^ LPAREN! IDENTIFIER<IdNode> (COMMA! IDENTIFIER<IdNode>)* RPAREN!
     ;
 
 type
@@ -149,14 +149,14 @@ type
     ;
 
 bool_literal
-    :   TRUE 
-    |   FALSE
+    :   TRUE<LiteralNode> 
+    |   FALSE<LiteralNode>
     ;
 
 // Lexer rules
 
 CHAR_LITERAL
-    :   APOS LETTER APOS
+    :   APOS l=LETTER APOS { setText(l.getText()); }
     ;
 
 INT_LITERAL

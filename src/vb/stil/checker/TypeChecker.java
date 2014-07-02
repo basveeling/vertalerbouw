@@ -5,20 +5,21 @@ import vb.stil.symtab.IdEntry;
 import vb.stil.symtab.SymbolTable;
 import vb.stil.tree.DeclNode;
 import vb.stil.tree.EntityType;
+import vb.stil.tree.ExprNode;
 import vb.stil.tree.Operator;
 import vb.stil.tree.StilNode;
 
 public class TypeChecker {
 	
 	/**
-	 * Validate operand type of assignment expression
+	 * Process assignment expression, validating operand type
 	 *
 	 * @param declNode
 	 * @param t1
 	 * @return EntityType
 	 * @throws StilException
 	 */
-	public DeclNode validateAssignmentExpression(StilNode node, StilNode id, EntityType t1, SymbolTable<IdEntry> symtab) throws StilException {
+	public EntityType processAssignmentExpression(ExprNode node, StilNode id, EntityType t1, SymbolTable<IdEntry> symtab) throws StilException {
 		IdEntry symbol = symtab.retrieve(id.getText());
 
 		if (symbol == null) {
@@ -31,54 +32,24 @@ public class TypeChecker {
 			throw new StilException(node, "operand type does not match variable type");
 		}
 
-		return declNode;
-	}
-
-	/**
-	 * Validate operand type of constant assignment expression
-	 *
-	 * @param declNode
-	 * @param t1
-	 * @return EntityType
-	 * @throws StilException
-	 */
-	public EntityType validateConstantAssignmentExpression(StilNode node, StilNode id, EntityType t1, SymbolTable<IdEntry> symtab) throws StilException {
-		DeclNode declNode = validateAssignmentExpression(node, id, t1, symtab);
-
-		if (!declNode.isConstant()) {
-			throw new StilException(node, "identifier must be declared as constant");
-		}
-
-		return t1;
-	}
-
-	/**
-	 * Validate operand type of variable assignment expression
-	 *
-	 * @param declNode
-	 * @param t1
-	 * @return EntityType
-	 * @throws StilException
-	 */
-	public EntityType validateVariableAssignmentExpression(StilNode node, StilNode id, EntityType t1, SymbolTable<IdEntry> symtab) throws StilException {
-		DeclNode declNode = validateAssignmentExpression(node, id, t1, symtab);
-
 		if (!declNode.isVariable()) {
 			throw new StilException(node, "identifier must be declared as variable");
 		}
+		
+		node.setEntityType(t1);
 
 		return t1;
 	}
 	
 	/**
-	 * Validate operand type of unary expression
+	 * Process unary expression, validating operand type
 	 *
 	 * @param op
 	 * @param t1
 	 * @return EntityType
 	 * @throws StilException
 	 */
-	public EntityType validateLogicExpression(StilNode node, Operator op, EntityType t1) throws StilException {
+	public EntityType processLogicExpression(ExprNode node, Operator op, EntityType t1) throws StilException {
 		EntityType result = null;
 		
 		if (op == Operator.PLUS || op == Operator.MINUS) {
@@ -95,11 +66,13 @@ public class TypeChecker {
 			result = EntityType.BOOL;
 		}
 		
+		node.setEntityType(result);
+		
 		return result;
 	}
 
 	/**
-	 * Validate operand types of binary expression
+	 * Process binary expression, validating operand types
 	 *
 	 * @param op
 	 * @param t1
@@ -107,7 +80,7 @@ public class TypeChecker {
 	 * @return EntityType
 	 * @throws StilException
 	 */
-	public EntityType validateLogicExpression(StilNode node, Operator op, EntityType t1, EntityType t2) throws StilException {
+	public EntityType processLogicExpression(ExprNode node, Operator op, EntityType t1, EntityType t2) throws StilException {
 		EntityType result = null;
 		
 		if (op == Operator.OR || op == Operator.AND) {
@@ -149,36 +122,44 @@ public class TypeChecker {
 			result = EntityType.INT;
 		}
 		
+		node.setEntityType(result);
+		
 		return result;
 	}
 
 	/**
-	 * Validate the type of a print statement parameter
+	 * Process print statement, validating the type of a parameter
 	 *
 	 * @param node
 	 * @param type
 	 * @return
 	 * @throws StilException
 	 */
-	public EntityType validatePrintStatement(StilNode node, EntityType type) throws StilException {
+	public EntityType processPrintStatement(ExprNode node, EntityType type) throws StilException {
 		if (type == EntityType.VOID) {
 			throw new StilException(node, "print expression parameters cannot return type void");
 		}
-		
+
+		node.setEntityType(type);
+
 		return type;
 	}
 	
 	/**
-	 * Validate the type of a print statement parameter, in the context of multiple parameters
+	 * Process print statement in the context of multiple parameters, validating the type of a parameter
 	 *
 	 * @param node
 	 * @param type
 	 * @return
 	 * @throws StilException
 	 */
-	public EntityType validateMultiplePrintStatement(StilNode node, EntityType type) throws StilException {
-		validatePrintStatement(node, type);
+	public EntityType processMultiplePrintStatement(ExprNode node, EntityType type) throws StilException {
+		processPrintStatement(node, type);
+
+		EntityType result = EntityType.VOID;
+
+		node.setEntityType(result);
 		
-		return EntityType.VOID;
+		return result;
 	}
 }
