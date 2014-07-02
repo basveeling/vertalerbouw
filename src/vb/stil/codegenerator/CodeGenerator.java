@@ -11,6 +11,7 @@ import vb.stil.tree.DeclNode;
 import vb.stil.tree.ExprNode;
 import vb.stil.tree.IdNode;
 import vb.stil.tree.LiteralNode;
+import vb.stil.tree.LogicExprNode;
 import vb.stil.tree.StilNode;
 
 public class CodeGenerator {
@@ -44,17 +45,18 @@ public class CodeGenerator {
 		return template;
 	}
 
-	public ST program(StilNode node) {
-		ST template = getTemplate("program");
+	public ST processBinaryLogicExpression(LogicExprNode node) {
+		ST template = null;
 
-		for (int index = 0; index < node.getChildCount(); index++) {
-			StilNode expression = (StilNode) node.getChild(index);
+		template = getTemplate(node.getOperator().getTemplateName());
+		template.add("expr1", getChildST(node, 0));
+		template.add("expr2", getChildST(node, 1));
 
-			template.add("instructions", expression.getST());
-		}
+		node.setST(template);
 
 		return template;
 	}
+
 
 	public ST varDeclaration(DeclNode node,IdNode id) {
 		try {
@@ -86,14 +88,35 @@ public class CodeGenerator {
 
 		return template;
 	}
-	public ST printStatement(ExprNode node) {
+	public ST processUnaryLogicExpression(LogicExprNode node) {
+		ST template = null;
+
+		template = getTemplate(node.getOperator().getTemplateName());
+		template.add("expr1", getChildST(node, 0));
+
+		node.setST(template);
+
+		return template;
+	}
+
+	public ST processProgram(StilNode node) {
+		ST template = getTemplate("program");
+
+		for (int index = 0; index < node.getChildCount(); index++) {
+			template.add("instructions", getChildST(node, index));
+		}
+
+		return template;
+	}
+
+	public ST processPrintStatement(ExprNode node) {
 		ST template = getTemplate("printMultiple");
 
 		for (int index = 0; index < node.getChildCount(); index++) {
 			ExprNode expression = (ExprNode) node.getChild(index);
 
 			ST statement = null;
-			
+
 			switch (expression.getEntityType()) {
 			case CHAR:
 				statement = getTemplate("printChar");
@@ -104,14 +127,27 @@ public class CodeGenerator {
 				statement.add("expression", expression.getST());
 				break;
 			default:
+				System.err.println("VOID ERROR");
 				break;
 			}
 
 			template.add("statements", statement);
-
-			index++;
 		}
+		node.setST(template);
 
 		return template;
+	}
+
+	/**
+	 * Returns the StringTemplate of a child
+	 *
+	 * @param node
+	 *            Root node
+	 * @param index
+	 *            Index of the child
+	 * @return
+	 */
+	protected static ST getChildST(StilNode node, int index) {
+		return ((StilNode) node.getChild(index)).getST();
 	}
 }

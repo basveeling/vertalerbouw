@@ -85,7 +85,7 @@ var_declaration
 
 expression
     :   (IDENTIFIER<IdNode> BECOMES) => assignment_statement
-    |   (closed_compound_expression | arithmetic_expression | print_statement | read_statement)
+    |   (closed_compound_expression | arithmetic_expression)
     ;
 
 compound_expression
@@ -98,29 +98,29 @@ closed_compound_expression
 
 // priority 6
 arithmetic_expression
-    :   arithmetic_expression_pr5 (OR<ExprNode>^ arithmetic_expression_pr5)*
+    :   arithmetic_expression_pr5 (OR<LogicExprNode>^ arithmetic_expression_pr5)*
     ;
 
 arithmetic_expression_pr5
-    :   arithmetic_expression_pr4 (AND<ExprNode>^ arithmetic_expression_pr4)*
+    :   arithmetic_expression_pr4 (AND<LogicExprNode>^ arithmetic_expression_pr4)*
     ;
 
 arithmetic_expression_pr4
-    :   arithmetic_expression_pr3 ((LT<ExprNode>^ | LTE<ExprNode>^ | GT<ExprNode>^ | GTE<ExprNode>^ | EQ<ExprNode>^ | NEQ<ExprNode>^) arithmetic_expression_pr3)*
+    :   arithmetic_expression_pr3 ((LT<LogicExprNode>^ | LTE<LogicExprNode>^ | GT<LogicExprNode>^ | GTE<LogicExprNode>^ | EQ<LogicExprNode>^ | NEQ<LogicExprNode>^) arithmetic_expression_pr3)*
     ;
 
 arithmetic_expression_pr3
-    :   arithmetic_expression_pr2 ((PLUS<ExprNode>^ | MINUS<ExprNode>^) arithmetic_expression_pr2)*
+    :   arithmetic_expression_pr2 ((PLUS<LogicExprNode>^ | MINUS<LogicExprNode>^) arithmetic_expression_pr2)*
     ;
 
 arithmetic_expression_pr2
-    :   arithmetic_expression_pr1 ((DIVIDE<ExprNode>^ | MULTIPLY<ExprNode>^ | MODULO<ExprNode>^) arithmetic_expression_pr1)*
+    :   arithmetic_expression_pr1 ((DIVIDE<LogicExprNode>^ | MULTIPLY<LogicExprNode>^ | MODULO<LogicExprNode>^) arithmetic_expression_pr1)*
     ;
 
 arithmetic_expression_pr1
-    :   PLUS operand    -> ^(UNARY_PLUS<ExprNode> operand)
-    |   MINUS operand   -> ^(UNARY_MINUS<ExprNode> operand)
-    |   NOT operand     -> ^(UNARY_NOT<ExprNode> operand)
+    :   PLUS operand    -> ^(UNARY_PLUS<LogicExprNode> operand)
+    |   MINUS operand   -> ^(UNARY_MINUS<LogicExprNode> operand)
+    |   NOT operand     -> ^(UNARY_NOT<LogicExprNode> operand)
     |   operand
     ;
 
@@ -130,6 +130,8 @@ operand
     |   INT_LITERAL<LiteralNode>
     |   IDENTIFIER<IdNode>
     |   LPAREN! expression RPAREN!
+    |   print_statement
+    |   read_statement
     ;
 
 assignment_statement

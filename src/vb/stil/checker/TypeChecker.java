@@ -6,9 +6,16 @@ import vb.stil.symtab.SymbolTable;
 import vb.stil.tree.DeclNode;
 import vb.stil.tree.EntityType;
 import vb.stil.tree.ExprNode;
+import vb.stil.tree.LogicExprNode;
 import vb.stil.tree.Operator;
 import vb.stil.tree.StilNode;
 
+/**
+ * Validates and calculates the type of entities and decorates the AST.
+ *
+ * @author Jarno van Leeuwen
+ * @author Bas Veeling
+ */
 public class TypeChecker {
 	
 	/**
@@ -49,10 +56,12 @@ public class TypeChecker {
 	 * @return EntityType
 	 * @throws StilException
 	 */
-	public EntityType processLogicExpression(ExprNode node, Operator op, EntityType t1) throws StilException {
+	public EntityType processLogicExpression(LogicExprNode node, Operator op, EntityType t1) throws StilException {
 		EntityType result = null;
 		
-		if (op == Operator.PLUS || op == Operator.MINUS) {
+		node.setOperator(op);
+		
+		if (op == Operator.UNARY_PLUS || op == Operator.UNARY_MINUS) {
 			if (t1 != EntityType.INT) {
 				throw new StilException(node, "operand has an invalid type");
 			}
@@ -80,8 +89,10 @@ public class TypeChecker {
 	 * @return EntityType
 	 * @throws StilException
 	 */
-	public EntityType processLogicExpression(ExprNode node, Operator op, EntityType t1, EntityType t2) throws StilException {
+	public EntityType processLogicExpression(LogicExprNode node, Operator op, EntityType t1, EntityType t2) throws StilException {
 		EntityType result = null;
+
+		node.setOperator(op);
 		
 		if (op == Operator.OR || op == Operator.AND) {
 			if (t1 != EntityType.BOOL) {

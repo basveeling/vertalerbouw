@@ -27,9 +27,8 @@ options {
 }
 
 program[int numOps, int locals] returns [ST template = null] 
-    :   ^(PROGRAM (declaration | expression)*) { template = codeGenerator.program((StilNode)$PROGRAM); }
+    :   ^(PROGRAM (declaration | expression)*) { template = codeGenerator.processProgram((StilNode)$PROGRAM); }
     ;
-
     
 declaration returns [ST template = null]
     :   var_declaration
@@ -47,10 +46,11 @@ var_declaration returns [ST template = null]
     :   ^(VAR type id=IDENTIFIER) { 
             codeGenerator.varDeclaration((DeclNode)$VAR,(IdNode)$id); ((DeclNode)$VAR).setST(template); 
         }
+
     ;
 
 print_statement returns [ST template = null]
-    :   ^(PRINT expression+) { template = codeGenerator.printStatement((ExprNode)$PRINT); ((ExprNode)$PRINT).setST(template); } 
+    :   ^(PRINT expression+) { template = codeGenerator.processPrintStatement((ExprNode)$PRINT); } 
     ;
 
 expression returns [ST template = null]
@@ -67,14 +67,14 @@ expression returns [ST template = null]
 //    |   ^(GTE expression expression)      { entityType = typeChecker.validateLogicExpression($node, Operator.GTE, t1, t2); }
 //    |   ^(EQ expression expression)       { entityType = typeChecker.validateLogicExpression($node, Operator.EQ, t1, t2); }
 //    |   ^(NEQ expression expression)      { entityType = typeChecker.validateLogicExpression($node, Operator.NEQ, t1, t2); }
-//    |   ^(PLUS expression expression)     { entityType = typeChecker.validateLogicExpression($node, Operator.PLUS, t1, t2); }
-//    |   ^(MINUS expression expression)    { entityType = typeChecker.validateLogicExpression($node, Operator.MINUS, t1, t2); }
-//    |   ^(DIVIDE expression expression)   { entityType = typeChecker.validateLogicExpression($node, Operator.DIVIDE, t1, t2); }
-//    |   ^(MULTIPLY expression expression) { entityType = typeChecker.validateLogicExpression($node, Operator.MULTIPLY, t1, t2); }
-//    |   ^(MODULO expression expression)   { entityType = typeChecker.validateLogicExpression($node, Operator.MODULO, t1, t2); }
-//    |   ^(UNARY_PLUS expression)          { entityType = typeChecker.validateLogicExpression($node, Operator.PLUS, t1); }
-//    |   ^(UNARY_MINUS expression)         { entityType = typeChecker.validateLogicExpression($node, Operator.MINUS, t1); }
-//    |   ^(UNARY_NOT expression)           { entityType = typeChecker.validateLogicExpression($node, Operator.NOT, t1); }
+    |   ^(node=PLUS expression expression)     { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=MINUS expression expression)    { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=DIVIDE expression expression)   { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=MULTIPLY expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=MODULO expression expression)   { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=UNARY_PLUS expression)          { template = codeGenerator.processUnaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=UNARY_MINUS expression)         { template = codeGenerator.processUnaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=UNARY_NOT expression)           { template = codeGenerator.processUnaryLogicExpression((LogicExprNode)$node); }
     ;
 
 operand returns [ST template = null]

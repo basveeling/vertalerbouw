@@ -18,7 +18,8 @@ program(maxStackDepth, maxLocals, instructions) ::= <<
     .method public static main([Ljava/lang/String;)V
         .limit stack 102
         .limit locals 100
-            <instructions ; separator="\npop\n">
+        <instructions ; separator="\npop\n">
+        pop
         return
     .end method
 >>
@@ -46,6 +47,58 @@ intLiteral(value) ::= <<
 >>
 
 
+divide(expr1, expr2) ::= <<
+    <expr1>
+    <expr2>
+    idiv
+>>
+
+
+minus(expr1, expr2) ::= <<
+    <expr1>
+    <expr2>
+    isub
+>>
+
+
+not(expr1) ::= <<
+    <expr1>
+    ifeq
+>>
+
+
+modulo(expr1, expr2) ::= <<
+    <expr1>
+    <expr2>
+    irem
+>>
+
+
+multiply(expr1, expr2) ::= <<
+    <expr1>
+    <expr2>
+    imul
+>>
+
+
+plus(expr1, expr2) ::= <<
+    <expr1>
+    <expr2>
+    iadd
+>>
+
+
+unary_minus(expr1) ::= <<
+    <expr1>
+    ineg
+>>
+
+
+unary_plus(expr1) ::= <<
+    <expr1>
+>>
+
+
 printChar(expression) ::= <<
     <expression>
     dup
@@ -66,6 +119,5 @@ printInt(expression) ::= <<
 
 printMultiple(statements) ::= <<
     <statements ; separator="\npop\n">
-    dup
     ; TODO: Make sure this doesn't return anything.
 >>
