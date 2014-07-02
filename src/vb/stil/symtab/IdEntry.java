@@ -3,8 +3,8 @@ package vb.stil.symtab;
 import vb.stil.tree.DeclNode;
 
 public class IdEntry {
-	private DeclNode declNode;
-	private int level = -1;
+	protected DeclNode declNode;
+	protected int level = -1;
 
 	public int getLevel() {
 		return this.level;

@@ -85,7 +85,7 @@ var_declaration
 
 expression
     :   (IDENTIFIER<IdNode> BECOMES) => assignment_statement
-    |   (closed_compound_expression | arithmetic_expression | print_statement | read_statement)
+    |   (closed_compound_expression | arithmetic_expression)
     ;
 
 compound_expression
@@ -130,6 +130,8 @@ operand
     |   INT_LITERAL<LiteralNode>
     |   IDENTIFIER<IdNode>
     |   LPAREN! expression RPAREN!
+    |   print_statement
+    |   read_statement
     ;
 
 assignment_statement
