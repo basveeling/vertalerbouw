@@ -5,6 +5,7 @@ package vb.stil.tree;
 
 import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.CommonTree;
+import org.stringtemplate.v4.ST;
 
 /**
  * @author basveeling
@@ -12,6 +13,11 @@ import org.antlr.runtime.tree.CommonTree;
  */
 public class StilNode extends CommonTree {
 
+	/**
+	 * StringTemplate holder
+	 */
+	private ST st = null;
+	
 	/**
 	 *
 	 */
@@ -31,6 +37,14 @@ public class StilNode extends CommonTree {
 	 */
 	public StilNode(Token t) {
 		super(t);
+	}
+
+	public ST getST() {
+		return st;
+	}
+
+	public void setST(ST st) {
+		this.st = st;
 	}
 
 	@Override

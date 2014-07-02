@@ -1,18 +1,18 @@
 group stil;
 
 
-jasminFile(maxStackDepth, maxLocals, instructions) ::= <<
+program(maxStackDepth, maxLocals, instructions) ::= <<
     .class public Program
     .super java/lang/Object
-    .method public \<init\>()V
+    .method public \<init>()V
         aload_0
-        invokenonvirtual java/lang/Object/\<init\>()V
+        invokenonvirtual java/lang/Object/\<init>()V
         return
     .end method
 
     .method public static main([Ljava/lang/String;)V
-        .limit stack <maxStackDepth>
-        .limit locals <maxLocals>
+        .limit stack 102
+        .limit locals 100
             <instructions ; separator="\n">
         return
     .end method
@@ -30,20 +30,31 @@ var(id, varNum) ::= <<
     iload <varNum> ; <id>
 >>
 
+
 charLiteral(value) ::= <<
     ldc "<value>"
 >>
+
 
 intLiteral(value) ::= <<
     ldc <value>
 >>
 
-printMultiple(expressions) ::= <<
-    <expressions : printSingle() ; separator="\n">
+
+printChar(expression) ::= <<
+    getstatic java/lang/System/out Ljava/io/PrintStream; 
+    <expression>
+    invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
 >>
 
-printSingle(expression) ::= <<
+
+printInt(expression) ::= <<
     getstatic java/lang/System/out Ljava/io/PrintStream; 
     <expression>
     invokevirtual java/io/PrintStream/println(I)V
+>>
+
+
+printMultiple(statements) ::= <<
+    <statements ; separator="\n">
 >>

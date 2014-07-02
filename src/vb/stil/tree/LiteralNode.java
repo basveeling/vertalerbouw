@@ -2,9 +2,7 @@ package vb.stil.tree;
 
 import org.antlr.runtime.Token;
 
-public class LiteralNode extends StilNode {
-	protected EntityType entityType;
-
+public class LiteralNode extends ExprNode {
 	public LiteralNode() {
 		super();
 	}
@@ -15,14 +13,6 @@ public class LiteralNode extends StilNode {
 	
 	public LiteralNode(Token t) {
 		super(t);
-	}
-	
-	public EntityType getEntityType() {
-		return entityType;
-	}
-	
-	public void setEntityType(EntityType entityType) {
-		this.entityType = entityType;
 	}
 	
 	@Override

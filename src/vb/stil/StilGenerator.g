@@ -23,21 +23,15 @@ options {
 }
 
 @members {
-    protected CodeGenerator codeGenerator = new JasminCodeGenerator();
+    protected CodeGenerator codeGenerator = new CodeGenerator();
 }
 
-program[int numOps, int locals] returns [ST template = null]
-    @init {
-        template = codeGenerator.program();
-    }
-    :   ^(PROGRAM (st=expression { template.add("instructions", st); })*) 
+program[int numOps, int locals] returns [ST template = null] 
+    :   ^(PROGRAM expression*) { template = codeGenerator.program((StilNode)$PROGRAM); }
     ;
 
 print_statement returns [ST template = null]
-    @init { 
-        template = codeGenerator.printStatement(); 
-    }
-    :   ^(node=PRINT (st=expression { template.add("expressions", st); })+) 
+    :   ^(PRINT expression+) { template = codeGenerator.printStatement((ExprNode)$PRINT); ((ExprNode)$PRINT).setST(template); } 
     ;
 
 expression returns [ST template = null]
@@ -67,6 +61,6 @@ expression returns [ST template = null]
 operand returns [ST template = null]
 //    :   id=IDENTIFIER 
 //    |   (TRUE | FALSE) 
-    :   v=CHAR_LITERAL
-    |   v=INT_LITERAL   { template = codeGenerator.intLiteral((LiteralNode)$v); }
+    :   v=CHAR_LITERAL  { template = codeGenerator.charLiteral((LiteralNode)$v); ((LiteralNode)$v).setST(template); }
+    |   v=INT_LITERAL   { template = codeGenerator.intLiteral((LiteralNode)$v); ((LiteralNode)$v).setST(template); }
     ;
