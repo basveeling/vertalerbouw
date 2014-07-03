@@ -32,15 +32,15 @@ program[int numOps, int locals] returns [ST template = null]
     
 declaration returns [ST template = null]
     :   var_declaration
-    //|   constant_declaration 
+    |   constant_declaration 
     ;
 
 
-// constant_declaration returns [ST template = null]
-//     :   ^(CONST t=type id=IDENTIFIER expr=expression) { 
-//             codeGenerator.constDeclaration((DeclNode)$CONST); ((DeclNode)$CONST).setST(template); 
-//         }
-//     ;
+constant_declaration returns [ST template = null]
+    :   ^(CONST type id=IDENTIFIER expression) { 
+            codeGenerator.constDeclaration((DeclNode)$CONST,(IdNode)$id); ((DeclNode)$CONST).setST(template); 
+        }
+    ;
 
 var_declaration returns [ST template = null]
     :   ^(VAR type id=IDENTIFIER) { 

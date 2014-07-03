@@ -68,6 +68,22 @@ public class CodeGenerator {
 		return null;
 	}
 
+
+	public ST constDeclaration(DeclNode node,IdNode id) {
+		try {
+			String idname = node.getChild(0).getText(); //Retrieve the identifier name
+
+			symtab.enter(idname, new MachineEntry(node));
+			ST template = getTemplate("becomes");
+			template.add("id",id);
+			template.add("varnum",symtab.retrieve(idname).getVarnum());
+			template.add("expression",((ExprNode) node.getChild(1)).getST());
+		} catch (SymbolTableException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public ST becomes(ExprNode node) {
 		ST template = getTemplate("becomes");
 		String id = node.getChild(0).getText(); //Retrieve the identifier name
