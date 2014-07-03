@@ -39,6 +39,7 @@ declaration
 constant_declaration
     :   ^(CONST t=type id=IDENTIFIER expr=expression) { 
             declarationChecker.processConstantDeclaration((DeclNode)$CONST, $id, t, symtab); 
+            typeChecker.processConstantAssignmentExpression((DeclNode)$CONST, $id, expr, symtab);
         }
     ;
 

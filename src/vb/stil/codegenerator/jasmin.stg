@@ -61,6 +61,18 @@ minus(expr1, expr2) ::= <<
 >>
 
 
+lt(expr1, expr2, label1, label2) ::= <<
+  <expr1>
+  <expr2>
+  if_icmplt L<label1>
+  ldc 0
+  goto L<label2>
+  L<label1>:
+  ldc 1 
+  L<label2>:
+>>
+
+
 not(expr1) ::= <<
   <expr1>
   ifeq
