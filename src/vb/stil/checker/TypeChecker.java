@@ -17,37 +17,53 @@ import vb.stil.tree.StilNode;
  * @author Bas Veeling
  */
 public class TypeChecker {
-
+	
 	/**
-	 * Process assignment expression, validating operand type
+	 * Process assignment expression, validating operand type and returning the declaration node for further processing
 	 *
 	 * @param declNode
 	 * @param t1
 	 * @return EntityType
 	 * @throws StilException
 	 */
-	public EntityType processAssignmentExpression(ExprNode node, StilNode id, EntityType t1, SymbolTable<IdEntry> symtab) throws StilException {
+	protected DeclNode processAssignmentExpression(StilNode node, StilNode id, EntityType t1, SymbolTable<IdEntry> symtab) throws StilException {
 		IdEntry symbol = symtab.retrieve(id.getText());
-		
+
 		if (symbol == null) {
 			throw new StilException(node, "use of undeclared identifier");
 		}
-		
-		DeclNode declNode = symbol.getDeclNode();
 
-		if (declNode.getEntityType() != t1) {
-			throw new StilException(node, "operand type does not match variable type");
-		}
+		DeclNode declNode = symbol.getDeclNode();
 		
+		if (declNode.getEntityType() != t1) {
+			throw new StilException(node, "operand type does not match identifier type");
+		}
+
+		symbol.setAssigned(true);
+
+		return declNode;
+	}
+
+	/**
+	 * Process variable assignment expression, validating operand type
+	 *
+	 * @param declNode
+	 * @param t1
+	 * @return EntityType
+	 * @throws StilException
+	 */
+	public EntityType processVariableAssignmentExpression(ExprNode node, StilNode id, EntityType t1, SymbolTable<IdEntry> symtab) throws StilException {
+		DeclNode declNode = processAssignmentExpression(node, id, t1, symtab);
+
 		if (!declNode.isVariable()) {
 			throw new StilException(node, "identifier must be declared as variable");
 		}
-
-		node.setEntityType(t1);
 		
+		node.setEntityType(t1);
+
 		return t1;
 	}
-
+	
 	/**
 	 * Process assignment expression, validating operand type
 	 *
@@ -57,27 +73,15 @@ public class TypeChecker {
 	 * @throws StilException
 	 */
 	public EntityType processConstantAssignmentExpression(DeclNode node, StilNode id, EntityType t1, SymbolTable<IdEntry> symtab) throws StilException {
-		IdEntry symbol = symtab.retrieve(id.getText());
-		
-		if (symbol == null) {
-			throw new StilException(node, "use of undeclared identifier");
-		}
-		
-		DeclNode declNode = symbol.getDeclNode();
+		DeclNode declNode = processAssignmentExpression(node, id, t1, symtab);
 
-		if (declNode.getEntityType() != t1) {
-			throw new StilException(node, "operand type does not match variable type");
-		}
-		
 		if (!declNode.isConstant()) {
 			throw new StilException(node, "identifier must be declared as variable");
 		}
 
-		node.setEntityType(t1);
-		
 		return t1;
 	}
-
+	
 	/**
 	 * Process unary expression, validating operand type
 	 *
@@ -88,28 +92,28 @@ public class TypeChecker {
 	 */
 	public EntityType processLogicExpression(LogicExprNode node, Operator op, EntityType t1) throws StilException {
 		EntityType result = null;
-
+		
 		node.setOperator(op);
-
+		
 		if (op == Operator.UNARY_PLUS || op == Operator.UNARY_MINUS) {
 			if (t1 != EntityType.INT) {
 				throw new StilException(node, "operand has an invalid type");
 			}
-
+			
 			result = EntityType.INT;
 		} else if (op == Operator.NOT) {
 			if (t1 != EntityType.BOOL) {
 				throw new StilException(node, "operand has an invalid type");
 			}
-
+			
 			result = EntityType.BOOL;
 		}
-
+		
 		node.setEntityType(result);
-
+		
 		return result;
 	}
-	
+
 	/**
 	 * Process binary expression, validating operand types
 	 *
@@ -121,9 +125,9 @@ public class TypeChecker {
 	 */
 	public EntityType processLogicExpression(LogicExprNode node, Operator op, EntityType t1, EntityType t2) throws StilException {
 		EntityType result = null;
-		
-		node.setOperator(op);
 
+		node.setOperator(op);
+		
 		if (op == Operator.OR || op == Operator.AND) {
 			if (t1 != EntityType.BOOL) {
 				throw new StilException(node, "left-hand side operand has an invalid type");
@@ -131,7 +135,7 @@ public class TypeChecker {
 			if (t2 != EntityType.BOOL) {
 				throw new StilException(node, "right-hand side operand has an invalid type");
 			}
-
+			
 			result = EntityType.BOOL;
 		} else if (op == Operator.LT || op == Operator.LTE || op == Operator.GT || op == Operator.GTE) {
 			if (t1 != EntityType.INT) {
@@ -140,17 +144,17 @@ public class TypeChecker {
 			if (t2 != EntityType.INT) {
 				throw new StilException(node, "right-hand side operand has an invalid type");
 			}
-
+			
 			result = EntityType.BOOL;
 		} else if (op == Operator.EQ || op == Operator.NEQ) {
 			if (t1 != EntityType.BOOL && t1 != EntityType.CHAR && t1 != EntityType.INT) {
 				throw new StilException(node, "left-hand side operand has an invalid type");
 			}
-			
+
 			if (t1 != t2) {
 				throw new StilException(node, "right-hand side operand type must be the same as left-hand side operand type");
 			}
-
+			
 			result = EntityType.BOOL;
 		} else if (op == Operator.PLUS || op == Operator.MINUS || op == Operator.DIVIDE || op == Operator.MULTIPLY || op == Operator.MODULO) {
 			if (t1 != EntityType.INT) {
@@ -159,15 +163,15 @@ public class TypeChecker {
 			if (t2 != EntityType.INT) {
 				throw new StilException(node, "right-hand side operand has an invalid type");
 			}
-
+			
 			result = EntityType.INT;
 		}
-
+		
 		node.setEntityType(result);
-
+		
 		return result;
 	}
-	
+
 	/**
 	 * Process print statement, validating the type of a parameter
 	 *
@@ -180,12 +184,12 @@ public class TypeChecker {
 		if (type == EntityType.VOID) {
 			throw new StilException(node, "print expression parameters cannot return type void");
 		}
-		
+
 		node.setEntityType(type);
-		
+
 		return type;
 	}
-
+	
 	/**
 	 * Process print statement in the context of multiple parameters, validating the type of a parameter
 	 *
@@ -196,11 +200,11 @@ public class TypeChecker {
 	 */
 	public EntityType processMultiplePrintStatement(ExprNode node, EntityType type) throws StilException {
 		processPrintStatement(node, type);
-		
-		EntityType result = EntityType.VOID;
-		
-		node.setEntityType(result);
 
+		EntityType result = EntityType.VOID;
+
+		node.setEntityType(result);
+		
 		return result;
 	}
 }

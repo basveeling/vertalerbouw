@@ -6,6 +6,9 @@ var int d;
 b := c := 5;
 a := 3;
 d := 7;
+
+print(a); // 3
+
 print(b == c); //True
 print(b <> c); //False
 print(b <  c); //False
