@@ -24,16 +24,18 @@ program(maxStackDepth, maxLocals, instructions) ::= <<
   .end method
 >>
 
-becomes(varnum, expression, id) ::= <<
-  <expression>
-  dup
-  istore <varnum> ; <id>
+compound_expression(instructions) ::= <<
+  <instructions ; separator="\npop\n">
 >>
 
-
+becomes(varnum, expression, id, type) ::= <<
+  <expression>
+  dup
+  istore <varnum> ; <type> <id>
+>>
 
 idOperand(id, varnum, type) ::= <<
-  iload <varnum> ; <id>
+  iload <varnum> ; <type> <id>
 >>
 
 

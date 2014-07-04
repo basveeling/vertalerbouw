@@ -27,7 +27,10 @@ options {
 }
 
 program[int numOps, int locals] returns [ST template = null] 
-    :   ^(PROGRAM (declaration | expression)*) { template = codeGenerator.processProgram((StilNode)$PROGRAM); }
+    :   ^(PROGRAM
+            {codeGenerator.openScope();}
+            (declaration | expression)*) { template = codeGenerator.processProgram((StilNode)$PROGRAM); }
+            {codeGenerator.closeScope();}
     ;
     
 declaration returns [ST template = null]
@@ -53,10 +56,19 @@ print_statement returns [ST template = null]
     :   ^(PRINT expression+) { template = codeGenerator.processPrintStatement((ExprNode)$PRINT); } 
     ;
 
+closed_compound_expression returns [ST template = null]
+    :   ^(COMPOUND_EXPR  { codeGenerator.openScope(); } 
+            ((declaration)* expr=expression)*   
+            { template = codeGenerator.processCompoundExpression((StilNode)$COMPOUND_EXPR);
+              codeGenerator.closeScope(); ((ExprNode)$COMPOUND_EXPR).setST(template);}
+        )
+    ;
+
 expression returns [ST template = null]
-    :   st=print_statement  { template = st; }
+    :   st=print_statement                { template = st; }
 //    |   read_statement
-    |   st=operand          { template = st; }
+    |   st=operand                        { template = st; }
+    |   st=closed_compound_expression     { template = st; }
 //    |   closed_compound_expression
     |   ^(BECOMES IDENTIFIER expression)  { template = codeGenerator.becomes((ExprNode)$BECOMES); ((ExprNode)$BECOMES).setST(template);  }   
 //    |   ^(OR expression expression)       -> expressionLogicOR()
