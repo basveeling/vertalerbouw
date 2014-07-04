@@ -1,16 +1,19 @@
 package vb.stil.codegenerator;
 
+import java.util.Scanner;
+
 public class Foo {
-	public void hallo() {
-		System.out.println('c');
-
-		char a = 'a';
-		char b = 'b';
-
-		System.out.println(a == b);
-	}
-	
 	public static void main(String[] args) {
-		(new Foo()).hallo();
+		Scanner scanner = new Scanner(System.in);
+
+		int result = 0;
+
+		if (scanner.hasNextInt()) {
+			result = scanner.nextInt();
+		}
+
+		scanner.close();
+
+		System.out.println(result);
 	}
 }

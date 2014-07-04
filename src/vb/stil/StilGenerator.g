@@ -56,6 +56,10 @@ print_statement returns [ST template = null]
     :   ^(PRINT expression+) { template = codeGenerator.processPrintStatement((ExprNode)$PRINT); } 
     ;
 
+read_statement returns [ST template = null;] 
+    :   ^(READ IDENTIFIER+) { template = codeGenerator.processReadStatement((ExprNode)$READ); } 
+    ;
+
 closed_compound_expression returns [ST template = null]
     :   ^(COMPOUND_EXPR  { codeGenerator.openScope(); } 
             ((declaration)* expr=expression)*   
@@ -66,7 +70,7 @@ closed_compound_expression returns [ST template = null]
 
 expression returns [ST template = null]
     :   st=print_statement                { template = st; }
-//    |   read_statement
+    |   st=read_statement                 { template = st; }
     |   st=operand                        { template = st; }
     |   st=closed_compound_expression     { template = st; }
     |   ^(BECOMES IDENTIFIER expression)  { template = codeGenerator.becomes((ExprNode)$BECOMES); ((ExprNode)$BECOMES).setST(template);  }   
