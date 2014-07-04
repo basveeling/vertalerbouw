@@ -1,3 +1,8 @@
+print('a');
+
+print('a' <> 'a'); // false
+print('a' == 'a'); // true
+
 var int a;
 var int b;
 var int c;
@@ -6,6 +11,13 @@ var int d;
 b := c := 5;
 a := 3;
 d := 7;
+
+5+6;
+
+print(true || false); // true
+print(true && true); // true
+print(true && false); // false
+print(true && (false || true)); // true
 
 print(true);
 print(false);

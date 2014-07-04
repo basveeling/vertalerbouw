@@ -12,6 +12,7 @@ import vb.stil.tree.ExprNode;
 import vb.stil.tree.IdNode;
 import vb.stil.tree.LiteralNode;
 import vb.stil.tree.LogicExprNode;
+import vb.stil.tree.Operator;
 import vb.stil.tree.StilNode;
 
 public class CodeGenerator {
@@ -77,14 +78,28 @@ public class CodeGenerator {
 	
 	public ST processBinaryLogicExpression(LogicExprNode node) {
 		ST template = null;
+		Operator operator = node.getOperator();
 		
-		template = getTemplate("logic_expr");
+		switch (operator) {
+			case LT:
+			case LTE:
+			case GT:
+			case GTE:
+			case EQ:
+			case NEQ:
+				template = getTemplate("comparison");
+				template.add("operator", operator.getTemplateName());
+				template.add("label1", getNewLabelNumber());
+				template.add("label2", getNewLabelNumber());
+				break;
+			default:
+				template = getTemplate(operator.getTemplateName());
+				break;
+		}
+
 		template.add("expr1", getChildST(node, 0));
 		template.add("expr2", getChildST(node, 1));
-		template.add("operator", node.getOperator().getTemplateName());
-		template.add("label1", getNewLabelNumber());
-		template.add("label2", getNewLabelNumber());
-		
+
 		node.setST(template);
 		
 		return template;
@@ -101,7 +116,7 @@ public class CodeGenerator {
 	public ST processCharLiteral(LiteralNode v) {
 		ST template = getTemplate("charLiteral");
 		
-		template.add("value", v.getText());
+		template.add("value", (int) v.getText().charAt(0));
 		
 		return template;
 	}

@@ -70,8 +70,8 @@ expression returns [ST template = null]
     |   st=operand                        { template = st; }
     |   st=closed_compound_expression     { template = st; }
     |   ^(BECOMES IDENTIFIER expression)  { template = codeGenerator.becomes((ExprNode)$BECOMES); ((ExprNode)$BECOMES).setST(template);  }   
-//    |   ^(OR expression expression)       -> expressionLogicOR()
-//    |   ^(AND expression expression)      { entityType = typeChecker.validateLogicExpression($node, Operator.AND, t1, t2); }
+    |   ^(node=OR          expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node);  }
+    |   ^(node=AND         expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
     |   ^(node=LT          expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
     |   ^(node=LTE         expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
     |   ^(node=GT          expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
