@@ -1,3 +1,5 @@
+print(!true);
+
 print('a');
 
 print('a' <> 'a'); // false
@@ -45,3 +47,5 @@ print(d <  c); //False
 print(d >  c); //True
 print(d <= c); //False
 print(d >= c); //True
+
+print(8,9);

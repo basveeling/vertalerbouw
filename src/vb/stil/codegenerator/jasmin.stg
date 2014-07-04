@@ -1,6 +1,6 @@
 group stil;
 
-typeFieldMap ::= [
+type_map ::= [
   "int"  : "I",
   "bool" : "Z",
   "char" : "C"
@@ -104,9 +104,14 @@ isub
 >>
 
 
-not(expr1) ::= <<
-<expr1>
-ifeq
+not(expr, label1, label2) ::= <<
+<expr>
+ifeq L<label1>
+bipush 0
+goto L<label2>
+L<label1>:
+bipush 1 
+L<label2>:
 >>
 
 
@@ -154,7 +159,7 @@ print(expression,type) ::= <<
 dup
 getstatic java/lang/System/out Ljava/io/PrintStream; 
 swap
-invokevirtual java/io/PrintStream/println(<typeFieldMap.(type)>)V
+invokevirtual java/io/PrintStream/println(<type_map.(type)>)V
 >>
 
 

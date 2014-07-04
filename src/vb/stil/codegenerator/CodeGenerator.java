@@ -183,7 +183,12 @@ public class CodeGenerator {
 		ST template = null;
 		
 		template = getTemplate(node.getOperator().getTemplateName());
-		template.add("expr1", getChildST(node, 0));
+		template.add("expr", getChildST(node, 0));
+		
+		if (node.getOperator() == Operator.NOT) {
+			template.add("label1", getNewLabelNumber());
+			template.add("label2", getNewLabelNumber());
+		}
 		
 		node.setST(template);
 		
