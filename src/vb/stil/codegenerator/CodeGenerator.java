@@ -19,6 +19,8 @@ public class CodeGenerator {
 
 	protected STGroup templates;
 	protected MachineSymbolTable symtab = new MachineSymbolTable();
+	
+	protected int currentLabelNumber = 0;
 
 	public CodeGenerator() {
 		templates = new STGroupFile(CodeGenerator.groupFile);
@@ -52,58 +54,72 @@ public class CodeGenerator {
 		template.add("expr1", getChildST(node, 0));
 		template.add("expr2", getChildST(node, 1));
 
+		// some operators require labels to operate
+		switch (node.getOperator()) {
+			case LT:
+				template.add("label1", getLabel());
+				template.add("label2", getLabel());
+				break;
+			default:
+				break;
+		}
+
 		node.setST(template);
 
 		return template;
 	}
 
-
-	public ST varDeclaration(DeclNode node,IdNode id) {
+	public ST varDeclaration(DeclNode node, IdNode id) {
 		try {
 			symtab.enter(id.getText(), new MachineEntry(node));
 
 		} catch (SymbolTableException e) {
 			e.printStackTrace();
 		}
+
 		return null;
 	}
 
+	public ST constDeclaration(DeclNode node, IdNode id) {
+		ST template = null;
 
-	public ST constDeclaration(DeclNode node,IdNode id) {
 		try {
-			String idname = node.getChild(0).getText(); //Retrieve the identifier name
+			String idname = id.getText(); // Retrieve the identifier name
 
 			symtab.enter(idname, new MachineEntry(node));
-			ST template = getTemplate("becomes");
-			template.add("id",id);
-			template.add("varnum",symtab.retrieve(idname).getVarnum());
-			template.add("expression",((ExprNode) node.getChild(1)).getST());
+
+			template = getTemplate("becomes");
+			template.add("id", id);
+			template.add("varnum", symtab.retrieve(idname).getVarnum());
+			template.add("expression", getChildST(node, 2));
 		} catch (SymbolTableException e) {
 			e.printStackTrace();
 		}
-		return null;
+		
+		return template;
 	}
 
 	public ST becomes(ExprNode node) {
 		ST template = getTemplate("becomes");
-		String id = node.getChild(0).getText(); //Retrieve the identifier name
+		String id = node.getChild(0).getText(); // Retrieve the identifier name
 
-		template.add("id",id);
-		template.add("varnum",symtab.retrieve(id).getVarnum());
-		template.add("expression",((ExprNode) node.getChild(1)).getST());
+		template.add("id", id);
+		template.add("varnum", symtab.retrieve(id).getVarnum());
+		template.add("expression", getChildST(node, 1));
 
 		return template;
 	}
 
-
 	public ST idOperand(IdNode node) {
+		String id = node.getText(); // Retrieve the identifier name
+
 		ST template = getTemplate("idOperand");
-		String id = node.getText(); //Retrieve the identifier name
 		template.add("varnum", symtab.retrieve(id).getVarnum());
 		template.add("type", symtab.retrieve(id).getDeclNode().getEntityType().toString());
 
 		return template;
 	}
+
 	public ST processUnaryLogicExpression(LogicExprNode node) {
 		ST template = null;
 
@@ -134,17 +150,16 @@ public class CodeGenerator {
 			ST statement = null;
 
 			switch (expression.getEntityType()) {
-			case CHAR:
-				statement = getTemplate("printChar");
-				statement.add("expression", expression.getST());
-				break;
-			case INT:
-				statement = getTemplate("printInt");
-				statement.add("expression", expression.getST());
-				break;
-			default:
-				System.err.println("VOID ERROR");
-				break;
+				case CHAR:
+					statement = getTemplate("printChar");
+					statement.add("expression", expression.getST());
+					break;
+				case INT:
+					statement = getTemplate("printInt");
+					statement.add("expression", expression.getST());
+					break;
+				default:
+					break;
 			}
 
 			template.add("statements", statement);
@@ -165,5 +180,9 @@ public class CodeGenerator {
 	 */
 	protected static ST getChildST(StilNode node, int index) {
 		return ((StilNode) node.getChild(index)).getST();
+	}
+	
+	protected int getLabel() {
+		return currentLabelNumber++;
 	}
 }
