@@ -58,8 +58,8 @@ print_statement returns [EntityType entityType = null;]
 
 read_statement returns [EntityType entityType = null;] 
     :   ^(  node=READ 
-            id=IDENTIFIER { entityType = declarationChecker.retrieveDeclaration((ExprNode)$node, $id, symtab); } 
-        (   id=IDENTIFIER { entityType = declarationChecker.retrieveMultipleDeclaration((ExprNode)$node, $id, symtab); })*)
+            id=IDENTIFIER { entityType = declarationChecker.retrieveDeclaration((ExprNode)$node, $id, symtab, true); } 
+        (   id=IDENTIFIER { entityType = declarationChecker.retrieveMultipleDeclaration((ExprNode)$node, $id, symtab, true); })*)
     ;
 
 compound_expression returns [EntityType entityType = null;]
@@ -77,7 +77,7 @@ expression returns [EntityType entityType = null;]
     |   r=read_statement                { entityType = r;}
     |   o=operand                       { entityType = o; }
     |   c=closed_compound_expression    { entityType = c; }
-    |   ^(node=BECOMES id=IDENTIFIER t1=expression)  { entityType = typeChecker.processAssignmentExpression((ExprNode)$node, $id, t1, symtab); }   
+    |   ^(node=BECOMES id=IDENTIFIER t1=expression)  { entityType = typeChecker.processVariableAssignmentExpression((ExprNode)$node, $id, t1, symtab); }   
     |   ^(node=OR t1=expression t2=expression)       { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.OR, t1, t2); }
     |   ^(node=AND t1=expression t2=expression)      { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.AND, t1, t2); }
     |   ^(node=LT t1=expression t2=expression)       { entityType = typeChecker.processLogicExpression((LogicExprNode)$node, Operator.LT, t1, t2); }
@@ -98,7 +98,7 @@ expression returns [EntityType entityType = null;]
     
 
 operand returns [EntityType entityType = null;] 
-    :   id=IDENTIFIER   { entityType = declarationChecker.retrieveDeclaration($id, $id, symtab); ((IdNode)$id).setEntityType(entityType);}
+    :   id=IDENTIFIER   { entityType = declarationChecker.retrieveDeclaration($id, $id, symtab, false); ((IdNode)$id).setEntityType(entityType);}
     |   node=(TRUE | FALSE)  { entityType = EntityType.BOOL; ((LiteralNode)$node).setEntityType(entityType); }
     |   node=CHAR_LITERAL    { entityType = EntityType.CHAR; ((LiteralNode)$node).setEntityType(entityType); }
     |   node=INT_LITERAL     { entityType = EntityType.INT; ((LiteralNode)$node).setEntityType(entityType); }

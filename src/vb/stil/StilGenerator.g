@@ -41,19 +41,23 @@ declaration returns [ST template = null]
 
 constant_declaration returns [ST template = null]
     :   ^(CONST type id=IDENTIFIER expression) { 
-            template = codeGenerator.constDeclaration((DeclNode)$CONST,(IdNode)$id); ((DeclNode)$CONST).setST(template); 
+            template = codeGenerator.processConstDeclaration((DeclNode)$CONST,(IdNode)$id); ((DeclNode)$CONST).setST(template); 
         }
     ;
 
 var_declaration returns [ST template = null]
     :   ^(VAR type id=IDENTIFIER) { 
-            template = codeGenerator.varDeclaration((DeclNode)$VAR,(IdNode)$id); ((DeclNode)$VAR).setST(template); 
+            template = codeGenerator.processVarDeclaration((DeclNode)$VAR,(IdNode)$id); ((DeclNode)$VAR).setST(template); 
         }
 
     ;
 
 print_statement returns [ST template = null]
     :   ^(PRINT expression+) { template = codeGenerator.processPrintStatement((ExprNode)$PRINT); } 
+    ;
+
+read_statement returns [ST template = null;] 
+    :   ^(READ IDENTIFIER+) { template = codeGenerator.processReadStatement((ExprNode)$READ); } 
     ;
 
 closed_compound_expression returns [ST template = null]
@@ -66,12 +70,12 @@ closed_compound_expression returns [ST template = null]
 
 expression returns [ST template = null]
     :   st=print_statement                { template = st; }
-//    |   read_statement
+    |   st=read_statement                 { template = st; }
     |   st=operand                        { template = st; }
     |   st=closed_compound_expression     { template = st; }
     |   ^(BECOMES IDENTIFIER expression)  { template = codeGenerator.becomes((ExprNode)$BECOMES); ((ExprNode)$BECOMES).setST(template);  }   
-//    |   ^(OR expression expression)       -> expressionLogicOR()
-//    |   ^(AND expression expression)      { entityType = typeChecker.validateLogicExpression($node, Operator.AND, t1, t2); }
+    |   ^(node=OR          expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node);  }
+    |   ^(node=AND         expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
     |   ^(node=LT          expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
     |   ^(node=LTE         expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
     |   ^(node=GT          expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
@@ -89,10 +93,10 @@ expression returns [ST template = null]
     ;
 
 operand returns [ST template = null]
-    :   id=IDENTIFIER   { template = codeGenerator.idOperand((IdNode)$id); ((IdNode)$id).setST(template); }
-    |   (TRUE | FALSE) 
-    |   v=CHAR_LITERAL  { template = codeGenerator.charLiteral((LiteralNode)$v); ((LiteralNode)$v).setST(template); }
-    |   v=INT_LITERAL   { template = codeGenerator.intLiteral((LiteralNode)$v); ((LiteralNode)$v).setST(template); }
+    :   id=IDENTIFIER       { template = codeGenerator.processIdOperand((IdNode)$id); ((IdNode)$id).setST(template); }
+    |   v=(TRUE | FALSE)    { template = codeGenerator.processBoolLiteral((LiteralNode)$v); ((LiteralNode)$v).setST(template); }
+    |   v=CHAR_LITERAL      { template = codeGenerator.processCharLiteral((LiteralNode)$v); ((LiteralNode)$v).setST(template); }
+    |   v=INT_LITERAL       { template = codeGenerator.processIntLiteral((LiteralNode)$v); ((LiteralNode)$v).setST(template); }
     ;
 
 type
