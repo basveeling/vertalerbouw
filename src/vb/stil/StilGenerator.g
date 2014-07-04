@@ -69,24 +69,23 @@ expression returns [ST template = null]
 //    |   read_statement
     |   st=operand                        { template = st; }
     |   st=closed_compound_expression     { template = st; }
-//    |   closed_compound_expression
     |   ^(BECOMES IDENTIFIER expression)  { template = codeGenerator.becomes((ExprNode)$BECOMES); ((ExprNode)$BECOMES).setST(template);  }   
 //    |   ^(OR expression expression)       -> expressionLogicOR()
 //    |   ^(AND expression expression)      { entityType = typeChecker.validateLogicExpression($node, Operator.AND, t1, t2); }
-    |   ^(node=LT expression expression)       { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
-//    |   ^(LTE expression expression)      { entityType = typeChecker.validateLogicExpression($node, Operator.LTE, t1, t2); }
-//    |   ^(GT expression expression)       { entityType = typeChecker.validateLogicExpression($node, Operator.GT, t1, t2); }
-//    |   ^(GTE expression expression)      { entityType = typeChecker.validateLogicExpression($node, Operator.GTE, t1, t2); }
-//    |   ^(EQ expression expression)       { entityType = typeChecker.validateLogicExpression($node, Operator.EQ, t1, t2); }
-//    |   ^(node=NEQ expression expression)      { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node);  }
-    |   ^(node=PLUS expression expression)     { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
-    |   ^(node=MINUS expression expression)    { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
-    |   ^(node=DIVIDE expression expression)   { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
-    |   ^(node=MULTIPLY expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
-    |   ^(node=MODULO expression expression)   { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
-    |   ^(node=UNARY_PLUS expression)          { template = codeGenerator.processUnaryLogicExpression((LogicExprNode)$node); }
-    |   ^(node=UNARY_MINUS expression)         { template = codeGenerator.processUnaryLogicExpression((LogicExprNode)$node); }
-    |   ^(node=UNARY_NOT expression)           { template = codeGenerator.processUnaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=LT          expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=LTE         expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=GT          expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=GTE         expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=EQ          expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=NEQ         expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=PLUS        expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=MINUS       expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=DIVIDE      expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=MULTIPLY    expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=MODULO      expression expression) { template = codeGenerator.processBinaryLogicExpression((LogicExprNode)$node); }
+    |   ^(node=UNARY_PLUS  expression)            { template = codeGenerator.processUnaryLogicExpression( (LogicExprNode)$node); }
+    |   ^(node=UNARY_MINUS expression)            { template = codeGenerator.processUnaryLogicExpression( (LogicExprNode)$node); }
+    |   ^(node=UNARY_NOT   expression)            { template = codeGenerator.processUnaryLogicExpression( (LogicExprNode)$node); }
     ;
 
 operand returns [ST template = null]

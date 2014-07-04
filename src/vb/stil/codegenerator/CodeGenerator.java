@@ -57,19 +57,12 @@ public class CodeGenerator {
 	public ST processBinaryLogicExpression(LogicExprNode node) {
 		ST template = null;
 
-		template = getTemplate(node.getOperator().getTemplateName());
+		template = getTemplate("logic_expr");
 		template.add("expr1", getChildST(node, 0));
 		template.add("expr2", getChildST(node, 1));
-
-		// some operators require labels to operate
-		switch (node.getOperator()) {
-		case LT:
-			template.add("label1", getNewLabelNumber());
-			template.add("label2", getNewLabelNumber());
-			break;
-		default:
-			break;
-		}
+		template.add("operator", node.getOperator().getTemplateName());
+		template.add("label1", getNewLabelNumber());
+		template.add("label2", getNewLabelNumber());
 
 		node.setST(template);
 
@@ -168,20 +161,9 @@ public class CodeGenerator {
 			ExprNode expression = (ExprNode) node.getChild(index);
 
 			ST statement = null;
-
-			switch (expression.getEntityType()) {
-			case CHAR:
-				statement = getTemplate("printChar");
-				statement.add("expression", expression.getST());
-				break;
-			case INT:
-				statement = getTemplate("printInt");
-				statement.add("expression", expression.getST());
-				break;
-			default:
-				break;
-			}
-
+			statement = getTemplate("print");
+			statement.add("expression", expression.getST());
+			statement.add("type", expression.getEntityTypeString());
 			template.add("statements", statement);
 		}
 		node.setST(template);
