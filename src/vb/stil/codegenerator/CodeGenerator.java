@@ -1,5 +1,8 @@
 package vb.stil.codegenerator;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroup;
 import org.stringtemplate.v4.STGroupFile;
@@ -81,25 +84,35 @@ public class CodeGenerator {
 		Operator operator = node.getOperator();
 
 		switch (operator) {
-			case LT:
-			case LTE:
-			case GT:
-			case GTE:
-			case EQ:
-			case NEQ:
-				template = getTemplate("comparison");
-				template.add("operator", operator.getTemplateName());
-				template.add("label1", getNewLabelNumber());
-				template.add("label2", getNewLabelNumber());
-				break;
-			default:
-				template = getTemplate(operator.getTemplateName());
-				break;
+		case LT:
+		case LTE:
+		case GT:
+		case GTE:
+		case EQ:
+		case NEQ:
+			template = getTemplate("comparison");
+			template.add("operator", operator.getTemplateName());
+			template.add("label1", getNewLabelNumber());
+			template.add("label2", getNewLabelNumber());
+			break;
+		case DIVIDE:
+		case MINUS:
+		case OR:
+		case MODULO:
+		case MULTIPLY:
+		case PLUS:
+		case AND:
+			template = getTemplate("binary_operator");
+			template.add("operator", operator.getTemplateName());
+			break;
+		default:
+			template = getTemplate(operator.getTemplateName());
+			break;
 		}
-		
+
 		template.add("expr1", getChildST(node, 0));
 		template.add("expr2", getChildST(node, 1));
-		
+
 		node.setST(template);
 
 		return template;
@@ -107,7 +120,7 @@ public class CodeGenerator {
 
 	public ST processBoolLiteral(LiteralNode v) {
 		ST template = getTemplate("boolLiteral");
-		
+
 		template.add("value", v.getText());
 
 		return template;
@@ -160,7 +173,7 @@ public class CodeGenerator {
 			statement = getTemplate("print");
 			statement.add("expression", expression.getST());
 			statement.add("type", expression.getEntityTypeString());
-			
+
 			template.add("statements", statement);
 		}
 
@@ -171,16 +184,19 @@ public class CodeGenerator {
 
 	public ST processReadStatement(ExprNode node) {
 		ST template = getTemplate("readMultiple");
-
-		for (int index = 0; index < node.getChildCount(); index++) {
-			String id = node.getChild(index).getText(); // Retrieve the identifier name
-
-			ST statement = getTemplate("read");
-			statement.add("label", getNewLabelNumber());
-			statement.add("varnum", symtab.retrieve(id).getVarnum());
-
-			template.add("statements", statement);
+		ArrayList<HashMap<String,String>> vars = new ArrayList<>();
+		for (Object varNode : node.getChildren()) {
+			String id = ((StilNode) varNode).getText(); // Retrieve the identifier name
+			HashMap<String,String> properties = new HashMap<>();
+			properties.put("label",""+getNewLabelNumber());
+			properties.put("type",getEntityTypeString(id));
+			properties.put("varnum",""+getVarnum(id));
+			properties.put("id",id);
+			System.out.println(properties);
+			vars.add(properties);
 		}
+		template.add("variables", vars);
+		template.add("localtop", symtab.localTop + 1);
 
 		node.setST(template);
 
@@ -235,5 +251,13 @@ public class CodeGenerator {
 	 */
 	protected static ST getChildST(StilNode node, int index) {
 		return ((StilNode) node.getChild(index)).getST();
+	}
+
+	protected String getEntityTypeString(String id){
+		return symtab.retrieve(id).getDeclNode().getEntityTypeString();
+	}
+
+	protected Integer getVarnum(String id) {
+		return symtab.retrieve(id).getVarnum();
 	}
 }
