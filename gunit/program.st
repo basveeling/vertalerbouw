@@ -7,6 +7,9 @@ b := c := 5;
 a := 3;
 d := 7;
 
+print(true);
+print(false);
+
 print(a); // 3
 
 print(b == c); //True

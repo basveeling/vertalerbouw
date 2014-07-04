@@ -41,13 +41,13 @@ declaration returns [ST template = null]
 
 constant_declaration returns [ST template = null]
     :   ^(CONST type id=IDENTIFIER expression) { 
-            template = codeGenerator.constDeclaration((DeclNode)$CONST,(IdNode)$id); ((DeclNode)$CONST).setST(template); 
+            template = codeGenerator.processConstDeclaration((DeclNode)$CONST,(IdNode)$id); ((DeclNode)$CONST).setST(template); 
         }
     ;
 
 var_declaration returns [ST template = null]
     :   ^(VAR type id=IDENTIFIER) { 
-            template = codeGenerator.varDeclaration((DeclNode)$VAR,(IdNode)$id); ((DeclNode)$VAR).setST(template); 
+            template = codeGenerator.processVarDeclaration((DeclNode)$VAR,(IdNode)$id); ((DeclNode)$VAR).setST(template); 
         }
 
     ;
@@ -89,10 +89,10 @@ expression returns [ST template = null]
     ;
 
 operand returns [ST template = null]
-    :   id=IDENTIFIER   { template = codeGenerator.idOperand((IdNode)$id); ((IdNode)$id).setST(template); }
-    |   (TRUE | FALSE) 
-    |   v=CHAR_LITERAL  { template = codeGenerator.charLiteral((LiteralNode)$v); ((LiteralNode)$v).setST(template); }
-    |   v=INT_LITERAL   { template = codeGenerator.intLiteral((LiteralNode)$v); ((LiteralNode)$v).setST(template); }
+    :   id=IDENTIFIER       { template = codeGenerator.processIdOperand((IdNode)$id); ((IdNode)$id).setST(template); }
+    |   v=(TRUE | FALSE)    { template = codeGenerator.processBoolLiteral((LiteralNode)$v); ((LiteralNode)$v).setST(template); }
+    |   v=CHAR_LITERAL      { template = codeGenerator.processCharLiteral((LiteralNode)$v); ((LiteralNode)$v).setST(template); }
+    |   v=INT_LITERAL       { template = codeGenerator.processIntLiteral((LiteralNode)$v); ((LiteralNode)$v).setST(template); }
     ;
 
 type
