@@ -127,6 +127,17 @@ binary_operator(expr1,expr2,operator) ::= <<
 >>
 
 
+if_statement(expr, if_instructions, else_instructions, label1, label2) ::= <<
+<expr>
+ifeq L<label1>
+<if_instructions ; separator="\n">
+goto L<label2>
+L<label1>:
+<else_instructions ; separator="\n">
+L<label2>:
+>>
+
+
 print(expression,type) ::= <<
 <expression>
 dup

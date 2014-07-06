@@ -28,13 +28,19 @@ options {
 }
 
 program
-    :   ^(PROGRAM { symtab.openScope(); } (declaration | expression)*)
+    :   ^(PROGRAM 
+            { symtab.openScope(); } 
+            instructions
+            { symtab.closeScope(); })
+    ;
+
+instructions
+    :   (declaration | statement | expression)*
     ;
     
 declaration
     :   constant_declaration | var_declaration
     ;
-
 
 constant_declaration
     :   ^(CONST t=type id=IDENTIFIER expr=expression) { 
@@ -47,6 +53,18 @@ var_declaration
     :   ^(VAR t=type id=IDENTIFIER) { 
             declarationChecker.processVariableDeclaration((DeclNode)$VAR, $id, t, symtab);
         }
+    ;
+
+statement
+    :   if_statement
+    ;
+
+if_statement
+    :   ^(  IF              {   symtab.openScope();                                     }
+            expr=expression {   typeChecker.processIfStatement((StilNode)$IF, expr);    }
+            instructions    {   symtab.closeScope();                                    }
+         (  ELSE            {   symtab.openScope();                                     }
+            instructions    {   symtab.closeScope();                                    })?)
     ;
 
 print_statement returns [EntityType entityType = null;] 
@@ -63,12 +81,14 @@ read_statement returns [EntityType entityType = null;]
     ;
 
 compound_expression returns [EntityType entityType = null;]
-    :   ((declaration)* expr=expression { entityType = expr; })*
+    :   ((declaration | statement)* expr=expression { entityType = expr; })*
     ;
 
+//setEntityType
+
 closed_compound_expression returns [EntityType entityType = null;]
-    :   ^(  COMPOUND_EXPR           {   symtab.openScope();     } 
-            c=compound_expression   {   entityType = c; 
+    :   ^(  node=COMPOUND_EXPR      {   symtab.openScope();     } 
+            c=compound_expression   {   entityType = c; ((ExprNode)$node).setEntityType(entityType); 
                                         symtab.closeScope();    })
     ;
 
