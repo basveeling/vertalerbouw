@@ -7,12 +7,19 @@ options {
 @header{package vb.stil;}
 //------------------- program
 program walks program:
-simple.st          OK
+simple.st         OK
+types.st          OK
 duplicatedecl.st  FAIL
 
 // Declarations
 "var int x; var int x;"                               FAIL // No double declarations
 "var int x; x := print({var int x; read(x); x+5;});"  OK   // Same declarations in multiple levels
+
+// Unassigned
+"var int x; print(x);"                  FAIL // Can't print unassigned variable
+"var int x; var int y; y := x;"         FAIL // Can't assign with unassigned variable
+"var int x; var int y; x := 5; y := x;" OK   // Can assign with assigned variable
+"var int x; read(x);"                   OK   // Can read unassigned variable
 
 // PRINT
 "var int x; print(y);"                    FAIL // Can't print non-existing variables

@@ -5,16 +5,19 @@ type_map ::= [
   "bool" : "Z",
   "char" : "C"
 ]
+
 type_scanner_map ::= [
   "int"  : "Int",
   "bool" : "Boolean",
   "char" : ""
 ]
+
 type_scan_templ ::= [
   "int"  : "scan_int",
   "bool" : "scan_bool",
   "char" : "scan_char"
 ]
+
 bool_map ::= [
   "true"  : "1",
   "false" : "0"

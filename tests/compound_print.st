@@ -6,4 +6,3 @@ foo := 3;
 print(print(foo));
 
 print(bar);
-

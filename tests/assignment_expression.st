@@ -5,3 +5,5 @@ var int c;
 a := 'a';
 b := true;
 c := 5;
+
+print(a,b,c);
