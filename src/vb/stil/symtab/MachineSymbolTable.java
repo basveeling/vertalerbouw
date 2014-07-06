@@ -1,7 +1,7 @@
 package vb.stil.symtab;
 
 public class MachineSymbolTable extends SymbolTable<MachineEntry> {
-	private int localTop = 0;
+	public int localTop = 0;
 
 	public MachineSymbolTable() {
 		// TODO Auto-generated constructor stub

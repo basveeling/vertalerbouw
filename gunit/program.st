@@ -1,8 +1,18 @@
-var int k;
-
-read(k);
-
-print(k+1);
+var int a;
+//var int b;
+//var int c;
+var int d;
+//var bool k;
+var char x;
+read(d,x,a,d);
+print(d,x);
+//
+//b:=read(a);
+//read(c,d);
+//
+//print(a+b,c+d);
+//read(a,k,x);
+//print(a,k,x);
 
 //print(!true)
 //
