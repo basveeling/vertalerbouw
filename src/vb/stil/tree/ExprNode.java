@@ -27,8 +27,6 @@ public class ExprNode extends StilNode {
 	}
 
 	public String getEntityTypeString() {
-		System.out.println(entityType);
-
 		return entityType.toString().toLowerCase();
 	}
 	

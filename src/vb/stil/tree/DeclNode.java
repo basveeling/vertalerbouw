@@ -25,7 +25,9 @@ public class DeclNode extends StilNode {
 	public EntityType getEntityType() {
 		return entityType;
 	}
-
+	public String getEntityTypeString() {
+		return entityType.toString().toLowerCase();
+	}
 	public void setEntityType(EntityType entityType) {
 		this.entityType = entityType;
 	}
