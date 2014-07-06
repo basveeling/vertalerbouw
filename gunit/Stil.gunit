@@ -4,9 +4,24 @@ gunit Stil;
 //------------------- program
 program:
 basic.st OK
+types.st OK
+
+// Semicolon's
+"var int x; x := y"  FAIL // Must end with ;
+"var int x x := y;"  FAIL // Must split statements with ;
+"var int x; x := y;" OK // Must end with ;
+
 
 // COMPOUND
 "var int x; read(x); x := print({var int y; read(y); x + y;});" OK
+"var int x; read(x); x := print({var int y; read(y); x + y});"  FAIL // must end with ; for compound
+
+
+//Declarations
+"const int x;"      FAIL // Const must be assigned in declaration
+"const int x := 5;" OK
+"var int x;"        OK
+"var int x := 5;"   FAIL // Var's can't be assigned in declaration
 
 //------------------- IDENTIFIER
 IDENTIFIER:

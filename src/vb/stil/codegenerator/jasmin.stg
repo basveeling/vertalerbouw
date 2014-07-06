@@ -143,14 +143,14 @@ iadd
 >>
 
 
-unary_minus(expr1) ::= <<
-<expr1>
+unary_minus(expr) ::= <<
+<expr>
 ineg
 >>
 
 
-unary_plus(expr1) ::= <<
-<expr1>
+unary_plus(expr) ::= <<
+<expr>
 >>
 
 
