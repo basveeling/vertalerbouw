@@ -35,6 +35,7 @@ tokens {
 
     // keywords
     BOOL          =   'bool'      ;
+    COMPOUND_EXPR =   'compound'  ;
     CONST         =   'const'     ;
     CHAR          =   'char'      ;
     ELSE          =   'else'      ;
@@ -49,7 +50,7 @@ tokens {
     UNARY_NOT     =   'not'       ;
     UNARY_PLUS    =   'plus'      ;
     VAR           =   'var'       ;
-    COMPOUND_EXPR =   'compound'  ;
+    WHILE         =   'while'     ;
 }
 
 @lexer::header {
@@ -86,11 +87,15 @@ var_declaration
     ;
 
 statement
-    :   if_statement
+    :   (if_statement | while_statement)
     ;
 
 if_statement
     :   IF^ LPAREN! expression RPAREN! LCURLY! instructions RCURLY! (ELSE LCURLY! instructions RCURLY!)?
+    ;
+
+while_statement
+    :   WHILE^ LPAREN! expression RPAREN! LCURLY! instructions RCURLY!
     ;
 
 expression

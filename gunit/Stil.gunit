@@ -33,6 +33,13 @@ statements.st OK
 "if(true) { } else { }"                     OK
 "if(false) { } else"                        FAIL // Missing { } on else part
 
+// WHILE STATEMENT
+"while(true) { }"                              OK
+"while(true) { };"                             FAIL // Statement must not end with a semicolon
+"while(1 >= 2) { }"                            OK
+"while(true)"                                  FAIL // Missing { }
+"while(false) { const int x := 4; print(x); }" OK
+
 //------------------- IDENTIFIER
 IDENTIFIER:
 

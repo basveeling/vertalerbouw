@@ -61,6 +61,7 @@ program(maxStackDepth, maxLocals, instructions) ::= <<
   .end method
 >>
 
+
 compound_expression(instructions) ::= <<
 <instructions ; separator="\npop\n">
 >>
@@ -86,9 +87,11 @@ charLiteral(value) ::= <<
 bipush <value>
 >>
 
+
 intLiteral(value) ::= <<
 bipush <value>
 >>
+
 
 not(expr, label1, label2) ::= <<
 <expr>
@@ -100,10 +103,12 @@ bipush 1
 L<label2>:
 >>
 
+
 unary_minus(expr) ::= <<
 <expr>
 ineg
 >>
+
 
 unary_plus(expr) ::= <<
 <expr>
@@ -120,6 +125,7 @@ bipush 1
 L<label2>:
 >>
 
+
 binary_operator(expr1,expr2,operator) ::= <<
 <expr1>
 <expr2>
@@ -130,11 +136,23 @@ binary_operator(expr1,expr2,operator) ::= <<
 if_statement(expr, if_instructions, else_instructions, label1, label2) ::= <<
 <expr>
 ifeq L<label1>
-<if_instructions ; separator="\n">
+<if_instructions:{inst| <inst><\n>pop};separator="\n">
 goto L<label2>
 L<label1>:
-<else_instructions ; separator="\n">
+<else_instructions:{inst| <inst><\n>pop};separator="\n">
 L<label2>:
+iconst_0
+>>
+
+
+while_statement(expr, instructions, label1, label2) ::= <<
+L<label1>:
+<expr>
+ifeq L<label2>
+<instructions:{inst| <inst><\n>pop};separator="\n">
+goto L<label1>
+L<label2>:
+iconst_0
 >>
 
 
@@ -146,23 +164,28 @@ swap
 invokevirtual java/io/PrintStream/println(<type_map.(type)>)V
 >>
 
+
 printMultiple(statements) ::= <<
 <statements ; separator="\npop\n">
 >>
+
 
 scan_int() ::= <<
 invokevirtual java/util/Scanner/nextInt()I
 >>
 
+
 scan_bool() ::= <<
 invokevirtual java/util/Scanner/nextBoolean()Z
 >>
 
+
 scan_char() ::= <<
-invokevirtual         java/util/Scanner/next()Ljava/lang/String;
+invokevirtual java/util/Scanner/next()Ljava/lang/String;
 iconst_0              
-invokevirtual         java/lang/String/charAt(I)C
+invokevirtual java/lang/String/charAt(I)C
 >>
+
 
 read(var,scannertop) ::= <<
 iconst_0
@@ -175,7 +198,6 @@ aload <scannertop> ; scanner
 istore <var.varnum> ; <var.id>
 L<var.label>:
 >>
-
 
 
 readMultiple(variables,localtop) ::= <<

@@ -56,15 +56,21 @@ var_declaration
     ;
 
 statement
-    :   if_statement
+    :   (if_statement | while_statement)
     ;
 
 if_statement
-    :   ^(  IF              {   symtab.openScope();                                     }
-            expr=expression {   typeChecker.processIfStatement((StilNode)$IF, expr);    }
-            instructions    {   symtab.closeScope();                                    }
-         (  ELSE            {   symtab.openScope();                                     }
-            instructions    {   symtab.closeScope();                                    })?)
+    :   ^(  IF              { symtab.openScope();                                  }
+            expr=expression { typeChecker.processIfStatement((StilNode)$IF, expr); }
+            instructions    { symtab.closeScope();                                 }
+         (  ELSE            { symtab.openScope();                                  }
+            instructions    { symtab.closeScope();                                 })?)
+    ;
+
+while_statement
+    :   ^(  WHILE           { symtab.openScope();                                        }
+            expr=expression { typeChecker.processWhileStatement((StilNode)$WHILE, expr); }
+            instructions    { symtab.closeScope();                                       })
     ;
 
 print_statement returns [EntityType entityType = null;] 
