@@ -28,8 +28,7 @@ fi
 
 if [[ $compile = true ]]; then
     echo "(c) Compiling..."
-    # TODO: make this platform agnostic
-    java -jar /Applications/eclipse/plugins/org.eclipse.jdt.core_*.jar -d bin/ -1.7 src/
+    ant
 fi
 
 if [[ $rungunit = true ]]; then
@@ -42,14 +41,11 @@ if [[ $rungunit = true ]]; then
 fi
 
 if [[ $generatecode = true ]]; then
-    echo "(g) Generating code"
-    java -Dfile.encoding=UTF-8 -classpath bin vb.stil.Stil gunit/program.st
+    echo "(g) Generating code and compile"
+    java -Dfile.encoding=UTF-8 -classpath bin:jasmin.jar:classpath/* vb.stil.Stil program.st
 fi
 
 if [[ $runjasmin = true ]]; then
-    echo "(j) Compiling with Jasmin"
-    java -jar jasmin.jar -d gen/ gen/program.j 
-
     echo "==== RUNNING PROGRAM ===="
     cd gen; java Program
     echo "====      END        ===="

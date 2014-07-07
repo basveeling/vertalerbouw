@@ -1,10 +1,10 @@
 package vb.stil;
 
+import jasmin.Main;
+
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
-import java.util.EnumSet;
-import java.util.Set;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -16,6 +16,9 @@ import org.antlr.stringtemplate.StringTemplate;
 import org.stringtemplate.v4.ST;
 
 import vb.stil.tree.StilNodeAdaptor;
+
+import java.util.EnumSet;
+import java.util.Set;
 
 /**
  * Program that creates and starts the Stil lexer, parser, etc.
@@ -90,7 +93,14 @@ public class Stil {
 
 				jasmin.close();
 			}
-
+			if (!options.contains(Option.NO_ASSEMBLE)) { // Call Jasmin Main Function
+				Main.main(new String[] {"-d", "gen/", "gen/program.j"});
+			}
+			if (!options.contains(Option.NO_JAR)) {
+				String sep = System.getProperty("file.separator");
+				Process proc = Runtime.getRuntime().exec("jar cfm gen"+sep+"program.jar program-manifest.txt -C gen Program.class");
+				proc.waitFor();
+			}
 			if (options.contains(Option.DOT)) { // print the AST as DOT specification
 				DOTTreeGenerator gen = new DOTTreeGenerator();
 				StringTemplate st = gen.toDOT(tree);
@@ -137,7 +147,7 @@ public class Stil {
 	}
 
 	private static enum Option {
-		DOT, AST, NO_CHECKER, NO_INTERPRETER, NO_CODE_GENERATOR;
+		DOT, AST, NO_CHECKER, NO_INTERPRETER, NO_CODE_GENERATOR, NO_ASSEMBLE, NO_JAR;
 
 		private Option() {
 			text = name().toLowerCase();

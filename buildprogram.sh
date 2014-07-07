@@ -1,0 +1,1 @@
+java -Dfile.encoding=UTF-8 -classpath bin:classpath/* vb.stil.Stil program.st

@@ -1,26 +1,7 @@
-const int i := 10;
-var int j;
+const bool success := true;
 
-j := 1;
 
-while(j <= i) {
-    print(j);
-    j := j + 1;
-}
-
-//const bool success := true;
-//
-//if(2 >= 2) {
-//    print({
-//        var int x;
-//        var int y;
-//        read(x, y);
-//        x > y;
-//    });
-//} else {
-//    print(!success);
-//}
-
+print(success);
 
 
 //var int a;
