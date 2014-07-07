@@ -17,12 +17,6 @@ else
 fi
 # Loop the array
 
-
-echo "Building ANTLR grammars"
-cd src/vb/stil/; java org.antlr.Tool *.g; cd ../../..;
-echo "Compiling..."
-java -jar /Applications/eclipse/plugins/org.eclipse.jdt.core_*.jar -d bin/ -1.7 src/
-
 for file in "${file_base[@]}"; do
     # Padd file_base with suffixes
     file_in="$file.in"             # The in file
@@ -48,21 +42,13 @@ for file in "${file_base[@]}"; do
     printf "== Testing %s against %s\n" "$file_source" "$file_in"
 
     # Run application, redirect in file to app, and output to out file
-    java -Dfile.encoding=UTF-8 -classpath bin vb.stil.Stil "$file_source"
+    java -Dfile.encoding=UTF-8 -classpath bin:classpath/* vb.stil.Stil "$file_source"
     e_code=$?
     if [ $e_code != 0 ]; then
             printf "===== Generation FAIL : %d\n" "$e_code"
             exit 1;
     else
             printf "======== Generation OK!\n"
-    fi
-    java -jar jasmin.jar -d gen/ gen/program.j
-    e_code=$?
-    if [ $e_code != 0 ]; then
-            printf "===== Compile FAIL : %d\n" "$e_code"
-            exit 1;
-    else
-            printf "======== Compile OK!\n"
     fi
     cd gen; java Program < "../$file_in" > output.txt; cd ..
 
