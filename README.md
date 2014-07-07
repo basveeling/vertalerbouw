@@ -4,8 +4,7 @@
 Compiling is done with ANT. Make sure this is installed by following the steps on http://ant.apache.org/manual/install.html
 
 Open a shell in the root directory of the stil project and run:
-$ ant
-
+```$ ant```
 ### Running tests
 STIL includes two sets of tests: GUnit for gramatical tests and a custom code generation testing framework.
 Running GUnit tests:
