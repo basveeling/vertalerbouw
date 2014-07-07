@@ -16,8 +16,8 @@ Running GUnit tests:
 __OSX/UNIX:__
 ```
 $ cd bin
-$ java -cp classpath/antlr.jar org.antlr.gunit.Interp ../gunit/Stil.gunit
-$ java -cp classpath/antlr.jar org.antlr.gunit.Interp ../gunit/StilChecker.gunit
+$ java -cp classpath/antlr.jar:. org.antlr.gunit.Interp ../gunit/Stil.gunit
+$ java -cp classpath/antlr.jar:. org.antlr.gunit.Interp ../gunit/StilChecker.gunit
 $ cd ..
 ```
 __Windows:__
