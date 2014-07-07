@@ -58,7 +58,8 @@ var_declaration returns [ST template = null]
     ;
 
 statement returns [ST template = null]
-    :   st=if_statement { template = st; }
+    :   st=if_statement    { template = st; }
+    |   st=while_statement { template = st; }
     ;
 
 if_statement returns [ST template = null]
@@ -70,6 +71,14 @@ if_statement returns [ST template = null]
          (  ELSE            { codeGenerator.openScope();  }
             (i=instruction  { elseInstructions.add(i);    }  )*    
                             { codeGenerator.closeScope(); }  )?) { template = codeGenerator.processIfStatement((StilNode)$IF, ifInstructions, elseInstructions); }
+    ;
+
+while_statement returns [ST template = null]
+    @init { List<ST> instructions = new ArrayList<>(); } 
+    :   ^(  WHILE           { codeGenerator.openScope();  }
+            expr=expression
+            (i=instruction  { instructions.add(i);      }  )*    
+                            { codeGenerator.closeScope(); }) { template = codeGenerator.processWhileStatement((StilNode)$WHILE, instructions); }
     ;
 
 print_statement returns [ST template = null]

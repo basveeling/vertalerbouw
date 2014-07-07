@@ -176,6 +176,23 @@ public class CodeGenerator {
 		
 		return template;
 	}
+	
+	public ST processWhileStatement(StilNode node, List<ST> instructions) {
+		ST template = getTemplate("while_statement");
+		
+		template.add("expr", getChildST(node, 0));
+		
+		for (ST instruction : instructions) {
+			template.add("instructions", instruction);
+		}
+
+		template.add("label1", getNewLabelNumber());
+		template.add("label2", getNewLabelNumber());
+		
+		node.setST(template);
+		
+		return template;
+	}
 
 	public ST processIntLiteral(LiteralNode v) {
 		ST template = getTemplate("intLiteral");

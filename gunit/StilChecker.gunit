@@ -15,6 +15,8 @@ statements.st     OK
 // Declarations
 "var int x; var int x;"                               FAIL // No double declarations
 "var int x; x := print({var int x; read(x); x+5;});"  OK   // Same declarations in multiple levels
+"var int x; { x := 4; }; print(x);"                   FAIL // Unassigned in current scope
+"var int x; if(true) { x := 4; } print(x);"           FAIL // Unassigned in current scope
 
 // Unassigned
 "var int x; print(x);"                  FAIL // Can't print unassigned variable
@@ -53,3 +55,8 @@ statements.st     OK
 "if(true) { }"   OK
 "if(2) { }"      FAIL // Statement must be of type bool
 "if(1 >= 2) { }" OK
+
+// WHILE STATEMENT
+"while(true) { }"   OK
+"while(2) { }"      FAIL // Statement must be of type bool
+"while(1 >= 2) { }" OK

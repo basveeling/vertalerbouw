@@ -2,7 +2,9 @@ var int i;
 const bool success := true;
 
 if(success) {
-    var int i ;
+    var int i;
+
+    i := 2;
     
     if(!success) {
         var bool result;
@@ -18,6 +20,8 @@ if(success) {
 
         foo := {
             var bool foo;
+
+            foo := false;
 
             if(true || false) { 
                 foo := true;

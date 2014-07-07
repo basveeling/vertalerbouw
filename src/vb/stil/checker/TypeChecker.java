@@ -39,7 +39,7 @@ public class TypeChecker {
 			throw new StilException(node, "operand type does not match identifier type");
 		}
 		
-		symbol.setAssigned(true);
+		symbol.setAssignedForScope(symtab.currentLevel());
 		
 		return declNode;
 	}
@@ -93,6 +93,20 @@ public class TypeChecker {
 	public void processIfStatement(StilNode node, EntityType type) throws StilException {
 		if (type != EntityType.BOOL) {
 			throw new StilException(node, "if statement expression must be of type bool");
+		}
+	}
+
+	/**
+	 * Process while statement, validating the type of the expression
+	 *
+	 * @param node
+	 * @param type
+	 * @return
+	 * @throws StilException
+	 */
+	public void processWhileStatement(StilNode node, EntityType type) throws StilException {
+		if (type != EntityType.BOOL) {
+			throw new StilException(node, "while statement expression must be of type bool");
 		}
 	}
 
