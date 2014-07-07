@@ -8,6 +8,13 @@ import vb.stil.tree.DeclNode;
 import vb.stil.tree.EntityType;
 import vb.stil.tree.StilNode;
 
+/**
+ * Processes declaration statements and decorate the AST nodes accordingly.
+ *
+ * @author Bas Veeling
+ * @author Jarno van Leeuwen
+ * @version 7-7-2014
+ */
 public class DeclarationChecker {
 	/**
 	 * Process a declaration by registering relevant properties

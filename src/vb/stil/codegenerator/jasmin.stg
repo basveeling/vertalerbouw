@@ -44,7 +44,6 @@ binary_operators ::= [
 
 
 program(maxStackDepth, maxLocals, instructions) ::= <<
-  ; -> 
   .class public Program
   .super java/lang/Object
   .method public \<init>()V
