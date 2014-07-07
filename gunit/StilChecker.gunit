@@ -10,6 +10,7 @@ program walks program:
 simple.st         OK
 types.st          OK
 duplicatedecl.st  FAIL
+statements.st     OK
 
 // Declarations
 "var int x; var int x;"                               FAIL // No double declarations
@@ -47,3 +48,8 @@ duplicatedecl.st  FAIL
 "var int x; x := {var bool y; read(y); y;};"                    FAIL // Wrong type
 "var int x; x := {x; var bool y;};"                             FAIL // Can't end with declaration
 "var int x; x := {var bool y; read(y); x;}; print(y);"          FAIL // Can't use vars from closed scope
+
+// IF STATEMENT
+"if(true) { }"   OK
+"if(2) { }"      FAIL // Statement must be of type bool
+"if(1 >= 2) { }" OK

@@ -1,11 +1,26 @@
-var int a;
+const bool success := true;
+
+if(2 >= 2) {
+    print({
+        var int x;
+        var int y;
+        read(x, y);
+        x > y;
+    });
+} else {
+    print(!success);
+}
+
+
+
+//var int a;
 //var int b;
 //var int c;
-var int d;
+//var int d;
 //var bool k;
-var char x;
-read(d,x,a,d);
-print(d,x);
+//var char x;
+//read(d,x,a,d);
+//print(d,x);
 //
 //b:=read(a);
 //read(c,d);

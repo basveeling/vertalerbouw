@@ -37,7 +37,9 @@ tokens {
     BOOL          =   'bool'      ;
     CONST         =   'const'     ;
     CHAR          =   'char'      ;
+    ELSE          =   'else'      ;
     FALSE         =   'false'     ;
+    IF            =   'if'        ;
     INT           =   'int'       ;
     PRINT         =   'print'     ;
     PROGRAM       =   'program'   ;
@@ -62,12 +64,12 @@ tokens {
 // Parser rules
 
 program
-    :   declarations_and_expressions EOF
-            ->  ^(PROGRAM declarations_and_expressions)
+    :   instructions EOF
+            ->  ^(PROGRAM instructions)
     ;
 
-declarations_and_expressions
-    : ((declaration | expression) SEMICOLON!)*
+instructions
+    : (((declaration | expression) SEMICOLON!) | statement)*
     ;
 
 declaration
@@ -83,13 +85,21 @@ var_declaration
     :   VAR<DeclNode>^ type IDENTIFIER<IdNode>
     ;
 
+statement
+    :   if_statement
+    ;
+
+if_statement
+    :   IF^ LPAREN! expression RPAREN! LCURLY! instructions RCURLY! (ELSE LCURLY! instructions RCURLY!)?
+    ;
+
 expression
     :   (IDENTIFIER<IdNode> BECOMES) => assignment_statement
     |   (closed_compound_expression | arithmetic_expression)
     ;
 
 compound_expression
-    :   ((declaration SEMICOLON!)* expression SEMICOLON!)+
+    :   (((declaration SEMICOLON!) | statement)* expression SEMICOLON!)+
     ;
 
 closed_compound_expression

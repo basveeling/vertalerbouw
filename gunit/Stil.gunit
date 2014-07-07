@@ -3,8 +3,9 @@ gunit Stil;
 @header{package vb.stil;}
 //------------------- program
 program:
-basic.st OK
-types.st OK
+basic.st      OK
+types.st      OK
+statements.st OK
 
 // Semicolon's
 "var int x; x := y"  FAIL // Must end with ;
@@ -22,6 +23,15 @@ types.st OK
 "const int x := 5;" OK
 "var int x;"        OK
 "var int x := 5;"   FAIL // Var's can't be assigned in declaration
+
+// IF STATEMENT
+"if(true) { }"                              OK
+"if(true) { };"                             FAIL // Statement must not end with a semicolon
+"if(1 >= 2) { }"                            OK
+"if(true)"                                  FAIL // Missing { }
+"if(false) { const int x := 4; print(x); }" OK
+"if(true) { } else { }"                     OK
+"if(false) { } else"                        FAIL // Missing { } on else part
 
 //------------------- IDENTIFIER
 IDENTIFIER:

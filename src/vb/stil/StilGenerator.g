@@ -29,27 +29,47 @@ options {
 program[int numOps, int locals] returns [ST template = null] 
     :   ^(PROGRAM
             {codeGenerator.openScope();}
-            (declaration | expression)*) { template = codeGenerator.processProgram((StilNode)$PROGRAM); }
+            instruction*) { template = codeGenerator.processProgram((StilNode)$PROGRAM); }
             {codeGenerator.closeScope();}
+    ;
+
+instruction returns [ST template = null]
+    :   st=declaration { template = st; }
+    |   st=statement   { template = st; }
+    |   st=expression  { template = st; }
     ;
     
 declaration returns [ST template = null]
-    :   var_declaration
-    |   constant_declaration 
+    :   st=var_declaration      { template = st; }
+    |   st=constant_declaration { template = st; }
     ;
-
 
 constant_declaration returns [ST template = null]
     :   ^(CONST type id=IDENTIFIER expression) { 
-            template = codeGenerator.processConstDeclaration((DeclNode)$CONST,(IdNode)$id); ((DeclNode)$CONST).setST(template); 
+            template = codeGenerator.processConstDeclaration((DeclNode)$CONST, (IdNode)$id); ((DeclNode)$CONST).setST(template); 
         }
     ;
 
 var_declaration returns [ST template = null]
     :   ^(VAR type id=IDENTIFIER) { 
-            template = codeGenerator.processVarDeclaration((DeclNode)$VAR,(IdNode)$id); ((DeclNode)$VAR).setST(template); 
+            template = codeGenerator.processVarDeclaration((DeclNode)$VAR, (IdNode)$id); ((DeclNode)$VAR).setST(template); 
         }
 
+    ;
+
+statement returns [ST template = null]
+    :   st=if_statement { template = st; }
+    ;
+
+if_statement returns [ST template = null]
+    @init { List<ST> ifInstructions = new ArrayList<>(), elseInstructions = new ArrayList<>(); } 
+    :   ^(  IF              { codeGenerator.openScope();  }
+            expr=expression
+            (i=instruction  { ifInstructions.add(i);      }  )*    
+                            { codeGenerator.closeScope(); }
+         (  ELSE            { codeGenerator.openScope();  }
+            (i=instruction  { elseInstructions.add(i);    }  )*    
+                            { codeGenerator.closeScope(); }  )?) { template = codeGenerator.processIfStatement((StilNode)$IF, ifInstructions, elseInstructions); }
     ;
 
 print_statement returns [ST template = null]
@@ -62,7 +82,7 @@ read_statement returns [ST template = null;]
 
 closed_compound_expression returns [ST template = null]
     :   ^(COMPOUND_EXPR  { codeGenerator.openScope(); } 
-            ((declaration)* expr=expression)*   
+            ((declaration | statement)* expr=expression)*   
             { template = codeGenerator.processCompoundExpression((StilNode)$COMPOUND_EXPR);
               codeGenerator.closeScope(); ((ExprNode)$COMPOUND_EXPR).setST(template);}
         )
@@ -104,5 +124,3 @@ type
     |   CHAR
     |   INT
     ;
-    
-
