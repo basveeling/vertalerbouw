@@ -1,7 +1,6 @@
 /bin
 /target
 /.DS_Store
-/.classpath
 /.settings
 /src/vb/stil/StilChecker.java
 /src/vb/stil/StilLexer.java
