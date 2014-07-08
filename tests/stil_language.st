@@ -62,10 +62,15 @@ if(!bvar) {
     print(false);
 }
 
-const int i = 0;
-const int j = 1;
+var int i;
+
+i := 0;
+
+const int j := 1; // loop till j and comment test
 
 while(i <= j) {
+    var int foo;
+
     if(i == j) { 
         print(true); 
     } else {
@@ -75,6 +80,8 @@ while(i <= j) {
     i := i + 1;
 }
 
-while(i > j) {
+while((i-1) > j) {
     print(true);
+
+    var int bar;
 }

@@ -110,12 +110,12 @@ public class Stil {
 		} catch (RecognitionException e) {
 			System.err.print("ERROR: recognition exception thrown by compiler: ");
 			System.err.println(e.getMessage());
-			e.printStackTrace();
+			//e.printStackTrace();
 			System.exit(1);
 		} catch (Exception e) {
 			System.err.print("ERROR: uncaught exception thrown by compiler: ");
 			System.err.println(e.getMessage());
-			e.printStackTrace();
+			//e.printStackTrace();
 			System.exit(2);
 		}
 	}

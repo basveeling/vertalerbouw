@@ -1,28 +1,43 @@
 gunit Stil;
 
 @header{package vb.stil;}
-//------------------- program
 program:
 basic.st      OK
 types.st      OK
 statements.st OK
 
-// Semicolon's
+// SEMICOLONS
 "var int x; x := y"  FAIL // Must end with ;
 "var int x x := y;"  FAIL // Must split statements with ;
-"var int x; x := y;" OK // Must end with ;
-
+"var int x; x := y;" OK   // Must end with ;
 
 // COMPOUND
 "var int x; read(x); x := print({var int y; read(y); x + y;});" OK
 "var int x; read(x); x := print({var int y; read(y); x + y});"  FAIL // must end with ; for compound
 
-
-//Declarations
+// DECLARATIONS
 "const int x;"      FAIL // Const must be assigned in declaration
 "const int x := 5;" OK
 "var int x;"        OK
 "var int x := 5;"   FAIL // Var's can't be assigned in declaration
+
+// PRINT
+"print(1);"       OK
+"print(1)"        FAIL // Must end with ;
+"print(1,true);"  OK
+"print('b', 10);" OK
+"print(a);"       OK
+"print false;"    FAIL // Must surround operand with ( )
+
+// READ
+"read(1);"   FAIL // Can only read identifiers
+"read(a)"    FAIL // Must end with ;
+"read(a,b);" OK
+"read b;"    FAIL // Must surround operand with ( )
+
+// UNKNOWN STATEMENT
+"raed(b);"  FAIL
+"while(c);" FAIL
 
 // IF STATEMENT
 "if(true) { }"                              OK
@@ -40,24 +55,15 @@ statements.st OK
 "while(true)"                                  FAIL // Missing { }
 "while(false) { const int x := 4; print(x); }" OK
 
-//------------------- IDENTIFIER
 IDENTIFIER:
 
-"abc123" OK
-
-"a" OK
-
+"abc123"  OK
+"a"       OK
 "XYZ@999" FAIL
+"123abc"  FAIL
 
-"123abc" FAIL
-
-//------------------- INT_LITERAL
 INT_LITERAL:
 
-"00000" OK
-
+"00000"     OK
 "123456789" OK
-
-"-1" FAIL
-
-
+"-1"        FAIL
