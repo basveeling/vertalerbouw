@@ -100,7 +100,7 @@ while_statement
 
 expression
     :   (IDENTIFIER<IdNode> BECOMES) => assignment_statement
-    |   (closed_compound_expression | arithmetic_expression)
+    |   arithmetic_expression
     ;
 
 compound_expression
@@ -147,6 +147,7 @@ operand
     |   LPAREN! expression RPAREN!
     |   print_statement
     |   read_statement
+    |   closed_compound_expression
     ;
 
 assignment_statement

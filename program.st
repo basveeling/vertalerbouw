@@ -1,73 +1,55 @@
-const bool success := true;
+var int ivar;
 
+ivar := {
+    var int ivar1;
+    var int ivar2;
 
-print(success);
+    read(ivar1, ivar2);
+    print(ivar1, ivar2);
 
+    const int iconst1 := 1;
+    const int iconst2 := 2;
 
-//var int a;
-//var int b;
-//var int c;
-//var int d;
-//var bool k;
-//var char x;
-//read(d,x,a,d);
-//print(d,x);
-//
-//b:=read(a);
-//read(c,d);
-//
-//print(a+b,c+d);
-//read(a,k,x);
-//print(a,k,x);
+    ivar2 := ivar1 := +16 + 2 * -8;
 
-//print(!true)
-//
-//print('a');
-//
-//print('a' <> 'a'); // false
-//print('a' == 'a'); // true
-//
-//var int a;
-//var int b;
-//var int c;
-//var int d;
-//
-//b := c := 5;
-//a := 3;
-//d := 7;
-//
-//5+6;
-//
-//print(true || false); // true
-//print(true && true); // true
-//print(true && false); // false
-//print(true && (false || true)); // true
-//
-//print(true);
-//print(false);
-//
-//print(a); // 3
-//
-//print(b == c); //True
-//print(b <> c); //False
-//print(b <  c); //False
-//print(b >  c); //False
-//print(b <= c); //True
-//print(b >= c); //True
-//
-//
-//print(a == b); //False
-//print(a <> b); //True
-//print(a <  b); //True
-//print(a >  b); //False
-//print(a <= b); //True
-//print(a >= b); //False
-//
-//print(d == c); //False
-//print(d <> c); //True
-//print(d <  c); //False
-//print(d >  c); //True
-//print(d <= c); //False
-//print(d >= c); //True
-//
-//print(8,9);
+    print(  ivar1 < ivar2 && iconst1 <= iconst2, 
+            iconst1 * iconst2 > ivar2 - ivar1);
+
+    ivar1 < read(ivar2) && iconst1 <= iconst2;
+
+    ivar2 := print(ivar2) + 1;
+} + 1;
+
+var bool bvar;
+
+bvar := {
+    var bool bvar;
+
+    read(bvar);
+    print(bvar);
+
+    bvar := 12 / 5 * 5 + 12 % 5 == 12 && 6 >= 6;
+
+    const bool bconst := true;
+
+    print(!false && bvar == bconst || true <> false);
+} && true;
+
+var char cvar;
+
+cvar := {
+    var char cvar1;
+    var char cvar2;
+
+    read(cvar1);
+
+    const char cconst := 'c';
+
+    cvar2 := 'z';
+
+    print('a', cvar1 == cconst && (cvar2 <> 'b' || !true));
+
+    'b';
+};
+
+print(ivar, bvar, cvar);
