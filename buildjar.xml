@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project stil">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="/Users/basveeling/Dropbox/projects/stil/stil.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="vb.stil.Stil"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="/Users/basveeling/Dropbox/projects/stil/bin"/>
+            <fileset dir="/Users/basveeling/Dropbox/projects/stil/gen"/>
+            <zipfileset excludes="META-INF/*.SF" src="/Users/basveeling/Dropbox/projects/stil/classpath/antlr.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/Users/basveeling/Dropbox/projects/stil/classpath/jasmin.jar"/>
+        </jar>
+    </target>
+</project>
