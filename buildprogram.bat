@@ -1,3 +1,3 @@
 @ECHO OFF
-java -Dfile.encoding=UTF-8 -cp bin;jasmin.jar;classpath/* vb.stil.Stil -no_jar program.st
+java -jar stil.jar program.st
 pause

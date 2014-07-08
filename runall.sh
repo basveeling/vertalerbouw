@@ -42,7 +42,7 @@ fi
 
 if [[ $generatecode = true ]]; then
     echo "(g) Generating code and compile"
-    java -Dfile.encoding=UTF-8 -classpath bin:jasmin.jar:classpath/* vb.stil.Stil program.st
+    java -jar stil.jar program.st
 fi
 
 if [[ $runjasmin = true ]]; then
