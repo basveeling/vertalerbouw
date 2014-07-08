@@ -53,8 +53,8 @@ program(maxStackDepth, maxLocals, instructions) ::= <<
   .end method
 
   .method public static main([Ljava/lang/String;)V
-    .limit stack 102
-    .limit locals 100
+    .limit stack <maxStackDepth>
+    .limit locals <maxLocals>
     new java/util/Scanner
     dup
     getstatic java/lang/System/in Ljava/io/InputStream;
@@ -175,20 +175,44 @@ printMultiple(statements) ::= <<
 >>
 
 
-scan_int() ::= <<
+scan_int(label1, label2) ::= <<
+aload 0 
+invokevirtual java/util/Scanner/hasNextInt()Z
+ifeq L<label1>
+aload 0 ; scanner
 invokevirtual java/util/Scanner/nextInt()I
+goto L<label2>
+L<label1>:
+iconst_0
+L<label2>:
 >>
 
 
-scan_bool() ::= <<
+scan_bool(label1, label2) ::= <<
+aload 0 
+invokevirtual java/util/Scanner/hasNextBoolean()Z
+ifeq L<label1>
+aload 0 ; scanner
 invokevirtual java/util/Scanner/nextBoolean()Z
+goto L<label2>
+L<label1>:
+iconst_0
+L<label2>:
 >>
 
 
-scan_char() ::= <<
+scan_char(label1, label2) ::= <<
+aload 0 
+invokevirtual java/util/Scanner/hasNext()Z
+ifeq L<label1>
+aload 0 ; scanner
 invokevirtual java/util/Scanner/next()Ljava/lang/String;
 iconst_0              
 invokevirtual java/lang/String/charAt(I)C
+goto L<label2>
+L<label1>:
+iconst_0
+L<label2>:
 >>
 
 
@@ -197,14 +221,13 @@ iconst_0
 istore <var.varnum> ; <var.id>
 aload 0 ; scanner
 invokevirtual java/util/Scanner/hasNextLine()Z
-ifeq L<var.label>
-aload 0 ; scanner
-<(type_scan_templ.(var.type))()>
+ifeq L<var.label1>
+<(type_scan_templ.(var.type))(var.label2, var.label3)>
 aload 0 ; scanner
 invokevirtual java/util/Scanner/nextLine()Ljava/lang/String;
 pop
 istore <var.varnum> ; <var.id>
-L<var.label>:
+L<var.label1>:
 >>
 
 

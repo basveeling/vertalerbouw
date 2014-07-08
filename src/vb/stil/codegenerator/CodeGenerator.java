@@ -325,8 +325,11 @@ public class CodeGenerator {
 	 * @param node
 	 * @return ST StringTemplate
 	 */
-	public ST processProgram(StilNode node) {
+	public ST processProgram(StilNode node, int numOps, int locals) {
 		ST template = getTemplate("program");
+		
+		template.add("maxStackDepth", numOps);
+		template.add("maxLocals", locals);
 		
 		for (int index = 0; index < node.getChildCount(); index++) {
 			template.add("instructions", getChildST(node, index));
@@ -351,7 +354,9 @@ public class CodeGenerator {
 
 			HashMap<String, String> properties = new HashMap<>();
 
-			properties.put("label", "" + getNewLabelNumber());
+			properties.put("label1", "" + getNewLabelNumber());
+			properties.put("label2", "" + getNewLabelNumber());
+			properties.put("label3", "" + getNewLabelNumber());
 			properties.put("type", getEntityTypeString(id));
 			properties.put("varnum", "" + getVarnum(id));
 			properties.put("id", id);

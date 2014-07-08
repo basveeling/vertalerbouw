@@ -10,6 +10,11 @@ Open a shell in the root directory of the stil project and run:
 $ ant
 ```
 
+The attached shell/batch scripts make use of a JAR file. This can be (re)created by running:
+```
+$ ant -f buildjar.xml
+```
+
 ### Running tests
 STIL includes two sets of tests: GUnit for gramatical tests and a custom code generation testing framework.
 Running GUnit tests:

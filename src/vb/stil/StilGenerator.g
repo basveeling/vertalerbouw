@@ -29,7 +29,7 @@ options {
 program[int numOps, int locals] returns [ST template = null] 
     :   ^(PROGRAM
             {codeGenerator.openScope();}
-            instruction*) { template = codeGenerator.processProgram((StilNode)$PROGRAM); }
+            instruction*) { template = codeGenerator.processProgram((StilNode)$PROGRAM, numOps, locals); }
             {codeGenerator.closeScope();}
     ;
 
