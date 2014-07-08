@@ -55,6 +55,11 @@ program(maxStackDepth, maxLocals, instructions) ::= <<
   .method public static main([Ljava/lang/String;)V
     .limit stack 102
     .limit locals 100
+    new java/util/Scanner
+    dup
+    getstatic java/lang/System/in Ljava/io/InputStream;
+    invokespecial java/util/Scanner/\<init>(Ljava/io/InputStream;)V
+    astore 0 ; scanner
     <instructions ; separator="\npop\n">
     pop
     return
@@ -187,25 +192,23 @@ invokevirtual java/lang/String/charAt(I)C
 >>
 
 
-read(var,scannertop) ::= <<
+read(var) ::= <<
 iconst_0
 istore <var.varnum> ; <var.id>
-aload <scannertop> ; scanner
-invokevirtual java/util/Scanner/hasNext<type_scanner_map.(var.type)>()Z
+aload 0 ; scanner
+invokevirtual java/util/Scanner/hasNextLine()Z
 ifeq L<var.label>
-aload <scannertop> ; scanner
+aload 0 ; scanner
 <(type_scan_templ.(var.type))()>
+aload 0 ; scanner
+invokevirtual java/util/Scanner/nextLine()Ljava/lang/String;
+pop
 istore <var.varnum> ; <var.id>
 L<var.label>:
 >>
 
 
-readMultiple(variables,localtop) ::= <<
-new java/util/Scanner
-dup
-getstatic java/lang/System/in Ljava/io/InputStream;
-invokespecial java/util/Scanner/\<init>(Ljava/io/InputStream;)V
-astore <localtop> ; scanner
-<variables:read(localtop); separator="\n">
+readMultiple(variables) ::= <<
+<variables:read(); separator="\n">
 iload <first(variables).varnum> ; <first(variables).id>
 >>

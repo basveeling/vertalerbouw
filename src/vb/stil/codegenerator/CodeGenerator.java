@@ -32,20 +32,20 @@ public class CodeGenerator {
 	 * Location of the StringTemplate group file
 	 */
 	private static final String groupFile = "src/vb/stil/codegenerator/jasmin.stg";
-
+	
 	protected STGroup templates;
-
+	
 	protected MachineSymbolTable symtab = new MachineSymbolTable();
-
+	
 	protected int currentLabelNumber = 0;
-
+	
 	/**
 	 * Initialize a CodeGenerator using the specified StringTemplate group file
 	 */
 	public CodeGenerator() {
 		templates = new STGroupFile(CodeGenerator.groupFile);
 	}
-
+	
 	/**
 	 * Generate StringTemplate for an assignment expression
 	 *
@@ -54,24 +54,24 @@ public class CodeGenerator {
 	 */
 	public ST becomes(ExprNode node) {
 		ST template = getTemplate("becomes");
-		
-		String id = node.getChild(0).getText(); // Retrieve the identifier name
 
+		String id = node.getChild(0).getText(); // Retrieve the identifier name
+		
 		template.add("id", id);
 		template.add("varnum", symtab.retrieve(id).getVarnum());
 		template.add("expression", getChildST(node, 1));
 		template.add("type", symtab.retrieve(id).getDeclNode().getEntityType().toString());
-
+		
 		return template;
 	}
-	
+
 	/**
 	 * Close scope of the symbol table
 	 */
 	public void closeScope() {
 		symtab.closeScope();
 	}
-
+	
 	/**
 	 * Get the string representation of the entity type of the specified identifier
 	 *
@@ -81,7 +81,7 @@ public class CodeGenerator {
 	protected String getEntityTypeString(String id) {
 		return symtab.retrieve(id).getDeclNode().getEntityType().getEntityTypeString();
 	}
-
+	
 	/**
 	 * Retrieve the next available label number and increment the current label number
 	 *
@@ -90,7 +90,7 @@ public class CodeGenerator {
 	protected int getNewLabelNumber() {
 		return currentLabelNumber++;
 	}
-
+	
 	/**
 	 * Retrieve template from the group file for given name
 	 *
@@ -100,7 +100,7 @@ public class CodeGenerator {
 	protected ST getTemplate(String name) {
 		return templates.getInstanceOf(name);
 	}
-
+	
 	/**
 	 * Get the assigned variable storage number of the specified identifier
 	 *
@@ -110,14 +110,14 @@ public class CodeGenerator {
 	protected Integer getVarnum(String id) {
 		return symtab.retrieve(id).getVarnum();
 	}
-
+	
 	/**
 	 * Open scope of the symbol table
 	 */
 	public void openScope() {
 		symtab.openScope();
 	}
-
+	
 	/**
 	 * Generate StringTemplate for all binary logic expressions
 	 *
@@ -127,7 +127,7 @@ public class CodeGenerator {
 	public ST processBinaryLogicExpression(LogicExprNode node) {
 		ST template = null;
 		Operator operator = node.getOperator();
-
+		
 		switch (operator) {
 			case LT:
 			case LTE:
@@ -154,15 +154,15 @@ public class CodeGenerator {
 				template = getTemplate(operator.getTemplateName());
 				break;
 		}
-
+		
 		template.add("expr1", getChildST(node, 0));
 		template.add("expr2", getChildST(node, 1));
-
+		
 		node.setST(template);
-
+		
 		return template;
 	}
-
+	
 	/**
 	 * Generate StringTemplate for a boolean
 	 *
@@ -171,12 +171,12 @@ public class CodeGenerator {
 	 */
 	public ST processBoolLiteral(LiteralNode v) {
 		ST template = getTemplate("boolLiteral");
-
+		
 		template.add("value", v.getText());
-
+		
 		return template;
 	}
-
+	
 	/**
 	 * Generate StringTemplate for a character literal
 	 *
@@ -185,12 +185,12 @@ public class CodeGenerator {
 	 */
 	public ST processCharLiteral(LiteralNode v) {
 		ST template = getTemplate("charLiteral");
-
+		
 		template.add("value", (int) v.getText().charAt(0));
-
+		
 		return template;
 	}
-
+	
 	/**
 	 * Generate StringTemplate for a compound expression
 	 *
@@ -199,14 +199,14 @@ public class CodeGenerator {
 	 */
 	public ST processCompoundExpression(StilNode node) {
 		ST template = getTemplate("compound_expression");
-
+		
 		for (int index = 0; index < node.getChildCount(); index++) {
 			template.add("instructions", getChildST(node, index));
 		}
-
+		
 		return template;
 	}
-	
+
 	/**
 	 * Generate StringTemplate for a constant declaration
 	 *
@@ -216,12 +216,12 @@ public class CodeGenerator {
 	 */
 	public ST processConstDeclaration(DeclNode node, IdNode id) {
 		ST template = null;
-
+		
 		try {
 			String idname = id.getText(); // Retrieve the identifier name
-
+			
 			symtab.enter(idname, new MachineEntry(node));
-
+			
 			template = getTemplate("becomes");
 			template.add("id", id);
 			template.add("varnum", symtab.retrieve(idname).getVarnum());
@@ -230,10 +230,10 @@ public class CodeGenerator {
 		} catch (SymbolTableException e) {
 			e.printStackTrace();
 		}
-
+		
 		return template;
 	}
-
+	
 	/**
 	 * Generate StringTemplate for an identifier, automatically determining the storage location number
 	 *
@@ -242,15 +242,15 @@ public class CodeGenerator {
 	 */
 	public ST processIdOperand(IdNode node) {
 		String id = node.getText(); // Retrieve the identifier name
-
+		
 		ST template = getTemplate("idOperand");
 		template.add("varnum", symtab.retrieve(id).getVarnum());
 		template.add("id", id);
 		template.add("type", symtab.retrieve(id).getDeclNode().getEntityType().toString());
-
+		
 		return template;
 	}
-
+	
 	/**
 	 * Generate StringTemplate for an if statement
 	 *
@@ -261,25 +261,25 @@ public class CodeGenerator {
 	 */
 	public ST processIfStatement(StilNode node, List<ST> ifInstructions, List<ST> elseInstructions) {
 		ST template = getTemplate("if_statement");
-		
+
 		template.add("expr", getChildST(node, 0));
-		
+
 		for (ST instruction : ifInstructions) {
 			template.add("if_instructions", instruction);
 		}
-
+		
 		for (ST instruction : elseInstructions) {
 			template.add("else_instructions", instruction);
 		}
-		
+
 		template.add("label1", getNewLabelNumber());
 		template.add("label2", getNewLabelNumber());
-		
+
 		node.setST(template);
-		
+
 		return template;
 	}
-
+	
 	/**
 	 * Generate StringTemplate for an integer literal
 	 *
@@ -288,12 +288,12 @@ public class CodeGenerator {
 	 */
 	public ST processIntLiteral(LiteralNode v) {
 		ST template = getTemplate("intLiteral");
-
+		
 		template.add("value", v.getText());
-
+		
 		return template;
 	}
-
+	
 	/**
 	 * Generate StringTemplate for a print statement
 	 *
@@ -302,23 +302,23 @@ public class CodeGenerator {
 	 */
 	public ST processPrintStatement(ExprNode node) {
 		ST template = getTemplate("printMultiple");
-
+		
 		for (int index = 0; index < node.getChildCount(); index++) {
 			ExprNode expression = (ExprNode) node.getChild(index);
-
+			
 			ST statement = null;
 			statement = getTemplate("print");
 			statement.add("expression", expression.getST());
 			statement.add("type", expression.getEntityType().getEntityTypeString());
-
+			
 			template.add("statements", statement);
 		}
-
+		
 		node.setST(template);
-
+		
 		return template;
 	}
-
+	
 	/**
 	 * Generate StringTemplate for the program
 	 *
@@ -327,14 +327,14 @@ public class CodeGenerator {
 	 */
 	public ST processProgram(StilNode node) {
 		ST template = getTemplate("program");
-
+		
 		for (int index = 0; index < node.getChildCount(); index++) {
 			template.add("instructions", getChildST(node, index));
 		}
-
+		
 		return template;
 	}
-
+	
 	/**
 	 * Generate StringTemplate for a read statement
 	 *
@@ -343,30 +343,29 @@ public class CodeGenerator {
 	 */
 	public ST processReadStatement(ExprNode node) {
 		ST template = getTemplate("readMultiple");
-
-		ArrayList<HashMap<String, String>> vars = new ArrayList<>();
 		
+		ArrayList<HashMap<String, String>> vars = new ArrayList<>();
+
 		for (Object varNode : node.getChildren()) {
 			String id = ((StilNode) varNode).getText(); // Retrieve the identifier name
-			
+
 			HashMap<String, String> properties = new HashMap<>();
-			
+
 			properties.put("label", "" + getNewLabelNumber());
 			properties.put("type", getEntityTypeString(id));
 			properties.put("varnum", "" + getVarnum(id));
 			properties.put("id", id);
-			
+
 			vars.add(properties);
 		}
-		
+
 		template.add("variables", vars);
-		template.add("localtop", symtab.localTop + 1);
 
 		node.setST(template);
-
+		
 		return template;
 	}
-
+	
 	/**
 	 * Generate StringTemplate for unary logic expressions
 	 *
@@ -375,20 +374,20 @@ public class CodeGenerator {
 	 */
 	public ST processUnaryLogicExpression(LogicExprNode node) {
 		ST template = null;
-
+		
 		template = getTemplate(node.getOperator().getTemplateName());
 		template.add("expr", getChildST(node, 0));
-
+		
 		if (node.getOperator() == Operator.NOT) {
 			template.add("label1", getNewLabelNumber());
 			template.add("label2", getNewLabelNumber());
 		}
-
+		
 		node.setST(template);
-
+		
 		return template;
 	}
-
+	
 	/**
 	 * Generate StringTemplate for a variable declaration
 	 *
@@ -399,14 +398,14 @@ public class CodeGenerator {
 	public ST processVarDeclaration(DeclNode node, IdNode id) {
 		try {
 			symtab.enter(id.getText(), new MachineEntry(node));
-
+			
 		} catch (SymbolTableException e) {
 			e.printStackTrace();
 		}
-
+		
 		return null;
 	}
-
+	
 	/**
 	 * Generate StringTemplate for a while statement
 	 *
@@ -416,21 +415,21 @@ public class CodeGenerator {
 	 */
 	public ST processWhileStatement(StilNode node, List<ST> instructions) {
 		ST template = getTemplate("while_statement");
-		
+
 		template.add("expr", getChildST(node, 0));
-		
+
 		for (ST instruction : instructions) {
 			template.add("instructions", instruction);
 		}
-
+		
 		template.add("label1", getNewLabelNumber());
 		template.add("label2", getNewLabelNumber());
-		
+
 		node.setST(template);
-		
+
 		return template;
 	}
-
+	
 	/**
 	 * Returns the StringTemplate of a child at specified position
 	 *
