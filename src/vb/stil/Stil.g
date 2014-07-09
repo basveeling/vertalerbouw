@@ -174,7 +174,7 @@ bool_literal
 // Lexer rules
 
 CHAR_LITERAL
-    :   APOS l=LETTER APOS { setText(l.getText()); }
+    :   APOS l=CHARALL APOS { setText(l.getText()); }
     ;
 
 INT_LITERAL
@@ -199,5 +199,5 @@ fragment DIGIT  :   ('0'..'9') ;
 fragment LOWER  :   ('a'..'z') ;
 fragment UPPER  :   ('A'..'Z') ;
 fragment LETTER :   LOWER | UPPER ;
-
+fragment CHARALL:   .;
 // EOF

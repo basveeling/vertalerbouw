@@ -18,7 +18,7 @@ while getopts 'agcrj' flag; do
 done
 
 # cp tests/* bin/
-echo "Options: build (a)ntlr - (c)ompile - (r)un tests - (g)enerate code - run (j)asmine"
+echo "Options: build (a)ntlr - (c)ompile - (r)un tests - (g)enerate code - run (j)asmin"
 if [[ $buildgram = true ]]; then
     echo "(a) Building ANTLR grammars"
     cd src/vb/stil/; java org.antlr.Tool *.g; cd ../../..;
@@ -29,6 +29,7 @@ fi
 if [[ $compile = true ]]; then
     echo "(c) Compiling..."
     ant
+    ant -f buildjar.xml
 fi
 
 if [[ $rungunit = true ]]; then
