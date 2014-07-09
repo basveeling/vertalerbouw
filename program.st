@@ -53,3 +53,35 @@ cvar := {
 };
 
 print(ivar, bvar, cvar);
+
+if(bvar) {
+    print(true);
+}
+
+if(!bvar) {
+    print(false);
+}
+
+var int i;
+
+i := 0;
+
+const int j := 1; // loop till j and comment test
+
+while(i <= j) {
+    var int foo;
+
+    if(i == j) { 
+        print(true); 
+    } else {
+        print(false); 
+    }
+
+    i := i + 1;
+}
+
+while((i-1) > j) {
+    print(true);
+
+    var int bar;
+}

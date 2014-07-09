@@ -62,6 +62,8 @@ program(maxStackDepth, maxLocals, instructions) ::= <<
     astore 0 ; scanner
     <instructions ; separator="\npop\n">
     pop
+    aload 0 ; scanner
+    invokevirtual java/util/Scanner/close()V
     return
   .end method
 >>

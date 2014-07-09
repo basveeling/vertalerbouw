@@ -1,0 +1,7 @@
+// Assign a char to an int variable
+
+var int foo;
+
+foo := 'a'; 
+
+print(foo);
