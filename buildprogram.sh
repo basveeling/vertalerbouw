@@ -1,1 +1,1 @@
-java -jar stil.jar -dot program.st
+java -jar stil.jar program.st
