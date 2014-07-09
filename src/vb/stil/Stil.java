@@ -5,6 +5,8 @@ import jasmin.Main;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
+import java.util.EnumSet;
+import java.util.Set;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -16,9 +18,6 @@ import org.antlr.stringtemplate.StringTemplate;
 import org.stringtemplate.v4.ST;
 
 import vb.stil.tree.StilNodeAdaptor;
-
-import java.util.EnumSet;
-import java.util.Set;
 
 /**
  * Program that creates and starts the Stil lexer, parser, etc.
@@ -86,7 +85,7 @@ public class Stil {
 
 				StilGenerator generator = new StilGenerator(nodes);
 
-				ST output = generator.program(100, 100); // TODO: dynamisch uit checker halen
+				ST output = generator.program(100, 100);
 
 				FileWriter jasmin = new FileWriter("gen/program.j");
 				jasmin.write(output.render());
@@ -94,11 +93,11 @@ public class Stil {
 				jasmin.close();
 			}
 			if (!options.contains(Option.NO_ASSEMBLE)) { // Call Jasmin Main Function
-				Main.main(new String[] {"-d", "gen/", "gen/program.j"});
+				Main.main(new String[] { "-d", "gen/", "gen/program.j" });
 			}
 			if (!options.contains(Option.NO_JAR)) {
 				String sep = System.getProperty("file.separator");
-				Process proc = Runtime.getRuntime().exec("jar cfm gen"+sep+"program.jar program-manifest.txt -C gen Program.class");
+				Process proc = Runtime.getRuntime().exec("jar cfm gen" + sep + "program.jar program-manifest.txt -C gen Program.class");
 				proc.waitFor();
 			}
 			if (options.contains(Option.DOT)) { // print the AST as DOT specification
@@ -110,12 +109,12 @@ public class Stil {
 		} catch (RecognitionException e) {
 			System.err.print("ERROR: recognition exception thrown by compiler: ");
 			System.err.println(e.getMessage());
-			e.printStackTrace();
+			// e.printStackTrace();
 			System.exit(1);
 		} catch (Exception e) {
 			System.err.print("ERROR: uncaught exception thrown by compiler: ");
 			System.err.println(e.getMessage());
-			e.printStackTrace();
+			// e.printStackTrace();
 			System.exit(2);
 		}
 	}

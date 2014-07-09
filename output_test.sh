@@ -42,7 +42,7 @@ for file in "${file_base[@]}"; do
     printf "== Testing %s against %s\n" "$file_source" "$file_in"
 
     # Run application, redirect in file to app, and output to out file
-    java -Dfile.encoding=UTF-8 -classpath bin:classpath/* vb.stil.Stil "$file_source"
+    java -jar stil.jar "$file_source"
     e_code=$?
     if [ $e_code != 0 ]; then
             printf "===== Generation FAIL : %d\n" "$e_code"
@@ -50,7 +50,7 @@ for file in "${file_base[@]}"; do
     else
             printf "======== Generation OK!\n"
     fi
-    cd gen; java Program < "../$file_in" > output.txt; cd ..
+    cd gen; java Program < "../$file_in" > output.txt 2>&1; cd ..
 
     # Execute diff
     $diff "gen/output.txt" "$file_out_val"
